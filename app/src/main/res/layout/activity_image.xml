@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_titile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:clipToPadding="true"
+        android:elevation="3dp"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@mipmap/ic_arrow_back_white_24dp"
+            android:gravity="center_vertical|left" />
+
+        <TextView
+            android:id="@+id/tv_show"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="-24dp"
+            android:gravity="center"
+            android:text="@string/image_zn"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gv_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_titile"
+        android:cacheColorHint="@android:color/transparent"
+        android:columnWidth="150dp"
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="2"
+        android:padding="5dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp"></GridView>
+
+</RelativeLayout>

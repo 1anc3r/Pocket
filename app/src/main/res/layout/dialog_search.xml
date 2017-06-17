@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="40dp"
+    android:background="?attr/colorBackgroundFloating"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:drawablePadding="10dip"
+        android:gravity="left|center"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:minLines="10"
+        android:paddingLeft="5dip"
+        android:shadowDx="0.0"
+        android:shadowDy="1.0"
+        android:shadowRadius="1.0"
+        android:singleLine="true"
+        android:textColorHint="#ffdddddd" />
+
+</LinearLayout>

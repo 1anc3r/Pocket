@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <group
+        android:id="@+id/navigation_group_1"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigation_item_1"
+            android:checked="true"
+            android:icon="@mipmap/ic_lightbulb_outline_black_24dp"
+            android:title="工具" />
+
+        <item
+            android:id="@+id/navigation_item_2"
+            android:icon="@mipmap/ic_image_black_24dp"
+            android:title="资讯" />
+
+        <item
+            android:id="@+id/navigation_item_3"
+            android:icon="@mipmap/ic_book_black_24dp"
+            android:title="个人" />
+
+    </group>
+
+    <group
+        android:id="@+id/navigation_group_2"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigation_setting"
+            android:icon="@mipmap/ic_settings_black_24dp"
+            android:title="设置" />
+
+        <!--<item-->
+        <!--android:id="@+id/navigation_item_night"-->
+        <!--android:icon="@mipmap/ic_brightness_2_black_24dp"-->
+        <!--android:title="夜间模式" />-->
+
+    </group>
+
+</menu>

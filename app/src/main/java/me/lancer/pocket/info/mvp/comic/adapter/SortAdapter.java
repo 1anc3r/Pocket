@@ -1,0 +1,116 @@
+package me.lancer.pocket.info.mvp.comic.adapter;
+
+import android.app.Activity;
+import android.content.Context;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+import me.lancer.pocket.R;
+import me.lancer.pocket.info.mvp.comic.ComicBean;
+import me.lancer.pocket.info.mvp.comic.activity.SortActivity;
+import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.util.DensityUtil;
+
+public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
+
+    private static final int TYPE_TITLE = 0;
+    private static final int TYPE_CONTENT = 1;
+
+    private List<ComicBean> list;
+    private Context context;
+
+    public SortAdapter(Context context, List<ComicBean> list) {
+        this.context = context;
+        this.list = list;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_book, viewGroup, false);
+        return new ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+        if (list.get(position) != null) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHolder.ivCover.getLayoutParams();
+            params.height = DensityUtil.dip2px(context, 100);
+            viewHolder.ivCover.setLayoutParams(params);
+            ComicBean bean = list.get(position);
+            if (getItemViewType(position) == TYPE_CONTENT) {
+                viewHolder.tvTitle.setText(bean.getTitle());
+                if (bean.getCategory().equals("")) {
+                    viewHolder.tvCategory.setVisibility(View.GONE);
+                } else {
+                    viewHolder.tvCategory.setText(bean.getCategory());
+                }
+                ViewCompat.setTransitionName(viewHolder.ivCover, mParams.TRANSITION_PIC);
+                Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivCover);
+                viewHolder.container.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SortActivity.startActivity((Activity) context, list.get(position).getLink(), list.get(position).getCover(), list.get(position).getTitle(), viewHolder.ivCover);
+                    }
+                });
+            }else if (getItemViewType(position) == TYPE_TITLE) {
+                StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
+                layoutParams.setFullSpan(true);
+                viewHolder.tvTitle.setText(bean.getTitle());
+                viewHolder.tvCategory.setVisibility(View.GONE);
+                viewHolder.ivCover.setVisibility(View.GONE);
+                viewHolder.ivIconLeft.setVisibility(View.VISIBLE);
+                viewHolder.ivIconRight.setVisibility(View.VISIBLE);
+                if(!bean.getCover().equals("")){
+                    Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivIconLeft);
+                    Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivIconRight);
+                }
+            }
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return list == null ? 0 : list.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (list.get(position).getType() == 0) {
+            return TYPE_TITLE;
+        } else if (list.get(position).getType() == 1) {
+            return TYPE_CONTENT;
+        }
+        return super.getItemViewType(position);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        public CardView cardView;
+        public LinearLayout container;
+        public ImageView ivCover, ivIconLeft, ivIconRight;
+        public TextView tvTitle, tvCategory;
+
+        public ViewHolder(View rootView) {
+            super(rootView);
+            cardView = (CardView) rootView.findViewById(R.id.cardView);
+            container = (LinearLayout) rootView.findViewById(R.id.container);
+            ivCover = (ImageView) rootView.findViewById(R.id.ivCover);
+            ivIconLeft = (ImageView) rootView.findViewById(R.id.ivIconLeft);
+            ivIconRight = (ImageView) rootView.findViewById(R.id.ivIconRight);
+            tvTitle = (TextView) rootView.findViewById(R.id.tvTitle);
+            tvCategory = (TextView) rootView.findViewById(R.id.tvCategory);
+        }
+    }
+}
