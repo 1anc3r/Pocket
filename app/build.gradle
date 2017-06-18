@@ -46,6 +46,8 @@ dependencies {
     compile 'net.steamcrafted:load-toast:1.0.10'
     compile 'com.github.garretyoder:Colorful:1.1'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    compile 'com.amap.api:map2d:latest.integration'
+    compile 'com.amap.api:location:latest.integration'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 }

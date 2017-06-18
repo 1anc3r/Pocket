@@ -100,6 +100,12 @@
             android:name=".info.mvp.comic.activity.ComicSearchActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".info.mvp.disease.activity.DiseaseActivity" />
+        <activity
+            android:name=".info.mvp.knowledge.activity.KnowledgeDetailActivity" />
+        <activity
+            android:name=".info.mvp.disease.activity.DiseaseDetailActivity" />
+        <activity
             android:name=".tool.mvp.file.activity.FileActivity"
             android:launchMode="singleTask" />
         <activity
@@ -132,7 +138,7 @@
         <activity android:name=".tool.mvp.weather.activity.WeatherActivity" />
         <activity
             android:name=".tool.mvp.weather.activity.CityActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

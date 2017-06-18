@@ -18,6 +18,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
+import me.lancer.pocket.info.mvp.disease.activity.DiseaseActivity;
 import me.lancer.pocket.tool.mvp.app.activity.AppActivity;
 import me.lancer.pocket.tool.mvp.calculator.activity.CalculatorActivity;
 import me.lancer.pocket.tool.mvp.document.activity.DocumentActivity;
@@ -44,7 +45,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             "文章", "趣闻", "段子",
             "图书", "音乐", "电影",
             "图片", "漫画", "视频",
-            "游戏", "编程"};
+            "游戏", "编程", };
     private int[] imgTools = {
             R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
             R.mipmap.ic_photo_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
@@ -55,7 +56,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             R.mipmap.ic_insert_drive_file_black_48dp, R.mipmap.ic_lightbulb_outline_black_48dp, R.mipmap.ic_golf_course_black_48dp,
             R.mipmap.ic_book_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
             R.mipmap.ic_photo_black_48dp, R.mipmap.ic_mood_black_48dp, R.mipmap.ic_live_tv_black_48dp,
-            R.mipmap.ic_extension_black_48dp, R.mipmap.ic_code_black_48dp,};
+            R.mipmap.ic_extension_black_48dp, R.mipmap.ic_code_black_48dp};
 
     private RecyclerView mRecyclerView;
     private ModelAdapter mAdapter;

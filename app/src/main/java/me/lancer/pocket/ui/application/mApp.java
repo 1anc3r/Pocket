@@ -27,6 +27,7 @@ public class mApp extends Application {
     private RequestQueue mRequestQueue;
 
     public static Typeface TypeFace;
+    private boolean isPicture, isFirst;
 
     @Override
     public void onCreate() {
@@ -66,5 +67,21 @@ public class mApp extends Application {
         mRequestQueue.start();
         mRequestQueue.add(new ClearCacheRequest(cache, null));
         return mRequestQueue;
+    }
+
+    public boolean isPicture() {
+        return isPicture;
+    }
+
+    public void setPicture(boolean picture) {
+        isPicture = picture;
+    }
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+
+    public void setFirst(boolean first) {
+        isFirst = first;
     }
 }
