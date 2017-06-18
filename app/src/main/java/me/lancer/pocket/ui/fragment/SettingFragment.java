@@ -162,7 +162,7 @@ public class SettingFragment extends Fragment {
         funcList.add("电话、通讯录、信息 : \n" +
                 "\t\t\t\t电话 : 您手机上的通话记录\n" +
                 "\t\t\t\t通讯录 : 您手机上的联系人\n" +
-                "\t\t\t\t信息 : 您手机上的短信记录\n");
+                "\t\t\t\t信息 : 您手机上的短信记录");
         funcList.add("图片、音乐、视频、文档、应用、存储 : \n" +
                 "\t\t\t\t您手机上的各种类型的文件, 支持打开、删除、赋值、剪切");
         funcList.add("日历 : \n" +

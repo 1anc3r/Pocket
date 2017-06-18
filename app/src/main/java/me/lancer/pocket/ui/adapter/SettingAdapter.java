@@ -30,10 +30,6 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        if (list.get(position).equals("— 工具 —") || list.get(position).equals("— 资讯 —")) {
-            viewHolder.tvString.setTextSize(20);
-            viewHolder.tvString.setGravity(Gravity.CENTER);
-        }
         viewHolder.tvString.setText(list.get(position));
     }
 
