@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textColor="@color/black_dark"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="17sp" />
 
     </LinearLayout>

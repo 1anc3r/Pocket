@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:maxEms="10"
                     android:singleLine="true"
-                    android:textColor="@color/black_dark"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="17sp" />
 
             </LinearLayout>
