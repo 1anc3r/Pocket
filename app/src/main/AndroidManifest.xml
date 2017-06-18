@@ -6,8 +6,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -32,8 +33,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.activity.BlankActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.activity.SettingActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Overlay" />
         <activity
             android:name=".info.mvp.article.activity.ArticleActivity"
             android:launchMode="singleTask" />
@@ -79,11 +88,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name=".ui.activity.AboutActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.Overlay" />
-        <activity
             android:name=".info.mvp.chapter.activity.ChapterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -100,11 +104,14 @@
             android:name=".info.mvp.comic.activity.ComicSearchActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".info.mvp.disease.activity.DiseaseActivity" />
+            android:name=".info.mvp.disease.activity.DiseaseActivity"
+            android:launchMode="singleTask" />
         <activity
-            android:name=".info.mvp.knowledge.activity.KnowledgeDetailActivity" />
+            android:name=".info.mvp.knowledge.activity.KnowledgeDetailActivity"
+            android:launchMode="singleTask" />
         <activity
-            android:name=".info.mvp.disease.activity.DiseaseDetailActivity" />
+            android:name=".info.mvp.disease.activity.DiseaseDetailActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".tool.mvp.file.activity.FileActivity"
             android:launchMode="singleTask" />
@@ -130,16 +137,20 @@
             android:name=".tool.mvp.calculator.activity.CalculatorActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.activity.BlankActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".tool.mvp.translation.activity.TranslationActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".tool.mvp.weather.activity.WeatherActivity"
+        <activity
+            android:name=".tool.mvp.weather.activity.WeatherActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".tool.mvp.weather.activity.CityActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tool.mvp.contacts.activity.ContactActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tool.mvp.contacts.activity.MessageActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

@@ -49,6 +49,7 @@ dependencies {
     compile 'com.amap.api:map2d:latest.integration'
     compile 'com.amap.api:location:latest.integration'
     compile 'com.instabug.library:instabug:4.1.1'
+    compile 'com.lguipeng.bubbleview:library:1.0.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 }

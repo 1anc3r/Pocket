@@ -54,7 +54,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     private int id;
     private String title, img, link;
 
-    private  Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void handleMessage(Message msg) {
@@ -74,7 +74,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                         layout.setTitle(nb.getTitle());
                         ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
                         Glide.with(NewsDetailActivity.this).load(nb.getImg()).into(ivImg);
-                        if (nb.getContent()!=null) {
+                        if (nb.getContent() != null) {
                             htvContent.setHtml(nb.getContent(), new HtmlHttpImageGetter(htvContent));
                         }
                     }
@@ -153,7 +153,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
             htvContent.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
             new Thread(loadDetail).start();
-        }else{
+        } else {
             htvContent.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
             new Thread(loadItem).start();

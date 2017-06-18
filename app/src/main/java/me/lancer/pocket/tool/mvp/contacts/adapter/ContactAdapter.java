@@ -2,6 +2,7 @@ package me.lancer.pocket.tool.mvp.contacts.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.tool.mvp.contacts.activity.ContactActivity;
+import me.lancer.pocket.tool.mvp.contacts.activity.MessageActivity;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
 import me.lancer.pocket.ui.view.CircleImageView;
 
@@ -61,6 +64,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                 viewHolder.ivArg1.setVisibility(View.GONE);
                 viewHolder.ivArg2.setVisibility(View.GONE);
                 viewHolder.ivArg0.setVisibility(View.VISIBLE);
+                viewHolder.civHead.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startContactActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber(), null);
+                    }
+                });
+                viewHolder.tvArg0.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startContactActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber(), null);
+                    }
+                });
                 if (list.get(position).getType() == 1){//呼入
                     viewHolder.ivArg0.setImageResource(R.mipmap.ic_call_received_black_24dp);
                 }else if (list.get(position).getType() == 2){//呼出
@@ -95,6 +110,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                 viewHolder.ivArg2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startMessageActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber());
+                    }
+                });
+                viewHolder.cvContact.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startContactActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber(), null);
                     }
                 });
             }else if (type == 2){
@@ -103,14 +125,43 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                 viewHolder.tvArg2.setText(list.get(position).getMsgs().get(0).getContent());
                 viewHolder.ivArg1.setVisibility(View.GONE);
                 viewHolder.ivArg2.setVisibility(View.GONE);
+                viewHolder.civHead.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startContactActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber(), null);
+                    }
+                });
+                viewHolder.tvArg0.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startContactActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber(), null);
+                    }
+                });
                 viewHolder.cvContact.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        startMessageActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber());
                     }
                 });
             }
         }
+    }
+
+    public void startContactActivity(Activity activity, String name, String number, String img) {
+        Intent intent = new Intent();
+        intent.setClass(activity, ContactActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("number", number);
+        intent.putExtra("img", img);
+        context.startActivity(intent);
+    }
+
+    public void startMessageActivity(Activity activity, String name, String number) {
+        Intent intent = new Intent();
+        intent.setClass(activity, MessageActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("number", number);
+        context.startActivity(intent);
     }
 
     @Override

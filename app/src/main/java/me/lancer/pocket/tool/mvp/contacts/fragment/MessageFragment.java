@@ -1,19 +1,10 @@
 package me.lancer.pocket.tool.mvp.contacts.fragment;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.CallLog;
-import android.provider.ContactsContract;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.fragment.PresenterFragment;
-import me.lancer.pocket.info.mvp.news.INewsView;
-import me.lancer.pocket.info.mvp.news.NewsBean;
-import me.lancer.pocket.info.mvp.news.NewsPresenter;
-import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 import me.lancer.pocket.tool.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.tool.mvp.contacts.adapter.ContactAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
@@ -50,7 +36,6 @@ public class MessageFragment extends BaseFragment {
     private LinearLayoutManager mLinearLayoutManager;
     private Map<String, List<MessageBean>> messages = new HashMap<>();
     private List<ContactBean> contacts = new ArrayList<>();
-    private List<ContactBean> refences = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,13 +47,12 @@ public class MessageFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initData();
         initView(view);
+        initData();
     }
 
     private void initData() {
         getMessages();
-//        getRefences();
         getContacts();
     }
 
@@ -115,26 +99,6 @@ public class MessageFragment extends BaseFragment {
         getActivity().startManagingCursor(cursor);
     }
 
-    private void getRefences() {
-        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-        Cursor cursor = getActivity().getContentResolver().query(uri,
-                new String[]{
-                        ContactsContract.PhoneLookup.DISPLAY_NAME,
-                        "data1",
-                        "sort_key"
-                }, null, null, "sort_key");
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.moveToPosition(i);
-            String name = cursor.getString(0);
-            String number = cursor.getString(1);
-            ContactBean item = new ContactBean();
-            item.setName(name);
-            item.setNumber(number);
-            refences.add(item);
-        }
-        getActivity().startManagingCursor(cursor);
-    }
-
     private void getContacts() {
         Iterator iter = messages.entrySet().iterator();
         while (iter.hasNext()) {
@@ -145,6 +109,7 @@ public class MessageFragment extends BaseFragment {
             contact.setMsgs(message);
             contact.setNumber(number);
             contact.setName(number);
+
             if (message.get(0).getContent().contains("【") && message.get(0).getContent().contains("】")) {
                 contact.setName(message.get(0).getContent().split("【")[1].split("】")[0]);
             }
