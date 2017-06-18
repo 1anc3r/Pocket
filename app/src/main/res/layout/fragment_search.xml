@@ -18,15 +18,16 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <android.support.v7.widget.SearchView
-                app:theme="@style/ThemeOverlay.AppCompat.Light"
+                android:id="@+id/sv_contact"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
                 android:background="?attr/colorBackgroundFloating"
+                android:backgroundTint="?attr/colorBackgroundFloating"
                 android:foregroundTint="?attr/colorBackgroundFloating"
-                android:backgroundTint="?attr/colorBackgroundFloating" />
+                app:theme="@style/ThemeOverlay.AppCompat.Light" />
 
         </android.support.v7.widget.Toolbar>
 

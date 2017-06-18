@@ -43,6 +43,7 @@ import me.lancer.pocket.info.mvp.repository.RepositoryBean;
 import me.lancer.pocket.info.mvp.repository.adapter.RepositoryAdapter;
 import me.lancer.pocket.ui.activity.MainActivity;
 import me.lancer.pocket.ui.activity.SettingActivity;
+import me.lancer.pocket.ui.adapter.QAAdapter;
 import me.lancer.pocket.ui.adapter.SettingAdapter;
 import me.lancer.pocket.ui.application.mApp;
 import me.lancer.pocket.ui.application.mParams;
@@ -236,20 +237,24 @@ public class SettingFragment extends Fragment {
                 "\t\t\t\t趋势 : GitHub上今日最热的项目\n" +
                 "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想浏览的项目\n" +
                 "\t\t\t\t — 数据来源 : GithubRanking\n\t\t\t\t（https://github-ranking.com）");
-        problemList.add("Q : 为什么 \"信息\" 列表不显示联系人的名字?\n" +
-                "A : 因为1anc3r太懒了, 没有将 \"信息\" 列表和 \"联系人\" 列表进行比对╮(╯_╰)╭. ");
-        problemList.add("Q : \"文档\" 和 \"应用\" 加载时间很久?\n" +
-                "A : Android没有提供 \"文档\" 的访问接口, 1anc3r是通过遍历文件系统来识别文档的(๑•́ ₃ •̀๑); " +
+        problemList.add("Q : 主页上的搜索栏好像并没有什么用...");
+        problemList.add("A : 因为模块比较多, 各模块的搜索接口还没有统一, 个别模块中有搜索功能, 下一个版本搜索功能会上线. 如果您对搜索功能有什么好的建议或意见请通过意见反馈通道或者发送邮件联系1anc3r. ");
+        problemList.add("Q : 为什么 \"信息\" 列表不显示联系人的名字?");
+        problemList.add("A : 因为1anc3r太懒了, 没有将 \"信息\" 列表和 \"联系人\" 列表进行比对╮(╯_╰)╭. ");
+        problemList.add("Q : 为什么发送了短信却没有记录?");
+        problemList.add("A : 1anc3r在虚拟机上测试时没问题, 但是真机测试时也无法写入数据库, 目前正在努力寻找解决方法. ");
+        problemList.add("Q : 为什么 \"文档\" 和 \"应用\" 加载时间很久?");
+        problemList.add("A : Android没有提供 \"文档\" 的访问接口, 1anc3r是通过遍历文件系统来识别文档的(๑•́ ₃ •̀๑); " +
                 " \"应用\" 加载时间长是因为您的手机安装的应用太多了, 第二次加载会快一丢丢(ง •̀_•́)ง. ");
-        problemList.add("Q : \"天气\" 中选择的城市没有数据怎么办, 而且别的天气应用都可以定位城市, 为什么你的 \"天气\" 没办法定位城市?\n" +
-                "A : \"天气\" 数据来自中央天气, 没有数据的话1anc3r也造不出来. 没有加入定位的原因是中央天气的城市代码和高德地图的城市代码不一样. ");
-        problemList.add("Q : \"资讯\" 中数据加载时间长或者加载不出来怎么办?\n" +
-                "A : 首先, 检查您的网络是否可用; 其次, 下拉刷新可以解决一部分问题.\n" +
+        problemList.add("Q : \"天气\" 中选择的城市没有数据怎么办, 而且别的天气应用都可以定位城市, 为什么你的 \"天气\" 没办法定位城市?");
+        problemList.add("A : \"天气\" 数据来自中央天气, 没有数据的话1anc3r也造不出来. 没有加入定位的原因是中央天气的城市代码和高德地图的城市代码不一样. ");
+        problemList.add("Q : \"资讯\" 中数据加载时间长或者加载不出来怎么办?");
+        problemList.add("A : 首先, 检查您的网络是否可用; 其次, 下拉刷新可以解决一部分问题.\n" +
                 "(Ps. \"游戏\" 数据来自Steam, \"编程\" 数据来自Github, 这俩货访问速度肯定比其他国内站点慢)");
-        problemList.add("Q : 以后还有什么新功能模块?\n" +
-                "A : 目前1anc3r的想法是加入日历、时钟、备忘录. 如果你有什么有趣的API的话不妨联系1anc3r.");
-        problemList.add("Q : 1anc3r, 1anc3r, 你的程序又崩溃了!\n" +
-                "A : 方法一: 通过 \"意见反馈\" 撩一撩1anc3r; 方法二: 发送邮件至huangfangzhi0@foxmail.com");
+        problemList.add("Q : 以后还有什么新功能模块?");
+        problemList.add("A : 目前1anc3r的想法是加入日历、时钟、备忘录、收藏、通话短信统计. 如果你有什么有趣的API的话不妨联系1anc3r.");
+        problemList.add("Q : 1anc3r, 1anc3r, 你的程序又崩溃了!");
+        problemList.add("A : 方法一: 通过 \"意见反馈\" 撩一撩1anc3r; 方法二: 发送邮件至huangfangzhi0@foxmail.com");
     }
 
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
@@ -318,25 +323,31 @@ public class SettingFragment extends Fragment {
     };
 
     public void showListDialog(int type, List<String> list) {
-        View listDialogView = View.inflate(getActivity(), R.layout.dialog_list, null);
-        TextView tvType = (TextView) listDialogView.findViewById(R.id.tv_type);
-        switch (type) {
-            case 1:
-                tvType.setText("功能介绍");
-                break;
-            case 2:
-                tvType.setText("常见问题");
-                break;
+        if (type == 1) {
+            View listDialogView = View.inflate(getActivity(), R.layout.dialog_list, null);
+            TextView tvType = (TextView) listDialogView.findViewById(R.id.tv_type);
+            tvType.setText("功能介绍");
+            RecyclerView rvList = (RecyclerView) listDialogView.findViewById(R.id.rv_list);
+            rvList.setItemAnimator(new DefaultItemAnimator());
+            rvList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+            RecyclerView.Adapter adapter = new SettingAdapter(getActivity(), list);
+            rvList.setAdapter(adapter);
+            listDialog = new BottomSheetDialog(getActivity());
+            listDialog.setContentView(listDialogView);
+            listDialog.show();
+        } else if (type == 2) {
+            View listDialogView = View.inflate(getActivity(), R.layout.dialog_list, null);
+            TextView tvType = (TextView) listDialogView.findViewById(R.id.tv_type);
+            tvType.setText("常见问题");
+            RecyclerView rvList = (RecyclerView) listDialogView.findViewById(R.id.rv_list);
+            rvList.setItemAnimator(new DefaultItemAnimator());
+            rvList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+            QAAdapter adapter = new QAAdapter(getActivity(), list);
+            rvList.setAdapter(adapter);
+            listDialog = new BottomSheetDialog(getActivity());
+            listDialog.setContentView(listDialogView);
+            listDialog.show();
         }
-        RecyclerView rvList = (RecyclerView) listDialogView.findViewById(R.id.rv_list);
-        rvList.setItemAnimator(new DefaultItemAnimator());
-        rvList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        RecyclerView.Adapter adapter = new SettingAdapter(getActivity(), list);
-        rvList.setAdapter(adapter);
-
-        listDialog = new BottomSheetDialog(getActivity());
-        listDialog.setContentView(listDialogView);
-        listDialog.show();
     }
 
     private void showAboutDialog() {

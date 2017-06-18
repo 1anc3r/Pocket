@@ -3,16 +3,9 @@ package me.lancer.pocket.tool.mvp.contacts.fragment;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.CallLog;
-import android.provider.ContactsContract;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.fragment.PresenterFragment;
-import me.lancer.pocket.info.mvp.news.INewsView;
-import me.lancer.pocket.info.mvp.news.NewsBean;
-import me.lancer.pocket.info.mvp.news.NewsPresenter;
-import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 import me.lancer.pocket.tool.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.tool.mvp.contacts.adapter.ContactAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
@@ -48,7 +36,7 @@ public class CallLogFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list_no_swip, container, false);
+        return inflater.inflate(R.layout.fragment_list_no_swipe, container, false);
     }
 
     @Override

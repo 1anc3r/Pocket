@@ -20,6 +20,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.base.fragment.BaseFragment;
+import me.lancer.pocket.tool.mvp.contacts.activity.ContactSearchActivity;
 import me.lancer.pocket.ui.activity.AboutActivity;
 
 /**
@@ -27,7 +28,10 @@ import me.lancer.pocket.ui.activity.AboutActivity;
  */
 
 public class ContactsFragment extends BaseFragment {
+
+    private SearchView svContact;
     private Toolbar toolbar;
+    private ViewPager viewPager;
     private int index = 0;
 
     @Override
@@ -49,7 +53,23 @@ public class ContactsFragment extends BaseFragment {
 
     private void initTabLayout(View view) {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.vp_tab);
+        svContact = (SearchView) view.findViewById(R.id.sv_contact);
+        svContact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent();
+                intent.putExtra("query", query);
+                intent.setClass(getActivity(), ContactSearchActivity.class);
+                getActivity().startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+        viewPager = (ViewPager) view.findViewById(R.id.vp_tab);
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
         tabLayout.setupWithViewPager(viewPager);

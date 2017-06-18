@@ -149,6 +149,9 @@
             android:name=".tool.mvp.contacts.activity.ContactActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".tool.mvp.contacts.activity.ContactSearchActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".tool.mvp.contacts.activity.MessageActivity"
             android:launchMode="singleTask" />
     </application>
