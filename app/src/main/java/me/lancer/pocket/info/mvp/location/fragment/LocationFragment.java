@@ -104,7 +104,6 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
                 getActivity().finish();
             }
         });
-//        ((MainActivity) getActivity()).initDrawer(toolbar);
         mMapView = (MapView) view.findViewById(R.id.map);
         bundle = savedInstanceState;
         mMapView.onCreate(bundle);

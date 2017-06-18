@@ -10,6 +10,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ClearCacheRequest;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.Volley;
+import com.instabug.library.Instabug;
+import com.instabug.library.invocation.InstabugInvocationEvent;
 
 import org.polaric.colorful.Colorful;
 
@@ -56,6 +58,10 @@ public class mApp extends Application {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        new Instabug.Builder(this, "11ada4a3f59b870a986faa4816a3e513")
+                .setInvocationEvent(InstabugInvocationEvent.NONE)
+                .setEmailFieldVisibility(false)
+                .build();
     }
 
     public RequestQueue getRequestQueue() {

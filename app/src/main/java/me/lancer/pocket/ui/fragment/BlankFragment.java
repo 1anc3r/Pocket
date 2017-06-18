@@ -36,7 +36,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
 
     private int index = 0;
     private String[] strTools = {
-            "电话", "通讯录", "短信",
+            "电话", "通讯录", "信息",
             "图片", "音乐", "视频",
             "文档", "应用", "存储",
             /*"日历", "时钟",*/ "天气",

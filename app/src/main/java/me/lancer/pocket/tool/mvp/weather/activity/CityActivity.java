@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -133,6 +135,15 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("城市选择");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(CityActivity.this, WeatherActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -196,6 +207,12 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.navigation_home:
+                Intent intent = new Intent();
+                intent.setClass(CityActivity.this, WeatherActivity.class);
+                startActivity(intent);
+                finish();
+                break;
             case R.id.menu_about:
                 Intent intent0 = new Intent();
                 intent0.putExtra("link", "https://github.com/1anc3r");
@@ -248,6 +265,18 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
     @Override
     public void onItemLongClick(View view, int postion) {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.setClass(CityActivity.this, WeatherActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

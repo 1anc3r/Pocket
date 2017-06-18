@@ -153,6 +153,7 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
                 Intent intent = new Intent();
                 intent.setClass(WeatherActivity.this, CityActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         ivImg = (ImageView) findViewById(R.id.iv_img);

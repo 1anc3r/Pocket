@@ -135,7 +135,8 @@
         <activity
             android:name=".tool.mvp.translation.activity.TranslationActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".tool.mvp.weather.activity.WeatherActivity" />
+        <activity android:name=".tool.mvp.weather.activity.WeatherActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".tool.mvp.weather.activity.CityActivity"
             android:launchMode="singleTask"/>

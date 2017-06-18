@@ -1,6 +1,8 @@
 package me.lancer.pocket.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,11 @@ import me.lancer.pocket.R;
 
 public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHolder> {
 
+    private Context context;
     private List<String> list;
 
-    public SettingAdapter(List<String> list) {
+    public SettingAdapter(Context context, List<String> list) {
+        this.context = context;
         this.list = list;
     }
 
@@ -26,6 +30,10 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        if (list.get(position).equals("— 工具 —") || list.get(position).equals("— 资讯 —")) {
+            viewHolder.tvString.setTextSize(20);
+            viewHolder.tvString.setGravity(Gravity.CENTER);
+        }
         viewHolder.tvString.setText(list.get(position));
     }
 
