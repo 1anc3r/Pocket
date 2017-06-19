@@ -69,28 +69,30 @@ public class CallLogFragment extends BaseFragment {
                         CallLog.Calls.DATE,
                         CallLog.Calls.DURATION
                 }, null, null, CallLog.Calls.DEFAULT_SORT_ORDER);
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.moveToPosition(i);
-            String name = cursor.getString(0);
-            String number = cursor.getString(1);
-            if (name == null || name.equals("")) {
-                name = number;
+        if (cursor != null) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                String name = cursor.getString(0);
+                String number = cursor.getString(1);
+                if (name == null || name.equals("")) {
+                    name = number;
+                }
+                int type = Integer.parseInt(cursor.getString(2));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date callDate = new Date(Long.parseLong(cursor.getString(3)));
+                String date = sdf.format(callDate);
+                int callDuration = Integer.parseInt(cursor.getString(4));
+                int min = callDuration / 60;
+                int sec = callDuration % 60;
+                String duration = min + " 分 " + sec + " 秒 ";
+                ContactBean item = new ContactBean();
+                item.setName(name);
+                item.setNumber(number);
+                item.setType(type);
+                item.setDate(date);
+                item.setDuration(duration);
+                mList.add(item);
             }
-            int type = Integer.parseInt(cursor.getString(2));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date callDate = new Date(Long.parseLong(cursor.getString(3)));
-            String date = sdf.format(callDate);
-            int callDuration = Integer.parseInt(cursor.getString(4));
-            int min = callDuration / 60;
-            int sec = callDuration % 60;
-            String duration = min + " 分 " + sec + " 秒 ";
-            ContactBean item = new ContactBean();
-            item.setName(name);
-            item.setNumber(number);
-            item.setType(type);
-            item.setDate(date);
-            item.setDuration(duration);
-            mList.add(item);
         }
         getActivity().startManagingCursor(cursor);
     }

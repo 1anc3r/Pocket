@@ -254,7 +254,7 @@ public class SettingFragment extends Fragment {
         problemList.add("Q : 以后还有什么新功能模块?");
         problemList.add("A : 目前1anc3r的想法是加入日历、时钟、备忘录、收藏、通话短信统计. 如果你有什么有趣的API的话不妨联系1anc3r.");
         problemList.add("Q : 1anc3r, 1anc3r, 你的程序又崩溃了!");
-        problemList.add("A : 方法一: 通过 \"意见反馈\" 撩一撩1anc3r; 方法二: 发送邮件至huangfangzhi0@foxmail.com");
+        problemList.add("A : 方法一, 通过 \"意见反馈\" 撩一撩1anc3r; 方法二, 发送邮件至huangfangzhi0@foxmail.com");
     }
 
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
