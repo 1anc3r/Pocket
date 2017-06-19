@@ -20,6 +20,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:elevation="2dp"
             android:background="?attr/colorBackgroundFloating"
             android:foregroundTint="?attr/colorBackgroundFloating"
             android:backgroundTint="?attr/colorBackgroundFloating"></android.support.v7.widget.SearchView>

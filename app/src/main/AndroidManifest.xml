@@ -155,11 +155,13 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".tool.mvp.qrcode.activity.QRCodeActivity"
-            android:theme="@style/AppTheme.ActionBar"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".tool.mvp.qrcode.activity.QRCodeResultActivity"
             android:launchMode="singleTask" />
+        <activity android:name=".tool.mvp.morse.activity.MorseActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"

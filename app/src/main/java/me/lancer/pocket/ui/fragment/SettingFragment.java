@@ -244,7 +244,7 @@ public class SettingFragment extends Fragment {
         problemList.add("Q : 为什么发送了短信却没有记录?");
         problemList.add("A : 1anc3r在虚拟机上测试时没问题, 但是真机测试时也无法写入数据库, 目前正在努力寻找解决方法. ");
         problemList.add("Q : 为什么 \"文档\" 和 \"应用\" 加载时间很久?");
-        problemList.add("A : Android没有提供 \"文档\" 的访问接口, 1anc3r是通过遍历文件系统来识别文档的(๑•́ ₃ •̀๑); " +
+        problemList.add("A : Android没有提供 \"文档\" 的访问接口, 1anc3r是通过遍历文件系统来识别文档的(๑•́ ₃•̀๑); " +
                 " \"应用\" 加载时间长是因为您的手机安装的应用太多了, 第二次加载会快一丢丢(ง •̀_•́)ง. ");
         problemList.add("Q : \"天气\" 中选择的城市没有数据怎么办, 而且别的天气应用都可以定位城市, 为什么你的 \"天气\" 没办法定位城市?");
         problemList.add("A : \"天气\" 数据来自中央天气, 没有数据的话1anc3r也造不出来. 没有加入定位的原因是中央天气的城市代码和高德地图的城市代码不一样. ");

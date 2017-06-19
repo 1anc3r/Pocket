@@ -18,12 +18,12 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
-import me.lancer.pocket.info.mvp.disease.activity.DiseaseActivity;
 import me.lancer.pocket.tool.mvp.app.activity.AppActivity;
 import me.lancer.pocket.tool.mvp.calculator.activity.CalculatorActivity;
 import me.lancer.pocket.tool.mvp.document.activity.DocumentActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.image.activity.ImageActivity;
+import me.lancer.pocket.tool.mvp.morse.activity.MorseActivity;
 import me.lancer.pocket.tool.mvp.music.activity.MusicActivity;
 import me.lancer.pocket.tool.mvp.qrcode.activity.QRCodeActivity;
 import me.lancer.pocket.tool.mvp.translation.activity.TranslationActivity;
@@ -40,9 +40,9 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             "电话", "通讯录", "信息",
             "图片", "音乐", "视频",
             "文档", "应用", "存储",
-            /*"日历", "时钟",*/ "天气",
-            /*"备忘录",*/ "翻译", "计算器",
-            "二维码",};
+            /*"日历", "时钟","备忘录",*/
+            "天气", "翻译", "摩斯电码",
+            "计算器", "二维码", /*"带壳截图"*/};
     private String[] strInfos = {
             "文章", "趣闻", "段子",
             "图书", "音乐", "电影",
@@ -51,10 +51,10 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     private int[] imgTools = {
             R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
             R.mipmap.ic_photo_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
-            R.mipmap.ic_folder_black_48dp, R.mipmap.ic_widgets_black_48dp, R.mipmap.ic_save_black_48dp,
-            /*R.mipmap.ic_event_black_48dp, R.mipmap.ic_watch_later_black_48dp,*/ R.mipmap.ic_cloud_black_48dp,
-            /*R.mipmap.ic_menu_black_48dp,*/ R.mipmap.ic_translate_black_48dp, R.mipmap.ic_exposure_plus_1_black_48dp,
-            R.mipmap.ic_qrcode};
+            R.mipmap.ic_folder_open_black_48dp, R.mipmap.ic_widgets_black_48dp, R.mipmap.ic_save_black_48dp,
+            /*R.mipmap.ic_event_black_48dp, R.mipmap.ic_watch_later_black_48dp,R.mipmap.ic_menu_black_48dp,*/
+            R.mipmap.ic_cloud_queue_black_48dp, R.mipmap.ic_translate_black_48dp, R.mipmap.ic_all_inclusive_black_48dp,
+            R.mipmap.ic_exposure_plus_1_black_48dp, R.mipmap.ic_crop_free_black_48dp};
     private int[] imgInfos = {
             R.mipmap.ic_insert_drive_file_black_48dp, R.mipmap.ic_lightbulb_outline_black_48dp, R.mipmap.ic_golf_course_black_48dp,
             R.mipmap.ic_book_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
@@ -164,19 +164,19 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     intent.setClass(getActivity(), WeatherActivity.class);
                     startActivity(intent);
                     break;
-                /*case 12:
-                    intent.setClass(getActivity(), CalculatorActivity.class);
-                    startActivity(intent);
-                    break;*/
                 case 10:
                     intent.setClass(getActivity(), TranslationActivity.class);
                     startActivity(intent);
                     break;
                 case 11:
-                    intent.setClass(getActivity(), CalculatorActivity.class);
+                    intent.setClass(getActivity(), MorseActivity.class);
                     startActivity(intent);
                     break;
                 case 12:
+                    intent.setClass(getActivity(), CalculatorActivity.class);
+                    startActivity(intent);
+                    break;
+                case 13:
                     intent.setClass(getActivity(), QRCodeActivity.class);
                     startActivity(intent);
                     break;
