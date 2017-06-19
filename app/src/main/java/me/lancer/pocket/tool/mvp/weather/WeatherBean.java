@@ -30,7 +30,7 @@ public class WeatherBean {
     private String sportDetails;
     private List<FutureBean> future;
 
-    public WeatherBean(){
+    public WeatherBean() {
 
     }
 

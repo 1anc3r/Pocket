@@ -55,7 +55,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         if (list.get(position) != null) {
-            viewHolder.civHead.setImageResource(colors[position%16]);
+            viewHolder.civHead.setImageResource(colors[position % 16]);
             if (type == 0) {
                 viewHolder.tvArg0.setText(list.get(position).getName());
                 viewHolder.tvArg1.setText(list.get(position).getName());
@@ -76,21 +76,21 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                         startContactActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber(), null);
                     }
                 });
-                if (list.get(position).getType() == 1){//呼入
+                if (list.get(position).getType() == 1) {//呼入
                     viewHolder.ivArg0.setImageResource(R.mipmap.ic_call_received_black_24dp);
-                }else if (list.get(position).getType() == 2){//呼出
+                } else if (list.get(position).getType() == 2) {//呼出
                     viewHolder.ivArg0.setImageResource(R.mipmap.ic_call_made_black_24dp);
-                }else if (list.get(position).getType() == 3){//未接
+                } else if (list.get(position).getType() == 3) {//未接
                     viewHolder.ivArg0.setImageResource(R.mipmap.ic_call_missed_black_24dp);
                     viewHolder.tvArg2.setText("未接");
-                }else if (list.get(position).getType() == 5){//拒接
+                } else if (list.get(position).getType() == 5) {//拒接
                     viewHolder.ivArg0.setImageResource(R.mipmap.ic_clear_black_24dp);
                     viewHolder.tvArg2.setText("拒接");
                 }
                 viewHolder.cvContact.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse("tel:"+list.get(position).getNumber());
+                        Uri uri = Uri.parse("tel:" + list.get(position).getNumber());
                         Intent intent = new Intent(Intent.ACTION_CALL, uri);
                         context.startActivity(intent);
                     }
@@ -102,7 +102,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                 viewHolder.ivArg1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse("tel:"+list.get(position).getNumber());
+                        Uri uri = Uri.parse("tel:" + list.get(position).getNumber());
                         Intent intent = new Intent(Intent.ACTION_CALL, uri);
                         context.startActivity(intent);
                     }
@@ -119,7 +119,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                         startContactActivity((Activity) context, list.get(position).getName(), list.get(position).getNumber(), null);
                     }
                 });
-            }else if (type == 2){
+            } else if (type == 2) {
                 viewHolder.tvArg0.setText(list.get(position).getName());
                 viewHolder.tvArg1.setText(list.get(position).getName());
                 viewHolder.tvArg2.setText(list.get(position).getMsgs().get(0).getContent());

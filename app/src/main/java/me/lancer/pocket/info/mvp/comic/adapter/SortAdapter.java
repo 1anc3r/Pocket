@@ -64,7 +64,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
                         SortActivity.startActivity((Activity) context, list.get(position).getLink(), list.get(position).getCover(), list.get(position).getTitle(), viewHolder.ivCover);
                     }
                 });
-            }else if (getItemViewType(position) == TYPE_TITLE) {
+            } else if (getItemViewType(position) == TYPE_TITLE) {
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(bean.getTitle());
@@ -72,7 +72,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
                 viewHolder.ivCover.setVisibility(View.GONE);
                 viewHolder.ivIconLeft.setVisibility(View.VISIBLE);
                 viewHolder.ivIconRight.setVisibility(View.VISIBLE);
-                if(!bean.getCover().equals("")){
+                if (!bean.getCover().equals("")) {
                     Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivIconLeft);
                     Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivIconRight);
                 }

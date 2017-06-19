@@ -60,7 +60,7 @@ public class GameFeaturedFragment extends PresenterFragment<GamePresenter> imple
                         } else {
                             mList.addAll((List<GameBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager*10 + i);
+                                mAdapter.notifyItemInserted(pager * 10 + i);
                             }
                         }
                     }

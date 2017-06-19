@@ -10,7 +10,7 @@ public class CityBean {
     private String cityName;
     private String townName;
 
-    public CityBean(){
+    public CityBean() {
 
     }
 

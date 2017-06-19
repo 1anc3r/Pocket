@@ -47,12 +47,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                 temp = " 评论 " + list.get(position).getSubTitle();
                 star = Float.parseFloat(list.get(position).getStar());
                 viewHolder.tvContent.setText(list.get(position).getAuthor() + temp);
-            }else{
+            } else {
                 temp = list.get(position).getMainTitle().split(" - ")[1];
                 viewHolder.tvTitle.setText(temp);
                 temp = list.get(position).getMainTitle().split(" - ")[0];
                 viewHolder.tvContent.setText(temp);
-                star = Float.parseFloat(list.get(position).getStar())/2;
+                star = Float.parseFloat(list.get(position).getStar()) / 2;
             }
             viewHolder.rbRating.setRating(star);
             ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
@@ -69,7 +69,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                         intent.setClass(context, MusicDetailActivity.class);
                         context.startActivity(intent);
 //                        MusicDetailActivity.startActivity((Activity) context, 0, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getMainLink(), viewHolder.ivImg);
-                    }else{
+                    } else {
                         Intent intent = new Intent();
                         intent.putExtra("title", list.get(position).getMainTitle());
                         intent.putExtra("type", 1);

@@ -60,7 +60,7 @@ public class MovieReviewerFragment extends PresenterFragment<MoviePresenter> imp
                         } else {
                             mList.addAll((List<MovieBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager*10 + i);
+                                mAdapter.notifyItemInserted(pager * 10 + i);
                             }
                         }
                     }

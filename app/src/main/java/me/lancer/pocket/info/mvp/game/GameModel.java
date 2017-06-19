@@ -48,7 +48,7 @@ public class GameModel {
         String content;
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date today = new Date(new Date().getTime());
-        Date yestoday = new Date(new Date().getTime()-24*60*60*1000);
+        Date yestoday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
         String arg1 = format.format(today);
         String arg2 = format.format(yestoday);
         List<GameBean> list;

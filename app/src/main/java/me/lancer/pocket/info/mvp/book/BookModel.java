@@ -137,7 +137,7 @@ public class BookModel {
             mbItem.setAuthor(elements.get(i).getElementsByClass("pub").text());
             if (elements.get(i).getElementsByTag("span").hasClass("rating_nums")) {
                 mbItem.setStar(elements.get(i).getElementsByClass("rating_nums").text());
-            }else{
+            } else {
                 mbItem.setStar("0");
             }
             mbItem.setImg(elements.get(i).getElementsByTag("img").attr("src"));

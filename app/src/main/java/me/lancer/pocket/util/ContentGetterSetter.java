@@ -21,7 +21,7 @@ public class ContentGetterSetter {
     public ContentGetterSetter() {
     }
 
-    public String getContentFromHtml(String log,String url) {
+    public String getContentFromHtml(String log, String url) {
         StringBuilder content = new StringBuilder();
         OkHttpClient client = new OkHttpClient();
         client.setFollowRedirects(false);

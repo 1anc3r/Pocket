@@ -28,7 +28,7 @@ public class LocationPresenter implements IBasePresenter<ILocationView>, ILocati
         this.view = null;
     }
 
-    public void loadList(int type){
+    public void loadList(int type) {
         if (view != null) {
             view.showLoad();
             model.list(type);
@@ -51,7 +51,7 @@ public class LocationPresenter implements IBasePresenter<ILocationView>, ILocati
         }
     }
 
-    public void loadLocation(int type, double x, double y){
+    public void loadLocation(int type, double x, double y) {
         if (view != null) {
             view.showLoad();
             model.location(type, x, y);
@@ -74,7 +74,7 @@ public class LocationPresenter implements IBasePresenter<ILocationView>, ILocati
         }
     }
 
-    public void loadShow(int type, int id){
+    public void loadShow(int type, int id) {
         if (view != null) {
             view.showLoad();
             model.show(type, id);
@@ -97,7 +97,7 @@ public class LocationPresenter implements IBasePresenter<ILocationView>, ILocati
         }
     }
 
-    public void loadName(int type, String name){
+    public void loadName(int type, String name) {
         if (view != null) {
             view.showLoad();
             model.name(type, name);

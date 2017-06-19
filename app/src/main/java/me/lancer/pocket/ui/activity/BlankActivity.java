@@ -35,7 +35,7 @@ public class BlankActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blank);
         Bundle bundle = new Bundle();
-        switch (getIntent().getIntExtra("index", 0)){
+        switch (getIntent().getIntExtra("index", 0)) {
             case -3:
                 bundle.putInt(getString(R.string.index), 0);
                 currentFragment = new ContactsFragment();

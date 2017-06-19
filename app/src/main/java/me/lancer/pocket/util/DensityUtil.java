@@ -37,7 +37,7 @@ public final class DensityUtil {
 
     public static int getScreenHeight(Context context) {
         if (heightPixels <= 0) {
-            heightPixels =context.getResources().getDisplayMetrics().heightPixels;
+            heightPixels = context.getResources().getDisplayMetrics().heightPixels;
         }
         return heightPixels;
     }

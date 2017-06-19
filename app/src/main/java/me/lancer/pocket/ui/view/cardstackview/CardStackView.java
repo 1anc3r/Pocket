@@ -274,7 +274,8 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
     }
 
     public void next() {
-        if (mSelectPosition == DEFAULT_SELECT_POSITION || mSelectPosition == mViewHolders.size() - 1) return;
+        if (mSelectPosition == DEFAULT_SELECT_POSITION || mSelectPosition == mViewHolders.size() - 1)
+            return;
         performItemClick(mViewHolders.get(mSelectPosition + 1));
     }
 
@@ -821,7 +822,7 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
         mItemExpendListener = itemExpendListener;
     }
 
-    public interface ItemExpendListener{
+    public interface ItemExpendListener {
         void onItemExpend(boolean expend);
     }
 }

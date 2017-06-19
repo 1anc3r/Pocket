@@ -23,7 +23,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 
 public class MusicUtil {
-    
+
     private static final Uri albumArtUri = Uri.parse("content://media/external/audio/albumart");
 
     public static List<MusicBean> getMusicInfos(Context context) {

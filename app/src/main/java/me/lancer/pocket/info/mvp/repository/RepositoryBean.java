@@ -11,7 +11,7 @@ public class RepositoryBean {
     private String download;
     private String blog;
 
-    public RepositoryBean(){
+    public RepositoryBean() {
 
     }
 

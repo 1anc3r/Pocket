@@ -58,7 +58,7 @@
         android:divider="?android:colorBackground"
         android:dividerHeight="2dp"
         android:scrollbars="none"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll_progress"

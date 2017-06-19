@@ -61,7 +61,7 @@ public class KnowledgeModel {
         } else if (type == 1) {
             url = lList;
         }
-        Log.e("url", url+id);
+        Log.e("url", url + id);
         String content = contentGetterSetter.getContentFromHtml("Message.list", url + id);
         List<KnowledgeBean> list;
         if (!content.contains("获取失败!")) {
@@ -98,7 +98,7 @@ public class KnowledgeModel {
         } else if (type == 1) {
             url = lShow;
         }
-        Log.e("show: ", url+id);
+        Log.e("show: ", url + id);
         String content = contentGetterSetter.getContentFromHtml("Message.show", url + id);
         KnowledgeBean bean;
         if (!content.contains("获取失败!")) {

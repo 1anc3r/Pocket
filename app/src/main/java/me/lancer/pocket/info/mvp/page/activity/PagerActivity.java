@@ -61,7 +61,7 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
         init();
     }
 
-    public void init(){
+    public void init() {
         link = getIntent().getStringExtra("link");
         mAdapter = new PageAdapter(mData, getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -110,7 +110,7 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
         handler.sendMessage(msg);
     }
 
-    class PageAdapter extends FragmentPagerAdapter{
+    class PageAdapter extends FragmentPagerAdapter {
 
         List<PageBean> data;
 

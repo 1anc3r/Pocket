@@ -1,0 +1,100 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/launch_gallery"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="@string/gallery"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/convert_qr"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="@string/convert"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/share_qr"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/share"
+        app:showAsAction="always|withText" />
+
+    <!--android:icon="@drawable/ic_drawer"-->
+    <item
+        android:id="@+id/action_more"
+        android:icon="@android:drawable/ic_menu_more"
+        android:title="@string/action_more"
+        android:orderInCategory="100"
+        app:showAsAction="always">
+        <menu>
+
+            <item
+                android:id="@+id/save_qr"
+                android:icon="@android:drawable/ic_menu_save"
+                android:title="@string/save"
+                android:orderInCategory="101"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/revert_qr"
+                android:icon="@android:drawable/ic_menu_revert"
+                android:title="@string/revert"
+                android:orderInCategory="102"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/change_color"
+                android:icon="@android:drawable/ic_menu_view"
+                android:title="@string/change_color"
+                android:orderInCategory="103"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/add_txt"
+                android:icon="@android:drawable/ic_menu_edit"
+                android:title="@string/add_text"
+                android:orderInCategory="104"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/select_mode"
+                android:icon="@android:drawable/ic_menu_slideshow"
+                android:title="@string/select_mode"
+                android:orderInCategory="105"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/scan_qr"
+                android:icon="@android:drawable/ic_menu_camera"
+                android:title="@string/scan"
+                android:orderInCategory="106"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/detect_qr"
+                android:icon="@android:drawable/ic_menu_zoom"
+                android:title="@string/detect"
+                android:orderInCategory="107"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/about_info"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="@string/about"
+                android:orderInCategory="108"
+                app:showAsAction="never" />
+        </menu>
+
+    </item>
+
+
+    <!--<item-->
+    <!--android:id="@+id/action_settings"-->
+    <!--android:icon="@android:drawable/ic_menu_preferences"-->
+    <!--android:title="@string/action_settings"-->
+    <!--android:orderInCategory="100"-->
+    <!--app:showAsAction="never" />-->
+
+</menu>

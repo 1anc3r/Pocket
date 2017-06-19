@@ -52,7 +52,7 @@ public class LocationUtils {
                 jb.put("address", location.getAddress());
                 return jb;
             } else {
-                jb.put("error", "错误码:"+location.getErrorCode()+"\n错误信息:"+location.getErrorInfo()+"\n错误描述:"+location.getLocationDetail());
+                jb.put("error", "错误码:" + location.getErrorCode() + "\n错误信息:" + location.getErrorInfo() + "\n错误描述:" + location.getLocationDetail());
                 return jb;
             }
         } catch (JSONException e) {

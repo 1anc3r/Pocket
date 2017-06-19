@@ -7,7 +7,7 @@ import me.lancer.pocket.info.mvp.base.IBasePresenter;
  */
 
 public class ArticlePresenter implements IBasePresenter<IArticleView>, IArticlePresenter {
-    
+
     private IArticleView view;
     private ArticleModel model;
 

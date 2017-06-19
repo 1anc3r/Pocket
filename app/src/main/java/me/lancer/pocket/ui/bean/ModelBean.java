@@ -9,9 +9,10 @@ public class ModelBean {
     private String name;
     private int image;
 
-    public ModelBean(){}
+    public ModelBean() {
+    }
 
-    public ModelBean(String name, int image){
+    public ModelBean(String name, int image) {
         this.name = name;
         this.image = image;
     }

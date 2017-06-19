@@ -9,11 +9,11 @@ public class PageBean {
     private String title;
     private String link;
 
-    public PageBean(){
+    public PageBean() {
 
     }
 
-    public PageBean(String title, String link){
+    public PageBean(String title, String link) {
         this.title = title;
         this.link = link;
     }

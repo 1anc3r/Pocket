@@ -41,7 +41,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
 
     private ImageView ivImg;
     private TextView tvDiscount, tvOriginal, tvFinal, tvDevelopers, tvPublishers;
-    private HtmlTextView htvLanguages,htvDescription, htvRequirements;
+    private HtmlTextView htvLanguages, htvDescription, htvRequirements;
     private RecyclerView rvList;
     private ShotAdapter adapter;
     private List<String> shots = new ArrayList<>();
@@ -67,10 +67,10 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
                     if (msg.obj != null) {
                         loadToast.success();
                         GameBean bb = (GameBean) msg.obj;
-                        tvDiscount.setText("-"+bb.getDiscountPercent()+"%");
-                        tvOriginal.setText("￥"+bb.getOriginalPrice());
+                        tvDiscount.setText("-" + bb.getDiscountPercent() + "%");
+                        tvOriginal.setText("￥" + bb.getOriginalPrice());
                         tvOriginal.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-                        tvFinal.setText("￥"+bb.getFinalPrice());
+                        tvFinal.setText("￥" + bb.getFinalPrice());
                         tvDevelopers.setText(bb.getDevelopers());
                         tvPublishers.setText(bb.getPublishers());
                         htvLanguages.setHtml(bb.getSupportedLanguages(), new HtmlHttpImageGetter(htvLanguages));

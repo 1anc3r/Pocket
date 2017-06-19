@@ -56,7 +56,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ModelAdapter.ViewHolder viewHolder, int position) {
-        viewHolder.cvModel.setCardBackgroundColor(context.getResources().getColor(colors[(int) (Math.random()*16)]));
+        viewHolder.cvModel.setCardBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewHolder.llModel.getLayoutParams();
         params.width = (card - DensityUtil.dip2px(context, 32)) / 3;
         params.height = params.width;

@@ -47,8 +47,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 temp = " 评论 " + list.get(position).getSubTitle();
                 star = Float.parseFloat(list.get(position).getStar());
                 viewHolder.tvContent.setText(list.get(position).getAuthor() + temp);
-            }else{
-                star = Float.parseFloat(list.get(position).getStar())/2;
+            } else {
+                star = Float.parseFloat(list.get(position).getStar()) / 2;
                 viewHolder.tvContent.setText(list.get(position).getContent());
             }
             viewHolder.rbRating.setRating(star);
@@ -66,7 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                         intent.setClass(context, MovieDetailActivity.class);
                         context.startActivity(intent);
 //                        MovieDetailActivity.startActivity((Activity) context, 0, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getMainLink(), viewHolder.ivImg);
-                    }else{
+                    } else {
                         Intent intent = new Intent();
                         intent.putExtra("title", list.get(position).getMainTitle());
                         intent.putExtra("type", 1);

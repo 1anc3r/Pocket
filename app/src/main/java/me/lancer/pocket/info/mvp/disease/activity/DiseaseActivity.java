@@ -57,7 +57,7 @@ public class DiseaseActivity extends BaseActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         initNavigationViewBottom();
         initFragment(savedInstanceState);
-        if (app.isFirst()){
+        if (app.isFirst()) {
             showPictureDialog();
         }
     }

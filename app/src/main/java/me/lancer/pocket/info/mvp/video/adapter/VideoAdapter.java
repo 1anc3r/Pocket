@@ -52,20 +52,20 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
                 viewHolder.tvTitle.setTextSize(20);
                 viewHolder.tvTitle.setGravity(Gravity.CENTER);
                 viewHolder.ivImg.setVisibility(View.GONE);
-            }else if (getItemViewType(position) == TYPE_CONTENT_SMALL) {
+            } else if (getItemViewType(position) == TYPE_CONTENT_SMALL) {
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
                 ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
                 viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                            Intent intent = new Intent();
-                            intent.putExtra("aid", list.get(position).getAid());
-                            intent.setClass(context, VideoPlayerActivity.class);
-                            context.startActivity(intent);
+                        Intent intent = new Intent();
+                        intent.putExtra("aid", list.get(position).getAid());
+                        intent.setClass(context, VideoPlayerActivity.class);
+                        context.startActivity(intent);
                     }
                 });
-            }else if (getItemViewType(position) == TYPE_CONTENT_LARGE) {
+            } else if (getItemViewType(position) == TYPE_CONTENT_LARGE) {
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(list.get(position).getTitle());

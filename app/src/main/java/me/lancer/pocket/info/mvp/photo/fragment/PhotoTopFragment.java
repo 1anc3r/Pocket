@@ -62,7 +62,7 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
                         } else {
                             mList.addAll((List<PhotoBean>) msg.obj);
                             for (int i = 0; i < 12; i++) {
-                                mAdapter.notifyItemInserted((pager-1)*12 + i);
+                                mAdapter.notifyItemInserted((pager - 1) * 12 + i);
                             }
                         }
                     }

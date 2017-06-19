@@ -60,7 +60,7 @@ public class BookTopFragment extends PresenterFragment<BookPresenter> implements
                         } else {
                             mList.addAll((List<BookBean>) msg.obj);
                             for (int i = 0; i < 25; i++) {
-                                mAdapter.notifyItemInserted(pager*25 + i);
+                                mAdapter.notifyItemInserted(pager * 25 + i);
                             }
                         }
                     }

@@ -13,7 +13,7 @@ public class FutureBean {
     private String low;
     private String wind;
 
-    public FutureBean(){
+    public FutureBean() {
 
     }
 

@@ -69,7 +69,7 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
                             String address = item.getAddress();
                             if (address.length() > item.getName().length()) {
                                 AddPosition(item.getX(), item.getY(), item.getName(), address.substring(0, item.getName().length()) + "\n" + address.substring(item.getName().length(), address.length()), type);
-                            }else {
+                            } else {
                                 AddPosition(item.getX(), item.getY(), item.getName(), address, type);
                             }
                         }
@@ -132,7 +132,7 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
                     String address = jb.getString("address");
                     if (address.length() > 10) {
                         NowPosition(x, y, "我的位置", address.substring(0, address.length() / 2) + "\n" + address.substring(address.length() / 2, address.length()));
-                    }else {
+                    } else {
                         NowPosition(x, y, "我的位置", address);
                     }
                 } else {

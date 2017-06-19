@@ -11,7 +11,7 @@ public class MessageBean {
     private String date;
     private int type;
 
-    public MessageBean(){
+    public MessageBean() {
 
     }
 

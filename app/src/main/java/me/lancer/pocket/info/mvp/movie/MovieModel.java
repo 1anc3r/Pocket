@@ -137,7 +137,7 @@ public class MovieModel {
             mbItem.setContent(elements.get(i).getElementsByClass("pl").text());
             if (elements.get(i).getElementsByTag("span").hasClass("rating_nums")) {
                 mbItem.setStar(elements.get(i).getElementsByClass("rating_nums").text());
-            }else{
+            } else {
                 mbItem.setStar("0");
             }
             mbItem.setImg(elements.get(i).getElementsByTag("img").attr("src"));

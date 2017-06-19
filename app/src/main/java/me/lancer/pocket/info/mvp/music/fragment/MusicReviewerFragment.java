@@ -60,7 +60,7 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
                         } else {
                             mList.addAll((List<MusicBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager*10 + i);
+                                mAdapter.notifyItemInserted(pager * 10 + i);
                             }
                         }
                     }

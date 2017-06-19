@@ -11,7 +11,7 @@ public class TranslationBean {
     private String sd;//例句
     private String td;//例句翻译
 
-    public TranslationBean(){
+    public TranslationBean() {
 
     }
 

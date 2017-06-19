@@ -60,7 +60,7 @@ public class CodeUsersFragment extends PresenterFragment<CodePresenter> implemen
                         } else {
                             mList.addAll((List<CodeBean>) msg.obj);
                             for (int i = 0; i < 100; i++) {
-                                mAdapter.notifyItemInserted(pager*100 + i);
+                                mAdapter.notifyItemInserted(pager * 100 + i);
                             }
                         }
                     }
@@ -70,7 +70,7 @@ public class CodeUsersFragment extends PresenterFragment<CodePresenter> implemen
         }
     };
 
-    private  Runnable loadUsers = new Runnable() {
+    private Runnable loadUsers = new Runnable() {
         @Override
         public void run() {
             presenter.loadUsers(pager);

@@ -108,7 +108,7 @@ public class ComicModel {
                 String message = data.getString("message");
                 if (stateCode == 1 && message.equals("成功")) {
                     JSONArray returnData = data.getJSONArray("returnData");
-                    for (int i = 0; i < returnData.length(); i++){
+                    for (int i = 0; i < returnData.length(); i++) {
                         JSONObject comic = returnData.getJSONObject(i);
                         String title = comic.getString("name");
                         String link = URL.BOOK_URL + comic.getInt("comic_id");

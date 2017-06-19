@@ -6,12 +6,12 @@ import android.net.NetworkInfo;
 
 public class NetworkDiagnosis {
 
-    public boolean checkNetwork(Context context){
+    public boolean checkNetwork(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager != null){
+        if (connectivityManager != null) {
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            if(networkInfo != null && networkInfo.isConnected()){
-                if(networkInfo.getState() == NetworkInfo.State.CONNECTED){
+            if (networkInfo != null && networkInfo.isConnected()) {
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                     return true;
                 }
             }
@@ -19,12 +19,12 @@ public class NetworkDiagnosis {
         return false;
     }
 
-    public boolean isWifiConnected(Context context){
+    public boolean isWifiConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager != null){
+        if (connectivityManager != null) {
             NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            if(networkInfo != null && networkInfo.isConnected()){
-                if(networkInfo.getState() == NetworkInfo.State.CONNECTED){
+            if (networkInfo != null && networkInfo.isConnected()) {
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                     return true;
                 }
             }
@@ -32,12 +32,12 @@ public class NetworkDiagnosis {
         return false;
     }
 
-    public boolean isMobileConnected(Context context){
+    public boolean isMobileConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager != null){
+        if (connectivityManager != null) {
             NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-            if(networkInfo != null &&networkInfo.isConnected()){
-                if(networkInfo.getState() == NetworkInfo.State.CONNECTED){
+            if (networkInfo != null && networkInfo.isConnected()) {
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                     return true;
                 }
             }

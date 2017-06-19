@@ -28,7 +28,7 @@ public class DiseasePresenter implements IBasePresenter<IDiseaseView>, IDiseaseP
         this.view = null;
     }
 
-    public void loadList(int type){
+    public void loadList(int type) {
         if (view != null) {
             view.showLoad();
             model.list(type);
@@ -51,7 +51,7 @@ public class DiseasePresenter implements IBasePresenter<IDiseaseView>, IDiseaseP
         }
     }
 
-    public void loadPlace(int type, int place, int page){
+    public void loadPlace(int type, int place, int page) {
         if (view != null) {
             view.showLoad();
             model.place(type, place, page);
@@ -74,7 +74,7 @@ public class DiseasePresenter implements IBasePresenter<IDiseaseView>, IDiseaseP
         }
     }
 
-    public void loadDepartment(int type, int department, int page){
+    public void loadDepartment(int type, int department, int page) {
         if (view != null) {
             view.showLoad();
             model.department(type, department, page);
@@ -97,7 +97,7 @@ public class DiseasePresenter implements IBasePresenter<IDiseaseView>, IDiseaseP
         }
     }
 
-    public void loadName(int type, String name){
+    public void loadName(int type, String name) {
         if (view != null) {
             view.showLoad();
             model.name(type, name);
@@ -120,7 +120,7 @@ public class DiseasePresenter implements IBasePresenter<IDiseaseView>, IDiseaseP
         }
     }
 
-    public void loadShow(int type, int id){
+    public void loadShow(int type, int id) {
         if (view != null) {
             view.showLoad();
             model.show(type, id);

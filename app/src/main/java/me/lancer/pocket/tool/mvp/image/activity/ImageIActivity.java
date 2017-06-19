@@ -80,7 +80,7 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
         init();
     }
 
-    public void iLanguage(){
+    public void iLanguage() {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         language = pref.getString(getString(R.string.language_choice), "zn");
         if (language.equals("zn")) {

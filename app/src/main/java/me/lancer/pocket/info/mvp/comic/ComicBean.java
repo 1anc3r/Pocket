@@ -12,11 +12,11 @@ public class ComicBean {
     private String cover;
     private String link;
 
-    public ComicBean(){
+    public ComicBean() {
 
     }
 
-    public ComicBean(String title, String category, int type, String cover, String link){
+    public ComicBean(String title, String category, int type, String cover, String link) {
         this.title = title;
         this.category = category;
         this.type = type;

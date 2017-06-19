@@ -4,7 +4,11 @@
     android:color="@color/green_dark"
     tools:targetApi="lollipop">
 
-    <item android:drawable="@drawable/btn_true_normal"  android:state_pressed="false"/>
-    <item android:drawable="@drawable/btn_true_pressed" android:state_pressed="true"/>
+    <item
+        android:drawable="@drawable/btn_true_normal"
+        android:state_pressed="false" />
+    <item
+        android:drawable="@drawable/btn_true_pressed"
+        android:state_pressed="true" />
 
 </ripple>

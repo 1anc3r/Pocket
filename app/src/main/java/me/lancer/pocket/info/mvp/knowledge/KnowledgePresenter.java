@@ -28,7 +28,7 @@ public class KnowledgePresenter implements IBasePresenter<IKnowledgeView>, IKnow
         this.view = null;
     }
 
-    public void loadClassify(int type){
+    public void loadClassify(int type) {
         if (view != null) {
             view.showLoad();
             model.classify(type);
@@ -51,7 +51,7 @@ public class KnowledgePresenter implements IBasePresenter<IKnowledgeView>, IKnow
         }
     }
 
-    public void loadList(int type, int id){
+    public void loadList(int type, int id) {
         if (view != null) {
             view.showLoad();
             model.list(type, id);
@@ -74,7 +74,7 @@ public class KnowledgePresenter implements IBasePresenter<IKnowledgeView>, IKnow
         }
     }
 
-    public void loadNews(int type, int id){
+    public void loadNews(int type, int id) {
         if (view != null) {
             view.showLoad();
             model.news(type, id);
@@ -97,7 +97,7 @@ public class KnowledgePresenter implements IBasePresenter<IKnowledgeView>, IKnow
         }
     }
 
-    public void loadShow(int type, int id){
+    public void loadShow(int type, int id) {
         if (view != null) {
             view.showLoad();
             model.show(type, id);
@@ -120,7 +120,7 @@ public class KnowledgePresenter implements IBasePresenter<IKnowledgeView>, IKnow
         }
     }
 
-    public void loadSearch(int type, String keyword){
+    public void loadSearch(int type, String keyword) {
         if (view != null) {
             view.showLoad();
             model.search(type, keyword);

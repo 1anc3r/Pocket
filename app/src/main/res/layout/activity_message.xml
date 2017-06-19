@@ -31,7 +31,7 @@
             android:hint="输入信息"
             android:paddingLeft="8dp"
             android:layout_weight="1"
-            android:background="?attr/colorBackgroundFloating"/>
+            android:background="?attr/colorBackgroundFloating" />
 
         <Button
             android:id="@+id/btn_send"

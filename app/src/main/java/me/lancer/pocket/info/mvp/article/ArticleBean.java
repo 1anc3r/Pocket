@@ -12,7 +12,7 @@ public class ArticleBean {
     private String content;
     private int words;
 
-    public ArticleBean(){
+    public ArticleBean() {
 
     }
 

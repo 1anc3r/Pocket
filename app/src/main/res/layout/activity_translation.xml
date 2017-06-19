@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:textSize="16sp"
-                    android:textColor="?attr/colorPrimary"/>
+                    android:textColor="?attr/colorPrimary" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_res"

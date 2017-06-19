@@ -28,7 +28,7 @@ public class SystemPresenter implements IBasePresenter<ISystemView>, ISystemPres
         this.view = null;
     }
 
-    public void loadAll(int type){
+    public void loadAll(int type) {
         if (view != null) {
             view.showLoad();
             model.all(type);

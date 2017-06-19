@@ -114,7 +114,7 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
         loadToast.show();
         if (type == 0) {
             new Thread(loadTopDetail).start();
-        }else if (type == 1) {
+        } else if (type == 1) {
             new Thread(loadReviewerDetail).start();
         }
     }

@@ -46,7 +46,7 @@ public class KnowledgeDetailActivity extends PresenterActivity<KnowledgePresente
     private int id, type;
     private String title, img;
 
-    private  Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void handleMessage(Message msg) {
@@ -64,7 +64,7 @@ public class KnowledgeDetailActivity extends PresenterActivity<KnowledgePresente
                         loadToast.success();
                         KnowledgeBean mb = (KnowledgeBean) msg.obj;
                         layout.setTitle(mb.getTitle());
-                        if (mb.getMessage()!=null) {
+                        if (mb.getMessage() != null) {
                             htvContent.setHtml(mb.getMessage(), new HtmlHttpImageGetter(htvContent));
                         }
                     }
@@ -145,7 +145,7 @@ public class KnowledgeDetailActivity extends PresenterActivity<KnowledgePresente
 
     @Override
     public void showClassify(List<KnowledgeBean> list) {
-        
+
     }
 
     @Override

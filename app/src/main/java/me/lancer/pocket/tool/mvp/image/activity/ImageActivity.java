@@ -79,9 +79,9 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
         init();
     }
 
-    public void iLanguage(){
+    public void iLanguage() {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        language = pref.getString(getString(R.string.language_choice ), "zn");
+        language = pref.getString(getString(R.string.language_choice), "zn");
         if (language.equals("zn")) {
             strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
             strNoConnection = getResources().getString(R.string.no_connection_zn);

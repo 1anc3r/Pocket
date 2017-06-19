@@ -9,11 +9,11 @@ public class ChapterBean {
     private String title;
     private String link;
 
-    public ChapterBean(){
+    public ChapterBean() {
 
     }
 
-    public ChapterBean(String title, String link){
+    public ChapterBean(String title, String link) {
         this.title = title;
         this.link = link;
     }

@@ -85,9 +85,9 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
         mAdapter = new ContactAdapter(this, mList, 0);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
-        if (mList.size()>0){
+        if (mList.size() > 0) {
             tvCallLog.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tvCallLog.setVisibility(View.GONE);
         }
     }

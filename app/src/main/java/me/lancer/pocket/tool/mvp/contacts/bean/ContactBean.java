@@ -15,7 +15,7 @@ public class ContactBean {
     private String duration;
     private List<MessageBean> msgs;
 
-    public ContactBean(){
+    public ContactBean() {
 
     }
 

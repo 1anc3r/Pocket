@@ -62,7 +62,7 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
                         } else {
                             mList.addAll((List<PhotoBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted((pager-1)*10 + i);
+                                mAdapter.notifyItemInserted((pager - 1) * 10 + i);
                             }
                         }
                     }

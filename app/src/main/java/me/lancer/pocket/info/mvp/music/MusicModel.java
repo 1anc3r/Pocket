@@ -30,7 +30,7 @@ public class MusicModel {
     }
 
     public void loadReviewer(int pager) {//评论
-        String content = contentGetterSetter.getContentFromHtml("Music.loadReviewer", reviewerUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml("Music.loadReviewer", reviewerUrl + pager);
         List<MusicBean> list;
         if (!content.contains("获取失败!")) {
             list = getReviewerFromContent(content);
@@ -42,7 +42,7 @@ public class MusicModel {
     }
 
     public void loadTopMusic(int pager) {//音乐top250
-        String content = contentGetterSetter.getContentFromHtml("Music.loadTopMusic", topMusicUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml("Music.loadTopMusic", topMusicUrl + pager);
         List<MusicBean> list;
         if (!content.contains("获取失败!")) {
             list = getTopMusicFromContent(content);
@@ -145,7 +145,7 @@ public class MusicModel {
         Document document = Jsoup.parse(content);
         Element element = document.getElementById("content");
         bean.setSubTitle(element.getElementsByClass("info-list").get(0).html());
-        bean.setContent("— 乐评 —<br>"+element.getElementsByClass("review-content clearfix").get(0).html());
+        bean.setContent("— 乐评 —<br>" + element.getElementsByClass("review-content clearfix").get(0).html());
         return bean;
     }
 
@@ -154,9 +154,9 @@ public class MusicModel {
         Document document = Jsoup.parse(content);
         Element element = document.getElementById("content");
         bean.setSubTitle(element.getElementById("info").html());
-        if (element.getElementsByClass("all hidden").size()>0) {
+        if (element.getElementsByClass("all hidden").size() > 0) {
             bean.setContent("— 简介 —<br>" + element.getElementsByClass("all hidden").get(0).html());
-        }else{
+        } else {
             bean.setContent("— 简介 —<br>" + element.getElementById("link-report").html());
         }
         return bean;

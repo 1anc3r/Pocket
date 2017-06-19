@@ -46,7 +46,8 @@ public class ShotAdapter extends RecyclerView.Adapter<ShotAdapter.ViewHolder> {
                     intent.putExtra("img", list.get(position));
                     intent.putExtra("title", "");
                     intent.setClass(context, PhotoDetailActivity.class);
-                    context.startActivity(intent);}
+                    context.startActivity(intent);
+                }
             });
         }
     }

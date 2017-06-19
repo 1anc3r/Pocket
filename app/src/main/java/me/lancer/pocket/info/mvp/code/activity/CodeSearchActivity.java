@@ -58,7 +58,7 @@ public class CodeSearchActivity extends PresenterActivity<CodePresenter> impleme
                 case 3:
                     if (msg.obj != null) {
                         mList = (List<CodeBean>) msg.obj;
-                        for (CodeBean bean : mList){
+                        for (CodeBean bean : mList) {
                             Log.e("name", bean.getName());
                             Log.e("star", bean.getStar());
                             Log.e("link", bean.getLink());

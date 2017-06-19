@@ -60,7 +60,7 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
                         } else {
                             mList.addAll((List<MusicBean>) msg.obj);
                             for (int i = 0; i < 25; i++) {
-                                mAdapter.notifyItemInserted(pager*25 + i);
+                                mAdapter.notifyItemInserted(pager * 25 + i);
                             }
                         }
                     }
@@ -141,7 +141,7 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
 
     @Override
     public void showReviewer(List<MusicBean> list) {
-        
+
     }
 
     @Override

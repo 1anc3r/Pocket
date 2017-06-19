@@ -60,7 +60,7 @@ public class BookReviewerFragment extends PresenterFragment<BookPresenter> imple
                         } else {
                             mList.addAll((List<BookBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager*10 + i);
+                                mAdapter.notifyItemInserted(pager * 10 + i);
                             }
                         }
                     }

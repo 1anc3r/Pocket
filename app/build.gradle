@@ -23,6 +23,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        mavenCentral()
     }
 }
 
@@ -50,6 +51,13 @@ dependencies {
     compile 'com.amap.api:location:latest.integration'
     compile 'com.instabug.library:instabug:4.1.1'
     compile 'com.lguipeng.bubbleview:library:1.0.0'
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'com.journeyapps:zxing-android-embedded:3.3.0'
+    compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.2'
+    compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
+    compile 'com.github.QuadFlask:colorpicker:0.0.13'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    compile project(path: ':cropper')
 }

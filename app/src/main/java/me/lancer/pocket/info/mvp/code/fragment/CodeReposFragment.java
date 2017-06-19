@@ -60,7 +60,7 @@ public class CodeReposFragment extends PresenterFragment<CodePresenter> implemen
                         } else {
                             mList.addAll((List<CodeBean>) msg.obj);
                             for (int i = 0; i < 100; i++) {
-                                mAdapter.notifyItemInserted(pager*100 + i);
+                                mAdapter.notifyItemInserted(pager * 100 + i);
                             }
                         }
                     }
