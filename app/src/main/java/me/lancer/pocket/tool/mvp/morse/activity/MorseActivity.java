@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -73,7 +74,7 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
                             String ch = (String) entry.getKey();
                             String co = (String) entry.getValue();
                             mList.add(ch + " = " + co);
-                            mList.sort(new mComparator());
+                            Collections.sort(mList, new mComparator());
                             co2ch.put(co, ch);
                         }
                         mAdapter.notifyDataSetChanged();
