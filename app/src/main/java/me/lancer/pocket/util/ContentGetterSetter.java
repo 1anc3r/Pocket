@@ -35,14 +35,11 @@ public class ContentGetterSetter {
                     content.append(line);
                 }
                 reader.close();
-                Log.e(log, "获取成功!");
                 return content.toString();
             } else {
-                Log.e(log, "获取失败!状态码:" + response.code());
                 return "获取失败!状态码:" + response.code();
             }
         } catch (IOException e) {
-            Log.e(log, "获取失败!捕获异常:" + e.toString());
             return "获取失败!捕获异常:" + e.toString();
         }
     }
@@ -59,16 +56,13 @@ public class ContentGetterSetter {
             fis.read(bytes);
             String content = new String(bytes);
             if (content == null) {
-                Log.e("gettersetter.fromFile", "加载文件失败!空文件");
                 return "加载文件失败!空文件";
             }
             if (fis != null) {
                 fis.close();
             }
-            Log.e("gettersetter.fromFile", "加载文件成功!");
             return content;
         } catch (IOException e) {
-            Log.e("gettersetter.fromFile", "加载文件失败!捕获异常:" + e.toString());
             return "加载文件失败!捕获异常:" + e.toString();
         }
     }
@@ -90,9 +84,8 @@ public class ContentGetterSetter {
             if (fos != null) {
                 fos.close();
             }
-            Log.e("gettersetter.toFile", "配置文件成功!");
         } catch (Exception e) {
-            Log.e("gettersetter.toFile", "配置文件失败!捕获异常:" + e.toString());
+            e.printStackTrace();
         }
     }
 }

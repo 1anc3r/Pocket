@@ -3,6 +3,7 @@ package me.lancer.pocket.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,12 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         viewHolder.cvModel.setCardBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewHolder.llModel.getLayoutParams();
         params.width = (card - DensityUtil.dip2px(context, 32)) / 3;
-        params.height = params.width;
+//        params.height = params.width;
+        if (Math.random() * 3 > 2) {
+            params.height = params.width * 3 / 2;
+        } else {
+            params.height = params.width;
+        }
         viewHolder.llModel.setLayoutParams(params);
         viewHolder.tvName.setText(list.get(position).getName());
         viewHolder.ivIcon.setImageResource(list.get(position).getImage());

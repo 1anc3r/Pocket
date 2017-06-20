@@ -52,7 +52,6 @@ public class DiseaseModel {
             presenter.loadListSuccess(list);
         } else {
             presenter.loadListFailure(content);
-            Log.e("Disease.list", content);
         }
     }
 
@@ -70,7 +69,6 @@ public class DiseaseModel {
             presenter.loadPlaceSuccess(list);
         } else {
             presenter.loadPlaceFailure(content);
-            Log.e("Disease.place", content);
         }
     }
 
@@ -88,7 +86,6 @@ public class DiseaseModel {
             presenter.loadDepartmentSuccess(list);
         } else {
             presenter.loadDepartmentFailure(content);
-            Log.e("Disease.department", content);
         }
     }
 
@@ -99,7 +96,6 @@ public class DiseaseModel {
         } else if (type == 1) {
             url = sName;
         }
-        Log.e("url", url + name);
         String content = contentGetterSetter.getContentFromHtml("Disease.name", url + name);
         DiseaseBean bean;
         if (!content.contains("获取失败!")) {
@@ -107,7 +103,6 @@ public class DiseaseModel {
             presenter.loadNameSuccess(bean);
         } else {
             presenter.loadListFailure(content);
-            Log.e("Disease.name", content);
         }
     }
 
@@ -125,7 +120,6 @@ public class DiseaseModel {
             presenter.loadShowSuccess(bean);
         } else {
             presenter.loadShowFailure(content);
-            Log.e("Disease.show", content);
         }
     }
 

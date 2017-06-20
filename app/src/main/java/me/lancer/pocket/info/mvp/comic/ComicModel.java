@@ -34,7 +34,6 @@ public class ComicModel {
             presenter.loadListSuccess(list);
         } else {
             presenter.loadListFailure(content);
-            Log.e("loadList", content);
         }
     }
 
@@ -46,7 +45,6 @@ public class ComicModel {
             presenter.loadListSuccess(list);
         } else {
             presenter.loadListFailure(content);
-            Log.e("loadList", content);
         }
     }
 
@@ -58,7 +56,6 @@ public class ComicModel {
             presenter.loadRankSuccess(list);
         } else {
             presenter.loadRankFailure(content);
-            Log.e("loadRankTitle", content);
         }
     }
 
@@ -68,7 +65,6 @@ public class ComicModel {
         if (!content.contains("获取失败!")) {
             list = getContentFromContent(content);
         } else {
-            Log.e("loadRankContent", content);
         }
         return list;
     }
@@ -81,7 +77,6 @@ public class ComicModel {
             presenter.loadSortSuccess(list);
         } else {
             presenter.loadSortFailure(content);
-            Log.e("loadSortTitle", content);
         }
     }
 
@@ -93,7 +88,6 @@ public class ComicModel {
             presenter.loadSortSuccess(list);
         } else {
             presenter.loadSortFailure(content);
-            Log.e("loadRankContent", content);
         }
     }
 

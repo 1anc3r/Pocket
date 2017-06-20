@@ -37,7 +37,6 @@ public class WeatherModel {
             presenter.loadWeatherSuccess(bean);
         } else {
             presenter.loadWeatherFailure(content);
-            Log.e("loadWeather", content);
         }
     }
 
@@ -48,7 +47,6 @@ public class WeatherModel {
             presenter.loadCitySuccess(list);
         } else {
             presenter.loadCityFailure(content);
-            Log.e("loadCity", content);
         }
     }
 

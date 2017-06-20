@@ -31,7 +31,6 @@ public class ArticleModel {
             presenter.loadDailySuccess(bean);
         } else {
             presenter.loadDailyFailure(content);
-            Log.e("loadDaily", content);
         }
     }
 
@@ -43,7 +42,6 @@ public class ArticleModel {
             presenter.loadRandomSuccess(bean);
         } else {
             presenter.loadRandomFailure(content);
-            Log.e("loadRandom", content);
         }
     }
 

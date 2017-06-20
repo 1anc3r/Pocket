@@ -37,7 +37,6 @@ public class MovieModel {
             presenter.loadReviewerSuccess(list);
         } else {
             presenter.loadReviewerFailure(content);
-            Log.e("loadReviewer", content);
         }
     }
 
@@ -49,7 +48,6 @@ public class MovieModel {
             presenter.loadTopMovieSuccess(list);
         } else {
             presenter.loadTopMovieFailure(content);
-            Log.e("loadTopMovie", content);
         }
     }
 
@@ -61,7 +59,6 @@ public class MovieModel {
             presenter.loadTopMovieSuccess(list);
         } else {
             presenter.loadTopMovieFailure(content);
-            Log.e("loadTopMovie", content);
         }
     }
 
@@ -73,7 +70,6 @@ public class MovieModel {
             presenter.loadReviewerDetailSuccess(bean);
         } else {
             presenter.loadReviewerDetailFailure(content);
-            Log.e("loadReviewerDetail", content);
         }
     }
 
@@ -86,7 +82,6 @@ public class MovieModel {
             presenter.loadTopDetailSuccess(bean);
         } else {
             presenter.loadTopDetailFailure(content);
-            Log.e("loadTopDetail", content);
         }
     }
 

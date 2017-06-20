@@ -337,8 +337,6 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
 
                 final int pointerIndex = ev.findPointerIndex(activePointerId);
                 if (pointerIndex == -1) {
-                    Log.e(TAG, "Invalid pointerId=" + activePointerId
-                            + " in onInterceptTouchEvent");
                     break;
                 }
 
@@ -427,7 +425,6 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
             case MotionEvent.ACTION_MOVE:
                 final int activePointerIndex = ev.findPointerIndex(mActivePointerId);
                 if (activePointerIndex == -1) {
-                    Log.e(TAG, "Invalid pointerId=" + mActivePointerId + " in onTouchEvent");
                     break;
                 }
 

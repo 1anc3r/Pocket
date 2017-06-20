@@ -28,7 +28,6 @@ public class MorseModel {
             presenter.loadMorseSuccess(map);
         } else {
             presenter.loadMorseFailure(content);
-            Log.e("loadMorse", content);
         }
     }
 

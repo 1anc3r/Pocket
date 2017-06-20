@@ -51,7 +51,6 @@ public class KnowledgeListFragment extends PresenterFragment<KnowledgePresenter>
 //                    mSwipeRefreshLayout.setRefreshing(true);
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     break;
                 case 3:
                     if (msg.obj != null) {

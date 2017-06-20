@@ -61,7 +61,6 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
                 case 1:
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     break;
                 case 3:
                     if (msg.obj != null) {
@@ -136,7 +135,6 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
                         NowPosition(x, y, "我的位置", address);
                     }
                 } else {
-                    Log.e("error", jb.getString("error"));
                 }
             }
             new Thread(loadLocation).start();

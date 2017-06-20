@@ -55,7 +55,6 @@ public class DiseaseDetailActivity extends PresenterActivity<DiseasePresenter> i
                 case 1:
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     loadToast.error();
                     break;
                 case 3:

@@ -50,7 +50,6 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
                 case 1:
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     loadToast.error();
                     break;
                 case 3:

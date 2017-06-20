@@ -50,7 +50,6 @@ public class CodeTrendingFragment extends PresenterFragment<CodePresenter> imple
                     mSwipeRefreshLayout.setRefreshing(true);
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     break;
                 case 3:
                     if (msg.obj != null) {

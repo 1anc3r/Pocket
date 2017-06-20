@@ -916,7 +916,7 @@ public class QRCodeActivity extends ActionBarActivity {
 //            ExifInterface ei = new ExifInterface(photoPath);
 //            orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 //        } catch (IOException ex) {
-//            Log.e(TAG, "can not retrieve exif");
+//            (TAG, "can not retrieve exif");
 //        }
 
         String[] orientationColumn = {MediaStore.Images.Media.ORIENTATION};
@@ -1027,7 +1027,6 @@ public class QRCodeActivity extends ActionBarActivity {
                 return packageInfo.versionName;
             }
         } catch (Exception e) {
-            Log.e(TAG, "failed to get package info" + e);
             return "Unknown";
         }
     }

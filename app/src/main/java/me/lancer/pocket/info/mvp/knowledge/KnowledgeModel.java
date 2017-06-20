@@ -50,7 +50,6 @@ public class KnowledgeModel {
             presenter.loadClassifySuccess(list);
         } else {
             presenter.loadClassifyFailure(content);
-            Log.e("Message.classify", content);
         }
     }
 
@@ -61,7 +60,6 @@ public class KnowledgeModel {
         } else if (type == 1) {
             url = lList;
         }
-        Log.e("url", url + id);
         String content = contentGetterSetter.getContentFromHtml("Message.list", url + id);
         List<KnowledgeBean> list;
         if (!content.contains("获取失败!")) {
@@ -69,7 +67,6 @@ public class KnowledgeModel {
             presenter.loadListSuccess(list);
         } else {
             presenter.loadListFailure(content);
-            Log.e("Message.list", content);
         }
     }
 
@@ -87,7 +84,6 @@ public class KnowledgeModel {
             presenter.loadNewsSuccess(list);
         } else {
             presenter.loadNewsFailure(content);
-            Log.e("Message.news", content);
         }
     }
 
@@ -98,7 +94,6 @@ public class KnowledgeModel {
         } else if (type == 1) {
             url = lShow;
         }
-        Log.e("show: ", url + id);
         String content = contentGetterSetter.getContentFromHtml("Message.show", url + id);
         KnowledgeBean bean;
         if (!content.contains("获取失败!")) {
@@ -106,7 +101,6 @@ public class KnowledgeModel {
             presenter.loadShowSuccess(bean);
         } else {
             presenter.loadShowFailure(content);
-            Log.e("Message.show", content);
         }
     }
 
@@ -124,7 +118,6 @@ public class KnowledgeModel {
             presenter.loadSearchSuccess(list);
         } else {
             presenter.loadSearchFailure(content);
-            Log.e("Message.search", content);
         }
     }
 

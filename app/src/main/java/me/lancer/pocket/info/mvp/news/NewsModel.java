@@ -41,7 +41,6 @@ public class NewsModel {
             presenter.loadHotestSuccess(list);
         } else {
             presenter.loadHotestFailure(content);
-            Log.e("loadHotest", content);
         }
     }
 
@@ -53,7 +52,6 @@ public class NewsModel {
             presenter.loadLatestSuccess(list);
         } else {
             presenter.loadLatestFailure(content);
-            Log.e("loadLatest", content);
         }
     }
 
@@ -65,7 +63,6 @@ public class NewsModel {
             presenter.loadBeforeSuccess(list);
         } else {
             presenter.loadBeforeFailure(content);
-            Log.e("loadLatest", content);
         }
     }
 
@@ -77,7 +74,6 @@ public class NewsModel {
             presenter.loadListSuccess(list);
         } else {
             presenter.loadListFailure(content);
-            Log.e("loadList", content);
         }
     }
 
@@ -89,7 +85,6 @@ public class NewsModel {
             presenter.loadItemSuccess(list);
         } else {
             presenter.loadItemFailure(content);
-            Log.e("loadItem", content);
         }
     }
 
@@ -101,7 +96,6 @@ public class NewsModel {
             presenter.loadDetailSuccess(bean);
         } else {
             presenter.loadDetailFailure(content);
-            Log.e("loadDetail", content);
         }
     }
 

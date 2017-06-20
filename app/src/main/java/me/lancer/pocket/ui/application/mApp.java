@@ -36,7 +36,6 @@ public class mApp extends Application {
         super.onCreate();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         boolean night = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
-        Log.e(getString(R.string.night), String.valueOf(night));
 //        if (night) {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //        } else {

@@ -161,7 +161,6 @@ public class QRCodeResultActivity extends BaseActivity {
                 try {
                     startActivity(intent);
                 } catch (ActivityNotFoundException ex) {
-                    Log.e(TAG, "Can not find activity to open the text");
                     Toast.makeText(this, R.string.no_activity, Toast.LENGTH_LONG).show();
                 }
 

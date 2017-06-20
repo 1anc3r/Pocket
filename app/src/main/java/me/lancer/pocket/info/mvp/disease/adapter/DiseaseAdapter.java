@@ -102,7 +102,7 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.ViewHold
                     viewHolder.tvPlace.setText("发病处 : " + item.getPlace());
                     viewHolder.tvKeyword.setText("关键字 : " + item.getKeywords());
                 }
-//                Log.e("isPicture", ((mApp)context.getApplicationContext()).isPicture()+"");
+//                ("isPicture", ((mApp)context.getApplicationContext()).isPicture()+"");
 //                if (((mApp)context.getApplicationContext()).isPicture()) {
 //                    LruImageCache cache = LruImageCache.instance();
 //                    ImageLoader loader = new ImageLoader(mQueue, cache);

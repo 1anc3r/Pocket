@@ -34,7 +34,6 @@ public class ChapterModel {
             presenter.loadListSuccess(list);
         } else {
             presenter.loadListFailure(content);
-            Log.e("loadList", content);
         }
     }
 

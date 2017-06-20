@@ -39,7 +39,6 @@ public class CodeModel {
             presenter.loadUsersSuccess(list);
         } else {
             presenter.loadUsersFailure(content);
-            Log.e("loadUsers", content);
         }
     }
 
@@ -51,7 +50,6 @@ public class CodeModel {
             presenter.loadOrganizationsSuccess(list);
         } else {
             presenter.loadOrganizationsFailure(content);
-            Log.e("loadOrganizations", content);
         }
     }
 
@@ -63,7 +61,6 @@ public class CodeModel {
             presenter.loadRepositoriesSuccess(list);
         } else {
             presenter.loadRepositoriesFailure(content);
-            Log.e("loadRepositories", content);
         }
     }
 
@@ -75,7 +72,6 @@ public class CodeModel {
             presenter.loadTrendingSuccess(list);
         } else {
             presenter.loadTrendingFailure(content);
-            Log.e("loadTrending", content);
         }
     }
 
@@ -87,7 +83,6 @@ public class CodeModel {
             presenter.loadSearchingSuccess(list);
         } else {
             presenter.loadSearchingFailure(content);
-            Log.e("loadSearching", content);
         }
     }
 
@@ -99,7 +94,6 @@ public class CodeModel {
             presenter.loadDetailSuccess(bean);
         } else {
             presenter.loadDetailFailure(content);
-            Log.e("loadDetail", content);
         }
     }
 

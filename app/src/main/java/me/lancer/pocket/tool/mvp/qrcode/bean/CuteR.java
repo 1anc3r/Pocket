@@ -50,12 +50,10 @@ public class CuteR {
     private static final int MAX_LOGO_SIZE = 1080;
 
     public static Bitmap Product(String txt, Bitmap input, boolean colorful, int color) {
-        Log.d(TAG, "Product start input input.getWidth(): " + input.getWidth() + " input.getHeight(): " + input.getHeight());
         Bitmap QRImage = null;
         try {
             QRImage = encodeAsBitmap(txt);
         } catch (WriterException e) {
-            Log.e(TAG, "encodeAsBitmap: " + e);
         }
 
         if (colorful && color != Color.BLACK) {
@@ -82,7 +80,7 @@ public class CuteR {
         }
 //
 //        if (patternCenters == null || patternCenters.length == 0) {
-//            Log.e(TAG, "patternCenters == null || patternCenters.length == 0");
+//            (TAG, "patternCenters == null || patternCenters.length == 0");
 //            return null;
 //        }
 
@@ -172,7 +170,6 @@ public class CuteR {
         try {
             QRImage = encodeAsBitmap(txt);
         } catch (WriterException e) {
-            Log.e(TAG, "encodeAsBitmap: " + e);
             return null;
         }
 
@@ -187,7 +184,6 @@ public class CuteR {
         try {
             QRImage = encodeAsBitmap(txt, ErrorCorrectionLevel.L);
         } catch (WriterException e) {
-            Log.e(TAG, "encodeAsBitmap: " + e);
             return null;
         }
         return Bitmap.createScaledBitmap(QRImage, QRImage.getWidth() * SCALE_NORMAL_QR, QRImage.getHeight() * SCALE_NORMAL_QR, false);
@@ -634,17 +630,14 @@ public class CuteR {
             Result result = reader.decode(bBitmap);
             return result;
         } catch (NotFoundException e) {
-            Log.e(TAG, "direct decode exception", e);
             HashMap<DecodeHintType, Object> map = new HashMap<>();
             map.put(DecodeHintType.PURE_BARCODE, Boolean.TRUE);
             try {
                 Result result = reader.decode(bBitmap, map);
                 return result;
             } catch (NotFoundException ex) {
-                Log.e(TAG, "DecodeHintType.PURE_BARCODE exception", ex);
                 return null;
             }
         }
     }
-
 }

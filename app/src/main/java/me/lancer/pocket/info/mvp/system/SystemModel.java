@@ -43,7 +43,6 @@ public class SystemModel {
             presenter.loadAllSuccess(list);
         } else {
             presenter.loadAllFailure(content);
-            Log.e("System.all", content);
         }
     }
 

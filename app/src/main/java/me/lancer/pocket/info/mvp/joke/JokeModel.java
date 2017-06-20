@@ -36,7 +36,6 @@ public class JokeModel {
             presenter.loadTextSuccess(list);
         } else {
             presenter.loadTextFailure(content);
-            Log.e("loadJoke", content);
         }
     }
 
@@ -48,7 +47,6 @@ public class JokeModel {
             presenter.loadImageSuccess(list);
         } else {
             presenter.loadImageFailure(content);
-            Log.e("loadImage", content);
         }
     }
 
@@ -60,7 +58,6 @@ public class JokeModel {
             presenter.loadVideoSuccess(list);
         } else {
             presenter.loadVideoFailure(content);
-            Log.e("loadVideo", content);
         }
     }
 

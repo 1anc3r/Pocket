@@ -35,7 +35,6 @@ public class TranslationModel {
             presenter.loadTranslationSuccess(list);
         } else {
             presenter.loadTranslationFailure(content);
-            Log.e("loadTranslation", content);
         }
     }
 

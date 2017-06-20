@@ -37,7 +37,6 @@ public class BookModel {
             presenter.loadReviewerSuccess(list);
         } else {
             presenter.loadReviewerFailure(content);
-            Log.e("loadReviewer", content);
         }
     }
 
@@ -49,7 +48,6 @@ public class BookModel {
             presenter.loadTopBookSuccess(list);
         } else {
             presenter.loadTopBookFailure(content);
-            Log.e("loadTopBook", content);
         }
     }
 
@@ -61,7 +59,6 @@ public class BookModel {
             presenter.loadTopBookSuccess(list);
         } else {
             presenter.loadTopBookFailure(content);
-            Log.e("loadTopMovie", content);
         }
     }
 
@@ -73,7 +70,6 @@ public class BookModel {
             presenter.loadReviewerDetailSuccess(bean);
         } else {
             presenter.loadReviewerDetailFailure(content);
-            Log.e("loadReviewerDetail", content);
         }
     }
 
@@ -85,7 +81,6 @@ public class BookModel {
             presenter.loadTopDetailSuccess(bean);
         } else {
             presenter.loadTopDetailFailure(content);
-            Log.e("loadTopDetail", content);
         }
     }
 

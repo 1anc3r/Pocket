@@ -49,7 +49,6 @@ public class ContactSearchActivity extends BaseActivity {
                 case 1:
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     break;
                 case 3:
                     if (msg.obj != null) {

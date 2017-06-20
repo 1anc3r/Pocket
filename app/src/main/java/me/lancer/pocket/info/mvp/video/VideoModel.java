@@ -34,7 +34,6 @@ public class VideoModel {
             presenter.loadThemeSuccess(list);
         } else {
             presenter.loadThemeFailure(content);
-            Log.e("loadTheme", content);
         }
     }
 
@@ -46,7 +45,6 @@ public class VideoModel {
             presenter.loadDetailSuccess(bean);
         } else {
             presenter.loadDetailFailure(content);
-            Log.e("loadDetail", content);
         }
     }
 

@@ -33,13 +33,14 @@ import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.morse.IMorseView;
 import me.lancer.pocket.tool.mvp.morse.MorsePresenter;
 import me.lancer.pocket.tool.mvp.morse.adapter.MorseAdapter;
+import me.lancer.pocket.ui.view.ClearEditText;
 
 @SuppressWarnings("ALL")
 public class MorseActivity extends PresenterActivity<MorsePresenter> implements IMorseView, View.OnClickListener {
 
     private LinearLayout llMorse;
     private Toolbar toolbar;
-    private EditText etChar, etCode;
+    private ClearEditText etChar, etCode;
     private FloatingActionButton fab;
     private RecyclerView mRecyclerView;
     private MorseAdapter mAdapter;
@@ -61,7 +62,6 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
                 case 1:
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     break;
                 case 3:
                     if (msg.obj != null) {
@@ -150,9 +150,9 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        etChar = (EditText) findViewById(R.id.et_char);
+        etChar = (ClearEditText) findViewById(R.id.et_char);
         etChar.setOnClickListener(this);
-        etCode = (EditText) findViewById(R.id.et_code);
+        etCode = (ClearEditText) findViewById(R.id.et_code);
         etCode.setOnClickListener(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);

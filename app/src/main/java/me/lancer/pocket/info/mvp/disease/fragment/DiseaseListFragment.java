@@ -53,7 +53,6 @@ public class DiseaseListFragment extends PresenterFragment<DiseasePresenter> imp
                     mSwipeRefreshLayout.setRefreshing(true);
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     break;
                 case 3:
                     if (msg.obj != null) {
@@ -85,7 +84,7 @@ public class DiseaseListFragment extends PresenterFragment<DiseasePresenter> imp
 //                        adpDisease.notifyDataSetChanged();
                         lDisease.clear();
                         lDisease.add((DiseaseBean) msg.obj);
-//                        Log.e("item", ((DiseaseBean) msg.obj).getMessage());
+//                        ("item", ((DiseaseBean) msg.obj).getMessage());
                         adpDisease = new DiseaseAdapter(getActivity(), type, name, lDisease);
                         rvDisease.setAdapter(adpDisease);
                     }
@@ -148,7 +147,6 @@ public class DiseaseListFragment extends PresenterFragment<DiseasePresenter> imp
         type = getArguments().getInt("id");
         name = getArguments().getString("name");
         obj = getArguments().getInt("obj");
-        Log.e("keyword", what + " " + type + " " + name + " " + obj);
     }
 
     private void initView(View view) {

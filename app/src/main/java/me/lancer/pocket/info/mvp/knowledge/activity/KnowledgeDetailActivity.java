@@ -56,7 +56,6 @@ public class KnowledgeDetailActivity extends PresenterActivity<KnowledgePresente
                 case 1:
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     loadToast.error();
                     break;
                 case 3:

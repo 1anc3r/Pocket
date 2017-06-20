@@ -53,16 +53,10 @@ public class CodeSearchActivity extends PresenterActivity<CodePresenter> impleme
                     mSwipeRefreshLayout.setRefreshing(true);
                     break;
                 case 2:
-                    Log.e("log", (String) msg.obj);
                     break;
                 case 3:
                     if (msg.obj != null) {
                         mList = (List<CodeBean>) msg.obj;
-                        for (CodeBean bean : mList) {
-                            Log.e("name", bean.getName());
-                            Log.e("star", bean.getStar());
-                            Log.e("link", bean.getLink());
-                        }
                         mAdapter = new CodeAdapter(CodeSearchActivity.this, mList);
                         mRecyclerView.setAdapter(mAdapter);
                     }

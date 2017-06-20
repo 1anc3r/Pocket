@@ -49,7 +49,6 @@ public class LocaltionModel {
             presenter.loadListSuccess(list);
         } else {
             presenter.loadListFailure(content);
-            Log.e("Location.list", content);
         }
     }
 
@@ -68,7 +67,6 @@ public class LocaltionModel {
             presenter.loadLocationSuccess(list);
         } else {
             presenter.loadLocationFailure(content);
-            Log.e("Location.location", content);
         }
     }
 
@@ -86,7 +84,6 @@ public class LocaltionModel {
             presenter.loadShowSuccess(bean);
         } else {
             presenter.loadShowFailure(content);
-            Log.e("Location.show", content);
         }
     }
 
@@ -104,7 +101,6 @@ public class LocaltionModel {
             presenter.loadNameSuccess(bean);
         } else {
             presenter.loadNameFailure(content);
-            Log.e("Location.name", content);
         }
     }
 

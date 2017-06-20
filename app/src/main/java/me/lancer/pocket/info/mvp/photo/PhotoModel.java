@@ -83,7 +83,6 @@ public class PhotoModel {
             presenter.loadLatestSuccess(list);
         } else {
             presenter.loadLatestFailure(content);
-            Log.e("loadReviewer", content);
         }
     }
 
@@ -95,7 +94,6 @@ public class PhotoModel {
             presenter.loadThemeSuccess(list);
         } else {
             presenter.loadThemeFailure(content);
-            Log.e("loadTheme", content);
         }
     }
 
@@ -107,7 +105,6 @@ public class PhotoModel {
             presenter.loadWelfareSuccess(list);
         } else {
             presenter.loadWelfareFailure(content);
-            Log.e("loadReviewer", content);
         }
     }
 

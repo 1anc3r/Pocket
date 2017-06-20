@@ -72,8 +72,6 @@ public class MusicAdapter extends BaseAdapter {
         final ViewHolder viewHolder;
         final String path = musicList.get(position).getPath();
 
-        Log.e("IP & PORT", searchList.toString());
-
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_music, null);
             viewHolder = new ViewHolder();

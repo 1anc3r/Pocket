@@ -39,7 +39,6 @@ public class GameModel {
             presenter.loadFeaturedSuccess(list);
         } else {
             presenter.loadFeaturedFailure(content);
-            Log.e("loadFeatured", content);
         }
     }
 
@@ -61,7 +60,6 @@ public class GameModel {
             presenter.loadCategoriesSuccess(list);
         } else {
             presenter.loadCategoriesFailure(content);
-            Log.e("loadCategories", content);
         }
     }
 
@@ -69,7 +67,6 @@ public class GameModel {
         if (id == 54029) {
             id = 730;
         }
-        Log.e("url", appdetailsUrl + id);
         String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", appdetailsUrl + id);
         GameBean bean;
         if (!content.contains("获取失败!")) {
@@ -81,7 +78,6 @@ public class GameModel {
             }
         } else {
             presenter.loadDetailFailure(content);
-            Log.e("loadDetail", content);
         }
     }
 
@@ -238,9 +234,9 @@ public class GameModel {
                     requirements += pc.getString("recommended") + "<br>";
                 }
 //                if (data.getJSONArray("mac_requirements").length() == 0) {
-//                    Log.e("mac", "mac_requirements");
+//                    ("mac", "mac_requirements");
 //                } else {
-//                    Log.e("mac", "mac:" + data.getJSONObject("mac_requirements").toString());
+//                    ("mac", "mac:" + data.getJSONObject("mac_requirements").toString());
 //                    JSONObject mac = data.getJSONObject("mac_requirements");
 //                    if (mac.has("minimum")) {
 //                        requirements += mac.getString("minimum") + "<br>";
@@ -250,9 +246,9 @@ public class GameModel {
 //                    }
 //                }
 //                if (data.getJSONArray("linux_requirements").length() == 0) {
-//                    Log.e("linux", "linux_requirements");
+//                    ("linux", "linux_requirements");
 //                } else {
-//                    Log.e("linux", "linux:" + data.getJSONObject("linux_requirements").toString());
+//                    ("linux", "linux:" + data.getJSONObject("linux_requirements").toString());
 //                    JSONObject linux = data.getJSONObject("linux_requirements");
 //                    if (linux.has("minimum")) {
 //                        requirements += linux.getString("minimum") + "<br>";
