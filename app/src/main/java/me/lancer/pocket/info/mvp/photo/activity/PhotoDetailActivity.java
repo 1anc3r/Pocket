@@ -1,6 +1,7 @@
 package me.lancer.pocket.info.mvp.photo.activity;
 
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -23,6 +24,7 @@ import com.bumptech.glide.Glide;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
+import java.io.IOException;
 import java.util.List;
 
 import me.lancer.pocket.R;
@@ -36,7 +38,7 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
 
     private ImageView ivImg;
     private FrameLayout flPhoto;
-    private Button btnShare, btnDownload;
+    private Button btnSetting, btnShare, btnDownload;
     private LoadToast loadToast;
 
     private String img, title;
@@ -105,6 +107,8 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
         ivImg = (ImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
+        btnSetting = (Button) findViewById(R.id.btn_setting);
+        btnSetting.setOnClickListener(vOnClickListener);
         btnShare = (Button) findViewById(R.id.btn_share);
         btnShare.setOnClickListener(vOnClickListener);
         btnDownload = (Button) findViewById(R.id.btn_download);
@@ -127,7 +131,11 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
         @Override
         public void onClick(View view) {
             if (view == btnShare) {
-
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\n" + img+"\n分享自口袋");
+                startActivity(Intent.createChooser(intent, "分享到"));
             } else if (view == btnDownload) {
                 new Thread(download).start();
             }

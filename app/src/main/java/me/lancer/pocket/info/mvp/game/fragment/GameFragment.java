@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -150,23 +151,21 @@ public class GameFragment extends BaseFragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_about:
-                        Intent intent0 = new Intent();
-                        intent0.putExtra("link", "https://github.com/1anc3r");
-                        intent0.putExtra("title", "Github");
-                        intent0.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent0);
-                        break;
-                    case R.id.menu_blog:
-                        Intent intent1 = new Intent();
-                        intent1.putExtra("link", "https://www.1anc3r.me");
-                        intent1.putExtra("title", "Blog");
-                        intent1.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent1);
+                        showAboutDialog();
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("游戏");
+        builder.setMessage("\t\t\t\t精选 : 精选各大平台热门游戏\n" +
+                "\t\t\t\t优惠、热销、新品、即将推出\n" +
+                "\t\t\t\t — 数据来源 : Steam\n\t\t\t\t（https://store.steampowered.com）");
+        builder.show();
     }
 
 //    private void inflateMenu() {

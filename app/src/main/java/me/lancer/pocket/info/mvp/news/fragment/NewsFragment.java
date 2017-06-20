@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -136,23 +137,22 @@ public class NewsFragment extends BaseFragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_about:
-                        Intent intent0 = new Intent();
-                        intent0.putExtra("link", "https://github.com/1anc3r");
-                        intent0.putExtra("title", "Github");
-                        intent0.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent0);
-                        break;
-                    case R.id.menu_blog:
-                        Intent intent1 = new Intent();
-                        intent1.putExtra("link", "https://www.1anc3r.me");
-                        intent1.putExtra("title", "Blog");
-                        intent1.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent1);
+                        showAboutDialog();
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("趣闻");
+        builder.setMessage("\t\t\t\t每日 : 知乎日报的每日信息\n" +
+                "\t\t\t\t热门 : 知乎日报的热门信息\n" +
+                "\t\t\t\t分类 : 包括动漫、游戏、财经、电影、音乐、互联网安全等日报\n" +
+                "\t\t\t\t — 数据来源 : 知乎日报\n\t\t\t\t（http://news-at.zhihu.com/api）");
+        builder.show();
     }
 
 //    private void inflateMenu() {

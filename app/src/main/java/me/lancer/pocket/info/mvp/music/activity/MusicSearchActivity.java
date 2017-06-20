@@ -1,5 +1,6 @@
 package me.lancer.pocket.info.mvp.music.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,7 @@ import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -140,21 +142,20 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_about:
-                Intent intent0 = new Intent();
-                intent0.putExtra("link", "https://github.com/1anc3r");
-                intent0.putExtra("title", "Github");
-                intent0.setClass(this, AboutActivity.class);
-                startActivity(intent0);
-                break;
-            case R.id.menu_blog:
-                Intent intent1 = new Intent();
-                intent1.putExtra("link", "https://www.1anc3r.me");
-                intent1.putExtra("title", "Blog");
-                intent1.setClass(this, AboutActivity.class);
-                startActivity(intent1);
+                showAboutDialog();
                 break;
         }
         return true;
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("音乐");
+        builder.setMessage("\t\t\t\t乐评 : 豆瓣音乐的最受欢迎乐评\n" +
+                "\t\t\t\t乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
+                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想了解的音乐信息\n" +
+                "\t\t\t\t — 数据来源 : 豆瓣音乐\n\t\t\t\t（https://music.douban.com）");
+        builder.show();
     }
 
     @Override

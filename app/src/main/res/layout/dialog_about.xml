@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:text="Organization : XiYouMobile"
+        android:text="组织 : 西安邮电大学移动应用开发实验室"
         android:textSize="16sp" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:text="Author : 1anc3r (HuangFangzhi)"
+        android:text="开发者 : 1anc3r (HuangFangzhi)"
         android:textSize="16sp" />
 
     <TextView
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingTop="4dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="4dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -126,5 +126,16 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_share"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="16dp"
+        android:textSize="18sp"
+        android:textColor="@color/red"
+        android:text="分享应用"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.os.Message;
 import android.provider.ContactsContract;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -116,21 +117,19 @@ public class ContactSearchActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_about:
-                Intent intent0 = new Intent();
-                intent0.putExtra("link", "https://github.com/1anc3r");
-                intent0.putExtra("title", "Github");
-                intent0.setClass(this, AboutActivity.class);
-                startActivity(intent0);
-                break;
-            case R.id.menu_blog:
-                Intent intent1 = new Intent();
-                intent1.putExtra("link", "https://www.1anc3r.me");
-                intent1.putExtra("title", "Blog");
-                intent1.setClass(this, AboutActivity.class);
-                startActivity(intent1);
+                showAboutDialog();
                 break;
         }
         return true;
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("电话、通讯录、信息");
+        builder.setMessage("\t\t\t\t电话 : 您手机上的通话记录\n" +
+                "\t\t\t\t通讯录 : 您手机上的联系人\n" +
+                "\t\t\t\t信息 : 您手机上的短信记录");
+        builder.show();
     }
 
     private void getContacts() {

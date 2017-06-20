@@ -34,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.polaric.colorful.ColorPickerDialog;
 import org.polaric.colorful.Colorful;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,16 +171,23 @@ public class SettingFragment extends Fragment {
                 "\t\t\t\t正在卖力开发中...");
         funcList.add("时钟 : \n" +
                 "\t\t\t\t正在卖力开发中...");
+        funcList.add("备忘录 : \n" +
+                "\t\t\t\t正在卖力开发中...");
         funcList.add("天气 : \n" +
                 "\t\t\t\t天气信息 : 提供全国各城市的天气信息\n" +
                 "\t\t\t\t城市选择 : 通过列表点选或搜索名称的方式选择城市\n" +
                 "\t\t\t\t — 数据来源 : 中央天气\n\t\t\t\t（http://tj.nineton.cn/Heart/index）");
-        funcList.add("备忘录 : \n" +
-                "\t\t\t\t正在卖力开发中...");
-        funcList.add("计算器 : \n" +
-                "\t\t\t\t这是一个支持多项式运算的计算器, 由栈实现");
         funcList.add("翻译 : \n" +
                 "\t\t\t\t — 翻译支持 : 必应词典\n\t\t\t\t（http://cn.bing.com/dict/）");
+        funcList.add("摩斯电码 : \n" +
+                "\t\t\t\t在字符串和摩斯电码之间任意转换\n"+
+                "\t\t\t\t长按粘贴, 双击复制\n");
+        funcList.add("计算器 : \n" +
+                "\t\t\t\t这是一个支持多项式运算的计算器, 由栈实现");
+        funcList.add("二维码 : \n" +
+                "\t\t\t\t扫描 : 调用后置摄像头扫描二维码\n" +
+                "\t\t\t\t识别 : 识别本机图片中的二维码\n" +
+                "\t\t\t\t — 使用开源库 : （https://github.com/scola/Qart）");
         funcList.add("— 资讯 —");
         funcList.add("文章 : \n" +
                 "\t\t\t\t每日一文 : 每天一篇精选优质短篇\n" +
@@ -196,17 +204,17 @@ public class SettingFragment extends Fragment {
                 "\t\t\t\t段子 : 内涵段子的热辣段子\n" +
                 "\t\t\t\t图片 : 内涵段子的爆笑图片\n" +
                 "\t\t\t\t — 数据来源 : 内涵段子\n\t\t\t\t（http://neihanshequ.com）");
-        funcList.add("读书 : \n" +
+        funcList.add("图书 : \n" +
                 "\t\t\t\t书评 : 豆瓣读书的最受欢迎书评\n" +
                 "\t\t\t\t书榜 : 爬取呈现豆瓣图书TOP250\n" +
                 "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想了解的图书信息\n" +
                 "\t\t\t\t — 数据来源 : 豆瓣读书\n\t\t\t\t（https://book.douban.com）");
-        funcList.add("听音 : \n" +
+        funcList.add("音乐 : \n" +
                 "\t\t\t\t乐评 : 豆瓣音乐的最受欢迎乐评\n" +
                 "\t\t\t\t乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
                 "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想了解的音乐信息\n" +
                 "\t\t\t\t — 数据来源 : 豆瓣音乐\n\t\t\t\t（https://music.douban.com）");
-        funcList.add("观影 : \n" +
+        funcList.add("电影 : \n" +
                 "\t\t\t\t影评 : 豆瓣电影的最受欢迎影评\n" +
                 "\t\t\t\t影榜 : 爬取呈现豆瓣电影TOP250\n" +
                 "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想了解的电影信息\n" +
@@ -376,6 +384,18 @@ public class SettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        TextView tvShare = (TextView) aboutDialogView.findViewById(R.id.tv_share);
+        tvShare.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\nhttp://www.coolapk.com/apk/me.lancer.pocket");
+                startActivity(Intent.createChooser(intent, "分享到"));
+            }
+        });
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(aboutDialogView);
         aboutDialog = builder.create();
@@ -384,7 +404,7 @@ public class SettingFragment extends Fragment {
     private void showRepositoryDialog(List<RepositoryBean> list) {
         View listDialogView = View.inflate(getActivity(), R.layout.dialog_list, null);
         TextView tvType = (TextView) listDialogView.findViewById(R.id.tv_type);
-        tvType.setText("我的作品");
+        tvType.setText("相关应用");
         RecyclerView rvList = (RecyclerView) listDialogView.findViewById(R.id.rv_list);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

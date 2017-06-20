@@ -13,12 +13,7 @@
 
     <item
         android:id="@+id/menu_about"
-        android:title="Github"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_blog"
-        android:title="Blog"
+        android:title="关于"
         app:showAsAction="never" />
 
 </menu>

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -129,24 +130,37 @@ public class BookFragment extends BaseFragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+//                    case R.id.menu_about:
+//                        Intent intent0 = new Intent();
+//                        intent0.putExtra("link", "https://github.com/1anc3r");
+//                        intent0.putExtra("title", "Github");
+//                        intent0.setClass(getActivity(), AboutActivity.class);
+//                        startActivity(intent0);
+//                        break;
+//                    case R.id.menu_blog:
+//                        Intent intent1 = new Intent();
+//                        intent1.putExtra("link", "https://www.1anc3r.me");
+//                        intent1.putExtra("title", "Blog");
+//                        intent1.setClass(getActivity(), AboutActivity.class);
+//                        startActivity(intent1);
+//                        break;
                     case R.id.menu_about:
-                        Intent intent0 = new Intent();
-                        intent0.putExtra("link", "https://github.com/1anc3r");
-                        intent0.putExtra("title", "Github");
-                        intent0.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent0);
-                        break;
-                    case R.id.menu_blog:
-                        Intent intent1 = new Intent();
-                        intent1.putExtra("link", "https://www.1anc3r.me");
-                        intent1.putExtra("title", "Blog");
-                        intent1.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent1);
+                        showAboutDialog();
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("图书");
+        builder.setMessage("\t\t\t\t书评 : 豆瓣读书的最受欢迎书评\n" +
+                "\t\t\t\t书榜 : 爬取呈现豆瓣图书TOP250\n" +
+                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想了解的图书信息\n" +
+                "\t\t\t\t — 数据来源 : 豆瓣读书\n\t\t\t\t（https://book.douban.com）");
+        builder.show();
     }
 
 //    private void inflateMenu() {

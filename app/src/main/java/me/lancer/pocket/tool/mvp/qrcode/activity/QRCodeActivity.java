@@ -143,6 +143,7 @@ public class QRCodeActivity extends ActionBarActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
+        getActionBar().setTitle("二维码");
         pickPhoto = (CropImageView) findViewById(R.id.pick_img);
         editTextView = (LinearLayout) findViewById(R.id.text_group);
         mEditTextView = (EditText) findViewById(R.id.edit_text);
@@ -413,7 +414,7 @@ public class QRCodeActivity extends ActionBarActivity {
         }
 
         if (id == R.id.about_info) {
-//            openAbout();
+            openAbout();
         }
 
         if (id == R.id.select_mode) {
@@ -988,34 +989,13 @@ public class QRCodeActivity extends ActionBarActivity {
 //    }
 
     private void openAbout() {
-        WebView web = new WebView(this);
-        web.loadUrl(getResources().getString(R.string.about_page));
-        web.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                return true;
-            }
-        });
-        new AlertDialog.Builder(this)
-                .setTitle(String.format(getResources().getString(R.string.about_info_title), getMyVersion(this)))
-                .setPositiveButton(R.string.about_info_share, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-                        intent.setType("text/plain");
-                        intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_subject));
-                        intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_content));
-                        startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_channel)));
-                    }
-                })
-                .setNegativeButton(R.string.about_info_close, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                })
-                .setView(web)
-                .create()
-                .show();
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setTitle("二维码");
+        builder.setMessage("\t\t\t\t模式 : 选择希望生成怎样的二维码\n" +
+                "\t\t\t\t扫描 : 调用后置摄像头扫描二维码\n" +
+                "\t\t\t\t识别 : 识别本机图片中的二维码\n" +
+                "\t\t\t\t — 使用开源库 : （https://github.com/scola/Qart）");
+        builder.show();
     }
 
     public static String getMyVersion(Context context) {

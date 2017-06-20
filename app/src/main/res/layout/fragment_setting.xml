@@ -206,7 +206,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:text="我的作品"
+                            android:text="相关应用"
                             android:textSize="16sp" />
 
                         <View
@@ -236,7 +236,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:text="关于我"
+                            android:text="关于"
                             android:textSize="16sp" />
 
                         <View

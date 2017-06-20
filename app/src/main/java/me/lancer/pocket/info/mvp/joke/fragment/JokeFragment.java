@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -129,23 +130,21 @@ public class JokeFragment extends BaseFragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_about:
-                        Intent intent0 = new Intent();
-                        intent0.putExtra("link", "https://github.com/1anc3r");
-                        intent0.putExtra("title", "Github");
-                        intent0.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent0);
-                        break;
-                    case R.id.menu_blog:
-                        Intent intent1 = new Intent();
-                        intent1.putExtra("link", "https://www.1anc3r.me");
-                        intent1.putExtra("title", "Blog");
-                        intent1.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent1);
+                        showAboutDialog();
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("段子");
+        builder.setMessage("\t\t\t\t段子 : 内涵段子的热辣段子\n" +
+                "\t\t\t\t图片 : 内涵段子的爆笑图片\n" +
+                "\t\t\t\t — 数据来源 : 内涵段子\n\t\t\t\t（http://neihanshequ.com）");
+        builder.show();
     }
 
 //    private void inflateMenu() {

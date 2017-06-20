@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -213,21 +214,19 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
                 finish();
                 break;
             case R.id.menu_about:
-                Intent intent0 = new Intent();
-                intent0.putExtra("link", "https://github.com/1anc3r");
-                intent0.putExtra("title", "Github");
-                intent0.setClass(CityActivity.this, AboutActivity.class);
-                startActivity(intent0);
-                break;
-            case R.id.menu_blog:
-                Intent intent1 = new Intent();
-                intent1.putExtra("link", "https://www.1anc3r.me");
-                intent1.putExtra("title", "Blog");
-                intent1.setClass(CityActivity.this, AboutActivity.class);
-                startActivity(intent1);
+                showAboutDialog();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("天气");
+        builder.setMessage("\t\t\t\t天气信息 : 提供全国各城市的天气信息\n" +
+                "\t\t\t\t城市选择 : 通过列表点选或搜索名称的方式选择城市\n" +
+                "\t\t\t\t — 数据来源 : 中央天气\n\t\t\t\t（http://tj.nineton.cn/Heart/index）");
+        builder.show();
     }
 
     @Override

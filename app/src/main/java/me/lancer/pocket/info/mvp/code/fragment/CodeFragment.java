@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -144,23 +145,24 @@ public class CodeFragment extends BaseFragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_about:
-                        Intent intent0 = new Intent();
-                        intent0.putExtra("link", "https://github.com/1anc3r");
-                        intent0.putExtra("title", "Github");
-                        intent0.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent0);
-                        break;
-                    case R.id.menu_blog:
-                        Intent intent1 = new Intent();
-                        intent1.putExtra("link", "https://www.1anc3r.me");
-                        intent1.putExtra("title", "Blog");
-                        intent1.setClass(getActivity(), AboutActivity.class);
-                        startActivity(intent1);
+                        showAboutDialog();
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("编程");
+        builder.setMessage("\t\t\t\t个人 : GitHub上Star最多的个人\n" +
+                "\t\t\t\t组织 : GitHub上Star最多的组织\n" +
+                "\t\t\t\t项目 : GitHub上Star最多的项目\n" +
+                "\t\t\t\t趋势 : GitHub上今日最热的项目\n" +
+                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想浏览的项目\n" +
+                "\t\t\t\t — 数据来源 : GithubRanking\n\t\t\t\t（https://github-ranking.com）");
+        builder.show();
     }
 
 //    private void inflateMenu() {

@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -140,21 +141,21 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_about:
-                Intent intent0 = new Intent();
-                intent0.putExtra("link", "https://github.com/1anc3r");
-                intent0.putExtra("title", "Github");
-                intent0.setClass(this, AboutActivity.class);
-                startActivity(intent0);
-                break;
-            case R.id.menu_blog:
-                Intent intent1 = new Intent();
-                intent1.putExtra("link", "https://www.1anc3r.me");
-                intent1.putExtra("title", "Blog");
-                intent1.setClass(this, AboutActivity.class);
-                startActivity(intent1);
+                showAboutDialog();
                 break;
         }
         return true;
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("漫画");
+        builder.setMessage("\t\t\t\t推荐 : 推荐好看的漫画\n" +
+                "\t\t\t\t排行 : 漫画排行榜\n" +
+                "\t\t\t\t分类 : 来自有妖气各分区排行榜\n" +
+                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想看的漫画\n" +
+                "\t\t\t\t — 数据来源 : 有妖气\n\t\t\t\t（https://www.u17.com）");
+        builder.show();
     }
 
     @Override
