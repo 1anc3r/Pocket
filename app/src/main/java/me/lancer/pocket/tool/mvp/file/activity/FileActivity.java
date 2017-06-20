@@ -259,40 +259,42 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             setResult(RESULT_OK, null);
             finish();
         } else if (v == ivSearch) {
-            InputMethodManager inputManager = (InputMethodManager) getApplication().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-            LayoutInflater inflater = LayoutInflater.from(this);
-            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_search, null);
-            final Dialog dialog = new AlertDialog.Builder(FileActivity.this).create();
-            etSearch = (EditText) layout.findViewById(R.id.et_search);
-            setSearchTextChanged();
-            etSearch.setText(searchStr);
-            etSearch.setFocusableInTouchMode(true);
-            etSearch.setFocusable(true);
-            etSearch.requestFocus();
-            etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            if (fileList.size() > 0) {
+                InputMethodManager inputManager = (InputMethodManager) getApplication().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                LayoutInflater inflater = LayoutInflater.from(this);
+                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_search, null);
+                final Dialog dialog = new AlertDialog.Builder(FileActivity.this).create();
+                etSearch = (EditText) layout.findViewById(R.id.et_search);
+                setSearchTextChanged();
+                etSearch.setText(searchStr);
+                etSearch.setFocusableInTouchMode(true);
+                etSearch.setFocusable(true);
+                etSearch.requestFocus();
+                etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH
-                            || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT
-                            || actionId == EditorInfo.IME_ACTION_NONE || actionId == EditorInfo.IME_ACTION_PREVIOUS
-                            || actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.KEYCODE_ENTER) {
-                        dialog.dismiss();
-                        return true;
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH
+                                || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT
+                                || actionId == EditorInfo.IME_ACTION_NONE || actionId == EditorInfo.IME_ACTION_PREVIOUS
+                                || actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                            dialog.dismiss();
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
-                }
-            });
-            dialog.show();
-            Window window = dialog.getWindow();
-            window.setContentView(layout);
-            WindowManager.LayoutParams lp = window.getAttributes();
-            window.setGravity(Gravity.CENTER | Gravity.BOTTOM);
-            window.setAttributes(lp);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                });
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setContentView(layout);
+                WindowManager.LayoutParams lp = window.getAttributes();
+                window.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+                window.setAttributes(lp);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
         } else if (v == btnDelete) {
             Handler dHandler = new Handler();
             dHandler.post(deleteFile);

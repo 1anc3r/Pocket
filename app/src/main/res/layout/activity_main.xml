@@ -7,25 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        android:background="?attr/colorPrimary">
-
-        <android.support.v7.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:elevation="2dp"
-            android:background="?attr/colorBackgroundFloating"
-            android:foregroundTint="?attr/colorBackgroundFloating"
-            android:backgroundTint="?attr/colorBackgroundFloating"></android.support.v7.widget.SearchView>
-
-    </LinearLayout>
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <FrameLayout
         android:id="@+id/fl_main"

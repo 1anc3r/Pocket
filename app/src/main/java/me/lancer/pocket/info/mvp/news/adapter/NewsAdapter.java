@@ -24,7 +24,7 @@ import me.lancer.pocket.ui.application.mParams;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    private static final int TYPE_CONTENT_LARGE = -1;
+    private static final int TYPE_CONTENtoolbar = -1;
     private static final int TYPE_CONTENT_SMALL = 0;
     private static final int TYPE_TITLE = 1;
 
@@ -62,7 +62,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                         NewsDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getTitle(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivImg);
                     }
                 });
-            } else if (getItemViewType(position) == TYPE_CONTENT_LARGE) {
+            } else if (getItemViewType(position) == TYPE_CONTENtoolbar) {
 //                StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
 //                layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
@@ -86,7 +86,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (list.get(position).getType() == -1) {
-            return TYPE_CONTENT_LARGE;
+            return TYPE_CONTENtoolbar;
         } else if (list.get(position).getType() == 0) {
             return TYPE_CONTENT_SMALL;
         } else if (list.get(position).getType() == 1) {

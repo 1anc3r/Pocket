@@ -91,7 +91,7 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

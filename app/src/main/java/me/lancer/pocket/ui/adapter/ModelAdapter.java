@@ -18,6 +18,7 @@ import java.util.Random;
 import me.lancer.pocket.R;
 import me.lancer.pocket.ui.bean.ModelBean;
 import me.lancer.pocket.util.DensityUtil;
+import yyydjk.com.library.CouponView;
 
 /**
  * Created by HuangFangzhi on 2017/6/13.
@@ -57,7 +58,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ModelAdapter.ViewHolder viewHolder, int position) {
-        viewHolder.cvModel.setCardBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));
+        viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewHolder.llModel.getLayoutParams();
         params.width = (card - DensityUtil.dip2px(context, 32)) / 3;
 //        params.height = params.width;
@@ -86,7 +87,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        public CardView cvModel;
+        public CouponView cvModel;
         public LinearLayout llModel;
         public ImageView ivIcon;
         public TextView tvName;
@@ -95,7 +96,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
         public ViewHolder(View rootView, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
             super(rootView);
-            cvModel = (CardView) rootView.findViewById(R.id.cv_model);
+            cvModel = (CouponView) rootView.findViewById(R.id.cv_model);
             llModel = (LinearLayout) rootView.findViewById(R.id.ll_model);
             ivIcon = (ImageView) rootView.findViewById(R.id.iv_icon);
             tvName = (TextView) rootView.findViewById(R.id.tv_name);

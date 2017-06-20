@@ -43,8 +43,7 @@
         <activity
             android:name=".ui.activity.AboutActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.Overlay" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".info.mvp.article.activity.ArticleActivity"
             android:launchMode="singleTask" />
@@ -90,16 +89,13 @@
         <activity
             android:name=".info.mvp.chapter.activity.ChapterActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.Overlay" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".info.mvp.comic.activity.SortActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar.Overlay" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".info.mvp.page.activity.PagerActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar.Overlay" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".info.mvp.comic.activity.ComicSearchActivity"
             android:launchMode="singleTask" />

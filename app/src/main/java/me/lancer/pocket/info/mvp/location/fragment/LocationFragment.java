@@ -95,7 +95,7 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) view.findViewById(R.id.t_large);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle("附近医院");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

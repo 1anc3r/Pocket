@@ -23,7 +23,7 @@ import me.lancer.pocket.util.LruImageCache;
 
 public class KnowledgeAdapter extends RecyclerView.Adapter<KnowledgeAdapter.ViewHolder> {
 
-    private static final int TYPE_CONTENT_LARGE = -1;
+    private static final int TYPE_CONTENtoolbar = -1;
     private static final int TYPE_CONTENT_SMALL = 0;
     private static final int TYPE_TITLE = 1;
 
@@ -68,7 +68,7 @@ public class KnowledgeAdapter extends RecyclerView.Adapter<KnowledgeAdapter.View
                         KnowledgeDetailActivity.startActivity((Activity) context, list.get(position).getId(), type, list.get(position).getTitle(), list.get(position).getImg(), viewHolder.ivImg);
                     }
                 });
-            } else if (getItemViewType(position) == TYPE_CONTENT_LARGE) {
+            } else if (getItemViewType(position) == TYPE_CONTENtoolbar) {
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
@@ -92,7 +92,7 @@ public class KnowledgeAdapter extends RecyclerView.Adapter<KnowledgeAdapter.View
     @Override
     public int getItemViewType(int position) {
         if (list.get(position).getType() == -1) {
-            return TYPE_CONTENT_LARGE;
+            return TYPE_CONTENtoolbar;
         } else if (list.get(position).getType() == 0) {
             return TYPE_CONTENT_SMALL;
         } else if (list.get(position).getType() == 1) {

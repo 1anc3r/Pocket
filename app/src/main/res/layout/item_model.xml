@@ -6,15 +6,26 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <yyydjk.com.library.CouponView
+        android:layout_margin="4dp"
         android:id="@+id/cv_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="4dp"
-        app:cardBackgroundColor="?attr/colorPrimary">
+        android:orientation="vertical"
+        app:cv_dash_line_color="@android:color/white"
+        app:cv_dash_line_gap="6dp"
+        app:cv_dash_line_margin_bottom="8dp"
+        app:cv_dash_line_margin_left="8dp"
+        app:cv_dash_line_margin_right="8dp"
+        app:cv_dash_line_margin_top="8dp"
+        app:cv_is_dash_line_bottom="true"
+        app:cv_is_dash_line_left="true"
+        app:cv_is_dash_line_right="true"
+        app:cv_is_dash_line_top="true"
+        app:cv_is_semicircle_bottom="false"
+        app:cv_is_semicircle_left="false"
+        app:cv_is_semicircle_right="false"
+        app:cv_is_semicircle_top="false">
 
         <LinearLayout
             android:id="@+id/ll_model"
@@ -40,6 +51,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </yyydjk.com.library.CouponView>
 
 </LinearLayout>

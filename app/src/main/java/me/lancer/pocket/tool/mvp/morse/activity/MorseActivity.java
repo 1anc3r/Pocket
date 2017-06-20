@@ -138,7 +138,7 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
 
     private void initView() {
         llMorse = (LinearLayout) findViewById(R.id.ll_morse);
-        toolbar = (Toolbar) findViewById(R.id.t_large);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("摩斯电码");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

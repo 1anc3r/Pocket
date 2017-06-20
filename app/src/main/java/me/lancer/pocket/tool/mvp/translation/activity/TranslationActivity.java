@@ -34,11 +34,12 @@ import me.lancer.pocket.tool.mvp.translation.ITranslationView;
 import me.lancer.pocket.tool.mvp.translation.TranslationBean;
 import me.lancer.pocket.tool.mvp.translation.TranslationPresenter;
 import me.lancer.pocket.tool.mvp.translation.adapter.TranslationAdapter;
+import me.lancer.pocket.ui.view.ClearEditText;
 
 public class TranslationActivity extends PresenterActivity<TranslationPresenter> implements ITranslationView {
 
     private TextView tvRes;
-    private EditText etTrans;
+    private ClearEditText etTrans;
     private LinearLayout llRes;
 
     private RecyclerView mRecyclerView;
@@ -118,7 +119,7 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("翻译");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -127,7 +128,7 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         tvRes = (TextView) findViewById(R.id.tv_res);
-        etTrans = (EditText) findViewById(R.id.et_trans);
+        etTrans = (ClearEditText) findViewById(R.id.et_trans);
         etTrans.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

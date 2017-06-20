@@ -2,6 +2,7 @@ package me.lancer.pocket.tool.mvp.base.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import org.polaric.colorful.CActivity;
+import org.polaric.colorful.Colorful;
 
 import me.lancer.pocket.R;
 
@@ -23,11 +25,13 @@ public class BaseActivity extends CActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(getResources().getColor(Colorful.getThemeDelegate().getPrimaryColor().getColorRes()));
+        getWindow().setNavigationBarColor(getResources().getColor(Colorful.getThemeDelegate().getPrimaryColor().getColorRes()));
         mActivity = this;
     }
 
     public Toolbar initToolbarAsHome() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -37,7 +41,7 @@ public class BaseActivity extends CActivity {
     }
 
     public Toolbar initToolbar(String title) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

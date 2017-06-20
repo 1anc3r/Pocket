@@ -103,7 +103,7 @@ public class DiseaseDetailActivity extends PresenterActivity<DiseasePresenter> i
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

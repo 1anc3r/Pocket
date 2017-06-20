@@ -80,7 +80,7 @@ public class MessageActivity extends BaseActivity {
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (name != null) {
             toolbar.setTitle(name);
         } else {

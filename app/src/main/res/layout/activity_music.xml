@@ -4,8 +4,9 @@
 
     <LinearLayout
         android:id="@+id/ll_titile"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
         android:background="?attr/colorPrimary"
         android:clipToPadding="true"
         android:elevation="3dp"

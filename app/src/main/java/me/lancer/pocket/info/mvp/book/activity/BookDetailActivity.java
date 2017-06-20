@@ -94,7 +94,7 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

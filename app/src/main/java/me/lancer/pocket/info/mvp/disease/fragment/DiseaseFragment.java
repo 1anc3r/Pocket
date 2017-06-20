@@ -41,7 +41,7 @@ public class DiseaseFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) view.findViewById(R.id.t_large);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle("疾病自查");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

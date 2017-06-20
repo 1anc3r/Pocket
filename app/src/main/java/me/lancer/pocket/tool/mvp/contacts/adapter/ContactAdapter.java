@@ -32,7 +32,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             , R.color.green, R.color.lightgreen, R.color.lime
             , R.color.yellow, R.color.amber, R.color.orange, R.color.deeporange};
 
-    private static final int TYPE_CONTENT_LARGE = -1;
+    private static final int TYPE_CONTENtoolbar = -1;
     private static final int TYPE_CONTENT_SMALL = 0;
     private static final int TYPE_TITLE = 1;
 

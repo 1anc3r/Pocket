@@ -29,7 +29,7 @@ import me.lancer.pocket.util.LruImageCache;
 
 public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.ViewHolder> {
 
-    private static final int TYPE_CONTENT_LARGE = -1;
+    private static final int TYPE_CONTENtoolbar = -1;
     private static final int TYPE_CONTENT_SMALL = 0;
     private static final int TYPE_TITLE = 1;
 
@@ -130,7 +130,7 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.ViewHold
     @Override
     public int getItemViewType(int position) {
         if (list.get(position).getType() == -1) {
-            return TYPE_CONTENT_LARGE;
+            return TYPE_CONTENtoolbar;
         } else if (list.get(position).getType() == 0) {
             return TYPE_CONTENT_SMALL;
         } else if (list.get(position).getType() == 1) {
