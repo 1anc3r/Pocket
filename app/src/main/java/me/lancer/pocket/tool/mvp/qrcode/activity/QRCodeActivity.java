@@ -143,7 +143,6 @@ public class QRCodeActivity extends ActionBarActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
-        getActionBar().setTitle("二维码");
         pickPhoto = (CropImageView) findViewById(R.id.pick_img);
         editTextView = (LinearLayout) findViewById(R.id.text_group);
         mEditTextView = (EditText) findViewById(R.id.edit_text);

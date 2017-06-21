@@ -197,9 +197,9 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
                     deleteFile.delete();
                     picList.remove(deletePath);
                     posList.remove(posList.get(0));
-                    showToast(ImageIActivity.this, "删除成功!");
+                    showSnackbar(mGridView, "删除成功!");
                 } else {
-                    showToast(ImageIActivity.this, "删除失败!");
+                    showSnackbar(mGridView, "删除失败!");
                 }
                 count++;
             }

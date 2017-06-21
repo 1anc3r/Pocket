@@ -49,7 +49,7 @@ public class MessageActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    showToast(MessageActivity.this, "发送成功");
+                    showSnackbar(mRecyclerView, "发送成功");
                     mList.clear();
                     getMessages(number);
                     mAdapter.notifyDataSetChanged();
@@ -58,7 +58,7 @@ public class MessageActivity extends BaseActivity {
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     break;
                 case 1:
-                    showToast(MessageActivity.this, "发送失败");
+                    showSnackbar(mRecyclerView, "发送失败");
                     break;
 
             }

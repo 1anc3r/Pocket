@@ -158,7 +158,6 @@ public class JokeFragment extends BaseFragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                showToast("...");
                 return false;
             }
 

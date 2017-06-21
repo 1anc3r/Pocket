@@ -223,7 +223,6 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-//        showToast("你点击了infoWindow窗口" + marker.getTitle());
     }
 
     @Override
@@ -232,7 +231,6 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-//        showToast("你点击的是" + marker.getTitle());
         return false;
     }
 

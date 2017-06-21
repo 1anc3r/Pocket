@@ -77,20 +77,18 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         super.onViewCreated(view, savedInstanceState);
         index = this.getArguments().getInt(getString(R.string.index));
         if (index == 0) {
-            initView(view, strTools, imgTools);
+            initView(strTools, imgTools);
         } else if (index == 1) {
-            initView(view, strInfos, imgInfos);
-        } else {
-
+            initView(strInfos, imgInfos);
         }
     }
 
-    private void initView(View view, String[] names, int[] icons) {
+    private void initView(String[] names, int[] icons) {
         WindowManager wm = (WindowManager) getContext()
                 .getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
         int height = wm.getDefaultDisplay().getHeight();
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        mRecyclerView = (RecyclerView) getView().findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

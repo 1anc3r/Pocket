@@ -128,7 +128,7 @@ public class DiseaseActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                showToast(this, "再按一次退出应用");
+                showSnackbar(bottomNavigationView, "再按一次退出应用");
                 exitTime = System.currentTimeMillis();
             } else {
                 Intent intent = new Intent(Intent.ACTION_MAIN);

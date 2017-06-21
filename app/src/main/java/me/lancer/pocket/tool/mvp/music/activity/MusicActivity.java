@@ -265,7 +265,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
 
     private void getMusics() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            showToast(this, strNoInternalExternalStorage);
+            showSnackbar(lvMusic, strNoInternalExternalStorage);
             return;
         }
         mProgressDialog = ProgressDialog.show(this, null, strLoading);
@@ -341,9 +341,9 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                 File deleteFile = new File(deletePath);
                 if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
                     deleteFile.delete();
-                    showToast(MusicActivity.this, "删除成功!");
+                    showSnackbar(lvMusic, "删除成功!");
                 } else {
-                    showToast(MusicActivity.this, "删除失败!");
+                    showSnackbar(lvMusic, "删除失败!");
                 }
             }
             int count = 0;

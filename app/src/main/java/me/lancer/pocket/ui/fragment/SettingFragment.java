@@ -149,7 +149,7 @@ public class SettingFragment extends Fragment {
         scNight = (SwitchCompat) view.findViewById(R.id.sc_night);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("正在加载,请稍后...");
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
         showAboutDialog();
     }
 

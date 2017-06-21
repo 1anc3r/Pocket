@@ -375,7 +375,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
                 out.flush();
                 out.close();
                 out = null;
-                showToast(this, "复制成功!");
+                showSnackbar(lvFile, "复制成功!");
             } else if (input.isDirectory()) {
                 File output = new File(outputPath + "/" + input.getName());
                 if (!output.exists()) {
@@ -387,14 +387,14 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
                         copyFile(item.getPath(), item.getName(), output.getPath());
                     }
                 }
-                showToast(this, "复制成功!");
+                showSnackbar(lvFile, "复制成功!");
             } else {
-                showToast(this, "复制失败!");
+                showSnackbar(lvFile, "复制失败!");
             }
         } catch (FileNotFoundException fnfe1) {
-            showToast(this, "复制失败:" + fnfe1.getMessage());
+            showSnackbar(lvFile, "复制失败:" + fnfe1.getMessage());
         } catch (Exception e) {
-            showToast(this, "复制失败:" + e.getMessage());
+            showSnackbar(lvFile, "复制失败:" + e.getMessage());
         }
     }
 
@@ -424,7 +424,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
                 out.close();
                 out = null;
                 new File(inputPath).delete();
-                showToast(this, "剪切成功!");
+                showSnackbar(lvFile, "剪切成功!");
             } else if (input.isDirectory()) {
                 File output = new File(outputPath + "/" + input.getName());
                 if (!output.exists()) {
@@ -436,14 +436,14 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
                         moveFile(item.getPath(), item.getName(), output.getPath());
                     }
                 }
-                showToast(this, "剪切成功!");
+                showSnackbar(lvFile, "剪切成功!");
             } else {
-                showToast(this, "剪切失败!");
+                showSnackbar(lvFile, "剪切失败!");
             }
         } catch (FileNotFoundException fnfe1) {
-            showToast(this, "剪切失败:" + fnfe1.getMessage());
+            showSnackbar(lvFile, "剪切失败:" + fnfe1.getMessage());
         } catch (Exception e) {
-            showToast(this, "剪切失败:" + e.getMessage());
+            showSnackbar(lvFile, "剪切失败:" + e.getMessage());
         }
     }
 
@@ -604,9 +604,9 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
                 if (deleteFile.isFile()) {
                     if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
                         deleteFile.delete();
-                        showToast(FileActivity.this, "删除成功!");
+                        showSnackbar(lvFile, "删除成功!");
                     } else {
-                        showToast(FileActivity.this, "删除失败!");
+                        showSnackbar(lvFile, "删除失败!");
                     }
                 } else if (deleteFile.isDirectory()) {
                     deleteDir(deleteFile);

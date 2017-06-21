@@ -169,7 +169,7 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
 
     private void getVideo() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            showToast(this, strNoInternalExternalStorage);
+            showSnackbar(mGroupGridView, strNoInternalExternalStorage);
             return;
         }
         mProgressDialog = ProgressDialog.show(this, null, strLoading);
@@ -253,9 +253,9 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
                 if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
                     deleteFile.delete();
                     posList.remove(posList.get(0));
-                    showToast(VideoActivity.this, "删除成功");
+                    showSnackbar(mGroupGridView, "删除成功");
                 } else {
-                    showToast(VideoActivity.this, "删除失败");
+                    showSnackbar(mGroupGridView, "删除失败");
                 }
                 count++;
             }

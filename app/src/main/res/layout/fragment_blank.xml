@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:paddingBottom="48dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:scrollbars="none" />

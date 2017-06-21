@@ -274,7 +274,7 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
 
     private void getAllDocument() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            showToast(this, strNoInternalExternalStorage);
+            showSnackbar(lvDoc, strNoInternalExternalStorage);
             return;
         }
         new Thread(new Runnable() {
@@ -388,9 +388,9 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
                 File deleteFile = new File(deletePath);
                 if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
                     deleteFile.delete();
-                    showToast(DocumentActivity.this, "删除成功!");
+                    showSnackbar(lvDoc, "删除成功!");
                 } else {
-                    showToast(DocumentActivity.this, "删除失败!");
+                    showSnackbar(lvDoc, "删除失败!");
                 }
             }
             int count = 0;

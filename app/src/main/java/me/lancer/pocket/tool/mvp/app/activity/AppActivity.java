@@ -2,6 +2,7 @@ package me.lancer.pocket.tool.mvp.app.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.Environment;
@@ -126,7 +127,7 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
 
     private void getApp() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            showToast(this, noInternalExternalStorage);
+            showSnackbar(lvApp, noInternalExternalStorage);
             return;
         }
         new Thread(new Runnable() {
@@ -136,13 +137,18 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
                 List<PackageInfo> packages = getPackageManager().getInstalledPackages(0);
                 for (int i = 0; i < packages.size(); i++) {
                     PackageInfo packageInfo = packages.get(i);
-                    AppBean appInfo = new AppBean();
-                    appInfo.setVersionCode(packageInfo.versionCode);
-                    appInfo.setAppName(packageInfo.applicationInfo.loadLabel(getPackageManager()).toString());
-                    appInfo.setPackageName(packageInfo.packageName);
-                    appInfo.setVersionName(packageInfo.versionName);
-                    appInfo.setAppIcon(packageInfo.applicationInfo.loadIcon(getPackageManager()));
-                    appList.add(appInfo);
+                    ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+                    if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) > 0) {
+
+                    } else {
+                        AppBean appInfo = new AppBean();
+                        appInfo.setVersionCode(packageInfo.versionCode);
+                        appInfo.setAppName(packageInfo.applicationInfo.loadLabel(getPackageManager()).toString());
+                        appInfo.setPackageName(packageInfo.packageName);
+                        appInfo.setVersionName(packageInfo.versionName);
+                        appInfo.setAppIcon(packageInfo.applicationInfo.loadIcon(getPackageManager()));
+                        appList.add(appInfo);
+                    }
                 }
                 lHandler.sendEmptyMessage(SCAN_OK);
             }

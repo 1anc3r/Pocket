@@ -138,7 +138,7 @@ public class SettingActivity extends BaseActivity {
         scNight = (SwitchCompat) findViewById(R.id.sc_night);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("正在加载,请稍后...");
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
         showAboutDialog();
     }
 

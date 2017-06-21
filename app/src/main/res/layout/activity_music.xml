@@ -31,7 +31,7 @@
             android:layout_height="48dp"
             android:gravity="center"
             android:text="@string/music_zn"
-            android:textColor="?attr/colorBackgroundFloating"
+            android:textColor="@android:color/white"
             android:textSize="18sp" />
 
         <TextView
