@@ -107,8 +107,10 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage(appList.get(position).getPackageName());
-                startActivity(LaunchIntent);
+                if (appList.get(position).getPackageName() != null) {
+                    Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage(appList.get(position).getPackageName());
+                    startActivity(LaunchIntent);
+                }
             }
         });
         ivBack = (ImageView) findViewById(R.id.iv_back);

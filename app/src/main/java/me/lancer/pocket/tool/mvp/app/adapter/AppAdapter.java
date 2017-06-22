@@ -27,7 +27,7 @@ public class AppAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return appList.size();
+        return appList != null ? appList.size() : 0;
     }
 
     @Override

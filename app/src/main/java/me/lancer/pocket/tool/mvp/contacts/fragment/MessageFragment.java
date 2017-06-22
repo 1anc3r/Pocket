@@ -75,25 +75,27 @@ public class MessageFragment extends BaseFragment {
                         "date",
                         "type"
                 }, null, null, "date desc");
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.moveToPosition(i);
-            String number = cursor.getString(1);
-            String body = cursor.getString(3);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date msgDate = new Date(Long.parseLong(cursor.getString(4)));
-            String date = sdf.format(msgDate);
-            int type = Integer.parseInt(cursor.getString(5));
-            MessageBean item = new MessageBean();
-            item.setContent(body);
-            item.setNumber(number);
-            item.setType(type);
-            item.setDate(date);
-            if (messages.get(number) != null) {
-                messages.get(number).add(item);
-            } else {
-                List<MessageBean> items = new ArrayList<MessageBean>();
-                items.add(item);
-                messages.put(number, items);
+        if (cursor != null) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                String number = cursor.getString(1);
+                String body = cursor.getString(3);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date msgDate = new Date(Long.parseLong(cursor.getString(4)));
+                String date = sdf.format(msgDate);
+                int type = Integer.parseInt(cursor.getString(5));
+                MessageBean item = new MessageBean();
+                item.setContent(body);
+                item.setNumber(number);
+                item.setType(type);
+                item.setDate(date);
+                if (messages.get(number) != null) {
+                    messages.get(number).add(item);
+                } else {
+                    List<MessageBean> items = new ArrayList<MessageBean>();
+                    items.add(item);
+                    messages.put(number, items);
+                }
             }
         }
         getActivity().startManagingCursor(cursor);

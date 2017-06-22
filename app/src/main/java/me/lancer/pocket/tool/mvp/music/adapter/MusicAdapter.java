@@ -53,7 +53,7 @@ public class MusicAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return musicList.size();
+        return musicList != null ? musicList.size() : 0;
     }
 
     @Override

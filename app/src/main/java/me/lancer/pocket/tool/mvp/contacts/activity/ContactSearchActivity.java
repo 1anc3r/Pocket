@@ -141,15 +141,17 @@ public class ContactSearchActivity extends BaseActivity {
                         "data1",
                         "sort_key"
                 }, null, null, "sort_key");
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.moveToPosition(i);
-            String name = cursor.getString(0);
-            String number = cursor.getString(1);
-            ContactBean item = new ContactBean();
-            item.setName(name);
-            item.setNumber(number);
-            if (name.contains(keyword) || number.contains(keyword)) {
-                temp.add(item);
+        if (cursor != null) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                String name = cursor.getString(0);
+                String number = cursor.getString(1);
+                ContactBean item = new ContactBean();
+                item.setName(name);
+                item.setNumber(number);
+                if (name.contains(keyword) || number.contains(keyword)) {
+                    temp.add(item);
+                }
             }
         }
         Message msg = new Message();

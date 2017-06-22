@@ -122,20 +122,22 @@ public class MessageActivity extends BaseActivity {
                         "date",
                         "type"
                 }, "address=?", new String[]{query.replace(" ", "").replace("-", "")}, "date desc");
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.moveToPosition(i);
-            String number = cursor.getString(1);
-            String body = cursor.getString(3);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date msgDate = new Date(Long.parseLong(cursor.getString(4)));
-            String date = sdf.format(msgDate);
-            int type = Integer.parseInt(cursor.getString(5));
-            MessageBean item = new MessageBean();
-            item.setContent(body);
-            item.setNumber(number);
-            item.setType(type);
-            item.setDate(date);
-            mList.add(item);
+        if (cursor != null) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                String number = cursor.getString(1);
+                String body = cursor.getString(3);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date msgDate = new Date(Long.parseLong(cursor.getString(4)));
+                String date = sdf.format(msgDate);
+                int type = Integer.parseInt(cursor.getString(5));
+                MessageBean item = new MessageBean();
+                item.setContent(body);
+                item.setNumber(number);
+                item.setType(type);
+                item.setDate(date);
+                mList.add(item);
+            }
         }
         startManagingCursor(cursor);
     }

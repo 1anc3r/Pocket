@@ -44,7 +44,7 @@ public class FileAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return fileList.size();
+        return fileList != null ? fileList.size() : 0;
     }
 
     @Override

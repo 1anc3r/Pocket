@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
 import me.lancer.pocket.tool.mvp.app.activity.AppActivity;
 import me.lancer.pocket.tool.mvp.calculator.activity.CalculatorActivity;
+import me.lancer.pocket.tool.mvp.calendar.activity.CalendarActivity;
 import me.lancer.pocket.tool.mvp.document.activity.DocumentActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.image.activity.ImageActivity;
@@ -40,7 +42,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             "电话", "通讯录", "信息",
             "图片", "音乐", "视频",
             "文档", "应用", "存储",
-            /*"日历", "时钟","备忘录",*/
+            "日历", /*"时钟","备忘录",*/
             "天气", "翻译", "摩斯电码",
             "计算器", "二维码", /*"带壳截图"*/};
     private String[] strInfos = {
@@ -52,7 +54,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
             R.mipmap.ic_photo_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
             R.mipmap.ic_folder_open_black_48dp, R.mipmap.ic_widgets_black_48dp, R.mipmap.ic_save_black_48dp,
-            /*R.mipmap.ic_event_black_48dp, R.mipmap.ic_watch_later_black_48dp,R.mipmap.ic_menu_black_48dp,*/
+            R.mipmap.ic_event_black_48dp, /*R.mipmap.ic_watch_later_black_48dp,R.mipmap.ic_menu_black_48dp,*/
             R.mipmap.ic_cloud_queue_black_48dp, R.mipmap.ic_translate_black_48dp, R.mipmap.ic_all_inclusive_black_48dp,
             R.mipmap.ic_exposure_plus_1_black_48dp, R.mipmap.ic_crop_free_black_48dp};
     private int[] imgInfos = {
@@ -100,7 +102,21 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setFocusable(true);
+        mRecyclerView.setFocusableInTouchMode(true);
+        mRecyclerView.setOnKeyListener(OnKeyListener);
     }
+
+    private View.OnKeyListener OnKeyListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_MENU) {
+                mAdapter.notifyDataSetChanged();
+                return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     public void onItemClick(View view, int postion) {
@@ -150,31 +166,31 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     intent.setClass(getActivity(), FileActivity.class);
                     startActivity(intent);
                     break;
-                /*case 9:
-                    intent.setClass(getActivity(), CalculatorActivity.class);
+                case 9:
+                    intent.setClass(getActivity(), CalendarActivity.class);
                     startActivity(intent);
                     break;
-                case 10:
+                /*case 10:
                     intent.setClass(getActivity(), CalculatorActivity.class);
                     startActivity(intent);
                     break;*/
-                case 9:
+                case 10:
                     intent.setClass(getActivity(), WeatherActivity.class);
                     startActivity(intent);
                     break;
-                case 10:
+                case 11:
                     intent.setClass(getActivity(), TranslationActivity.class);
                     startActivity(intent);
                     break;
-                case 11:
+                case 12:
                     intent.setClass(getActivity(), MorseActivity.class);
                     startActivity(intent);
                     break;
-                case 12:
+                case 13:
                     intent.setClass(getActivity(), CalculatorActivity.class);
                     startActivity(intent);
                     break;
-                case 13:
+                case 14:
                     intent.setClass(getActivity(), QRCodeActivity.class);
                     startActivity(intent);
                     break;

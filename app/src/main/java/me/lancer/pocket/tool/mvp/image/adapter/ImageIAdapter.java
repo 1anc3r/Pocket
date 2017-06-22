@@ -48,7 +48,7 @@ public class ImageIAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return picList.size();
+        return picList != null ? picList.size() : 0;
     }
 
     @Override
