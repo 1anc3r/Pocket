@@ -164,8 +164,10 @@
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
-        <activity android:name=".tool.mvp.calendar.activity.CalendarActivity"
-            android:launchMode="singleTask" />
+        <activity
+            android:name=".tool.mvp.calendar.activity.CalendarActivity" />
+        <activity android:name=".tool.mvp.calendar.activity.CalendarExeActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

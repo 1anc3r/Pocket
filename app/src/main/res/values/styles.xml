@@ -90,7 +90,7 @@
     </style>
 
     <style name="CalendarView">
-        <item name="android:background">@drawable/schedule_background</item>
+        <item name="android:background">@drawable/calendar_background</item>
     </style>
 
     <style name="ProgressBar.Horizontal" parent="@android:style/Widget.Holo.ProgressBar.Horizontal" tools:targetApi="honeycomb"></style>

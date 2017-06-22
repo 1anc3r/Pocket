@@ -1,11 +1,14 @@
-package me.lancer.pocket.tool.mvp.calendar.bean;
+package me.lancer.pocket.tool.mvp.calendar;
+
+import java.io.Serializable;
 
 /**
  * Created by HuangFangzhi on 2016/12/14.
  */
 
-public class CalendarBean {
+public class CalendarBean implements Serializable {
 
+    private int id;
     private int time;
     private int day;
     private int color;
@@ -15,6 +18,14 @@ public class CalendarBean {
 
     public CalendarBean(){
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getTime() {

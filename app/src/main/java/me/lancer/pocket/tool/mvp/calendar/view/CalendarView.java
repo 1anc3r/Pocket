@@ -24,11 +24,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import me.lancer.pocket.tool.mvp.calendar.bean.CalendarBean;
+import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.util.DensityUtil;
 
 import static me.lancer.pocket.R.*;
-import static me.lancer.pocket.R.style.CalendarView;
 
 /**
  * Created by HuangFangzhi on 2016/12/16.
@@ -36,18 +35,18 @@ import static me.lancer.pocket.R.style.CalendarView;
 
 public class CalendarView extends RelativeLayout {
 
-    private FrameLayout flScheduleContent;
+    private FrameLayout flCalendarContent;
     private List<View> arrCacheView = new ArrayList<>();
     private TextView tvMonthNum, tvMonthStr;
 
-    private static final int[] Schedule_BG = {drawable.schedule_content_teal, drawable.schedule_content_blue,
-            drawable.schedule_content_red, drawable.schedule_content_pink, drawable.schedule_content_yellow,
-            drawable.schedule_content_green, drawable.schedule_content_orage};
+    private static final int[] Schedule_BG = {drawable.calendar_content_teal, drawable.calendar_content_blue,
+            drawable.calendar_content_red, drawable.calendar_content_pink, drawable.calendar_content_yellow,
+            drawable.calendar_content_green, drawable.calendar_content_orage};
 
     private static final int TV_MONTH_ID = 11;
     private static final int TV_WEEK_ID = 26;
 
-    private List<? extends CalendarBean> arrSchedule;
+    private List<? extends CalendarBean> arrCalendar;
     private String[] CN_DAYS = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
 
     private int squareHeight;
@@ -77,14 +76,14 @@ public class CalendarView extends RelativeLayout {
         this(context, null);
     }
 
-    private OnScheduleItemClickListener onScheduleItemClickListener;
+    private OnCalendarItemClickListener onCalendarItemClickListener;
 
-    public void setOnScheduleItemClickListener(OnScheduleItemClickListener onScheduleItemClickListener) {
-        this.onScheduleItemClickListener = onScheduleItemClickListener;
+    public void setOnCalendarItemClickListener(OnCalendarItemClickListener onCalendarItemClickListener) {
+        this.onCalendarItemClickListener = onCalendarItemClickListener;
     }
 
-    public interface OnScheduleItemClickListener {
-        void onScheduleItemClick(TextView tv, int time, int day, String des);
+    public interface OnCalendarItemClickListener {
+        void onCalendarItemClick(TextView tv, int time, int day, CalendarBean bean);
     }
 
     private void initSize() {
@@ -299,12 +298,12 @@ public class CalendarView extends RelativeLayout {
         drawLeftView(llLeft);
         llBottom.addView(llLeft);
 
-        flScheduleContent = new FrameLayout(getContext());
+        flCalendarContent = new FrameLayout(getContext());
         LinearLayout.LayoutParams llp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        flScheduleContent.setLayoutParams(llp2);
+        flCalendarContent.setLayoutParams(llp2);
         drawScheduleFrame();
-        llBottom.addView(flScheduleContent);
+        llBottom.addView(flCalendarContent);
         sv.addView(llBottom);
 
         addView(sv);
@@ -329,11 +328,28 @@ public class CalendarView extends RelativeLayout {
             llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);
             tvDate = new TextView(getContext());
-            tvDate.setText((i + 1) + "");
+            int iTime = (i + 8);
+            String sTime = "";
+            if (iTime < 10) {
+                if (iTime == 8) {
+                    sTime = "上午\n0" + iTime + ":00";
+                } else {
+                    sTime = "0" + iTime + ":00";
+                }
+            } else {
+                if (iTime == 11) {
+                    sTime = iTime + ":00";
+                }else if (iTime == 12){
+                    sTime = "下午\n" + (iTime+2) + ":00";
+                }else{
+                    sTime = (iTime+2) + ":00";
+                }
+            }
+            tvDate.setText(sTime);
             tvDate.setLayoutParams(llp);
-            tvDate.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+            tvDate.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
             tvDate.setPadding(0, 0, 0, 0);
-            tvDate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            tvDate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             tvDate.setTextColor(0xFF999999);
             ll.addView(tvDate);
             llLeft.addView(ll);
@@ -350,21 +366,21 @@ public class CalendarView extends RelativeLayout {
                     squareHeight);
             flp.setMargins(col * squareWidth, row * squareHeight, 0, 0);
             fl.setLayoutParams(flp);
-            flScheduleContent.addView(fl);
+            flCalendarContent.addView(fl);
         }
     }
 
-    public void updateSchedule(List<? extends CalendarBean> arrSchedule) {
-        this.arrSchedule = arrSchedule;
-        updateSchedule();
+    public void updateCalendar(List<? extends CalendarBean> arrCalendar) {
+        this.arrCalendar = arrCalendar;
+        updateCalendar();
     }
 
-    private void updateSchedule() {
+    private void updateCalendar() {
         clearViewsIfNeeded();
         FrameLayout fl;
         FrameLayout.LayoutParams flp;
         TextView tvSchedule;
-        for (final CalendarBean c : arrSchedule) {
+        for (final CalendarBean c : arrCalendar) {
             final int time = c.getTime();
             final int day = c.getDay();
             fl = new FrameLayout(getContext());
@@ -386,14 +402,14 @@ public class CalendarView extends RelativeLayout {
             tvSchedule.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onScheduleItemClickListener != null) {
-                        onScheduleItemClickListener.onScheduleItemClick((TextView) v, time, day, c.getName());
+                    if (onCalendarItemClickListener != null) {
+                        onCalendarItemClickListener.onCalendarItemClick((TextView) v, time, day, c);
                     }
                 }
             });
             fl.addView(tvSchedule);
             arrCacheView.add(fl);
-            flScheduleContent.addView(fl);
+            flCalendarContent.addView(fl);
         }
     }
 
@@ -402,7 +418,7 @@ public class CalendarView extends RelativeLayout {
             return;
         }
         for (int i = arrCacheView.size() - 1; i >= 0; i--) {
-            flScheduleContent.removeView(arrCacheView.get(i));
+            flCalendarContent.removeView(arrCacheView.get(i));
             arrCacheView.remove(i);
         }
     }
@@ -421,13 +437,13 @@ public class CalendarView extends RelativeLayout {
         removeAllViews();
         init(getContext());
         draw();
-        updateSchedule();
+        updateCalendar();
     }
 
     public void refreshCurrentLayout(Date date) {
         removeAllViews();
         init(getContext(), date);
         draw();
-        updateSchedule();
+        updateCalendar();
     }
 }

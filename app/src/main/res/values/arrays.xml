@@ -21,4 +21,46 @@
         <item>@string/read_qr</item>
     </string-array>
 
+    <string-array name="start_time">
+        <item>"8:00"</item>
+        <item>"9:00"</item>
+        <item>"10:00"</item>
+        <item>"11:00"</item>
+        <item>"12:00"</item>
+        <item>"14:00"</item>
+        <item>"15:00"</item>
+        <item>"16:00"</item>
+        <item>"17:00"</item>
+        <item>"18:00"</item>
+        <item>"19:00"</item>
+        <item>"20:00"</item>
+        <item>"21:00"</item>
+    </string-array>
+
+    <string-array name="end_time">
+        <item>"9:00"</item>
+        <item>"10:00"</item>
+        <item>"11:00"</item>
+        <item>"12:00"</item>
+        <item>"14:00"</item>
+        <item>"15:00"</item>
+        <item>"16:00"</item>
+        <item>"17:00"</item>
+        <item>"18:00"</item>
+        <item>"19:00"</item>
+        <item>"20:00"</item>
+        <item>"21:00"</item>
+        <item>"22:00"</item>
+    </string-array>
+
+    <string-array name="week">
+        <item>"周一"</item>
+        <item>"周二"</item>
+        <item>"周三"</item>
+        <item>"周四"</item>
+        <item>"周五"</item>
+        <item>"周六"</item>
+        <item>"周日"</item>
+    </string-array>
+
 </resources>
