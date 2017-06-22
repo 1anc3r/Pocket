@@ -1,12 +1,15 @@
 package me.lancer.pocket.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.polaric.colorful.Colorful;
 
 import java.util.List;
 
@@ -32,10 +35,12 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         if (list.get(position).equals("— 工具 —") || list.get(position).equals("— 资讯 —")) {
             viewHolder.tvString.setGravity(Gravity.CENTER);
+            viewHolder.tvString.setTextColor(context.getResources().getColor(Colorful.getThemeDelegate().getPrimaryColor().getColorRes()));
             viewHolder.tvString.setTextSize(20);
             viewHolder.tvString.setText(list.get(position));
         } else {
             viewHolder.tvString.setGravity(Gravity.LEFT);
+            viewHolder.tvString.setTextColor(Color.BLACK);
             viewHolder.tvString.setTextSize(14);
             viewHolder.tvString.setText(list.get(position));
         }

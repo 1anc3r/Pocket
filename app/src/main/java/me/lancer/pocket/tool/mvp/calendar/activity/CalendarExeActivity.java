@@ -4,23 +4,18 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.tool.mvp.calendar.CalendarPresenter;
@@ -183,21 +178,18 @@ public class CalendarExeActivity extends PresenterActivity<CalendarPresenter> im
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             if (parent == sWeek) {
                 temp.setDay((int) (id + 1));
-                Log.e("setDay", "" + (id + 1));
             } else if (parent == sStartTime) {
                 if (id < 4) {
                     temp.setTime((int) (id + 1));
                 } else {
                     temp.setTime((int) (id));
                 }
-                Log.e("setTime", id + "节:" + temp.getTime());
             } else if (parent == sEndTime) {
                 if (temp.getTime() < 5) {
                     temp.setLength((int) ((id + 2) - temp.getTime()));
                 } else {
                     temp.setLength((int) (id + 1) - temp.getTime());
                 }
-                Log.e("setLength", id + "课时:" + temp.getLength());
             }
         }
 

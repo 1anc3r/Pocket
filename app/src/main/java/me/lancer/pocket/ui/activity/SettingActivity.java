@@ -157,7 +157,7 @@ public class SettingActivity extends BaseActivity {
         funcList.add("图片、音乐、视频、文档、应用、存储 : \n" +
                 "\t\t\t\t您手机上的各种类型的文件, 支持打开、删除、赋值、剪切");
         funcList.add("日历 : \n" +
-                "\t\t\t\t正在卖力开发中...");
+                "\t\t\t\t一个普通的日历");
         funcList.add("时钟 : \n" +
                 "\t\t\t\t正在卖力开发中...");
         funcList.add("备忘录 : \n" +
