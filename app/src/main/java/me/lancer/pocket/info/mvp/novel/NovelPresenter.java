@@ -28,5 +28,155 @@ public class NovelPresenter implements IBasePresenter<INovelView>, INovelPresent
         this.view = null;
     }
 
+    public void loadRank() {
+        if (view != null) {
+            view.showLoad();
+            model.loadRankList();
+        }
+    }
 
+    public void loadRank(String id) {
+        if (view != null) {
+            view.showLoad();
+            model.loadRankItem(id);
+        }
+    }
+
+
+    @Override
+    public void loadRankSuccess(List<NovelBean> list) {
+        if (view != null) {
+            view.showRank(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadRankFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadCate() {
+        if (view != null) {
+            view.showLoad();
+            model.loadCateList();
+        }
+    }
+
+    public void loadCate(String gender, String major, int start, int limit) {
+        if (view != null) {
+            view.showLoad();
+            model.loadCateItem(gender, major, start, limit);
+        }
+    }
+
+    @Override
+    public void loadCateSuccess(List<NovelBean> list) {
+        if (view != null) {
+            view.showCate(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadCateFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadSearch(String query) {
+        if (view != null) {
+            view.showLoad();
+            model.loadSearch(query);
+        }
+    }
+
+    @Override
+    public void loadSearchSuccess(List<NovelBean> list) {
+        if (view != null) {
+            view.showSearch(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadSearchFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadNovel(String id) {
+        if (view != null) {
+            view.showLoad();
+            model.loadNovel(id);
+        }
+    }
+
+    @Override
+    public void loadNovelSuccess(NovelBean bean) {
+        if (view != null) {
+            view.showNovel(bean);
+            switchSource(bean.getId());
+        }
+    }
+
+    @Override
+    public void loadNovelFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void switchSource(String id) {
+        if (view != null) {
+            view.showLoad();
+            model.switchSource(id);
+        }
+    }
+
+    @Override
+    public void switchSourceSuccess(String id) {
+        if (view != null) {
+            loadChapter(id);
+        }
+    }
+
+    @Override
+    public void switchSourceFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadChapter(String id) {
+        if (view != null) {
+            view.showLoad();
+            model.loadChapter(id);
+        }
+    }
+
+    @Override
+    public void loadChapterSuccess(List<NovelBean.Chapters> list) {
+        if (view != null) {
+            view.showChapter(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadChapterFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
 }

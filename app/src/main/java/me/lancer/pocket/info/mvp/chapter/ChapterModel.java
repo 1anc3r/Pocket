@@ -1,7 +1,5 @@
 package me.lancer.pocket.info.mvp.chapter;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.util.ContentGetterSetter;
-import me.lancer.pocket.util.URL;
+import me.lancer.pocket.url.BOOK_URL;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
@@ -52,7 +50,7 @@ public class ChapterModel {
                     for (int i = 0; i < chapterList.length(); i++) {
                         JSONObject chapter = chapterList.getJSONObject(i);
                         String title = chapter.getString("name");
-                        String link = URL.CHAPTER_URL + chapter.getInt("chapter_id");
+                        String link = BOOK_URL.CHAPTER_URL + chapter.getInt("chapter_id");
                         ChapterBean bean = new ChapterBean(title, link);
                         list.add(bean);
                     }

@@ -1,10 +1,10 @@
-package me.lancer.pocket.util;
+package me.lancer.pocket.url;
 
 /**
  * Created by HuangFangzhi on 2017/5/24.
  */
 
-public final class URL {
+public final class BOOK_URL {
     public static final String HOME_URL = "http://app.u17.com/v3/appV3/android/phone/comic/boutiqueList?android_id=0A00270000130000&v=3070099&model=VPhone&come_from=wandoujia";
     public static final String RANK_TITLE_URL = "http://app.u17.com/v3/appV3/android/phone/rank/list?android_id=0A00270000130000&v=3070099&model=VPhone&come_from=wandoujia";
     public static final String RANK_CONTENT_URL = "http://app.u17.com/v3/appV3/android/phone/list/commonComicList?argName=sort&android_id=0A00270000130000&v=3070099&model=VPhone&come_from=wandoujia&argValue=";

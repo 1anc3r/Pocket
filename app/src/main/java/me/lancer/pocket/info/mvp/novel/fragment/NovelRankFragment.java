@@ -129,6 +129,21 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
     }
 
     @Override
+    public void showSearch(List<NovelBean> list) {
+
+    }
+
+    @Override
+    public void showNovel(NovelBean bean) {
+
+    }
+
+    @Override
+    public void showChapter(List<NovelBean.Chapters> list) {
+
+    }
+
+    @Override
     public void showMsg(String log) {
         Message msg = new Message();
         msg.what = 2;

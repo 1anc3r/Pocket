@@ -9,16 +9,17 @@ import java.util.List;
 
 public class NovelBean implements Serializable {
 
-    private int id;
+    private String id;
     private String author;
     private String title;
     private String intro;
     private String category;
     private String tags;
-    private int words;
-    private int ratio;
+    private int count;
+    private String ratio;
     private String updated;
     private String cover;
+    private String link;
     private int type;
 
     public List<Chapters> chapters;
@@ -26,10 +27,6 @@ public class NovelBean implements Serializable {
     public static class Chapters implements Serializable {
         public String title;
         public String link;
-        public String id;
-        public int currency;
-        public boolean unreadble;
-        public boolean isVip;
 
         public Chapters() {
         }
@@ -44,11 +41,16 @@ public class NovelBean implements Serializable {
 
     }
 
-    public int getId() {
+    public NovelBean(String title, int type) {
+        this.title = title;
+        this.type = type;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -92,19 +94,19 @@ public class NovelBean implements Serializable {
         this.tags = tags;
     }
 
-    public int getWords() {
-        return words;
+    public int getCount() {
+        return count;
     }
 
-    public void setWords(int words) {
-        this.words = words;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public int getRatio() {
+    public String getRatio() {
         return ratio;
     }
 
-    public void setRatio(int ratio) {
+    public void setRatio(String ratio) {
         this.ratio = ratio;
     }
 
@@ -122,6 +124,14 @@ public class NovelBean implements Serializable {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public int getType() {
