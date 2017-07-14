@@ -31,4 +31,8 @@ public interface INovelPresenter {
     void loadChapterSuccess(List<NovelBean.Chapters> list);
 
     void loadChapterFailure(String log);
+
+    void loadContentSuccess(String content);
+
+    void loadContentFailure(String log);
 }

@@ -19,4 +19,6 @@ public interface INovelView extends IBaseView {
     void showDetail(NovelBean bean);
 
     void showChapter(List<NovelBean.Chapters> list);
+
+    void showContent(String content);
 }

@@ -179,4 +179,27 @@ public class NovelPresenter implements IBasePresenter<INovelView>, INovelPresent
             view.hideLoad();
         }
     }
+
+    public void loadContent(String link) {
+        if (view != null) {
+            view.showLoad();
+            model.loadContent(link);
+        }
+    }
+
+    @Override
+    public void loadContentSuccess(String content) {
+        if (view != null) {
+            view.showContent(content);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadContentFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
 }

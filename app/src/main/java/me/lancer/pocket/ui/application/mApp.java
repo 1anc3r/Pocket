@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 import com.instabug.library.Instabug;
 import com.instabug.library.invocation.InstabugInvocationEvent;
 
+import org.litepal.LitePalApplication;
 import org.polaric.colorful.Colorful;
 
 import java.io.File;
@@ -24,7 +25,7 @@ import me.lancer.pocket.R;
  * Created by HuangFangzhi on 2016/12/15.
  */
 
-public class mApp extends Application {
+public class mApp extends LitePalApplication {
 
     private RequestQueue mRequestQueue;
 

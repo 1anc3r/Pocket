@@ -1,5 +1,6 @@
 package me.lancer.pocket.info.mvp.novel.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewCompat;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
+import me.lancer.pocket.info.mvp.novel.activity.NovelReadActivity;
 import me.lancer.pocket.ui.application.mParams;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHolder> {
@@ -39,12 +41,12 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         if (list.get(position) != null) {
-            NovelBean.Chapters bean = list.get(position);
+            final NovelBean.Chapters bean = list.get(position);
             viewHolder.tvTitle.setText(bean.getTitle());
             viewHolder.tvTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    NovelReadActivity.startActivity((Activity)context, position, bean.getTitle(), bean.getLink());
                 }
             });
         }

@@ -184,8 +184,11 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                value1 = query;
-                new Thread(loadSearch).start();
+                Intent intent = new Intent();
+                intent.putExtra("type", 3);
+                intent.putExtra("value1", query);
+                intent.setClass(NovelListActivity.this, NovelListActivity.class);
+                startActivity(intent);
                 return false;
             }
 
@@ -278,6 +281,11 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
 
     @Override
     public void showChapter(List<NovelBean.Chapters> list) {
+
+    }
+
+    @Override
+    public void showContent(String content) {
 
     }
 

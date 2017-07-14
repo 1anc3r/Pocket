@@ -90,9 +90,9 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
                         tvTitle.setText(nb.getTitle());
                         tvAuthor.setText(nb.getAuthor());
                         tvIntro.setText(nb.getIntro());
-                        tvWordCount.setText((nb.getCount()/10000)+"万字");
-                        tvFollowCount.setText(value3+"人");
-                        tvRetentRatio.setText(value4+"%");
+                        tvWordCount.setText((nb.getCount() / 10000) + "万字");
+                        tvFollowCount.setText(value3 + "人");
+                        tvRetentRatio.setText(value4 + "%");
 //                        String[] tags = nb.getCategory().split(";");
 //                        for (String tag : tags) {
 //                            TextView tvTag = new TextView(NovelDetailActivity.this);
@@ -226,6 +226,21 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != -1) {
+            int position = resultCode;
+            if (position == mList.size()) {
+                showSnackbar(mRecyclerView, "这是最后一章.");
+            } else if (position == -1) {
+                showSnackbar(mRecyclerView, "这是第一章.");
+            } else {
+                NovelReadActivity.startActivity(this, position, mList.get(position).getTitle(), mList.get(position).getLink());
+            }
+        }
+    }
+
+    @Override
     protected NovelPresenter onCreatePresenter() {
         return new NovelPresenter(this);
     }
@@ -268,6 +283,11 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         msg.what = 4;
         msg.obj = list;
         handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showContent(String content) {
+
     }
 
     @Override

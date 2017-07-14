@@ -141,6 +141,11 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
     }
 
     @Override
+    public void showContent(String content) {
+
+    }
+
+    @Override
     public void showMsg(String log) {
         Message msg = new Message();
         msg.what = 2;

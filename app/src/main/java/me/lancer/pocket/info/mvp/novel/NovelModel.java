@@ -132,6 +132,17 @@ public class NovelModel {
         }
     }
 
+    public void loadContent(String link) {
+        Log.e("loadContent: ", link);
+        String content = contentGetterSetter.getContentFromHtml("Novel.loadContent", link);
+        if (!content.contains("获取失败!")) {
+            content = getContentFromContent(content);
+            presenter.loadContentSuccess(content);
+        } else {
+            presenter.loadContentFailure(content);
+        }
+    }
+
     private List<NovelBean> getRankListFromContent(String content) {
         try {
             List<NovelBean> list = new ArrayList<>();
@@ -316,6 +327,18 @@ public class NovelModel {
                 list.add(item);
             }
             return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private String getContentFromContent(String content) {
+        try {
+            JSONObject all = new JSONObject(content);
+            JSONObject chapter = all.getJSONObject("chapter");
+            String body = "        " + chapter.getString("body").replace("\n", "\n        ");
+            return body;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
