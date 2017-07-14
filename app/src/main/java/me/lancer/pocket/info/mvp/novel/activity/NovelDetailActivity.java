@@ -1,135 +1,133 @@
 package me.lancer.pocket.info.mvp.novel.activity;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
+import com.bumptech.glide.Glide;
+
+import net.steamcrafted.loadtoast.LoadToast;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.info.mvp.news.NewsBean;
+import me.lancer.pocket.info.mvp.news.activity.NewsDetailActivity;
+import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
+import me.lancer.pocket.info.mvp.novel.adapter.ChapterAdapter;
 import me.lancer.pocket.info.mvp.novel.adapter.NovelImgAdapter;
-import rx.Observable;
-import rx.functions.Action1;
+import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
  */
 
-public class NovelReadActivity extends PresenterActivity<NovelPresenter> implements INovelView {
+public class NovelDetailActivity extends PresenterActivity<NovelPresenter> implements INovelView {
+
+    private int[] colors = {R.color.red, R.color.pink, R.color.purple
+            , R.color.deeppurple, R.color.indigo, R.color.blue
+            , R.color.lightblue, R.color.cyan, R.color.teal
+            , R.color.green, R.color.lightgreen, R.color.lime
+            , R.color.yellow, R.color.amber, R.color.orange, R.color.deeporange};
 
     Toolbar toolbar;
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ImageView ivImg;
+    private TextView tvTitle, tvAuthor, tvIntro, tvWordCount, tvFollowCount, tvRetentRatio;
+    private LinearLayout llTags;
+    private LoadToast loadToast;
     private RecyclerView mRecyclerView;
-
-    private NovelImgAdapter mAdapter;
-
+    private ChapterAdapter mAdapter;
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private List<NovelBean> mList = new ArrayList<>();
+    private List<NovelBean.Chapters> mList = new ArrayList<>();
 
-    private int type, value3, value4;
-    private String value1, value2;
+    private String value1, value2, value4;
+    private int value3;
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
                     break;
                 case 2:
+                    loadToast.error();
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<NovelBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        loadToast.success();
+                        NovelBean nb = (NovelBean) msg.obj;
+                        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+                        Glide.with(NovelDetailActivity.this).load(nb.getCover()).into(ivImg);
+                        tvTitle.setText(nb.getTitle());
+                        tvAuthor.setText(nb.getAuthor());
+                        tvIntro.setText(nb.getIntro());
+                        tvWordCount.setText((nb.getCount()/10000)+"万字");
+                        tvFollowCount.setText(value3+"人");
+                        tvRetentRatio.setText(value4+"%");
+//                        String[] tags = nb.getCategory().split(";");
+//                        for (String tag : tags) {
+//                            TextView tvTag = new TextView(NovelDetailActivity.this);
+//                            tvTag.setText(tag);
+//                            tvTag.setTextSize(16);
+//                            tvTag.setTextColor(getResources().getColor(R.color.white));
+//                            tvTag.setBackgroundColor(getResources().getColor(colors[(int) (Math.random() * 16)]));
+//                            llTags.addView(tvTag);
+//                        }
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    break;
+                case 4:
+                    if (msg.obj != null) {
+                        loadToast.success();
+                        mList.clear();
+                        mList.addAll((List<NovelBean.Chapters>) msg.obj);
+                        mAdapter = new ChapterAdapter(NovelDetailActivity.this, mList);
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
                     break;
             }
         }
     };
 
-    private Runnable loadRank = new Runnable() {
+    private Runnable loadDetail = new Runnable() {
         @Override
         public void run() {
-            presenter.loadRank(value1);
-        }
-    };
-
-    private Runnable loadCate = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadCate(value1, value2, value3, value4);
-        }
-    };
-
-    private Runnable loadSearch = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadSearch(value1);
+            presenter.loadDetail(value1);
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_novel_info);
         initData();
         initView();
     }
@@ -139,39 +137,36 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            if (type == 1) {
-                actionBar.setTitle(value2);
-            }else if (type == 2) {
-                actionBar.setTitle(value2);
-            }else if (type == 3) {
-                actionBar.setTitle("搜索结果");
-            }
+            actionBar.setTitle(value2);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_result);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                load(type);
-            }
-        });
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        ivImg = (ImageView) findViewById(R.id.iv_img);
+        tvTitle = (TextView) findViewById(R.id.tv_title);
+        tvAuthor = (TextView) findViewById(R.id.tv_author);
+        tvIntro = (TextView) findViewById(R.id.tv_intro);
+        tvWordCount = (TextView) findViewById(R.id.tv_word_count);
+        tvFollowCount = (TextView) findViewById(R.id.tv_follow_count);
+        tvRetentRatio = (TextView) findViewById(R.id.tv_retent_ratio);
+        llTags = (LinearLayout) findViewById(R.id.ll_tags);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_chapter);
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new NovelImgAdapter(this, mList);
+        mAdapter = new ChapterAdapter(this, mList);
         mRecyclerView.setAdapter(mAdapter);
-        load(type);
+        loadToast = new LoadToast(this);
+        loadToast.setTranslationY(160);
+        loadToast.setText("玩命加载中...");
+        loadToast.show();
+        new Thread(loadDetail).start();
     }
 
     private void initData() {
-        type = getIntent().getIntExtra("type", 1);
         value1 = getIntent().getStringExtra("value1");
         value2 = getIntent().getStringExtra("value2");
         value3 = getIntent().getIntExtra("value3", 0);
-        value4 = getIntent().getIntExtra("value4", 50);
+        value4 = getIntent().getStringExtra("value4");
     }
 
     @Override
@@ -184,8 +179,11 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                value1 = query;
-                new Thread(loadSearch).start();
+                Intent intent = new Intent();
+                intent.putExtra("type", 3);
+                intent.putExtra("value1", query);
+                intent.setClass(NovelDetailActivity.this, NovelListActivity.class);
+                startActivity(intent);
                 return false;
             }
 
@@ -207,40 +205,24 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         return true;
     }
 
-    public static void startActivity(Activity activity, int type, String value1, String value2, int value3, int value4) {
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("小说");
+        builder.setMessage("\t\t\t\t排行 : 小说排行榜\n" +
+                "\t\t\t\t分类 : 小说各分区\n" +
+                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
+                "\t\t\t\t — 数据来源 : 追书神器\n\t\t\t\t（https://www.zhuishushenqi.com）");
+        builder.show();
+    }
+
+    public static void startActivity(Activity activity, String value1, String value2, int value3, String value4) {
         Intent intent = new Intent();
-        intent.setClass(activity, NovelListActivity.class);
-        intent.putExtra("type", type);
+        intent.setClass(activity, NovelDetailActivity.class);
         intent.putExtra("value1", value1);
         intent.putExtra("value2", value2);
         intent.putExtra("value3", value3);
         intent.putExtra("value4", value4);
         ActivityCompat.startActivity(activity, intent, new Bundle());
-    }
-
-    private void showAboutDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("漫画");
-        builder.setMessage("\t\t\t\t推荐 : 推荐好看的漫画\n" +
-                "\t\t\t\t排行 : 漫画排行榜\n" +
-                "\t\t\t\t分类 : 来自有妖气各分区排行榜\n" +
-                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想看的漫画\n" +
-                "\t\t\t\t — 数据来源 : 有妖气\n\t\t\t\t（https://www.u17.com）");
-        builder.show();
-    }
-
-    private void load(int method) {
-        switch (method) {
-            case 1:
-                new Thread(loadRank).start();
-                break;
-            case 2:
-                new Thread(loadCate).start();
-                break;
-            case 3:
-                new Thread(loadSearch).start();
-                break;
-        }
     }
 
     @Override
@@ -274,12 +256,18 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
 
     @Override
     public void showDetail(NovelBean bean) {
-
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = bean;
+        handler.sendMessage(msg);
     }
 
     @Override
     public void showChapter(List<NovelBean.Chapters> list) {
-
+        Message msg = new Message();
+        msg.what = 4;
+        msg.obj = list;
+        handler.sendMessage(msg);
     }
 
     @Override

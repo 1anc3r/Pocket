@@ -112,23 +112,23 @@ public class NovelPresenter implements IBasePresenter<INovelView>, INovelPresent
         }
     }
 
-    public void loadNovel(String id) {
+    public void loadDetail(String id) {
         if (view != null) {
             view.showLoad();
-            model.loadNovel(id);
+            model.loadDetail(id);
         }
     }
 
     @Override
-    public void loadNovelSuccess(NovelBean bean) {
+    public void loadDetailSuccess(NovelBean bean) {
         if (view != null) {
-            view.showNovel(bean);
+            view.showDetail(bean);
             switchSource(bean.getId());
         }
     }
 
     @Override
-    public void loadNovelFailure(String log) {
+    public void loadDetailFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();
@@ -160,7 +160,7 @@ public class NovelPresenter implements IBasePresenter<INovelView>, INovelPresent
     public void loadChapter(String id) {
         if (view != null) {
             view.showLoad();
-            model.loadChapter(id);
+            model.loadChapterList(id);
         }
     }
 

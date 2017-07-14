@@ -35,7 +35,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_small, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_code, viewGroup, false);
         return new ViewHolder(v);
     }
 
@@ -96,7 +96,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvSmall = (CardView) rootView.findViewById(R.id.cv_small);
+            cvSmall = (CardView) rootView.findViewById(R.id.cv_code);
             tvRank = (TextView) rootView.findViewById(R.id.tv_rank);
             ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
             tvName = (TextView) rootView.findViewById(R.id.tv_title);

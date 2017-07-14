@@ -1,5 +1,7 @@
 package me.lancer.pocket.info.mvp.novel;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,8 +31,9 @@ public class NovelModel {
     String sourceUrl = "http://api.zhuishushenqi.com/toc?view=summary&book=";//书源http://api.zhuishushenqi.com/toc?view=summary&book=573d65ab608bed412452ba69
     String chapterHeadUrl = "http://api.zhuishushenqi.com/toc/";//章节列表http://api.zhuishushenqi.com/toc/57e9357fbf649ec11272de11?view=chapters
     String chapterTailUrl = "?view=chapters";//章节列表http://api.zhuishushenqi.com/toc/57e9357fbf649ec11272de11?view=chapters
-    String pagerUrl = "http://chapter2.zhuishushenqi.com/chapter/";//章节内容http://chapter2.zhuishushenqi.com/chapter/http%3a%2f%2fbook.my716.com%2fgetBooks.aspx%3fmethod%3dcontent%26bookId%3d1127281%26chapterFile%3dU_1212539_201701211420571844_4093_2.txt?k=2124b73d7e2e1945&t=1468223717
-    String coverUrl = "http://statics.zhuishushenqi.com/";//封皮http://statics.zhuishushenqi.com/agent/http://images.zhulang.com/book_cover/image/18/98/189843.jpg
+    String pagerHeadUrl = "http://chapter2.zhuishushenqi.com/chapter/";//章节内容http://chapter2.zhuishushenqi.com/chapter/http%3a%2f%2fbook.my716.com%2fgetBooks.aspx%3fmethod%3dcontent%26bookId%3d1127281%26chapterFile%3dU_1212539_201701211420571844_4093_2.txt?k=2124b73d7e2e1945&t=1468223717
+    String pagerTailUrl = "?k=2124b73d7e2e1945&t=1468223717";//章节内容http://chapter2.zhuishushenqi.com/chapter/http%3a%2f%2fbook.my716.com%2fgetBooks.aspx%3fmethod%3dcontent%26bookId%3d1127281%26chapterFile%3dU_1212539_201701211420571844_4093_2.txt?k=2124b73d7e2e1945&t=1468223717
+    String coverUrl = "http://statics.zhuishushenqi.com";//封皮http://statics.zhuishushenqi.com/agent/http://images.zhulang.com/book_cover/image/18/98/189843.jpg
 
     public NovelModel(INovelPresenter presenter) {
         this.presenter = presenter;
@@ -70,6 +73,11 @@ public class NovelModel {
     }
 
     public void loadCateItem(String gender, String major, int start, int limit) {
+        if (gender.equals("男生")) {
+            gender = "male";
+        } else if (gender.equals("女生")) {
+            gender = "female";
+        }
         String content = contentGetterSetter.getContentFromHtml("Novel.loadCate", catsHeadUrl + gender + majorUrl + major + startUrl + start + limitUrl + limit);
         List<NovelBean> list;
         if (!content.contains("获取失败!")) {
@@ -91,14 +99,14 @@ public class NovelModel {
         }
     }
 
-    public void loadNovel(String id) {
+    public void loadDetail(String id) {
         String content = contentGetterSetter.getContentFromHtml("Novel.loadNovel", detailUrl + id);
         NovelBean bean;
         if (!content.contains("获取失败!")) {
-            bean = getNovelFromContent(content);
-            presenter.loadNovelSuccess(bean);
+            bean = getDetailFromContent(content);
+            presenter.loadDetailSuccess(bean);
         } else {
-            presenter.loadNovelFailure(content);
+            presenter.loadDetailFailure(content);
         }
     }
 
@@ -113,8 +121,8 @@ public class NovelModel {
         }
     }
 
-    public void loadChapter(String id) {
-        String content = contentGetterSetter.getContentFromHtml("Novel.loadChapter", chapterHeadUrl + id + chapterTailUrl);
+    public void loadChapterList(String id) {
+        String content = contentGetterSetter.getContentFromHtml("Novel.loadChapterList", chapterHeadUrl + id + chapterTailUrl);
         List<NovelBean.Chapters> list;
         if (!content.contains("获取失败!")) {
             list = getChaptersFromContent(content);
@@ -149,7 +157,7 @@ public class NovelModel {
         try {
             List<NovelBean> list = new ArrayList<>();
             JSONObject all = new JSONObject(content);
-            JSONObject ranking = all.getJSONObject("rankings");
+            JSONObject ranking = all.getJSONObject("ranking");
             JSONArray books = ranking.getJSONArray("books");
             for (int i = 0; i < books.length(); i++) {
                 NovelBean item = new NovelBean();
@@ -180,6 +188,7 @@ public class NovelModel {
             for (int i = 0; i < male.length(); i++) {
                 NovelBean item = new NovelBean();
                 JSONObject jsonItm = male.getJSONObject(i);
+                item.setId("男生");
                 item.setTitle(jsonItm.getString("name"));
                 item.setCount(jsonItm.getInt("bookCount"));
                 item.setType(0);
@@ -190,6 +199,7 @@ public class NovelModel {
             for (int i = 0; i < female.length(); i++) {
                 NovelBean item = new NovelBean();
                 JSONObject jsonItm = female.getJSONObject(i);
+                item.setId("女生");
                 item.setTitle(jsonItm.getString("name"));
                 item.setCount(jsonItm.getInt("bookCount"));
                 item.setType(0);
@@ -239,7 +249,7 @@ public class NovelModel {
                 item.setTitle(jsonItm.getString("title"));
                 item.setAuthor(jsonItm.getString("author"));
                 item.setIntro(jsonItm.getString("shortIntro"));
-                item.setCover(coverUrl + jsonItm.getString("cover"));
+                item.setCover((coverUrl + jsonItm.getString("cover")).replace("%3A", ":").replace("%2F", "/").replace("%26", "&").replace("%5B", "[").replace("%5D", "]"));
                 item.setCount(jsonItm.getInt("latelyFollower"));
                 item.setRatio(jsonItm.getString("retentionRatio"));
                 item.setType(0);
@@ -252,7 +262,7 @@ public class NovelModel {
         }
     }
 
-    private NovelBean getNovelFromContent(String content) {
+    private NovelBean getDetailFromContent(String content) {
         try {
             NovelBean bean = new NovelBean();
             JSONObject all = new JSONObject(content);
@@ -261,13 +271,9 @@ public class NovelModel {
             bean.setAuthor(all.getString("author"));
             bean.setIntro(all.getString("longIntro"));
             String category = "";
-            JSONArray gender = all.getJSONArray("gender");
-            for (int i = 0; i < gender.length(); i++) {
-                category += gender.getString(i) + " ";
-            }
             JSONArray tags = all.getJSONArray("tags");
             for (int i = 0; i < tags.length(); i++) {
-                category += tags.getString(i) + " ";
+                category += tags.getString(i) + ";";
             }
             bean.setCategory(category);
             bean.setCover(coverUrl + all.getString("cover"));
@@ -286,8 +292,8 @@ public class NovelModel {
             JSONArray all = new JSONArray(content);
             for (int i = 0; i < all.length(); i++) {
                 JSONObject jsonItm = all.getJSONObject(i);
-                if (!jsonItm.getString("name").equals("优质书源")){
-                    return jsonItm.getString("name");
+                if (!jsonItm.getString("name").equals("优质书源")) {
+                    return jsonItm.getString("_id");
                 }
             }
             return null;
@@ -305,7 +311,7 @@ public class NovelModel {
             for (int i = 0; i < chapters.length(); i++) {
                 JSONObject jsonItm = chapters.getJSONObject(i);
                 String title = jsonItm.getString("title");
-                String link = jsonItm.getString("link");
+                String link = pagerHeadUrl + jsonItm.getString("link") + pagerTailUrl;
                 NovelBean.Chapters item = new NovelBean.Chapters(title, link);
                 list.add(item);
             }

@@ -16,8 +16,5 @@
     <dimen name="display2">45sp</dimen>
     <dimen name="display3">56sp</dimen>
     <dimen name="display4">112sp</dimen>
-
-    <dimen name="book_read_bottom_text">12dp</dimen>
-    <dimen name="book_read_top_text">16sp</dimen>
 </resources>
 

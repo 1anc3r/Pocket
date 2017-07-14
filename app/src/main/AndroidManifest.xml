@@ -55,6 +55,15 @@
             android:name=".info.mvp.photo.activity.PhotoDetailNoBarActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".info.mvp.novel.activity.NovelListActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".info.mvp.novel.activity.NovelDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".info.mvp.novel.activity.NovelReadActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".info.mvp.book.activity.BookDetailActivity"
             android:launchMode="singleTask" />
         <activity

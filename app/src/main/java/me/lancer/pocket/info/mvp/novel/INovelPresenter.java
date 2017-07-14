@@ -20,9 +20,9 @@ public interface INovelPresenter {
 
     void loadSearchFailure(String log);
 
-    void loadNovelSuccess(NovelBean bean);
+    void loadDetailSuccess(NovelBean bean);
 
-    void loadNovelFailure(String log);
+    void loadDetailFailure(String log);
 
     void switchSourceSuccess(String id);
 

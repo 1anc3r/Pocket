@@ -19,7 +19,7 @@ import me.lancer.pocket.info.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
 import me.lancer.pocket.info.mvp.novel.INovelView;
-import me.lancer.pocket.info.mvp.novel.adapter.NovelAdapter;
+import me.lancer.pocket.info.mvp.novel.adapter.NovelTxtAdapter;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
@@ -30,7 +30,7 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    private NovelAdapter mAdapter;
+    private NovelTxtAdapter mAdapter;
 
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<NovelBean> mList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
     private Runnable loadTop = new Runnable() {
         @Override
         public void run() {
-//            presenter.loadRank();
+            presenter.loadRank();
         }
     };
 
@@ -98,11 +98,11 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new NovelAdapter(getActivity(), mList);
+        mAdapter = new NovelTxtAdapter(getActivity(), mList, 1);
 //        mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -122,10 +122,7 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
 
     @Override
     public void showCate(List<NovelBean> list) {
-        Message msg = new Message();
-        msg.what = 4;
-        msg.obj = list;
-        handler.sendMessage(msg);
+
     }
 
     @Override
@@ -134,7 +131,7 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
     }
 
     @Override
-    public void showNovel(NovelBean bean) {
+    public void showDetail(NovelBean bean) {
 
     }
 

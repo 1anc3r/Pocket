@@ -19,6 +19,7 @@ import me.lancer.pocket.info.mvp.joke.fragment.JokeFragment;
 import me.lancer.pocket.info.mvp.movie.fragment.MovieFragment;
 import me.lancer.pocket.info.mvp.music.fragment.MusicFragment;
 import me.lancer.pocket.info.mvp.news.fragment.NewsFragment;
+import me.lancer.pocket.info.mvp.novel.fragment.NovelFragment;
 import me.lancer.pocket.info.mvp.photo.fragment.PhotoFragment;
 import me.lancer.pocket.info.mvp.video.fragment.VideoFragment;
 import me.lancer.pocket.tool.mvp.contacts.fragment.ContactsFragment;
@@ -74,17 +75,21 @@ public class BlankActivity extends BaseActivity {
                 break;
             case 7:
                 bundle.putInt(getString(R.string.index), 0);
-                currentFragment = new ComicFragment();
+                currentFragment = new NovelFragment();
                 break;
             case 8:
                 bundle.putInt(getString(R.string.index), 0);
-                currentFragment = new VideoFragment();
+                currentFragment = new ComicFragment();
                 break;
             case 9:
                 bundle.putInt(getString(R.string.index), 0);
-                currentFragment = new GameFragment();
+                currentFragment = new VideoFragment();
                 break;
             case 10:
+                bundle.putInt(getString(R.string.index), 0);
+                currentFragment = new GameFragment();
+                break;
+            case 11:
                 bundle.putInt(getString(R.string.index), 0);
                 currentFragment = new CodeFragment();
                 break;
