@@ -1,7 +1,7 @@
 package me.lancer.pocket.info.mvp.joke.adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +13,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.joke.JokeBean;
-import me.lancer.pocket.info.mvp.photo.activity.PhotoDetailNoBarActivity;
+import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
 import me.lancer.pocket.ui.application.mParams;
 
 public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
@@ -57,7 +58,16 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
                 viewHolder.ivImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PhotoDetailNoBarActivity.startActivity((Activity) context, list.get(position).getImg(), list.get(position).getText(), viewHolder.ivImg);
+//                        PhotoDetailNoBarActivity.startActivity((Activity) context, list.get(position).getImg(), list.get(position).getText(), viewHolder.ivImg);
+                        ArrayList<String> gallery = new ArrayList<String>();
+                        for (JokeBean bean : list){
+                            gallery.add(bean.getImg());
+                        }
+                        Intent intent = new Intent();
+                        intent.putStringArrayListExtra("gallery", gallery);
+                        intent.putExtra("position", position);
+                        intent.setClass(context, PhotoGalleryActivity.class);
+                        context.startActivity(intent);
                     }
                 });
             } else if (getItemViewType(position) == TYPE_VIDEO) {

@@ -3,6 +3,7 @@ package me.lancer.pocket.info.mvp.joke.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
+    private FloatingActionButton fabRefresh;
 
     private JokeAdapter mAdapter;
 
@@ -127,6 +129,20 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
         mAdapter = new JokeAdapter(getActivity(), mList);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
+        fabRefresh = (FloatingActionButton) view.findViewById(R.id.fab_refresh);
+        fabRefresh.setVisibility(View.VISIBLE);
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (type == 0) {
+                    new Thread(loadText).start();
+                } else if (type == 1) {
+                    new Thread(loadImage).start();
+                } else if (type == 2) {
+                    new Thread(loadVideo).start();
+                }
+            }
+        });
     }
 
     @Override

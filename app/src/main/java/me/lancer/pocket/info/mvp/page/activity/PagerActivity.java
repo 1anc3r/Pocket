@@ -17,7 +17,7 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.page.IPageView;
 import me.lancer.pocket.info.mvp.page.PageBean;
 import me.lancer.pocket.info.mvp.page.PagePresenter;
-import me.lancer.pocket.info.mvp.page.fragment.PagerFragment;
+import me.lancer.pocket.info.mvp.page.fragment.PagerNoBarFragment;
 
 public class PagerActivity extends PresenterActivity<PagePresenter> implements IPageView {
 
@@ -120,7 +120,7 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
 
         @Override
         public Fragment getItem(int position) {
-            return PagerFragment.newInstance(data.get(position).getLink());
+            return PagerNoBarFragment.newInstance(data.get(position).getLink());
         }
 
         @Override

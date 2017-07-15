@@ -2,6 +2,8 @@ package me.lancer.pocket.info.mvp.photo.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -14,11 +16,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.activity.PhotoDetailActivity;
+import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
 import me.lancer.pocket.ui.application.mParams;
 import me.lancer.pocket.util.DensityUtil;
 
@@ -59,7 +63,16 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 viewHolder.ivImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), list.get(position).getTitle(), viewHolder.ivImg);
+//                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), list.get(position).getTitle(), viewHolder.ivImg);
+                        ArrayList<String> gallery = new ArrayList<String>();
+                        for (PhotoBean bean : list){
+                            gallery.add(bean.getImgLarge());
+                        }
+                        Intent intent = new Intent();
+                        intent.putStringArrayListExtra("gallery", gallery);
+                        intent.putExtra("position", position);
+                        intent.setClass(context, PhotoGalleryActivity.class);
+                        context.startActivity(intent);
                     }
                 });
             }
