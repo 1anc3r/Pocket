@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -183,6 +184,9 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
             case R.id.menu_about:
                 showAboutDialog();
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
         return true;
     }
@@ -213,10 +217,11 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         if (resultCode != -1) {
             int position = resultCode;
             if (position == mList.size()) {
-                showSnackbar(mRecyclerView, "这是最后一章.");
+//                showSnackbar(mRecyclerView, "这是最后一章.");
             } else if (position == -1) {
-                showSnackbar(mRecyclerView, "这是第一章.");
+//                showSnackbar(mRecyclerView, "这是第一章.");
             } else {
+                Log.e("onActivityResult: ", position + "");
                 NovelReadActivity.startActivity(this, position, mList.get(position).getTitle(), mList.get(position).getLink());
             }
         }

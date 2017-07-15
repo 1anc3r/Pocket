@@ -133,7 +133,6 @@ public class NovelModel {
     }
 
     public void loadContent(String link) {
-        Log.e("loadContent: ", link);
         String content = contentGetterSetter.getContentFromHtml("Novel.loadContent", link);
         if (!content.contains("获取失败!")) {
             content = getContentFromContent(content);

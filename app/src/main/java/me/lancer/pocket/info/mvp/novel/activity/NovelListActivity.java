@@ -187,6 +187,9 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
             case R.id.menu_about:
                 showAboutDialog();
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
         return true;
     }

@@ -5,29 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
-import org.litepal.crud.DataSupport;
+import org.w3c.dom.Text;
 
-import java.nio.CharBuffer;
 import java.util.List;
 
 import me.lancer.pocket.R;
@@ -45,8 +37,7 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
     Toolbar toolbar;
 
     private LoadToast loadToast;
-    private TextView tvContent;
-    private Button btnPrev, btnNext;
+    private TextView tvContent, tvPrev, tvNext;
 
     private String value1, value2;
     private int position;
@@ -79,23 +70,6 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         }
     };
 
-    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (view == btnPrev) {
-                Intent intent = new Intent();
-                intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
-                setResult(position - 1, intent);
-                finish();
-            } else if (view == btnNext) {
-                Intent intent = new Intent();
-                intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
-                setResult(position + 1, intent);
-                finish();
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,10 +87,10 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         tvContent = (TextView) findViewById(R.id.tv_content);
-        btnPrev = (Button) findViewById(R.id.btn_prev);
-        btnPrev.setOnClickListener(vOnClickListener);
-        btnNext = (Button) findViewById(R.id.btn_next);
-        btnNext.setOnClickListener(vOnClickListener);
+        tvPrev = (TextView) findViewById(R.id.tv_prev);
+        tvPrev.setOnClickListener(vOnClickListener);
+        tvNext = (TextView) findViewById(R.id.tv_next);
+        tvNext.setOnClickListener(vOnClickListener);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
         loadToast.setText("玩命加载中...");
@@ -129,6 +103,21 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         value1 = getIntent().getStringExtra("value1");
         value2 = getIntent().getStringExtra("value2");
     }
+
+    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent();
+            if (view == tvPrev) {
+                setResult(position - 1, intent);
+            } else if (view == tvNext) {
+                setResult(position + 1, intent);
+            }
+            intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
+            finish();
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -143,8 +132,27 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
             case R.id.menu_about:
                 showAboutDialog();
                 break;
+            case android.R.id.home:
+                Intent intent = new Intent();
+                intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
+                setResult(-1, intent);
+                finish();
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                break;
         }
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
+            setResult(-1, intent);
+            finish();
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void showAboutDialog() {
@@ -163,18 +171,9 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         intent.putExtra("position", position);
         intent.putExtra("value1", value1);
         intent.putExtra("value2", value2);
-        ActivityCompat.startActivityForResult(activity, intent, position, new Bundle());
-    }
+        activity.startActivityForResult(intent, position, new Bundle());
+        activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent = new Intent();
-            intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
-            setResult(-1, intent);
-            finish();
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     @Override
