@@ -48,8 +48,8 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     private String[] strInfos = {
             "文章", "趣闻", "段子",
             "图书", "音乐", "电影",
-            "图片", "小说", "漫画",
-            "视频", "游戏", "编程",};
+            "小说", "漫画", "视频",
+            "图片", "游戏", "编程",};
     private int[] imgTools = {
             R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
             R.mipmap.ic_photo_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
@@ -60,8 +60,8 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     private int[] imgInfos = {
             R.mipmap.ic_insert_drive_file_black_48dp, R.mipmap.ic_lightbulb_outline_black_48dp, R.mipmap.ic_golf_course_black_48dp,
             R.mipmap.ic_book_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
-            R.mipmap.ic_photo_black_48dp, R.mipmap.ic_local_library_black_48dp, R.mipmap.ic_mood_black_48dp,
-            R.mipmap.ic_live_tv_black_48dp, R.mipmap.ic_extension_black_48dp, R.mipmap.ic_code_black_48dp};
+            R.mipmap.ic_local_library_black_48dp, R.mipmap.ic_mood_black_48dp, R.mipmap.ic_live_tv_black_48dp,
+            R.mipmap.ic_photo_black_48dp, R.mipmap.ic_extension_black_48dp, R.mipmap.ic_code_black_48dp};
 
     private RecyclerView mRecyclerView;
     private ModelAdapter mAdapter;
@@ -125,15 +125,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         if (index == 0) {
             switch (postion) {
                 case 0:
-                    intent.putExtra("index", postion - 3);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
                 case 1:
-                    intent.putExtra("index", postion - 3);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
                 case 2:
                     intent.putExtra("index", postion - 3);
                     intent.setClass(getActivity(), BlankActivity.class);
@@ -170,10 +162,6 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     intent.setClass(getActivity(), CalendarActivity.class);
                     startActivity(intent);
                     break;
-                /*case 10:
-                    intent.setClass(getActivity(), CalculatorActivity.class);
-                    startActivity(intent);
-                    break;*/
                 case 10:
                     intent.setClass(getActivity(), WeatherActivity.class);
                     startActivity(intent);
@@ -196,66 +184,13 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     break;
             }
         } else if (index == 1) {
-            switch (postion) {
-                case 0:
-                    intent.setClass(getActivity(), ArticleActivity.class);
-                    startActivity(intent);
-                    break;
-                case 1:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 2:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 3:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 4:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 5:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 6:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 7:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 8:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 9:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 10:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
-                case 11:
-                    intent.putExtra("index", postion);
-                    intent.setClass(getActivity(), BlankActivity.class);
-                    startActivity(intent);
-                    break;
+            if (postion == 0){
+                intent.setClass(getActivity(), ArticleActivity.class);
+                startActivity(intent);
+            }else{
+                intent.putExtra("index", postion);
+                intent.setClass(getActivity(), BlankActivity.class);
+                startActivity(intent);
             }
         }
     }

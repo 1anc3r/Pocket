@@ -177,26 +177,7 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        MenuItem menuItem = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setQueryHint("搜索...");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent();
-                intent.putExtra("type", 3);
-                intent.putExtra("value1", query);
-                intent.setClass(NovelListActivity.this, NovelListActivity.class);
-                startActivity(intent);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
+        inflater.inflate(R.menu.menu_normal, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
