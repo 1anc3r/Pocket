@@ -73,6 +73,32 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_bright"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_bright"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="16dp"
+                            android:src="@mipmap/ic_brightness_medium_black_24dp"
+                            android:tint="#FF999999" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:text="屏幕亮度"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/ll_theme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package me.lancer.pocket.ui.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,10 +18,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.instabug.library.Instabug;
@@ -49,7 +55,7 @@ public class SettingActivity extends BaseActivity {
     private mApp app;
 
     private Toolbar toolbar;
-    private LinearLayout llNight, llTheme, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
+    private LinearLayout llNight, llBright, llTheme, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
     private Button btnLoginOut;
     private SwitchCompat scNight;
     private BottomSheetDialog listDialog;
@@ -59,6 +65,8 @@ public class SettingActivity extends BaseActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private boolean night = false;
+    private int screenMode;
+    private int screenBrightness;
 
     private List<String> funcList = new ArrayList<>(), problemList = new ArrayList<>();
     private List<RepositoryBean> reList = new ArrayList<>();
@@ -123,6 +131,8 @@ public class SettingActivity extends BaseActivity {
         initToolbar("设置");
         llNight = (LinearLayout) findViewById(R.id.ll_night);
         llNight.setOnClickListener(vOnClickListener);
+        llBright = (LinearLayout) findViewById(R.id.ll_bright);
+        llBright.setOnClickListener(vOnClickListener);
         llTheme = (LinearLayout) findViewById(R.id.ll_theme);
         llTheme.setOnClickListener(vOnClickListener);
         llFunc = (LinearLayout) findViewById(R.id.ll_func);
@@ -264,6 +274,16 @@ public class SettingActivity extends BaseActivity {
 //                    scNight.setChecked(true);
 //                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //                    recreate();
+                    try {
+                        screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
+                        screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                        if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                            setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                        }
+                        setScreenBrightness(255.0F/4);
+                    } catch (Settings.SettingNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     scNight.setChecked(true);
                     editor.putBoolean(mParams.ISNIGHT, true);
                     editor.apply();
@@ -278,6 +298,16 @@ public class SettingActivity extends BaseActivity {
 //                    scNight.setChecked(false);
 //                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 //                    recreate();
+                    try {
+                        screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
+                        screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                        if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                            setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                        }
+                        setScreenBrightness(255.0F);
+                    } catch (Settings.SettingNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     scNight.setChecked(false);
                     editor.putBoolean(mParams.ISNIGHT, false);
                     editor.apply();
@@ -288,7 +318,35 @@ public class SettingActivity extends BaseActivity {
                     recreate();
                 }
                 night = !night;
-            } else if (v == llTheme) {
+            } else if (v == llBright){
+                LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
+                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar_view, null);
+                final Dialog dialog = new AlertDialog.Builder(SettingActivity.this).create();
+                try {
+                    screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                } catch (Settings.SettingNotFoundException e) {
+                    e.printStackTrace();
+                }
+                SeekBar sbBright = (SeekBar) layout.findViewById(R.id.sb_vorb);
+                sbBright.setProgress(screenBrightness);
+                sbBright.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        setScreenBrightness(progress);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                dialog.show();
+                dialog.getWindow().setContentView(layout);
+            }else if (v == llTheme) {
                 ColorPickerDialog dialog = new ColorPickerDialog(SettingActivity.this);
                 dialog.setTitle("切换主题");
                 dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
@@ -402,5 +460,18 @@ public class SettingActivity extends BaseActivity {
         listDialog = new BottomSheetDialog(this);
         listDialog.setContentView(listDialogView);
         listDialog.show();
+    }
+
+    private void setScreenMode(int value) {
+        Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, value);
+    }
+
+    private void setScreenBrightness(float value) {
+        Window mWindow = getWindow();
+        WindowManager.LayoutParams mParams = mWindow.getAttributes();
+        float f = value / 255.0F;
+        mParams.screenBrightness = f;
+        mWindow.setAttributes(mParams);
+        Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, (int) value);
     }
 }
