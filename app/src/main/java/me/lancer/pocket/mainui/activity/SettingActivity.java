@@ -29,6 +29,10 @@ import android.widget.TextView;
 
 import com.instabug.library.Instabug;
 import com.instabug.library.invocation.InstabugInvocationMode;
+import com.tencent.connect.share.QQShare;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +71,7 @@ public class SettingActivity extends BaseActivity {
     private int screenMode;
     private int screenBrightness;
 
-    private List<String> funcList = new ArrayList<>(), problemList = new ArrayList<>();
+    private List<String> funcList = new ArrayList<>(), problemList = new ArrayList<>(), logList = new ArrayList<>();
     private List<RepositoryBean> reList = new ArrayList<>();
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     private final String root = Environment.getExternalStorageDirectory() + "/";
@@ -105,24 +109,21 @@ public class SettingActivity extends BaseActivity {
     private Runnable update = new Runnable() {
         @Override
         public void run() {
-            String content = contentGetterSetter.getContentFromHtml("repository", "updates.json");
+            String content = contentGetterSetter.getContentFromHtml("repository", "https://raw.githubusercontent.com/1anc3r/Pocket/master/app/src/main/assets/updates.json");
             if (!content.contains("获取失败!")) {
                 try {
-                    List<RepositoryBean> list = new ArrayList<>();
+                    List<String> list = new ArrayList<>();
                     JSONObject jsonObj = new JSONObject(content);
-                    JSONArray jsonArr = jsonObj.getJSONArray("apps");
+                    JSONArray jsonArr = jsonObj.getJSONArray("updates");
                     for (int i = 0; i < jsonArr.length(); i++) {
-                        RepositoryBean bean = new RepositoryBean();
+                        String item = "";
                         JSONObject jsonItem = jsonArr.getJSONObject(i);
-                        bean.setImg(jsonItem.getString("img"));
-                        bean.setName(jsonItem.getString("name"));
-                        bean.setDescription(jsonItem.getString("description"));
-                        bean.setDownload(jsonItem.getString("download"));
-                        bean.setBlog(jsonItem.getString("blog"));
-                        list.add(bean);
+                        item = item + "版本 : " + jsonItem.getString("version") + "\n";
+                        item = item + "内容 : \n" + jsonItem.getString("log");
+                        list.add(item.replace("；", "；\n"));
                     }
                     Message msg = new Message();
-                    msg.what = 0;
+                    msg.what = 1;
                     msg.obj = list;
                     handler.sendMessage(msg);
                 } catch (JSONException e) {
@@ -140,6 +141,13 @@ public class SettingActivity extends BaseActivity {
                     if (msg.obj != null) {
                         reList = (List<RepositoryBean>) msg.obj;
                         showRepositoryDialog(reList);
+                        progressDialog.dismiss();
+                    }
+                    break;
+                case 1:
+                    if (msg.obj != null) {
+                        logList = (List<String>) msg.obj;
+                        showUpdateDialog(logList);
                         progressDialog.dismiss();
                     }
                     break;
@@ -192,17 +200,17 @@ public class SettingActivity extends BaseActivity {
         scNight.setClickable(false);
         funcList.add("— 工具 —");
         funcList.add("电话、通讯录、信息 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 电话 : 列出手机上的通话记录\n" +
                 "\t\t\t\t * 通讯录 : 列出手机上的联系人\n" +
                 "\t\t\t\t * 信息 : 列出手机上的短信记录\n" +
                 "\t\t\t\t */");
         funcList.add("图片、音乐、视频、文档、应用、存储 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 列出手机上的各种类型的文件, 支持打开、删除、赋值、剪切\n" +
                 "\t\t\t\t */");
         funcList.add("日历 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 一个普通的日历\n" +
                 "\t\t\t\t * 需要手动添加事项\n" +
                 "\t\t\t\t */");
@@ -211,33 +219,33 @@ public class SettingActivity extends BaseActivity {
 //        funcList.add("备忘录 : \n" +
 //                "\t\t\t\t正在卖力开发中...");
         funcList.add("天气 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 天气信息 : 提供全国各城市的天气信息\n" +
                 "\t\t\t\t * 城市选择 : 通过列表点选或搜索名称的方式选择城市\n" +
                 "\t\t\t\t * ——数据来源 : 中央天气\n\t\t\t\t（tj.nineton.cn/Heart/index）\n" +
                 "\t\t\t\t */");
         funcList.add("翻译 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * ——翻译支持 : 必应词典\n\t\t\t\t（cn.bing.com/dict/）\n" +
                 "\t\t\t\t */");
         funcList.add("摩斯电码 : \n" +
-                "\t\t\t\t/*\n"  +
-                "\t\t\t\t * 在字符串和摩斯电码之间任意转换\n"+
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 在字符串和摩斯电码之间任意转换\n" +
                 "\t\t\t\t * 长按粘贴, 双击复制\n" +
                 "\t\t\t\t */");
         funcList.add("计算器 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 这是一个支持多项式运算的计算器, 由栈实现\n" +
                 "\t\t\t\t */");
         funcList.add("二维码 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 扫描 : 调用后置摄像头扫描二维码\n" +
                 "\t\t\t\t * 识别 : 识别本机图片中的二维码\n" +
                 "\t\t\t\t * ——使用开源库 : （github.com/scola/Qart）\n" +
                 "\t\t\t\t */");
         funcList.add("— 资讯 —");
         funcList.add("文章 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 每日一文 : 每天一篇精选优质短篇\n" +
                 "\t\t\t\t * 随机文章 : 点击刷新按钮随机读文章\n" +
                 "\t\t\t\t * ——数据来源 : " +
@@ -245,41 +253,41 @@ public class SettingActivity extends BaseActivity {
                 "\n\t\t\t\t *  背景图片\n\t\t\t\t（bing.ioliu.cn）\n" +
                 "\t\t\t\t */");
         funcList.add("趣闻 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 每日 : 知乎日报的每日信息\n" +
                 "\t\t\t\t * 热门 : 知乎日报的热门信息\n" +
                 "\t\t\t\t * 分类 : 包括动漫、游戏、财经、电影、音乐、互联网安全等日报\n" +
                 "\t\t\t\t * ——数据来源 : 知乎日报\n\t\t\t\t（news-at.zhihu.com/api）\n" +
                 "\t\t\t\t */");
         funcList.add("段子 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 段子 : 内涵段子的热辣段子\n" +
                 "\t\t\t\t * 图片 : 内涵段子的爆笑图片\n" +
                 "\t\t\t\t * ——数据来源 : 内涵段子\n\t\t\t\t（neihanshequ.com）\n" +
                 "\t\t\t\t */");
         funcList.add("图书 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 书评 : 豆瓣读书的最受欢迎书评\n" +
                 "\t\t\t\t * 书榜 : 爬取呈现豆瓣图书TOP250\n" +
                 "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想了解的图书信息\n" +
                 "\t\t\t\t * ——数据来源 : 豆瓣读书\n\t\t\t\t（book.douban.com）\n" +
                 "\t\t\t\t */");
         funcList.add("音乐 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 乐评 : 豆瓣音乐的最受欢迎乐评\n" +
                 "\t\t\t\t * 乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
                 "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想了解的音乐信息\n" +
                 "\t\t\t\t * ——数据来源 : 豆瓣音乐\n\t\t\t\t（music.douban.com）\n" +
                 "\t\t\t\t */");
         funcList.add("电影 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 影评 : 豆瓣电影的最受欢迎影评\n" +
                 "\t\t\t\t * 影榜 : 爬取呈现豆瓣电影TOP250\n" +
                 "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想了解的电影信息\n" +
                 "\t\t\t\t * ——数据来源 : 豆瓣电影\n\t\t\t\t（movie.douban.com）\n" +
                 "\t\t\t\t */");
         funcList.add("图片 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 妹子 : 好看的妹子图\n" +
                 "\t\t\t\t * 美景 : 好看的风景照\n" +
                 "\t\t\t\t * ——数据来源 : " +
@@ -287,14 +295,14 @@ public class SettingActivity extends BaseActivity {
                 "\n\t\t\t\t *  美图 : Pexels Popular Photos\n\t\t\t\t（www.pexels.com）\n" +
                 "\t\t\t\t */");
         funcList.add("小说 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 排行 : 小说排行榜\n" +
                 "\t\t\t\t * 分类 : 小说各分区\n" +
                 "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
                 "\t\t\t\t * ——数据来源 : 追书神器\n\t\t\t\t（https://www.zhuishushenqi.com）\n" +
                 "\t\t\t\t */");
         funcList.add("漫画 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 推荐 : 推荐好看的漫画\n" +
                 "\t\t\t\t * 排行 : 漫画排行榜\n" +
                 "\t\t\t\t * 分类 : 来自有妖气各分区排行榜\n" +
@@ -302,18 +310,18 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t * ——数据来源 : 有妖气\n\t\t\t\t（www.u17.com）\n" +
                 "\t\t\t\t */");
         funcList.add("视频 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 分类 : 来自B站各分区排行榜前十\n" +
                 "\t\t\t\t * ——数据来源 : BiliBili\n\t\t\t\t（api.bilibili.com）\n" +
                 "\t\t\t\t */");
         funcList.add("游戏 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 精选 : 精选各大平台热门游戏\n" +
                 "\t\t\t\t * 优惠、热销、新品、即将推出\n" +
                 "\t\t\t\t * ——数据来源 : Steam\n\t\t\t\t（store.steampowered.com）\n" +
                 "\t\t\t\t */");
         funcList.add("编程 : \n" +
-                "\t\t\t\t/*\n"  +
+                "\t\t\t\t/*\n" +
                 "\t\t\t\t * 个人 : GitHub上Star最多的个人\n" +
                 "\t\t\t\t * 组织 : GitHub上Star最多的组织\n" +
                 "\t\t\t\t * 项目 : GitHub上Star最多的项目\n" +
@@ -357,7 +365,7 @@ public class SettingActivity extends BaseActivity {
                         if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
                             setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                         }
-                        setScreenBrightness(255.0F/4);
+                        setScreenBrightness(255.0F / 4);
                     } catch (Settings.SettingNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -395,7 +403,7 @@ public class SettingActivity extends BaseActivity {
                     recreate();
                 }
                 night = !night;
-            } else if (v == llBright){
+            } else if (v == llBright) {
                 LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
                 LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar_view, null);
                 final Dialog dialog = new AlertDialog.Builder(SettingActivity.this).create();
@@ -423,7 +431,7 @@ public class SettingActivity extends BaseActivity {
                 });
                 dialog.show();
                 dialog.getWindow().setContentView(layout);
-            }else if (v == llTheme) {
+            } else if (v == llTheme) {
                 ColorPickerDialog dialog = new ColorPickerDialog(SettingActivity.this);
                 dialog.setTitle("切换主题");
                 dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
@@ -445,7 +453,7 @@ public class SettingActivity extends BaseActivity {
                 showListDialog(2, problemList);
             } else if (v == llUpdate) {
                 new Thread(update).start();
-            }  else if (v == llFeedback) {
+            } else if (v == llFeedback) {
                 Instabug.invoke(InstabugInvocationMode.NEW_CHAT);
             } else if (v == llDownload) {
                 new Thread(repository).start();
@@ -515,11 +523,12 @@ public class SettingActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\nhttps://www.coolapk.com/apk/me.lancer.pocket" +"\n分享自口袋");
-                startActivity(Intent.createChooser(intent, "分享到"));
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setType("text/plain");
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+//                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\nhttps://www.coolapk.com/apk/me.lancer.pocket" + "\n分享自口袋");
+//                startActivity(Intent.createChooser(intent, "分享到"));
+                onClickShare("口袋", "快看看我发现了什么宝贝(ง •̀_•́)ง\n——分享自@口袋", "https://www.coolapk.com/apk/me.lancer.pocket", "http://image.coolapk.com/apk_logo/2017/0715/ic_launcher-web-for-145716-o_1bl3b1tcc4fnrri1gtpm50137q14-uid-659349.png", "口袋");
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -535,6 +544,20 @@ public class SettingActivity extends BaseActivity {
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         RecyclerView.Adapter adapter = new RepositoryAdapter(this, list);
+        rvList.setAdapter(adapter);
+        listDialog = new BottomSheetDialog(this);
+        listDialog.setContentView(listDialogView);
+        listDialog.show();
+    }
+
+    private void showUpdateDialog(List<String> logList) {
+        View listDialogView = View.inflate(this, R.layout.dialog_list, null);
+        TextView tvType = (TextView) listDialogView.findViewById(R.id.tv_type);
+        tvType.setText("更新日志");
+        RecyclerView rvList = (RecyclerView) listDialogView.findViewById(R.id.rv_list);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        RecyclerView.Adapter adapter = new SettingAdapter(this, logList);
         rvList.setAdapter(adapter);
         listDialog = new BottomSheetDialog(this);
         listDialog.setContentView(listDialogView);

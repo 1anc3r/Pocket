@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.contacts.adapter.MessageAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.MessageBean;
 

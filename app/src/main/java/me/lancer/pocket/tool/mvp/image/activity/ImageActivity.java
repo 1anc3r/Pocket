@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.tool.mvp.image.adapter.ImageAdapter;
-import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.image.bean.ImageBean;
 import me.lancer.pocket.R;
 

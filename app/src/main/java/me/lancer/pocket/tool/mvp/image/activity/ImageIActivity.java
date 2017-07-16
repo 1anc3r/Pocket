@@ -20,7 +20,7 @@ import java.util.List;
 
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.image.adapter.ImageIAdapter;
-import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.mainui.application.App;
 import me.lancer.pocket.R;
 

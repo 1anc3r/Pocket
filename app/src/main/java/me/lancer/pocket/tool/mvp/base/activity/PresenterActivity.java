@@ -2,6 +2,7 @@ package me.lancer.pocket.tool.mvp.base.activity;
 
 import android.os.Bundle;
 
+import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.base.IBasePresenter;
 
 /**

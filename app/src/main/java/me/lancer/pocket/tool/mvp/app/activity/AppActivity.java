@@ -24,7 +24,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.app.adapter.AppAdapter;
 import me.lancer.pocket.tool.mvp.app.bean.AppBean;
-import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 
 public class AppActivity extends BaseActivity implements View.OnClickListener {
 
