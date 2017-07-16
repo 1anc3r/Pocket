@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.game.GameBean;
 import me.lancer.pocket.info.mvp.game.activity.GameDetailActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
 
@@ -56,7 +56,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
             if (list.get(position).isLinuxAvailable()) {
                 viewHolder.ivLinux.setVisibility(View.VISIBLE);
             }
-            ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+            ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getHeaderImage()).into(viewHolder.ivImg);
             viewHolder.cvGame.setOnClickListener(new View.OnClickListener() {
                 @Override

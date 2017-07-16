@@ -2,21 +2,15 @@ package me.lancer.pocket.tool.mvp.translation.activity;
 
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,14 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.news.NewsBean;
-import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.translation.ITranslationView;
 import me.lancer.pocket.tool.mvp.translation.TranslationBean;
 import me.lancer.pocket.tool.mvp.translation.TranslationPresenter;
 import me.lancer.pocket.tool.mvp.translation.adapter.TranslationAdapter;
-import me.lancer.pocket.ui.view.ClearEditText;
+import me.lancer.pocket.mainui.view.ClearEditText;
 
 public class TranslationActivity extends PresenterActivity<TranslationPresenter> implements ITranslationView {
 

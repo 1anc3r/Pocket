@@ -19,21 +19,18 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
-import me.lancer.pocket.info.mvp.disease.fragment.DiseaseFragment;
 import me.lancer.pocket.info.mvp.location.fragment.LocationFragment;
 import me.lancer.pocket.info.mvp.knowledge.fragment.KnowledgeFragment;
 import me.lancer.pocket.info.mvp.system.fragment.SystemFragment;
-import me.lancer.pocket.ui.application.mApp;
-import me.lancer.pocket.ui.application.mParams;
-import me.lancer.pocket.ui.view.CircleImageView;
+import me.lancer.pocket.mainui.application.App;
+import me.lancer.pocket.mainui.application.Params;
 
 public class DiseaseActivity extends BaseActivity {
 
-    private mApp app = new mApp();
+    private App app = new App();
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -53,7 +50,7 @@ public class DiseaseActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disease);
-        app = (mApp) this.getApplication();
+        app = (App) this.getApplication();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         initNavigationViewBottom();
         initFragment(savedInstanceState);
@@ -101,7 +98,7 @@ public class DiseaseActivity extends BaseActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(mParams.CURRENT_INDEX, currentIndex);
+        outState.putInt(Params.CURRENT_INDEX, currentIndex);
         super.onSaveInstanceState(outState);
     }
 

@@ -1,6 +1,5 @@
 package me.lancer.pocket.info.mvp.comic.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +25,6 @@ import me.lancer.pocket.info.mvp.comic.ComicBean;
 import me.lancer.pocket.info.mvp.comic.ComicPresenter;
 import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class ComicSearchActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 

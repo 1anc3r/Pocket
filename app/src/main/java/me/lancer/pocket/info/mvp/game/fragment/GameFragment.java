@@ -1,6 +1,5 @@
 package me.lancer.pocket.info.mvp.game.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -21,7 +20,6 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.base.fragment.BaseFragment;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class GameFragment extends BaseFragment {
 

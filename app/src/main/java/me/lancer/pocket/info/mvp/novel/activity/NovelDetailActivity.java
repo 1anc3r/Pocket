@@ -6,14 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -33,17 +30,11 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
-import me.lancer.pocket.info.mvp.news.NewsBean;
-import me.lancer.pocket.info.mvp.news.activity.NewsDetailActivity;
-import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
 import me.lancer.pocket.info.mvp.novel.adapter.ChapterAdapter;
-import me.lancer.pocket.info.mvp.novel.adapter.NovelImgAdapter;
-import me.lancer.pocket.ui.application.mParams;
-import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.mainui.application.Params;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
@@ -86,7 +77,7 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
                     if (msg.obj != null) {
                         loadToast.success();
                         NovelBean nb = (NovelBean) msg.obj;
-                        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+                        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
                         Glide.with(NovelDetailActivity.this).load(nb.getCover()).into(ivImg);
                         tvTitle.setText(nb.getTitle());
                         tvAuthor.setText(nb.getAuthor());

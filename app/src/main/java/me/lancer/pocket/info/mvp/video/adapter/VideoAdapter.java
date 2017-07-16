@@ -20,7 +20,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.video.VideoBean;
 import me.lancer.pocket.info.mvp.video.activity.VideoPlayerActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> {
 
@@ -54,7 +54,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
                 viewHolder.ivImg.setVisibility(View.GONE);
             } else if (getItemViewType(position) == TYPE_CONTENT_SMALL) {
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
-                ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
                 viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -69,7 +69,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
-                ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
                 viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
                     @Override

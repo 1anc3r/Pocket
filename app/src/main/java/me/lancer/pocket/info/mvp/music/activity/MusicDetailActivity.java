@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -26,9 +25,9 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.music.IMusicView;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.MusicPresenter;
-import me.lancer.pocket.ui.application.mParams;
-import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
 
 public class MusicDetailActivity extends PresenterActivity<MusicPresenter> implements IMusicView {
 
@@ -103,7 +102,7 @@ public class MusicDetailActivity extends PresenterActivity<MusicPresenter> imple
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         ivImg = (ImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
         htvInfo = (HtmlTextView) findViewById(R.id.htv_info);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
@@ -126,7 +125,7 @@ public class MusicDetailActivity extends PresenterActivity<MusicPresenter> imple
         intent.putExtra("img", img);
         intent.putExtra("link", link);
         ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, mParams.TRANSITION_PIC);
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 

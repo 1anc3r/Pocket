@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +20,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.activity.NovelDetailActivity;
-import me.lancer.pocket.info.mvp.novel.activity.NovelListActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class NovelImgAdapter extends RecyclerView.Adapter<NovelImgAdapter.ViewHolder> {
 
@@ -51,7 +47,7 @@ public class NovelImgAdapter extends RecyclerView.Adapter<NovelImgAdapter.ViewHo
                 viewHolder.tvIntro.setText(bean.getIntro());
                 viewHolder.tvInfo.setText(bean.getCount()+"人在追 | "+bean.getRatio()+"读者留存");
                 if (list.get(position).getCover()!=null) {
-                    ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+                    ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
                     Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivImg);
                 }else{
                     viewHolder.ivImg.setVisibility(View.GONE);

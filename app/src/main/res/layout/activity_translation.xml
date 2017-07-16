@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <me.lancer.pocket.ui.view.ClearEditText
+            <me.lancer.pocket.mainui.view.ClearEditText
                 android:id="@+id/et_trans"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"

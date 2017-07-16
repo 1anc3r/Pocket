@@ -16,7 +16,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,9 +32,9 @@ import me.lancer.pocket.info.mvp.game.GameBean;
 import me.lancer.pocket.info.mvp.game.GamePresenter;
 import me.lancer.pocket.info.mvp.game.IGameView;
 import me.lancer.pocket.info.mvp.game.adapter.ShotAdapter;
-import me.lancer.pocket.ui.application.mParams;
-import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
 
 public class GameDetailActivity extends PresenterActivity<GamePresenter> implements IGameView {
 
@@ -115,7 +114,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         ivImg = (ImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
         tvDiscount = (TextView) findViewById(R.id.tv_discount);
         tvOriginal = (TextView) findViewById(R.id.tv_original);
@@ -146,7 +145,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         intent.putExtra("title", title);
         intent.putExtra("img", img);
         ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, mParams.TRANSITION_PIC);
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 

@@ -43,7 +43,7 @@
                         android:scaleType="centerCrop"
                         android:transitionName="transImg" />
 
-                    <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
+                    <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
                         android:id="@+id/htv_info"
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
@@ -59,7 +59,7 @@
 
             </android.support.v7.widget.CardView>
 
-            <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
+            <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
                 android:id="@+id/htv_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

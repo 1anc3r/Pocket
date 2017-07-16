@@ -13,7 +13,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -28,7 +27,7 @@ import me.lancer.pocket.info.mvp.chapter.ChapterBean;
 import me.lancer.pocket.info.mvp.chapter.ChapterPresenter;
 import me.lancer.pocket.info.mvp.chapter.IChapterView;
 import me.lancer.pocket.info.mvp.chapter.adapter.ChapterAdapter;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class ChapterActivity extends PresenterActivity<ChapterPresenter> implements IChapterView {
 
@@ -90,7 +89,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ivCover = (ImageView) findViewById(R.id.imageView);
-        ViewCompat.setTransitionName(ivCover, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);

@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,7 +20,6 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.tool.mvp.contacts.activity.ContactSearchActivity;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 /**
  * Created by HuangFangzhi on 2017/6/14.

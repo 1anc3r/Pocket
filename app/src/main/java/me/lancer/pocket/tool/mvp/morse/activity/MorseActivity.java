@@ -12,7 +12,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -34,7 +33,7 @@ import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.morse.IMorseView;
 import me.lancer.pocket.tool.mvp.morse.MorsePresenter;
 import me.lancer.pocket.tool.mvp.morse.adapter.MorseAdapter;
-import me.lancer.pocket.ui.view.ClearEditText;
+import me.lancer.pocket.mainui.view.ClearEditText;
 
 @SuppressWarnings("ALL")
 public class MorseActivity extends PresenterActivity<MorsePresenter> implements IMorseView, View.OnClickListener {

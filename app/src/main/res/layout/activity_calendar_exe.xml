@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <me.lancer.pocket.ui.view.ClearEditText
+        <me.lancer.pocket.mainui.view.ClearEditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:drawableTint="?attr/colorPrimary"
             android:hint="输入标题" />
 
-        <me.lancer.pocket.ui.view.ClearEditText
+        <me.lancer.pocket.mainui.view.ClearEditText
             android:id="@+id/et_location"
             android:inputType="text"
             android:layout_width="match_parent"

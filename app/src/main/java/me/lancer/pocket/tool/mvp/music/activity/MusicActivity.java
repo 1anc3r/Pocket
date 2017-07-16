@@ -42,11 +42,11 @@ import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.music.adapter.MusicAdapter;
 import me.lancer.pocket.tool.mvp.music.bean.MusicBean;
-import me.lancer.pocket.ui.application.mApp;
+import me.lancer.pocket.mainui.application.App;
 
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
 
-    mApp app;
+    App app;
     private TextView tvShow;
     private ListView lvMusic;
     private EditText etSearch;
@@ -159,7 +159,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void init() {
-        app = (mApp) MusicActivity.this.getApplication();
+        app = (App) MusicActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
         tvShow.setText(strShow);
         ivBack = (ImageView) findViewById(R.id.iv_back);

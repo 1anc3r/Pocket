@@ -1,6 +1,5 @@
 package me.lancer.pocket.info.mvp.book.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +25,6 @@ import me.lancer.pocket.info.mvp.book.BookBean;
 import me.lancer.pocket.info.mvp.book.BookPresenter;
 import me.lancer.pocket.info.mvp.book.IBookView;
 import me.lancer.pocket.info.mvp.book.adapter.BookAdapter;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class BookSearchActivity extends PresenterActivity<BookPresenter> implements IBookView {
 

@@ -16,7 +16,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.photo.activity.PhotoDetailActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class ShotAdapter extends RecyclerView.Adapter<ShotAdapter.ViewHolder> {
 
@@ -37,7 +37,7 @@ public class ShotAdapter extends RecyclerView.Adapter<ShotAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         if (list.get(position) != null) {
-            ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+            ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position)).into(viewHolder.ivImg);
             viewHolder.cvShot.setOnClickListener(new View.OnClickListener() {
                 @Override

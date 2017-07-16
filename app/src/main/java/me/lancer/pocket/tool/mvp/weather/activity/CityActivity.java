@@ -12,12 +12,10 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,15 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.weather.CityBean;
 import me.lancer.pocket.tool.mvp.weather.IWeatherView;
 import me.lancer.pocket.tool.mvp.weather.WeatherBean;
 import me.lancer.pocket.tool.mvp.weather.WeatherPresenter;
 import me.lancer.pocket.tool.mvp.weather.adapter.CityAdapter;
-import me.lancer.pocket.tool.mvp.weather.adapter.FutureAdapter;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class CityActivity extends PresenterActivity<WeatherPresenter> implements IWeatherView, CityAdapter.MyItemClickListener, CityAdapter.MyItemLongClickListener {
 

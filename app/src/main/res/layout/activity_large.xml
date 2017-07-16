@@ -55,7 +55,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
+            <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
                 android:id="@+id/htv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

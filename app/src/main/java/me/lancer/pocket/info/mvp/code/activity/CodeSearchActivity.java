@@ -1,6 +1,5 @@
 package me.lancer.pocket.info.mvp.code.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +25,6 @@ import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.CodePresenter;
 import me.lancer.pocket.info.mvp.code.ICodeView;
 import me.lancer.pocket.info.mvp.code.adapter.CodeAdapter;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class CodeSearchActivity extends PresenterActivity<CodePresenter> implements ICodeView {
 

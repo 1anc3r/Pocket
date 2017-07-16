@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.movie.MovieBean;
 import me.lancer.pocket.info.mvp.movie.activity.MovieDetailActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -52,7 +52,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 viewHolder.tvContent.setText(list.get(position).getContent());
             }
             viewHolder.rbRating.setRating(star);
-            ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+            ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
             viewHolder.cvMedimu.setOnClickListener(new View.OnClickListener() {
                 @Override

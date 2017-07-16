@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ import me.lancer.pocket.info.mvp.disease.fragment.DiseaseFragment;
 import me.lancer.pocket.info.mvp.location.ILocationView;
 import me.lancer.pocket.info.mvp.location.LocationBean;
 import me.lancer.pocket.info.mvp.location.LocationPresenter;
-import me.lancer.pocket.ui.activity.MainActivity;
 import me.lancer.pocket.util.LocationUtils;
 
 public class LocationFragment extends PresenterFragment<LocationPresenter> implements ILocationView, AMap.OnMarkerClickListener,

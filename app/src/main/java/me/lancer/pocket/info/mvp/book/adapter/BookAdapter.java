@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.book.BookBean;
 import me.lancer.pocket.info.mvp.book.activity.BookDetailActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
@@ -52,7 +52,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             }
             viewHolder.rbRating.setRating(star);
             viewHolder.tvContent.setText(list.get(position).getAuthor() + temp);
-            ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+            ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
             viewHolder.cvMedimu.setOnClickListener(new View.OnClickListener() {
                 @Override

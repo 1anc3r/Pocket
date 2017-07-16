@@ -46,12 +46,12 @@ import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.adapter.FileAdapter;
 import me.lancer.pocket.tool.mvp.file.bean.FileBean;
-import me.lancer.pocket.ui.application.mApp;
+import me.lancer.pocket.mainui.application.App;
 import me.lancer.pocket.util.FileTypeRefereeUtil;
 
 public class FileActivity extends BaseActivity implements View.OnClickListener {
 
-    mApp app;
+    App app;
     private TextView tvPath, tvShow;
     private ListView lvFile;
     private EditText etSearch;
@@ -180,7 +180,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
 
     private void init() {
         iLanguage();
-        app = (mApp) FileActivity.this.getApplication();
+        app = (App) FileActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
         Intent i = getIntent();
         Bundle b = i.getExtras();

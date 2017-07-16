@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.activity.MusicDetailActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> {
 
@@ -55,7 +55,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                 star = Float.parseFloat(list.get(position).getStar()) / 2;
             }
             viewHolder.rbRating.setRating(star);
-            ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+            ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
             viewHolder.cvMedimu.setOnClickListener(new View.OnClickListener() {
                 @Override

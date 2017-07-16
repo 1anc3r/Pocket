@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.disease.fragment.DiseaseFragment;
 import me.lancer.pocket.info.mvp.system.SystemBean;
-import me.lancer.pocket.ui.activity.MainActivity;
+import me.lancer.pocket.mainui.activity.MainActivity;
 
 public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.ViewHolder> {
 

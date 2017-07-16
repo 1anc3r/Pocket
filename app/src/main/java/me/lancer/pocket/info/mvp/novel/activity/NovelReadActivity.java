@@ -20,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -28,7 +27,6 @@ import android.widget.TextView;
 import net.steamcrafted.loadtoast.LoadToast;
 
 import org.polaric.colorful.Colorful;
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -37,8 +35,7 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
-import me.lancer.pocket.ui.activity.SettingActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
@@ -116,7 +113,7 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
     private void initData() {
         sharedPreferences = this.getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        night = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
+        night = sharedPreferences.getBoolean(Params.ISNIGHT, false);
 
         position = getIntent().getIntExtra("position", 0);
         value1 = getIntent().getStringExtra("value1");
@@ -207,7 +204,7 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
             } catch (Settings.SettingNotFoundException e) {
                 e.printStackTrace();
             }
-            editor.putBoolean(mParams.ISNIGHT, true);
+            editor.putBoolean(Params.ISNIGHT, true);
             editor.apply();
             Colorful.config(NovelReadActivity.this)
                     .translucent(false)
@@ -230,7 +227,7 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
             } catch (Settings.SettingNotFoundException e) {
                 e.printStackTrace();
             }
-            editor.putBoolean(mParams.ISNIGHT, false);
+            editor.putBoolean(Params.ISNIGHT, false);
             editor.apply();
             Colorful.config(NovelReadActivity.this)
                     .translucent(false)

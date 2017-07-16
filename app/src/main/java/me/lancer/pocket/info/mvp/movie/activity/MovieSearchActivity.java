@@ -1,6 +1,5 @@
 package me.lancer.pocket.info.mvp.movie.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +25,6 @@ import me.lancer.pocket.info.mvp.movie.IMovieView;
 import me.lancer.pocket.info.mvp.movie.MovieBean;
 import me.lancer.pocket.info.mvp.movie.MoviePresenter;
 import me.lancer.pocket.info.mvp.movie.adapter.MovieAdapter;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class MovieSearchActivity extends PresenterActivity<MoviePresenter> implements IMovieView {
 

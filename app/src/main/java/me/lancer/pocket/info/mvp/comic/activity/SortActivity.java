@@ -13,7 +13,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -28,7 +27,7 @@ import me.lancer.pocket.info.mvp.comic.ComicBean;
 import me.lancer.pocket.info.mvp.comic.ComicPresenter;
 import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 
@@ -89,7 +88,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ivCover = (ImageView) findViewById(R.id.imageView);
-        ViewCompat.setTransitionName(ivCover, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);

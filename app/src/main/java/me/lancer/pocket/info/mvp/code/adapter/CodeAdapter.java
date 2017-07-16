@@ -18,7 +18,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.activity.CodeDetailActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
 
@@ -51,7 +51,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
                     viewHolder.tvName.setText(bean.getName());
                 }
                 viewHolder.tvStar.setText(bean.getStar());
-                ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
                 Glide.with(context).load(bean.getImg()).into(viewHolder.ivImg);
                 viewHolder.cvSmall.setOnClickListener(new View.OnClickListener() {
                     @Override

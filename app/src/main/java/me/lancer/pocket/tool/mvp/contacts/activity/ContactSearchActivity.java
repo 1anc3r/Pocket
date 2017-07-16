@@ -1,6 +1,5 @@
 package me.lancer.pocket.tool.mvp.contacts.activity;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,7 +24,6 @@ import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.contacts.adapter.ContactAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class ContactSearchActivity extends BaseActivity {
 

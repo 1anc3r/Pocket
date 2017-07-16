@@ -29,11 +29,11 @@ import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.video.adapter.VideoAdapter;
 import me.lancer.pocket.tool.mvp.video.bean.VideoBean;
-import me.lancer.pocket.ui.application.mApp;
+import me.lancer.pocket.mainui.application.App;
 
 public class VideoActivity extends BaseActivity implements View.OnClickListener {
 
-    mApp app;
+    App app;
     private TextView tvShow;
     private ImageView ivBack;
     private GridView mGroupGridView;
@@ -142,7 +142,7 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void init() {
-        app = (mApp) VideoActivity.this.getApplication();
+        app = (App) VideoActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
         tvShow.setText(strShow);
         ivBack = (ImageView) findViewById(R.id.iv_back);

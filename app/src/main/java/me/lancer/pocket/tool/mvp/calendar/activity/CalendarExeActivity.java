@@ -1,6 +1,5 @@
 package me.lancer.pocket.tool.mvp.calendar.activity;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
@@ -20,7 +19,7 @@ import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.tool.mvp.calendar.CalendarPresenter;
 import me.lancer.pocket.tool.mvp.calendar.ICalendarView;
-import me.lancer.pocket.ui.view.ClearEditText;
+import me.lancer.pocket.mainui.view.ClearEditText;
 
 public class CalendarExeActivity extends PresenterActivity<CalendarPresenter> implements ICalendarView {
 

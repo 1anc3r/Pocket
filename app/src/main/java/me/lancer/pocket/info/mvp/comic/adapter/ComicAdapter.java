@@ -21,7 +21,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.chapter.activity.ChapterActivity;
 import me.lancer.pocket.info.mvp.comic.ComicBean;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
 
@@ -53,7 +53,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                 } else {
                     viewHolder.tvCategory.setText(bean.getCategory());
                 }
-                ViewCompat.setTransitionName(viewHolder.ivCover, mParams.TRANSITION_PIC);
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivCover);
                 viewHolder.container.setOnClickListener(new View.OnClickListener() {
                     @Override

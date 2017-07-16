@@ -10,9 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -24,9 +22,9 @@ import me.lancer.pocket.info.mvp.article.ArticleBean;
 import me.lancer.pocket.info.mvp.article.ArticlePresenter;
 import me.lancer.pocket.info.mvp.article.IArticleView;
 import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
-import me.lancer.pocket.ui.application.mParams;
-import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
 
 public class ArticleActivity extends PresenterActivity<ArticlePresenter> implements IArticleView {
 
@@ -109,7 +107,7 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
             }
         });
         ivImg = (ImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load("https://www.dujin.org/sys/bing/1366.php").into(ivImg);
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
         htvAuthor = (HtmlTextView) findViewById(R.id.htv_author);

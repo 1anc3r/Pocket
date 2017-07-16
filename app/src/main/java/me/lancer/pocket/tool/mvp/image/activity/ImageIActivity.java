@@ -21,12 +21,12 @@ import java.util.List;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.image.adapter.ImageIAdapter;
 import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
-import me.lancer.pocket.ui.application.mApp;
+import me.lancer.pocket.mainui.application.App;
 import me.lancer.pocket.R;
 
 public class ImageIActivity extends BaseActivity implements View.OnClickListener {
 
-    mApp app;
+    App app;
     private ImageView ivBack;
     private TextView tvShow;
     private GridView mGridView;
@@ -116,7 +116,7 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
 
     private void init() {
         iLanguage();
-        app = (mApp) ImageIActivity.this.getApplication();
+        app = (App) ImageIActivity.this.getApplication();
         ivBack = (ImageView) findViewById(R.id.iv_back);
         ivBack.setOnClickListener(this);
         Intent i = getIntent();

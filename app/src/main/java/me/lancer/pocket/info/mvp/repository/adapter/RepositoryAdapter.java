@@ -17,7 +17,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.repository.RepositoryBean;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> {
 
@@ -63,7 +63,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
                 context.startActivity(intent);
             }
         });
-        ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
         Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
     }
 

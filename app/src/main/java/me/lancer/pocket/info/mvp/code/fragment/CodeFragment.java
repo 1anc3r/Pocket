@@ -22,7 +22,6 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.code.activity.CodeSearchActivity;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class CodeFragment extends BaseFragment {
 

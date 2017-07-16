@@ -3,7 +3,6 @@ package me.lancer.pocket.info.mvp.page.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import com.bumptech.glide.Glide;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.base.fragment.BaseFragment;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class PagerNoBarFragment extends BaseFragment {
 
@@ -44,7 +43,7 @@ public class PagerNoBarFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        ViewCompat.setTransitionName(imageView, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(imageView, Params.TRANSITION_PIC);
         Glide.with(this).load(link).into(imageView);
     }
 }

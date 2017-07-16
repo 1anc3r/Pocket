@@ -6,7 +6,7 @@
     android:background="?attr/colorPrimary"
     android:orientation="vertical">
 
-    <me.lancer.pocket.ui.view.CircleImageView
+    <me.lancer.pocket.mainui.view.CircleImageView
         android:id="@+id/civ_head"
         android:layout_width="60dp"
         android:layout_height="60dp"

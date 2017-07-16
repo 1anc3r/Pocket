@@ -22,7 +22,6 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.comic.activity.ComicSearchActivity;
-import me.lancer.pocket.ui.activity.AboutActivity;
 
 public class ComicFragment extends BaseFragment {
 

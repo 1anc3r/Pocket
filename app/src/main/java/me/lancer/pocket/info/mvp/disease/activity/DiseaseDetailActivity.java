@@ -13,7 +13,6 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -29,9 +28,9 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.disease.DiseaseBean;
 import me.lancer.pocket.info.mvp.disease.DiseasePresenter;
 import me.lancer.pocket.info.mvp.disease.IDiseaseView;
-import me.lancer.pocket.ui.application.mParams;
-import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
 import me.lancer.pocket.util.LruImageCache;
 
 public class DiseaseDetailActivity extends PresenterActivity<DiseasePresenter> implements IDiseaseView {
@@ -112,7 +111,7 @@ public class DiseaseDetailActivity extends PresenterActivity<DiseasePresenter> i
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
         layout.setTitle(title);
         ivImg = (NetworkImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         LruImageCache cache = LruImageCache.instance();
         ImageLoader loader = new ImageLoader(mQueue, cache);
         ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
@@ -133,7 +132,7 @@ public class DiseaseDetailActivity extends PresenterActivity<DiseasePresenter> i
         intent.putExtra("title", title);
         intent.putExtra("img", img);
         ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, networkImageView, mParams.TRANSITION_PIC);
+                .makeSceneTransitionAnimation(activity, networkImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 

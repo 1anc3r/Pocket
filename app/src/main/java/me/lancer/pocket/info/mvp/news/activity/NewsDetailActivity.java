@@ -16,7 +16,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -35,9 +34,9 @@ import me.lancer.pocket.info.mvp.news.INewsView;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.NewsPresenter;
 import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
-import me.lancer.pocket.ui.application.mParams;
-import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
 
 public class NewsDetailActivity extends PresenterActivity<NewsPresenter> implements INewsView {
 
@@ -71,7 +70,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                         loadToast.success();
                         NewsBean nb = (NewsBean) msg.obj;
                         layout.setTitle(nb.getTitle());
-                        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+                        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
                         Glide.with(NewsDetailActivity.this).load(nb.getImg()).into(ivImg);
                         if (nb.getContent() != null) {
                             htvContent.setHtml(nb.getContent(), new HtmlHttpImageGetter(htvContent));
@@ -130,7 +129,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
         layout.setTitle(title);
         ivImg = (ImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
@@ -167,7 +166,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         intent.putExtra("img", img);
         intent.putExtra("link", link);
         ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, mParams.TRANSITION_PIC);
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 

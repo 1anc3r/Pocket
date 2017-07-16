@@ -21,13 +21,13 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <application
-        android:name=".ui.application.mApp"
+        android:name=".mainui.application.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".mainui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,13 +35,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.BlankActivity"
+            android:name=".mainui.activity.BlankActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.activity.SettingActivity"
+            android:name=".mainui.activity.SettingActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.activity.AboutActivity"
+            android:name=".mainui.activity.AboutActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

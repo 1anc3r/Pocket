@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.joke.JokeBean;
 import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
 
@@ -53,7 +53,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
                 } else {
                     viewHolder.tvText.setText(list.get(position).getText());
                 }
-                ViewCompat.setTransitionName(viewHolder.ivImg, mParams.TRANSITION_PIC);
+                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
                 viewHolder.ivImg.setOnClickListener(new View.OnClickListener() {
                     @Override

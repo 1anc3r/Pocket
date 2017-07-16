@@ -20,7 +20,6 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.disease.fragment.DiseaseFragment;
-import me.lancer.pocket.ui.activity.MainActivity;
 
 public class SystemFragment extends BaseFragment {
 

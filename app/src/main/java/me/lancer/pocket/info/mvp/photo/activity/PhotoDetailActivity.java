@@ -1,7 +1,6 @@
 package me.lancer.pocket.info.mvp.photo.activity;
 
 import android.app.Activity;
-import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -24,7 +23,6 @@ import com.bumptech.glide.Glide;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
-import java.io.IOException;
 import java.util.List;
 
 import me.lancer.pocket.R;
@@ -32,7 +30,7 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.PhotoPresenter;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> implements IPhotoView {
 
@@ -105,7 +103,7 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
         }
         flPhoto = (FrameLayout) findViewById(R.id.fl_photo);
         ivImg = (ImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
+        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
         btnSetting = (Button) findViewById(R.id.btn_setting);
         btnSetting.setOnClickListener(vOnClickListener);
@@ -148,7 +146,7 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
         intent.putExtra("img", img);
         intent.putExtra("title", title);
         ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, mParams.TRANSITION_PIC);
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 

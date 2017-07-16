@@ -41,12 +41,12 @@ import me.lancer.pocket.tool.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.document.adapter.DocumentAdapter;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.file.bean.FileBean;
-import me.lancer.pocket.ui.application.mApp;
+import me.lancer.pocket.mainui.application.App;
 import me.lancer.pocket.util.FileTypeRefereeUtil;
 
 public class DocumentActivity extends BaseActivity implements View.OnClickListener {
 
-    mApp app;
+    App app;
 
     private TextView tvShow;
     private ListView lvDoc;
@@ -164,7 +164,7 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void init() {
-        app = (mApp) DocumentActivity.this.getApplication();
+        app = (App) DocumentActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
         tvShow.setText(strShow);
         ivBack = (ImageView) findViewById(R.id.iv_back);
@@ -341,7 +341,9 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                handler.post(changed);
+                if (adapter != null && docList.size() > 0) {
+                    handler.post(changed);
+                }
             }
 
             @Override

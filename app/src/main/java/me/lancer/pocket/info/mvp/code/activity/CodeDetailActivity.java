@@ -11,7 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,7 +25,7 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.CodePresenter;
 import me.lancer.pocket.info.mvp.code.ICodeView;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 
 public class CodeDetailActivity extends PresenterActivity<CodePresenter> implements ICodeView {
 
@@ -115,7 +114,7 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
         intent.putExtra("img", img);
         intent.putExtra("link", link);
         ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, mParams.TRANSITION_PIC);
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
@@ -126,7 +125,7 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
         intent.putExtra("star", star);
         intent.putExtra("link", link);
         ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, null, mParams.TRANSITION_PIC);
+                .makeSceneTransitionAnimation(activity, null, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 

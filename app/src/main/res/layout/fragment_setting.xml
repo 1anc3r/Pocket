@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activity.SettingActivity">
+    tools:context=".mainui.activity.SettingActivity">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

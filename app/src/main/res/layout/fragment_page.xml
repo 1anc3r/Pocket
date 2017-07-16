@@ -12,24 +12,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_dark"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/black_dark">
 
             <ImageView
                 android:id="@+id/imageView"
+                android:paddingTop="48dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:scaleType="fitStart" />
+                android:scaleType="fitCenter" />
 
             <LinearLayout
                 android:id="@+id/ll_bar"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_gravity="bottom"
                 android:background="@color/black_dark"
                 android:gravity="center_vertical|right"
                 android:paddingRight="8dp">

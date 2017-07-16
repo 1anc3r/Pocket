@@ -20,7 +20,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.comic.ComicBean;
 import me.lancer.pocket.info.mvp.comic.activity.SortActivity;
-import me.lancer.pocket.ui.application.mParams;
+import me.lancer.pocket.mainui.application.Params;
 import me.lancer.pocket.util.DensityUtil;
 
 public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
@@ -56,7 +56,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
                 } else {
                     viewHolder.tvCategory.setText(bean.getCategory());
                 }
-                ViewCompat.setTransitionName(viewHolder.ivCover, mParams.TRANSITION_PIC);
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivCover);
                 viewHolder.container.setOnClickListener(new View.OnClickListener() {
                     @Override
