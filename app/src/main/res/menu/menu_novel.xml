@@ -12,8 +12,8 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/menu_night"
-        android:title="夜间模式"
+        android:id="@+id/menu_theme"
+        android:title="主题换色"
         app:showAsAction="never" />
 
     <item

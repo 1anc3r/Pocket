@@ -8,6 +8,7 @@
     <string name="night">夜间模式</string>
     <string name="logincn">登录</string>
     <string name="settingcn">设置</string>
+    <string name="select_color">主题换色</string>
     <string name="language_choice">language_choice</string>
 
     <string name="send_failed_en">Send Failed : </string>

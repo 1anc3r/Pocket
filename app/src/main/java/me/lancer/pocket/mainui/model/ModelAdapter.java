@@ -10,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.polaric.colorful.Colorful;
+
 import java.util.List;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.mainui.application.App;
 import me.lancer.pocket.util.DensityUtil;
 import yyydjk.com.library.CouponView;
 
@@ -26,7 +29,8 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
             , R.color.deeppurple, R.color.indigo, R.color.blue
             , R.color.lightblue, R.color.cyan, R.color.teal
             , R.color.green, R.color.lightgreen, R.color.lime
-            , R.color.yellow, R.color.amber, R.color.orange, R.color.deeporange};
+            , R.color.yellow, R.color.amber, R.color.orange
+            , R.color.deeporange, R.color.black_float};
 
     private Context context;
     private List<ModelBean> list;
@@ -54,8 +58,12 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ModelAdapter.ViewHolder viewHolder, int position) {
-        viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewHolder.llModel.getLayoutParams();
+        if (((App)context.getApplicationContext()).isNight()) {
+            viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[16]));
+        } else {
+            viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));
+        }
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewHolder.llModel.getLayoutParams();
         params.width = (card - DensityUtil.dip2px(context, 32)) / 3;
 //        params.height = params.width;
         if (Math.random() * 3 > 2) {

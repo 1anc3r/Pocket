@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
+import org.polaric.colorful.ColorPickerDialog;
 import org.polaric.colorful.Colorful;
 
 import java.util.List;
@@ -148,8 +149,8 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
             case R.id.menu_about:
                 showAboutDialog();
                 break;
-            case R.id.menu_night:
-                showNightDialog();
+            case R.id.menu_theme:
+                showColorPickDialog();
                 break;
             case R.id.menu_bright:
                 showBrightDialog();
@@ -187,55 +188,27 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         builder.show();
     }
 
-    private void showNightDialog() {
-        if (!night) {
-//                    editor.putBoolean(mParams.ISNIGHT, true);
-//                    editor.apply();
-//                    scNight.setChecked(true);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    recreate();
-            try {
-                screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
-                screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-                if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                    setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+    private void showColorPickDialog() {
+        ColorPickerDialog dialog = new ColorPickerDialog(NovelReadActivity.this);
+        dialog.setTitle("切换主题");
+        dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+            @Override
+            public void onColorSelected(Colorful.ThemeColor themeColor) {
+                if (themeColor.getColorRes() == R.color.md_deep_orange_500) {
+                    night = true;
+                } else {
+                    night = false;
                 }
-                setScreenBrightness(255.0F/4);
-            } catch (Settings.SettingNotFoundException e) {
-                e.printStackTrace();
+                Colorful.config(NovelReadActivity.this)
+                        .primaryColor(themeColor)
+                        .accentColor(themeColor)
+                        .translucent(false)
+                        .dark(night)
+                        .apply();
+                recreate();
             }
-            editor.putBoolean(Params.ISNIGHT, true);
-            editor.apply();
-            Colorful.config(NovelReadActivity.this)
-                    .translucent(false)
-                    .dark(true)
-                    .apply();
-            recreate();
-        } else {
-//                    editor.putBoolean(mParams.ISNIGHT, false);
-//                    editor.apply();
-//                    scNight.setChecked(false);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    recreate();
-            try {
-                screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
-                screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-                if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                    setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                }
-                setScreenBrightness(255.0F);
-            } catch (Settings.SettingNotFoundException e) {
-                e.printStackTrace();
-            }
-            editor.putBoolean(Params.ISNIGHT, false);
-            editor.apply();
-            Colorful.config(NovelReadActivity.this)
-                    .translucent(false)
-                    .dark(false)
-                    .apply();
-            recreate();
-        }
-        night = !night;
+        });
+        dialog.show();
     }
 
     private void showBrightDialog() {

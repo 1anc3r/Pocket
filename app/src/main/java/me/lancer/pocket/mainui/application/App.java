@@ -28,14 +28,14 @@ public class App extends LitePalApplication {
     private RequestQueue mRequestQueue;
 
     public static Typeface TypeFace;
-    private boolean isPicture, isFirst;
+    private boolean isPicture, isFirst, isNight;
 
     @Override
     public void onCreate() {
         super.onCreate();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
-        boolean night = sharedPreferences.getBoolean(Params.ISNIGHT, false);
-//        if (night) {
+        isNight = sharedPreferences.getBoolean(Params.ISNIGHT, false);
+//        if (isNight) {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //        } else {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -44,7 +44,7 @@ public class App extends LitePalApplication {
                 .primaryColor(Colorful.ThemeColor.RED)
                 .accentColor(Colorful.ThemeColor.RED)
                 .translucent(false)
-                .dark(night);
+                .dark(isNight);
         Colorful.init(this);
         TypeFace = Typeface.createFromAsset(getAssets(), "fonts/MaterialIcons_Regular.ttf");
         try {
@@ -87,5 +87,13 @@ public class App extends LitePalApplication {
 
     public void setFirst(boolean first) {
         isFirst = first;
+    }
+
+    public boolean isNight() {
+        return isNight;
+    }
+
+    public void setNight(boolean night) {
+        isNight = night;
     }
 }

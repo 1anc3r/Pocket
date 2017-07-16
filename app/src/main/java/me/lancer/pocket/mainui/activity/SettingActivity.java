@@ -18,6 +18,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -67,7 +68,6 @@ public class SettingActivity extends BaseActivity {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private boolean night = false;
     private int screenMode;
     private int screenBrightness;
 
@@ -168,10 +168,10 @@ public class SettingActivity extends BaseActivity {
         initToolbar("设置");
         llNight = (LinearLayout) findViewById(R.id.ll_night);
         llNight.setOnClickListener(vOnClickListener);
-        llBright = (LinearLayout) findViewById(R.id.ll_bright);
-        llBright.setOnClickListener(vOnClickListener);
         llTheme = (LinearLayout) findViewById(R.id.ll_theme);
         llTheme.setOnClickListener(vOnClickListener);
+        llBright = (LinearLayout) findViewById(R.id.ll_bright);
+        llBright.setOnClickListener(vOnClickListener);
         llFunc = (LinearLayout) findViewById(R.id.ll_func);
         llFunc.setOnClickListener(vOnClickListener);
         llProblem = (LinearLayout) findViewById(R.id.ll_problem);
@@ -195,8 +195,8 @@ public class SettingActivity extends BaseActivity {
         app = (App) this.getApplication();
         sharedPreferences = this.getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        night = sharedPreferences.getBoolean(Params.ISNIGHT, false);
-        scNight.setChecked(night);
+//        night = sharedPreferences.getBoolean(Params.ISNIGHT, false);
+        scNight.setChecked(app.isNight());
         scNight.setClickable(false);
         funcList.add("— 工具 —");
         funcList.add("电话、通讯录、信息 : \n" +
@@ -368,100 +368,11 @@ public class SettingActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             if (v == llNight) {
-                if (!night) {
-//                    editor.putBoolean(mParams.ISNIGHT, true);
-//                    editor.apply();
-//                    scNight.setChecked(true);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    recreate();
-                    try {
-                        screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
-                        screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-                        if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                            setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                        }
-                        setScreenBrightness(255.0F / 4);
-                    } catch (Settings.SettingNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    scNight.setChecked(true);
-                    editor.putBoolean(Params.ISNIGHT, true);
-                    editor.apply();
-                    Colorful.config(SettingActivity.this)
-                            .translucent(false)
-                            .dark(true)
-                            .apply();
-                    recreate();
-                } else {
-//                    editor.putBoolean(mParams.ISNIGHT, false);
-//                    editor.apply();
-//                    scNight.setChecked(false);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    recreate();
-                    try {
-                        screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
-                        screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-                        if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                            setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                        }
-                        setScreenBrightness(255.0F);
-                    } catch (Settings.SettingNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    scNight.setChecked(false);
-                    editor.putBoolean(Params.ISNIGHT, false);
-                    editor.apply();
-                    Colorful.config(SettingActivity.this)
-                            .translucent(false)
-                            .dark(false)
-                            .apply();
-                    recreate();
-                }
-                night = !night;
+                switchLight();
             } else if (v == llBright) {
-                LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
-                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar_view, null);
-                final Dialog dialog = new AlertDialog.Builder(SettingActivity.this).create();
-                try {
-                    screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-                } catch (Settings.SettingNotFoundException e) {
-                    e.printStackTrace();
-                }
-                SeekBar sbBright = (SeekBar) layout.findViewById(R.id.sb_vorb);
-                sbBright.setProgress(screenBrightness);
-                sbBright.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        setScreenBrightness(progress);
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                    }
-                });
-                dialog.show();
-                dialog.getWindow().setContentView(layout);
+                showBrightSeekDialog();
             } else if (v == llTheme) {
-                ColorPickerDialog dialog = new ColorPickerDialog(SettingActivity.this);
-                dialog.setTitle("切换主题");
-                dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
-                    @Override
-                    public void onColorSelected(Colorful.ThemeColor themeColor) {
-                        Colorful.config(SettingActivity.this)
-                                .primaryColor(themeColor)
-                                .accentColor(themeColor)
-                                .translucent(false)
-                                .dark(night)
-                                .apply();
-                        recreate();
-                    }
-                });
-                dialog.show();
+                showColorPickDialog();
             } else if (v == llFunc) {
                 showListDialog(1, funcList);
             } else if (v == llProblem) {
@@ -478,6 +389,113 @@ public class SettingActivity extends BaseActivity {
             }
         }
     };
+
+    private void switchLight() {
+        if (!app.isNight()) {
+//                    editor.putBoolean(mParams.ISNIGHT, true);
+//                    editor.apply();
+//                    scNight.setChecked(true);
+//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    recreate();
+            try {
+                screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
+                screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                    setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                }
+                setScreenBrightness(255.0F / 4);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            scNight.setChecked(true);
+            app.setNight(true);
+            editor.putBoolean(Params.ISNIGHT, true);
+            editor.apply();
+            Colorful.config(SettingActivity.this)
+                    .translucent(false)
+                    .dark(true)
+                    .apply();
+            recreate();
+        } else {
+//                    editor.putBoolean(mParams.ISNIGHT, false);
+//                    editor.apply();
+//                    scNight.setChecked(false);
+//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    recreate();
+            try {
+                screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
+                screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                    setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                }
+                setScreenBrightness(255.0F);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            scNight.setChecked(false);
+            app.setNight(false);
+            editor.putBoolean(Params.ISNIGHT, false);
+            editor.apply();
+            Colorful.config(SettingActivity.this)
+                    .translucent(false)
+                    .dark(false)
+                    .apply();
+            recreate();
+        }
+    }
+
+    private void showBrightSeekDialog() {
+        LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar_view, null);
+        final Dialog dialog = new AlertDialog.Builder(SettingActivity.this).create();
+        try {
+            screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
+        SeekBar sbBright = (SeekBar) layout.findViewById(R.id.sb_vorb);
+        sbBright.setProgress(screenBrightness);
+        sbBright.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setScreenBrightness(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+        dialog.show();
+        dialog.getWindow().setContentView(layout);
+    }
+
+    private void showColorPickDialog() {
+        ColorPickerDialog dialog = new ColorPickerDialog(SettingActivity.this);
+        dialog.setTitle("主题换色");
+        dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+            @Override
+            public void onColorSelected(Colorful.ThemeColor themeColor) {
+                if (themeColor.getColorRes() == R.color.md_deep_orange_500) {
+                    app.setNight(true);
+                } else {
+                    app.setNight(false);
+                }
+                Colorful.config(SettingActivity.this)
+                        .primaryColor(themeColor)
+                        .accentColor(themeColor)
+                        .translucent(false)
+                        .dark(app.isNight())
+                        .apply();
+                recreate();
+            }
+        });
+        dialog.show();
+    }
 
     public void showListDialog(int type, List<String> list) {
         if (type == 1) {
