@@ -79,7 +79,7 @@ public class SettingActivity extends BaseActivity {
     private Runnable repository = new Runnable() {
         @Override
         public void run() {
-            String content = contentGetterSetter.getContentFromHtml("repository", "raw.githubusercontent.com/1anc3r/1anc3r-s-Programming-Journey/master/AppLink.md");
+            String content = contentGetterSetter.getContentFromHtml("repository", "https://raw.githubusercontent.com/1anc3r/1anc3r-s-Programming-Journey/master/AppLink.md");
             if (!content.contains("获取失败!")) {
                 try {
                     List<RepositoryBean> list = new ArrayList<>();
@@ -207,7 +207,8 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t */");
         funcList.add("图片、音乐、视频、文档、应用、存储 : \n" +
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 列出手机上的各种类型的文件, 支持打开、删除、赋值、剪切\n" +
+                "\t\t\t\t * 列出手机上的各种类型的文件\n" +
+                "\t\t\t\t * 支持打开、删除、赋值、剪切\n" +
                 "\t\t\t\t */");
         funcList.add("日历 : \n" +
                 "\t\t\t\t/*\n" +
@@ -221,12 +222,14 @@ public class SettingActivity extends BaseActivity {
         funcList.add("天气 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 天气信息 : 提供全国各城市的天气信息\n" +
-                "\t\t\t\t * 城市选择 : 通过列表点选或搜索名称的方式选择城市\n" +
-                "\t\t\t\t * ——数据来源 : 中央天气\n\t\t\t\t（tj.nineton.cn/Heart/index）\n" +
+                "\t\t\t\t * 城市选择 : 然而并不能定位\n" +
+                "\t\t\t\t * ——数据来源 : 中央天气\n" +
+                "\t\t\t\t * （tj.nineton.cn/Heart/index）\n" +
                 "\t\t\t\t */");
         funcList.add("翻译 : \n" +
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * ——翻译支持 : 必应词典\n\t\t\t\t（cn.bing.com/dict/）\n" +
+                "\t\t\t\t * ——翻译支持 : 必应词典\n" +
+                "\t\t\t\t * （cn.bing.com/dict/）\n" +
                 "\t\t\t\t */");
         funcList.add("摩斯电码 : \n" +
                 "\t\t\t\t/*\n" +
@@ -249,57 +252,67 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t * 每日一文 : 每天一篇精选优质短篇\n" +
                 "\t\t\t\t * 随机文章 : 点击刷新按钮随机读文章\n" +
                 "\t\t\t\t * ——数据来源 : " +
-                "\n\t\t\t\t *  每日一文\n\t\t\t\t（meiriyiwen.com）" +
-                "\n\t\t\t\t *  背景图片\n\t\t\t\t（bing.ioliu.cn）\n" +
+                "\n\t\t\t\t *  每日一文（meiriyiwen.com）" +
+                "\n\t\t\t\t *  背景图片（bing.ioliu.cn）\n" +
                 "\t\t\t\t */");
         funcList.add("趣闻 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 每日 : 知乎日报的每日信息\n" +
                 "\t\t\t\t * 热门 : 知乎日报的热门信息\n" +
-                "\t\t\t\t * 分类 : 包括动漫、游戏、财经、电影、音乐、互联网安全等日报\n" +
-                "\t\t\t\t * ——数据来源 : 知乎日报\n\t\t\t\t（news-at.zhihu.com/api）\n" +
+                "\t\t\t\t * 分类 : 包括动漫、游戏、财经、" +
+                "\t\t\t\t *        电影、音乐、互联网安全等日报\n" +
+                "\t\t\t\t * ——数据来源 : 知乎日报\n" +
+                "\t\t\t\t * （news-at.zhihu.com/api）\n" +
                 "\t\t\t\t */");
         funcList.add("段子 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 段子 : 内涵段子的热辣段子\n" +
                 "\t\t\t\t * 图片 : 内涵段子的爆笑图片\n" +
-                "\t\t\t\t * ——数据来源 : 内涵段子\n\t\t\t\t（neihanshequ.com）\n" +
+                "\t\t\t\t * ——数据来源 : 内涵段子\n" +
+                "\t\t\t\t * （neihanshequ.com）\n" +
                 "\t\t\t\t */");
         funcList.add("图书 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 书评 : 豆瓣读书的最受欢迎书评\n" +
                 "\t\t\t\t * 书榜 : 爬取呈现豆瓣图书TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想了解的图书信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣读书\n\t\t\t\t（book.douban.com）\n" +
+                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                "\t\t\t\t *        搜索你想了解的图书信息\n" +
+                "\t\t\t\t * ——数据来源 : 豆瓣读书\n" +
+                "\t\t\t\t * （book.douban.com）\n" +
                 "\t\t\t\t */");
         funcList.add("音乐 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 乐评 : 豆瓣音乐的最受欢迎乐评\n" +
                 "\t\t\t\t * 乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想了解的音乐信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣音乐\n\t\t\t\t（music.douban.com）\n" +
+                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                "\t\t\t\t *        搜索你想了解的音乐信息\n" +
+                "\t\t\t\t * ——数据来源 : 豆瓣音乐\n" +
+                "\t\t\t\t * （music.douban.com）\n" +
                 "\t\t\t\t */");
         funcList.add("电影 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 影评 : 豆瓣电影的最受欢迎影评\n" +
                 "\t\t\t\t * 影榜 : 爬取呈现豆瓣电影TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想了解的电影信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣电影\n\t\t\t\t（movie.douban.com）\n" +
+                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                "\t\t\t\t *        搜索你想了解的电影信息\n" +
+                "\t\t\t\t * ——数据来源 : 豆瓣电影\n" +
+                "\t\t\t\t * （movie.douban.com）\n" +
                 "\t\t\t\t */");
         funcList.add("图片 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 妹子 : 好看的妹子图\n" +
                 "\t\t\t\t * 美景 : 好看的风景照\n" +
                 "\t\t\t\t * ——数据来源 : " +
-                "\n\t\t\t\t *  佳人 : Gank.io\n\t\t\t\t（gank.io）" +
-                "\n\t\t\t\t *  美图 : Pexels Popular Photos\n\t\t\t\t（www.pexels.com）\n" +
+                "\n\t\t\t\t *  佳人 : Gank.io（gank.io）" +
+                "\n\t\t\t\t *  美图 : Pexels（www.pexels.com）\n" +
                 "\t\t\t\t */");
         funcList.add("小说 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 排行 : 小说排行榜\n" +
                 "\t\t\t\t * 分类 : 小说各分区\n" +
                 "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
-                "\t\t\t\t * ——数据来源 : 追书神器\n\t\t\t\t（https://www.zhuishushenqi.com）\n" +
+                "\t\t\t\t * ——数据来源 : 追书神器\n" +
+                "\t\t\t\t * （www.zhuishushenqi.com）\n" +
                 "\t\t\t\t */");
         funcList.add("漫画 : \n" +
                 "\t\t\t\t/*\n" +
@@ -307,18 +320,19 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t * 排行 : 漫画排行榜\n" +
                 "\t\t\t\t * 分类 : 来自有妖气各分区排行榜\n" +
                 "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的漫画\n" +
-                "\t\t\t\t * ——数据来源 : 有妖气\n\t\t\t\t（www.u17.com）\n" +
+                "\t\t\t\t * ——数据来源 : 有妖气（www.u17.com）\n" +
                 "\t\t\t\t */");
         funcList.add("视频 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 分类 : 来自B站各分区排行榜前十\n" +
-                "\t\t\t\t * ——数据来源 : BiliBili\n\t\t\t\t（api.bilibili.com）\n" +
+                "\t\t\t\t * ——数据来源 : BiliBili（api.bilibili.com）\n" +
                 "\t\t\t\t */");
         funcList.add("游戏 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 精选 : 精选各大平台热门游戏\n" +
                 "\t\t\t\t * 优惠、热销、新品、即将推出\n" +
-                "\t\t\t\t * ——数据来源 : Steam\n\t\t\t\t（store.steampowered.com）\n" +
+                "\t\t\t\t * ——数据来源 : Steam\n" +
+                "\t\t\t\t * （store.steampowered.com）\n" +
                 "\t\t\t\t */");
         funcList.add("编程 : \n" +
                 "\t\t\t\t/*\n" +
@@ -326,7 +340,8 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t * 组织 : GitHub上Star最多的组织\n" +
                 "\t\t\t\t * 项目 : GitHub上Star最多的项目\n" +
                 "\t\t\t\t * 趋势 : GitHub上今日最热的项目\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想浏览的项目\n" +
+                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                "\t\t\t\t *        搜索你想浏览的项目\n" +
                 "\t\t\t\t * ——数据来源 : GithubRanking\n\t\t\t\t（github-ranking.com）\n" +
                 "\t\t\t\t */");
         problemList.add("Q : 主页上的搜索栏好像并没有什么用...");
