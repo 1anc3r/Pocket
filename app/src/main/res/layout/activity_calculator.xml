@@ -73,6 +73,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="C"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -85,6 +86,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="("
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -96,6 +98,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text=")"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -108,6 +111,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="÷"
+                android:textColor="#000000"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -126,6 +130,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="7"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -137,6 +142,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="8"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -148,6 +154,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="9"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -159,6 +166,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="×"
+                android:textColor="#000000"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -177,6 +185,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="4"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -188,6 +197,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="5"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -199,6 +209,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="6"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -210,6 +221,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="-"
+                android:textColor="#000000"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -228,6 +240,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="1"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -239,6 +252,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="2"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -250,6 +264,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="3"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -261,6 +276,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="+"
+                android:textColor="#000000"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -279,6 +295,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="0"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -290,6 +307,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="."
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <Button
@@ -301,9 +319,11 @@
                 android:fontFamily="sans-serif-thin"
                 android:padding="20dp"
                 android:text="="
+                android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="normal" />
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

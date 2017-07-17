@@ -7,8 +7,8 @@ android {
         applicationId "me.lancer.pocket"
         minSdkVersion 21
         targetSdkVersion 21
-        versionCode 8
-        versionName "0.8.4"
+        versionCode 9
+        versionName "0.9.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

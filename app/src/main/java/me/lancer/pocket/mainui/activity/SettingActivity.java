@@ -392,11 +392,6 @@ public class SettingActivity extends BaseActivity {
 
     private void switchLight() {
         if (!app.isNight()) {
-//                    editor.putBoolean(mParams.ISNIGHT, true);
-//                    editor.apply();
-//                    scNight.setChecked(true);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    recreate();
             try {
                 screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
                 screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
@@ -412,16 +407,13 @@ public class SettingActivity extends BaseActivity {
             editor.putBoolean(Params.ISNIGHT, true);
             editor.apply();
             Colorful.config(SettingActivity.this)
+                    .primaryColor(Colorful.ThemeColor.DEEP_ORANGE)
+                    .accentColor(Colorful.ThemeColor.DEEP_ORANGE)
                     .translucent(false)
                     .dark(true)
                     .apply();
             recreate();
         } else {
-//                    editor.putBoolean(mParams.ISNIGHT, false);
-//                    editor.apply();
-//                    scNight.setChecked(false);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    recreate();
             try {
                 screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
                 screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
@@ -437,6 +429,8 @@ public class SettingActivity extends BaseActivity {
             editor.putBoolean(Params.ISNIGHT, false);
             editor.apply();
             Colorful.config(SettingActivity.this)
+                    .primaryColor(Colorful.ThemeColor.RED)
+                    .accentColor(Colorful.ThemeColor.RED)
                     .translucent(false)
                     .dark(false)
                     .apply();
@@ -482,8 +476,12 @@ public class SettingActivity extends BaseActivity {
             public void onColorSelected(Colorful.ThemeColor themeColor) {
                 if (themeColor.getColorRes() == R.color.md_deep_orange_500) {
                     app.setNight(true);
+                    editor.putBoolean(Params.ISNIGHT, true);
+                    editor.apply();
                 } else {
                     app.setNight(false);
+                    editor.putBoolean(Params.ISNIGHT, false);
+                    editor.apply();
                 }
                 Colorful.config(SettingActivity.this)
                         .primaryColor(themeColor)

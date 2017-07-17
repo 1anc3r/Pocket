@@ -2,6 +2,7 @@ package me.lancer.pocket.mainui.model;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import org.polaric.colorful.Colorful;
 import java.util.List;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.mainui.application.App;
 import me.lancer.pocket.util.DensityUtil;
 import yyydjk.com.library.CouponView;
@@ -58,7 +60,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ModelAdapter.ViewHolder viewHolder, int position) {
-        if (((App)context.getApplicationContext()).isNight()) {
+        if (((App)(((BaseActivity)context).getApplication())).isNight()) {
             viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[16]));
         } else {
             viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));

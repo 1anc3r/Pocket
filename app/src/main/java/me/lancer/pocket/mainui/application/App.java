@@ -40,11 +40,20 @@ public class App extends LitePalApplication {
 //        } else {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 //        }
-        Colorful.defaults()
-                .primaryColor(Colorful.ThemeColor.RED)
-                .accentColor(Colorful.ThemeColor.RED)
-                .translucent(false)
-                .dark(isNight);
+        if (isNight) {
+            Colorful.defaults()
+                    .primaryColor(Colorful.ThemeColor.DEEP_ORANGE)
+                    .accentColor(Colorful.ThemeColor.DEEP_ORANGE)
+                    .translucent(false)
+                    .dark(isNight);
+        } else {
+
+            Colorful.defaults()
+                    .primaryColor(Colorful.ThemeColor.RED)
+                    .accentColor(Colorful.ThemeColor.RED)
+                    .translucent(false)
+                    .dark(isNight);
+        }
         Colorful.init(this);
         TypeFace = Typeface.createFromAsset(getAssets(), "fonts/MaterialIcons_Regular.ttf");
         try {

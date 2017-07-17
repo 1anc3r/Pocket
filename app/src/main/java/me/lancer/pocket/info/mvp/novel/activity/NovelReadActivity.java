@@ -36,6 +36,8 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
+import me.lancer.pocket.mainui.activity.SettingActivity;
+import me.lancer.pocket.mainui.application.App;
 import me.lancer.pocket.mainui.application.Params;
 
 /**
@@ -44,6 +46,7 @@ import me.lancer.pocket.mainui.application.Params;
 
 public class NovelReadActivity extends PresenterActivity<NovelPresenter> implements INovelView {
 
+    private App app;
     Toolbar toolbar;
 
     private LoadToast loadToast;
@@ -112,6 +115,7 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
     }
 
     private void initData() {
+        app = (App) this.getApplication();
         sharedPreferences = this.getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         night = sharedPreferences.getBoolean(Params.ISNIGHT, false);
@@ -150,7 +154,8 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
                 showAboutDialog();
                 break;
             case R.id.menu_theme:
-                showColorPickDialog();
+                switchLight();
+//                showColorPickDialog();
                 break;
             case R.id.menu_bright:
                 showBrightDialog();
@@ -186,6 +191,52 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
                 "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
                 "\t\t\t\t — 数据来源 : 追书神器\n\t\t\t\t（https://www.zhuishushenqi.com）");
         builder.show();
+    }
+
+    private void switchLight() {
+        if (!app.isNight()) {
+            try {
+                screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
+                screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                    setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                }
+                setScreenBrightness(255.0F / 4);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            app.setNight(true);
+            editor.putBoolean(Params.ISNIGHT, true);
+            editor.apply();
+            Colorful.config(NovelReadActivity.this)
+                    .primaryColor(Colorful.ThemeColor.DEEP_ORANGE)
+                    .accentColor(Colorful.ThemeColor.DEEP_ORANGE)
+                    .translucent(false)
+                    .dark(true)
+                    .apply();
+            recreate();
+        } else {
+            try {
+                screenMode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
+                screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                if (screenMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                    setScreenMode(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                }
+                setScreenBrightness(255.0F);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            app.setNight(false);
+            editor.putBoolean(Params.ISNIGHT, false);
+            editor.apply();
+            Colorful.config(NovelReadActivity.this)
+                    .primaryColor(Colorful.ThemeColor.RED)
+                    .accentColor(Colorful.ThemeColor.RED)
+                    .translucent(false)
+                    .dark(false)
+                    .apply();
+            recreate();
+        }
     }
 
     private void showColorPickDialog() {
