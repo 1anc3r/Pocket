@@ -990,10 +990,12 @@ public class QRCodeActivity extends ActionBarActivity {
     private void openAbout() {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setTitle("二维码");
-        builder.setMessage("\t\t\t\t模式 : 选择希望生成怎样的二维码\n" +
-                "\t\t\t\t扫描 : 调用后置摄像头扫描二维码\n" +
-                "\t\t\t\t识别 : 识别本机图片中的二维码\n" +
-                "\t\t\t\t — 使用开源库 : （https://github.com/scola/Qart）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 扫描 : 调用后置摄像头扫描二维码\n" +
+                "\t\t\t\t * 识别 : 识别本机图片中的二维码\n" +
+                "\t\t\t\t * ——使用开源库 : （github.com/scola/Qart）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

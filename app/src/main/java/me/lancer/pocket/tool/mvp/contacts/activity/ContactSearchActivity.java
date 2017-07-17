@@ -123,9 +123,12 @@ public class ContactSearchActivity extends BaseActivity {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("电话、通讯录、信息");
-        builder.setMessage("\t\t\t\t电话 : 您手机上的通话记录\n" +
-                "\t\t\t\t通讯录 : 您手机上的联系人\n" +
-                "\t\t\t\t信息 : 您手机上的短信记录");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 电话 : 列出手机上的通话记录\n" +
+                "\t\t\t\t * 通讯录 : 列出手机上的联系人\n" +
+                "\t\t\t\t * 信息 : 列出手机上的短信记录\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

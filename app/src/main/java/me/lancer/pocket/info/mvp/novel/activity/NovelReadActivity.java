@@ -186,10 +186,14 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("小说");
-        builder.setMessage("\t\t\t\t排行 : 小说排行榜\n" +
-                "\t\t\t\t分类 : 小说各分区\n" +
-                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
-                "\t\t\t\t — 数据来源 : 追书神器\n\t\t\t\t（https://www.zhuishushenqi.com）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 排行 : 小说排行榜\n" +
+                "\t\t\t\t * 分类 : 小说各分区\n" +
+                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
+                "\t\t\t\t * ——数据来源 : 追书神器\n" +
+                "\t\t\t\t * （www.zhuishushenqi.com）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

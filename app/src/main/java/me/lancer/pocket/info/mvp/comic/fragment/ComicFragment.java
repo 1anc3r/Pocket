@@ -148,11 +148,14 @@ public class ComicFragment extends BaseFragment {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("漫画");
-        builder.setMessage("\t\t\t\t推荐 : 推荐好看的漫画\n" +
-                "\t\t\t\t排行 : 漫画排行榜\n" +
-                "\t\t\t\t分类 : 来自有妖气各分区排行榜\n" +
-                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想看的漫画\n" +
-                "\t\t\t\t — 数据来源 : 有妖气\n\t\t\t\t（https://www.u17.com）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 推荐 : 推荐好看的漫画\n" +
+                "\t\t\t\t * 排行 : 漫画排行榜\n" +
+                "\t\t\t\t * 分类 : 来自有妖气各分区排行榜\n" +
+                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的漫画\n" +
+                "\t\t\t\t * ——数据来源 : 有妖气（www.u17.com）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

@@ -146,10 +146,15 @@ public class NewsFragment extends BaseFragment {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("趣闻");
-        builder.setMessage("\t\t\t\t每日 : 知乎日报的每日信息\n" +
-                "\t\t\t\t热门 : 知乎日报的热门信息\n" +
-                "\t\t\t\t分类 : 包括动漫、游戏、财经、电影、音乐、互联网安全等日报\n" +
-                "\t\t\t\t — 数据来源 : 知乎日报\n\t\t\t\t（http://news-at.zhihu.com/api）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 每日 : 知乎日报的每日信息\n" +
+                "\t\t\t\t * 热门 : 知乎日报的热门信息\n" +
+                "\t\t\t\t * 分类 : 包括动漫、游戏、财经、" +
+                "\t\t\t\t *        电影、音乐、互联网安全等日报\n" +
+                "\t\t\t\t * ——数据来源 : 知乎日报\n" +
+                "\t\t\t\t * （news-at.zhihu.com/api）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

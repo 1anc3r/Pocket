@@ -195,8 +195,11 @@ public class VideoFragment extends BaseFragment {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("视频");
-        builder.setMessage("\t\t\t\t分类 : 来自B站各分区排行榜前十\n" +
-                "\t\t\t\t — 数据来源 : BiliBili\n\t\t\t\t（http://api.bilibili.com）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 分类 : 来自B站各分区排行榜前十\n" +
+                "\t\t\t\t * ——数据来源 : BiliBili（api.bilibili.com）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

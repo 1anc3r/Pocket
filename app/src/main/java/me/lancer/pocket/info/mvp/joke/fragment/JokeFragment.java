@@ -139,9 +139,13 @@ public class JokeFragment extends BaseFragment {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("段子");
-        builder.setMessage("\t\t\t\t段子 : 内涵段子的热辣段子\n" +
-                "\t\t\t\t图片 : 内涵段子的爆笑图片\n" +
-                "\t\t\t\t — 数据来源 : 内涵段子\n\t\t\t\t（http://neihanshequ.com）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 段子 : 内涵段子的热辣段子\n" +
+                "\t\t\t\t * 图片 : 内涵段子的爆笑图片\n" +
+                "\t\t\t\t * ——数据来源 : 内涵段子\n" +
+                "\t\t\t\t * （neihanshequ.com）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

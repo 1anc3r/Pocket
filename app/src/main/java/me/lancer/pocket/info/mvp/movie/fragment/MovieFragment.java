@@ -141,10 +141,15 @@ public class MovieFragment extends BaseFragment {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("电影");
-        builder.setMessage("\t\t\t\t影评 : 豆瓣电影的最受欢迎影评\n" +
-                "\t\t\t\t影榜 : 爬取呈现豆瓣电影TOP250\n" +
-                "\t\t\t\t搜索 : 点击右上角的搜索按钮搜索你想了解的电影信息\n" +
-                "\t\t\t\t — 数据来源 : 豆瓣电影\n\t\t\t\t（https://movie.douban.com）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 影评 : 豆瓣电影的最受欢迎影评\n" +
+                "\t\t\t\t * 影榜 : 爬取呈现豆瓣电影TOP250\n" +
+                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                "\t\t\t\t *        搜索你想了解的电影信息\n" +
+                "\t\t\t\t * ——数据来源 : 豆瓣电影\n" +
+                "\t\t\t\t * （movie.douban.com）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

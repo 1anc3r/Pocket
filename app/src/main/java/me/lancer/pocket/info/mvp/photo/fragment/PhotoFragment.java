@@ -146,11 +146,14 @@ public class PhotoFragment extends BaseFragment {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("图片");
-        builder.setMessage("\t\t\t\t妹子 : 好看的妹子图\n" +
-                "\t\t\t\t美景 : 好看的风景照\n" +
-                "\t\t\t\t — 数据来源 : " +
-                "\n\t\t\t\t 佳人 : Gank.io\n\t\t\t\t（http://gank.io）" +
-                "\n\t\t\t\t 美图 : Pexels Popular Photos\n\t\t\t\t（https://www.pexels.com）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 妹子 : 好看的妹子图\n" +
+                "\t\t\t\t * 美景 : 好看的风景照\n" +
+                "\t\t\t\t * ——数据来源 : " +
+                "\n\t\t\t\t *  佳人 : Gank.io（gank.io）" +
+                "\n\t\t\t\t *  美图 : Pexels（www.pexels.com）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

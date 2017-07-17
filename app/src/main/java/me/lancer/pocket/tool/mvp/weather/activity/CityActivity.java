@@ -218,9 +218,13 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("天气");
-        builder.setMessage("\t\t\t\t天气信息 : 提供全国各城市的天气信息\n" +
-                "\t\t\t\t城市选择 : 通过列表点选或搜索名称的方式选择城市\n" +
-                "\t\t\t\t — 数据来源 : 中央天气\n\t\t\t\t（http://tj.nineton.cn/Heart/index）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 天气信息 : 提供全国各城市的天气信息\n" +
+                "\t\t\t\t * 城市选择 : 然而并不能定位\n" +
+                "\t\t\t\t * ——数据来源 : 中央天气\n" +
+                "\t\t\t\t * （tj.nineton.cn/Heart/index）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 

@@ -160,9 +160,13 @@ public class GameFragment extends BaseFragment {
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("游戏");
-        builder.setMessage("\t\t\t\t精选 : 精选各大平台热门游戏\n" +
-                "\t\t\t\t优惠、热销、新品、即将推出\n" +
-                "\t\t\t\t — 数据来源 : Steam\n\t\t\t\t（https://store.steampowered.com）");
+        builder.setMessage(
+                "\t\t\t\t/*\n" +
+                "\t\t\t\t * 精选 : 精选各大平台热门游戏\n" +
+                "\t\t\t\t * 优惠、热销、新品、即将推出\n" +
+                "\t\t\t\t * ——数据来源 : Steam\n" +
+                "\t\t\t\t * （store.steampowered.com）\n" +
+                "\t\t\t\t */");
         builder.show();
     }
 
