@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.info.mvp.app.fragment.AppFragment;
 import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.book.fragment.BookFragment;
 import me.lancer.pocket.info.mvp.code.fragment.CodeFragment;
@@ -92,6 +93,10 @@ public class BlankActivity extends BaseActivity {
             case 11:
                 bundle.putInt(getString(R.string.index), 0);
                 currentFragment = new CodeFragment();
+                break;
+            case 1024:
+                bundle.putInt(getString(R.string.index), 0);
+                currentFragment = new AppFragment();
                 break;
         }
         currentFragment.setArguments(bundle);

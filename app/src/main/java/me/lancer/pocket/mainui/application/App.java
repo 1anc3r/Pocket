@@ -47,7 +47,6 @@ public class App extends LitePalApplication {
                     .translucent(false)
                     .dark(isNight);
         } else {
-
             Colorful.defaults()
                     .primaryColor(Colorful.ThemeColor.RED)
                     .accentColor(Colorful.ThemeColor.RED)
