@@ -35,7 +35,6 @@ import me.lancer.pocket.mainui.application.Params;
 public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> implements IPhotoView {
 
     private ImageView ivImg;
-    private FrameLayout flPhoto;
     private Button btnSetting, btnShare, btnDownload;
     private LoadToast loadToast;
 
@@ -101,7 +100,6 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        flPhoto = (FrameLayout) findViewById(R.id.fl_photo);
         ivImg = (ImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
@@ -158,7 +156,7 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
 
     @Override
     public void showMsg(String log) {
-        showSnackbar(flPhoto, log);
+        showSnackbar(ivImg, log);
     }
 
     @Override

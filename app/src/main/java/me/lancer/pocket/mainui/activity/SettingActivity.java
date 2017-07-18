@@ -259,7 +259,7 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 每日 : 知乎日报的每日信息\n" +
                 "\t\t\t\t * 热门 : 知乎日报的热门信息\n" +
-                "\t\t\t\t * 分类 : 包括动漫、游戏、财经、" +
+                "\t\t\t\t * 分类 : 包括动漫、游戏、财经、\n" +
                 "\t\t\t\t *        电影、音乐、互联网安全等日报\n" +
                 "\t\t\t\t * ——数据来源 : 知乎日报\n" +
                 "\t\t\t\t * （news-at.zhihu.com/api）\n" +
@@ -342,7 +342,8 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t * 趋势 : GitHub上今日最热的项目\n" +
                 "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
                 "\t\t\t\t *        搜索你想浏览的项目\n" +
-                "\t\t\t\t * ——数据来源 : GithubRanking\n\t\t\t\t（github-ranking.com）\n" +
+                "\t\t\t\t * ——数据来源 : GithubRanking\n" +
+                "\t\t\t\t * （github-ranking.com）\n" +
                 "\t\t\t\t */");
         problemList.add("Q : 主页上的搜索栏好像并没有什么用...");
         problemList.add("A : 因为模块比较多, 各模块的搜索接口还没有统一, 个别模块中有搜索功能, 下一个版本搜索功能会上线. 如果您对搜索功能有什么好的建议或意见请通过意见反馈通道或者发送邮件联系1anc3r. ");

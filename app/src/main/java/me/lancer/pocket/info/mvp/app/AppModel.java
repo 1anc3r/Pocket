@@ -63,6 +63,7 @@ public class AppModel {
     }
 
     public void loadSearch(String query, int pager) {
+        List<AppBean> list;
         StringBuilder content = new StringBuilder();
         OkHttpClient client = new OkHttpClient();
         client.setFollowRedirects(false);
@@ -76,12 +77,13 @@ public class AppModel {
                     content.append(line);
                 }
                 reader.close();
-                presenter.loadHomepageSuccess(getAppListFromContent(content.toString()));
+                list = getAppListFromContent(content.toString());
+                presenter.loadSearchSuccess(list);
             } else {
-                presenter.loadHomepageFailure("获取失败!");
+                presenter.loadSearchFailure("获取失败!");
             }
         } catch (Exception e) {
-            presenter.loadHomepageFailure("获取失败!捕获异常:" + e.toString());
+            presenter.loadSearchFailure("获取失败!捕获异常:" + e.toString());
         }
     }
 
@@ -99,12 +101,12 @@ public class AppModel {
                     content.append(line);
                 }
                 reader.close();
-                presenter.loadHomepageSuccess(getAppListFromContent(content.toString()));
+                presenter.loadDetailSuccess(getDetailFromContent(content.toString()));
             } else {
-                presenter.loadHomepageFailure("获取失败!");
+                presenter.loadDetailFailure("获取失败!");
             }
         } catch (Exception e) {
-            presenter.loadHomepageFailure("获取失败!捕获异常:" + e.toString());
+            presenter.loadDetailFailure("获取失败!捕获异常:" + e.toString());
         }
     }
 
@@ -112,7 +114,6 @@ public class AppModel {
         try {
             List<AppBean> list = new ArrayList<>();
             JSONArray jsonArray = new JSONArray(content);
-            int count = 0;
             for (int i = 0; i < jsonArray.length(); i++) {
                 AppBean bean = new AppBean();
                 JSONObject jsonItm = jsonArray.getJSONObject(i);
@@ -129,7 +130,40 @@ public class AppModel {
     }
 
     private AppBean getDetailFromContent(String content) {
-        Log.e("getDetailFromContent: ", content);
-        return null;
+        try {
+            AppBean bean = new AppBean();
+            JSONObject jsonObject = new JSONObject(content);
+            JSONObject field = jsonObject.getJSONObject("field");
+            bean.setId(field.getString("aid"));
+//            bean.setApkName(field.getString("title"));
+            bean.setPkgName(field.getString("apkname"));
+            bean.setVersCode(field.getInt("apkversioncode"));
+            bean.setVersNum(field.getString("apkversionname"));
+            bean.setVersLog(field.getString("changelog"));
+            bean.setSupport(field.getString("romversion"));
+            bean.setIntro(field.getString("introduce"));
+            bean.setRemark(field.getString("remark"));
+            bean.setLanguage(field.getString("language"));
+            bean.setScreenshots(field.getString("screenshot").split(","));
+            String apkfile = field.getString("apkfile");
+            if (apkfile.contains("http")) {
+                bean.setDownLink(apkfile);
+            } else {
+                bean.setDownLink(APP_URL.DOWN_URL + apkfile);
+            }
+            Log.e("onClick: ", bean.getDownLink());
+            JSONObject meta = jsonObject.getJSONObject("meta");
+            bean.setApkName(meta.getString("title"));
+            bean.setLogo(meta.getString("logo"));
+            bean.setAuthor(meta.getString("developername"));
+            bean.setDownNum(meta.getString("downnum"));
+            bean.setFavrNum(meta.getString("favnum"));
+            bean.setCommNum(meta.getString("commentnum"));
+            bean.setStar(meta.getString("score"));
+            return bean;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

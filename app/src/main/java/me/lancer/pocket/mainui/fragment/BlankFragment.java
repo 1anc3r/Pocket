@@ -19,7 +19,6 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
-import me.lancer.pocket.tool.mvp.app.activity.AppActivity;
 import me.lancer.pocket.tool.mvp.calculator.activity.CalculatorActivity;
 import me.lancer.pocket.tool.mvp.calendar.activity.CalendarActivity;
 import me.lancer.pocket.tool.mvp.document.activity.DocumentActivity;

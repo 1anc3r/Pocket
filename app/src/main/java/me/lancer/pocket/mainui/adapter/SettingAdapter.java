@@ -35,12 +35,13 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         if (list.get(position).equals("— 工具 —") || list.get(position).equals("— 资讯 —")) {
             viewHolder.tvString.setGravity(Gravity.CENTER);
-            viewHolder.tvString.setTextColor(context.getResources().getColor(R.color.primary));
+            viewHolder.tvString.setTextColor(context.getResources().getColor(R.color.orange));
             viewHolder.tvString.setTextSize(20);
             viewHolder.tvString.setText(list.get(position));
         } else {
             viewHolder.tvString.setGravity(Gravity.LEFT);
             viewHolder.tvString.setTextSize(14);
+            viewHolder.tvString.setTextColor(context.getResources().getColor(R.color.blue));
             viewHolder.tvString.setText(list.get(position));
         }
     }

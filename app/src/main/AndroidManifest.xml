@@ -62,6 +62,12 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".info.mvp.app.activity.AppDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".info.mvp.app.activity.AppSearchActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".info.mvp.article.activity.ArticleActivity"
             android:launchMode="singleTask" />
         <activity android:name=".info.mvp.news.activity.NewsDetailActivity" />

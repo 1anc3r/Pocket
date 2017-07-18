@@ -1,4 +1,4 @@
-package me.lancer.pocket.info.mvp.game.adapter;
+package me.lancer.pocket.info.mvp.app.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,25 +12,26 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.photo.activity.PhotoDetailActivity;
+import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
 import me.lancer.pocket.mainui.application.Params;
 
-public class ShotAdapter extends RecyclerView.Adapter<ShotAdapter.ViewHolder> {
+public class AppShotAdapter extends RecyclerView.Adapter<AppShotAdapter.ViewHolder> {
 
     private List<String> list;
     private Context context;
 
-    public ShotAdapter(Context context, List<String> list) {
+    public AppShotAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_shot, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_app_shot, viewGroup, false);
         return new ViewHolder(v);
     }
 
@@ -42,10 +43,15 @@ public class ShotAdapter extends RecyclerView.Adapter<ShotAdapter.ViewHolder> {
             viewHolder.cvShot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    Intent intent = new Intent();
+//                    intent.putExtra("img", list.get(position));
+//                    intent.putExtra("title", "");
+//                    intent.setClass(context, PhotoDetailActivity.class);
+//                    context.startActivity(intent);
                     Intent intent = new Intent();
-                    intent.putExtra("img", list.get(position));
-                    intent.putExtra("title", "");
-                    intent.setClass(context, PhotoDetailActivity.class);
+                    intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
+                    intent.putExtra("position", position);
+                    intent.setClass(context, PhotoGalleryActivity.class);
                     context.startActivity(intent);
                 }
             });

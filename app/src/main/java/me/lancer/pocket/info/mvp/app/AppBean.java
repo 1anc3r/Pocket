@@ -20,8 +20,7 @@ public class AppBean {
     private String versLog;//版本介绍
     private String star;//评分
     private String downLink;//下载
-    private String downNum1;//下载（详）
-    private String downNum2;//下载（略）
+    private String downNum;//下载（详）
     private String favrNum;//关注
     private String commNum;//评论
     private String publish;//上线日期
@@ -131,20 +130,12 @@ public class AppBean {
         this.downLink = downLink;
     }
 
-    public String getDownNum1() {
-        return downNum1;
+    public String getDownNum() {
+        return downNum;
     }
 
-    public void setDownNum1(String downNum1) {
-        this.downNum1 = downNum1;
-    }
-
-    public String getDownNum2() {
-        return downNum2;
-    }
-
-    public void setDownNum2(String downNum2) {
-        this.downNum2 = downNum2;
+    public void setDownNum(String downNum) {
+        this.downNum = downNum;
     }
 
     public String getFavrNum() {

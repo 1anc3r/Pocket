@@ -8,10 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +23,8 @@ import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.AppPresenter;
 import me.lancer.pocket.info.mvp.app.IAppView;
-import me.lancer.pocket.info.mvp.app.adapter.AppAdapter;
+import me.lancer.pocket.info.mvp.app.adapter.AppGridAdapter;
 import me.lancer.pocket.info.mvp.base.fragment.PresenterFragment;
-import me.lancer.pocket.info.mvp.photo.PhotoBean;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
@@ -38,7 +35,7 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    private AppAdapter mAdapter;
+    private AppGridAdapter mAdapter;
 
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<AppBean> mList = new ArrayList<>();
@@ -61,7 +58,7 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
                 case 3:
                     if (msg.obj != null) {
                         mList = (List<AppBean>) msg.obj;
-                        mAdapter = new AppAdapter(getActivity(), mList);
+                        mAdapter = new AppGridAdapter(getActivity(), mList);
                         mRecyclerView.setAdapter(mAdapter);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -81,7 +78,7 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
                     if (msg.obj != null) {
                         mList.addAll((List<AppBean>) msg.obj);
                         Collections.sort(mList, AppComparator);
-                        mAdapter = new AppAdapter(getActivity(), mList);
+                        mAdapter = new AppGridAdapter(getActivity(), mList);
                         mRecyclerView.setAdapter(mAdapter);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -169,21 +166,24 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                pager = 1;
-                mList.clear();
-                if (type == 1) {
-                    new Thread(loadHomepage).start();
-                } else if (type == 2) {
-                    query = getArguments().getString("query");
-                    new Thread(loadSearch).start();
-                }
+                Message msg = new Message();
+                msg.what = 0;
+                handler.sendMessageDelayed(msg, 800);
+//                pager = 1;
+//                mList.clear();
+//                if (type == 1) {
+//                    new Thread(loadHomepage).start();
+//                } else if (type == 2) {
+//                    query = getArguments().getString("query");
+//                    new Thread(loadSearch).start();
+//                }
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new AppAdapter(getActivity(), mList);
+        mAdapter = new AppGridAdapter(getActivity(), mList);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -195,9 +195,9 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
                         && last + 1 == mAdapter.getItemCount()) {
                     load = 1;
                     pager += 1;
-                    if (type == 0) {
+                    if (type == 1) {
                         new Thread(loadHomepage).start();
-                    } else if (type == 1) {
+                    } else if (type == 2) {
                         query = getArguments().getString("query");
                         new Thread(loadSearch).start();
                     }

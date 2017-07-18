@@ -31,7 +31,7 @@ import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.game.GameBean;
 import me.lancer.pocket.info.mvp.game.GamePresenter;
 import me.lancer.pocket.info.mvp.game.IGameView;
-import me.lancer.pocket.info.mvp.game.adapter.ShotAdapter;
+import me.lancer.pocket.info.mvp.game.adapter.GameShotAdapter;
 import me.lancer.pocket.mainui.application.Params;
 import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
@@ -42,7 +42,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
     private TextView tvDiscount, tvOriginal, tvFinal, tvDevelopers, tvPublishers;
     private HtmlTextView htvLanguages, htvDescription, htvRequirements;
     private RecyclerView rvList;
-    private ShotAdapter adapter;
+    private GameShotAdapter adapter;
     private List<String> shots = new ArrayList<>();
     private LoadToast loadToast;
 
@@ -75,7 +75,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
                         htvDescription.setHtml(bb.getDescription(), new HtmlHttpImageGetter(htvDescription));
                         htvRequirements.setHtml(bb.getRequirements(), new HtmlHttpImageGetter(htvRequirements));
                         shots = bb.getScreenshots();
-                        adapter = new ShotAdapter(GameDetailActivity.this, shots);
+                        adapter = new GameShotAdapter(GameDetailActivity.this, shots);
                         rvList.setAdapter(adapter);
                     }
                     break;
@@ -129,7 +129,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvList.setLayoutManager(llm);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        adapter = new ShotAdapter(this, shots);
+        adapter = new GameShotAdapter(this, shots);
         rvList.setAdapter(adapter);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
