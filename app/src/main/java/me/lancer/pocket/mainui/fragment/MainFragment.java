@@ -51,7 +51,7 @@ public class MainFragment extends BaseFragment {
 
     private void initToolbar(View view) {
         toolbar = (Toolbar) view.findViewById(R.id.t_tab);
-        toolbar.setTitle("   口袋");
+        toolbar.setTitle("   " + getResources().getString(R.string.app_name));
         toolbar.setLogo(R.mipmap.ic_launcher);
         toolbar.setNavigationIcon(null);
     }
@@ -63,8 +63,8 @@ public class MainFragment extends BaseFragment {
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.getTabAt(0).setCustomView(setTabTextIcon("工具",R.mipmap.ic_tool));
-        tabLayout.getTabAt(1).setCustomView(setTabTextIcon("资讯",R.mipmap.ic_info));
+        tabLayout.getTabAt(0).setCustomView(setTabTextIcon("工具", R.mipmap.ic_tool));
+        tabLayout.getTabAt(1).setCustomView(setTabTextIcon("资讯", R.mipmap.ic_info));
     }
 
     private View setTabTextIcon(String text, int icon) {

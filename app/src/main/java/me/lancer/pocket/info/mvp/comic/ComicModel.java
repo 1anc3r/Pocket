@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.util.ContentGetterSetter;
-import me.lancer.pocket.url.BOOK_URL;
+import me.lancer.pocket.url.NOVEL_URL;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
@@ -25,7 +25,7 @@ public class ComicModel {
     }
 
     public void loadList() {
-        String content = contentGetterSetter.getContentFromHtml("Book.loadList", BOOK_URL.HOME_URL);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadList", NOVEL_URL.HOME_URL);
         List<ComicBean> list;
         if (!content.contains("获取失败!")) {
             list = getListFromContent(content);
@@ -36,7 +36,7 @@ public class ComicModel {
     }
 
     public void loadList(String query) {
-        String content = contentGetterSetter.getContentFromHtml("Book.loadList", BOOK_URL.SEARCH_HEAD + query + BOOK_URL.SEARCH_TAIL);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadList", NOVEL_URL.SEARCH_HEAD + query + NOVEL_URL.SEARCH_TAIL);
         List<ComicBean> list;
         if (!content.contains("获取失败!")) {
             list = getSearchFromContent(content);
@@ -47,7 +47,7 @@ public class ComicModel {
     }
 
     public void loadRankTitle() {
-        String content = contentGetterSetter.getContentFromHtml("Book.loadRankTitle", BOOK_URL.RANK_TITLE_URL);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadRankTitle", NOVEL_URL.RANK_TITLE_URL);
         List<ComicBean> list;
         if (!content.contains("获取失败!")) {
             list = getRankTitleFromContent(content);
@@ -68,7 +68,7 @@ public class ComicModel {
     }
 
     public void loadSortTitle() {
-        String content = contentGetterSetter.getContentFromHtml("Book.loadSortTitle", BOOK_URL.SORT_TITLE_URL);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadSortTitle", NOVEL_URL.SORT_TITLE_URL);
         List<ComicBean> list;
         if (!content.contains("获取失败!")) {
             list = getSortTitleFromContent(content);
@@ -103,7 +103,7 @@ public class ComicModel {
                     for (int i = 0; i < returnData.length(); i++) {
                         JSONObject comic = returnData.getJSONObject(i);
                         String title = comic.getString("name");
-                        String link = BOOK_URL.BOOK_URL + comic.getInt("comic_id");
+                        String link = NOVEL_URL.BOOK_URL + comic.getInt("comic_id");
                         ComicBean item = new ComicBean(title, "", 0, "", link);
                         list.add(item);
                     }
@@ -141,7 +141,7 @@ public class ComicModel {
                                 String title = comic.getString("name");
                                 String category = comic.getString("short_description");
                                 String cover = comic.getString("cover");
-                                String link = BOOK_URL.BOOK_URL + comic.getInt("comicId");
+                                String link = NOVEL_URL.BOOK_URL + comic.getInt("comicId");
                                 ComicBean item = new ComicBean(title, category, 1, cover, link);
                                 list.add(item);
                             }
@@ -172,7 +172,7 @@ public class ComicModel {
                         JSONObject ranking = rankingList.getJSONObject(i);
                         String title = ranking.getString("title") + "排行";
                         String category = ranking.getString("subTitle");
-                        String link = BOOK_URL.RANK_CONTENT_URL + ranking.getInt("argValue");
+                        String link = NOVEL_URL.RANK_CONTENT_URL + ranking.getInt("argValue");
                         ComicBean bean = new ComicBean(title, category, 0, "", link);
                         list.add(bean);
                         list.addAll(loadRankContent(link));
@@ -202,7 +202,7 @@ public class ComicModel {
                         JSONObject ranking = rankingList.getJSONObject(i);
                         String title = ranking.getString("sortName");
                         String cover = ranking.getString("cover");
-                        String link = BOOK_URL.SORT_CONTENT_URL + "&argValue=" + ranking.getInt("argValue") + "&argName=" + ranking.getString("argName");
+                        String link = NOVEL_URL.SORT_CONTENT_URL + "&argValue=" + ranking.getInt("argValue") + "&argName=" + ranking.getString("argName");
                         ComicBean bean = new ComicBean(title, "", 1, cover, link);
                         list.add(bean);
                     }
@@ -232,7 +232,7 @@ public class ComicModel {
                         String title = comic.getString("name");
                         String category = comic.getString("description");
                         String cover = comic.getString("cover");
-                        String link = BOOK_URL.BOOK_URL + comic.getInt("comicId");
+                        String link = NOVEL_URL.BOOK_URL + comic.getInt("comicId");
                         ComicBean bean = new ComicBean(title, category, 1, cover, link);
                         list.add(bean);
                     }

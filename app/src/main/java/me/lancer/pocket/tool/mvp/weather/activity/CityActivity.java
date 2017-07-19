@@ -202,12 +202,6 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.navigation_home:
-                Intent intent = new Intent();
-                intent.setClass(CityActivity.this, WeatherActivity.class);
-                startActivity(intent);
-                finish();
-                break;
             case R.id.menu_about:
                 showAboutDialog();
                 break;

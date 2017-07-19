@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -67,20 +66,6 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     private Boolean isAll = false;
 
     private SharedPreferences pref;
-    private String language = "zn";
-    private String strConnectionSucceeded = "";
-    private String strNoConnection = "";
-    private String strConnectionFailed = "";
-    private String strShow = "";
-    private String strNoInternalExternalStorage = "";
-    private String strLoading = "";
-    private String strDelete = "";
-    private String strCopy = "";
-    private String strCut = "";
-    private String strUpload = "";
-    private String strAll = "";
-    private String strPaste = "";
-    private String strCancel = "";
 
     private Handler mHandler = new Handler() {
 
@@ -119,49 +104,14 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
-        iLanguage();
         getMusics();
         init();
-    }
-
-    public void iLanguage() {
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        language = pref.getString(getString(R.string.language_choice), "zn");
-        if (language.equals("zn")) {
-            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
-            strNoConnection = getResources().getString(R.string.no_connection_zn);
-            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
-            strShow = getResources().getString(R.string.music_zn);
-            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_zn);
-            strLoading = getResources().getString(R.string.loading_zn);
-            strDelete = getResources().getString(R.string.delete_zn);
-            strCopy = getResources().getString(R.string.copy_zn);
-            strCut = getResources().getString(R.string.cut_zn);
-            strUpload = getResources().getString(R.string.upload_zn);
-            strAll = getResources().getString(R.string.all_zn);
-            strPaste = getResources().getString(R.string.paste_zn);
-            strCancel = getResources().getString(R.string.cancel_zn);
-        } else if (language.equals("en")) {
-            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
-            strNoConnection = getResources().getString(R.string.no_connection_en);
-            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
-            strShow = getResources().getString(R.string.music_en);
-            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_en);
-            strLoading = getResources().getString(R.string.loading_en);
-            strDelete = getResources().getString(R.string.delete_en);
-            strCopy = getResources().getString(R.string.copy_en);
-            strCut = getResources().getString(R.string.cut_en);
-            strUpload = getResources().getString(R.string.upload_en);
-            strAll = getResources().getString(R.string.all_en);
-            strPaste = getResources().getString(R.string.paste_en);
-            strCancel = getResources().getString(R.string.cancel_en);
-        }
     }
 
     private void init() {
         app = (App) MusicActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
-        tvShow.setText(strShow);
+        tvShow.setText(getResources().getString(R.string.music_zn));
         ivBack = (ImageView) findViewById(R.id.iv_back);
         ivBack.setOnClickListener(this);
         ivSearch = (ImageView) findViewById(R.id.iv_search);
@@ -171,13 +121,13 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         lvMusic.setAdapter(adapter);
         llBottom = (LinearLayout) findViewById(R.id.ll_bottom);
         tvDelete = (TextView) findViewById(R.id.tv_delete);
-        tvDelete.setText(strDelete);
+        tvDelete.setText(getResources().getString(R.string.delete_zn));
         tvCopy = (TextView) findViewById(R.id.tv_copy);
-        tvCopy.setText(strCopy);
+        tvCopy.setText(getResources().getString(R.string.copy_zn));
         tvMove = (TextView) findViewById(R.id.tv_cut);
-        tvMove.setText(strCut);
+        tvMove.setText(getResources().getString(R.string.cut_zn));
         tvAll = (TextView) findViewById(R.id.tv_all);
-        tvAll.setText(strAll);
+        tvAll.setText(getResources().getString(R.string.all_zn));
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
         btnDelete.setOnClickListener(this);
         btnCopy = (LinearLayout) findViewById(R.id.btn_copy);
@@ -265,10 +215,10 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
 
     private void getMusics() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            showSnackbar(lvMusic, strNoInternalExternalStorage);
+            showSnackbar(lvMusic, getResources().getString(R.string.no_internal_external_storage_zn));
             return;
         }
-        mProgressDialog = ProgressDialog.show(this, null, strLoading);
+        mProgressDialog = ProgressDialog.show(this, null, getResources().getString(R.string.loading_zn));
         new Thread(new Runnable() {
 
             @Override

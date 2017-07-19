@@ -31,8 +31,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -392,7 +390,6 @@ public class QRCodeActivity extends ActionBarActivity {
             Uri contentUri = Uri.fromFile(newFile);
 
             if (contentUri != null) {
-                Log.d(TAG, "Uri: " + contentUri);
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

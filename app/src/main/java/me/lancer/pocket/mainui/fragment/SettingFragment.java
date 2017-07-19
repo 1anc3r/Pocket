@@ -386,7 +386,7 @@ public class SettingFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\nhttp://www.coolapk.com/apk/me.lancer.pocket" +"\n分享自口袋");
+                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\nhttp://www.coolapk.com/apk/me.lancer.pocket" + "\n分享自@" + getResources().getString(R.string.app_name));
                 startActivity(Intent.createChooser(intent, "分享到"));
             }
         });

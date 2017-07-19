@@ -16,7 +16,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -74,16 +73,16 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
                     if (msg.obj != null) {
                         bean = (AppBean) msg.obj;
                         tvVersNum.setText(bean.getVersNum() + "  " + bean.getSupport() + "+  " + bean.getLanguage());
-                        tvInfo.setText(bean.getFavrNum() + "关注 / " + bean.getCommNum() + "评论 / " + bean.getDownNum() + "下载");
+                        tvInfo.setText(bean.getFavrNum() + getString(R.string.favr) + bean.getCommNum() + getString(R.string.comm) + bean.getDownNum() + getString(R.string.down));
                         tvVersLog.setText("\n" + bean.getVersNum() + "\n" + bean.getVersLog());
                         tvRemark.setText("\n" + bean.getRemark());
-                        tvIntro.setHtml("<br>" + bean.getIntro() + "<br>", new HtmlHttpImageGetter(tvIntro));
+                        tvIntro.setHtml(getString(R.string.br) + bean.getIntro() + getString(R.string.br), new HtmlHttpImageGetter(tvIntro));
                         for (String itm : bean.getScreenshots()) {
                             shots.add(itm);
                         }
                         adapter.notifyDataSetChanged();
                         rbStar.setRating(Float.parseFloat(bean.getStar()));
-                        btnDown.setText(bean.getDownNum()+"下载");
+                        btnDown.setText(bean.getDownNum() + getString(R.string.down));
                     }
                     break;
             }
@@ -137,16 +136,15 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
         adapter = new AppShotAdapter(this, shots);
         rvList.setAdapter(adapter);
         btnDown = (Button) findViewById(R.id.btn_download);
-        btnDown.setVisibility(View.GONE);
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Log.e("onClick: ", bean.getDownLink());
-                Uri content_url = Uri.parse(bean.getDownLink());
-                intent.setData(content_url);
-                startActivity(intent);
+                showSnackbar(rvList, "下载功能暂不开放");
+//                Intent intent = new Intent();
+//                intent.setAction("android.intent.action.VIEW");
+//                Uri content_url = Uri.parse(bean.getDownLink());
+//                intent.setData(content_url);
+//                startActivity(intent);
             }
         });
         new Thread(loadDetail).start();
@@ -164,7 +162,6 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
     }
 
     private File downFile(String httpUrl) {
-        Log.e("downFile: ", httpUrl);
         if (bean != null) {
             final String fileName = bean.getApkName() + ".apk";
             final String filePath = Environment.getExternalStorageDirectory().toString() + "/me.lancer.pocket.info";

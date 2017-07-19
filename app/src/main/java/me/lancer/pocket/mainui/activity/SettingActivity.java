@@ -18,7 +18,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -30,10 +29,6 @@ import android.widget.TextView;
 
 import com.instabug.library.Instabug;
 import com.instabug.library.invocation.InstabugInvocationMode;
-import com.tencent.connect.share.QQShare;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -555,12 +550,7 @@ public class SettingActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setType("text/plain");
-//                intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-//                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\nhttps://www.coolapk.com/apk/me.lancer.pocket" + "\n分享自口袋");
-//                startActivity(Intent.createChooser(intent, "分享到"));
-                onClickShare("口袋", "快看看我发现了什么宝贝(ง •̀_•́)ง\n——分享自@口袋", "https://www.coolapk.com/apk/me.lancer.pocket", "http://image.coolapk.com/apk_logo/2017/0715/ic_launcher-web-for-145716-o_1bl3b1tcc4fnrri1gtpm50137q14-uid-659349.png", "口袋");
+                onClickShare(getResources().getString(R.string.app_name), "快看看我发现了什么宝贝(ง •̀_•́)ง\n——分享自@" + getResources().getString(R.string.app_name), "https://www.coolapk.com/apk/me.lancer.pocket", "http://image.coolapk.com/apk_logo/2017/0715/ic_launcher-web-for-145716-o_1bl3b1tcc4fnrri1gtpm50137q14-uid-659349.png", getResources().getString(R.string.app_name));
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

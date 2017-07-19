@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -77,22 +76,6 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
     private Boolean isAll = false;
 
     private SharedPreferences pref;
-    private String language = "zn";
-    private String strConnectionSucceeded = "";
-    private String strNoConnection = "";
-    private String strConnectionFailed = "";
-    private String strDownload = "";
-    private String strInternal = "";
-    private String strExternal = "";
-    private String strNoInternalExternalStorage = "";
-    private String strLoading = "";
-    private String strDelete = "";
-    private String strCopy = "";
-    private String strCut = "";
-    private String strUpload = "";
-    private String strAll = "";
-    private String strPaste = "";
-    private String strCancel = "";
 
     private Handler lHandler = new Handler() {
 
@@ -140,46 +123,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         init();
     }
 
-    public void iLanguage() {
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        language = pref.getString(getString(R.string.language_choice), "zn");
-        if (language.equals("zn")) {
-            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
-            strNoConnection = getResources().getString(R.string.no_connection_zn);
-            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
-            strDownload = getResources().getString(R.string.download_zn);
-            strInternal = getResources().getString(R.string.internal_zn);
-            strExternal = getResources().getString(R.string.external_zn);
-            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_zn);
-            strLoading = getResources().getString(R.string.loading_zn);
-            strDelete = getResources().getString(R.string.delete_zn);
-            strCopy = getResources().getString(R.string.copy_zn);
-            strCut = getResources().getString(R.string.cut_zn);
-            strUpload = getResources().getString(R.string.upload_zn);
-            strAll = getResources().getString(R.string.all_zn);
-            strPaste = getResources().getString(R.string.paste_zn);
-            strCancel = getResources().getString(R.string.cancel_zn);
-        } else if (language.equals("en")) {
-            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
-            strNoConnection = getResources().getString(R.string.no_connection_en);
-            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
-            strDownload = getResources().getString(R.string.download_en);
-            strInternal = getResources().getString(R.string.internal_en);
-            strExternal = getResources().getString(R.string.external_en);
-            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_en);
-            strLoading = getResources().getString(R.string.loading_en);
-            strDelete = getResources().getString(R.string.delete_en);
-            strCopy = getResources().getString(R.string.copy_en);
-            strCut = getResources().getString(R.string.cut_en);
-            strUpload = getResources().getString(R.string.upload_en);
-            strAll = getResources().getString(R.string.all_en);
-            strPaste = getResources().getString(R.string.paste_en);
-            strCancel = getResources().getString(R.string.cancel_en);
-        }
-    }
-
     private void init() {
-        iLanguage();
         app = (App) FileActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
         Intent i = getIntent();
@@ -188,13 +132,13 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         srcList = b.getStringArrayList("source");
         if (method.equals("download")) {
             parentpath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-            tvShow.setText(strDownload);
+            tvShow.setText(getResources().getString(R.string.download_zn));
         } else if (method.equals("out")) {
             parentpath = "/mnt/ext_sdcard/";
-            tvShow.setText(strExternal);
+            tvShow.setText(getResources().getString(R.string.external_zn));
         } else {
             parentpath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            tvShow.setText(strInternal);
+            tvShow.setText(getResources().getString(R.string.internal_zn));
         }
         ivBack = (ImageView) findViewById(R.id.iv_back);
         ivBack.setOnClickListener(this);
@@ -230,13 +174,13 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             llBottom.setVisibility(View.VISIBLE);
         }
         tvDelete = (TextView) findViewById(R.id.tv_delete);
-        tvDelete.setText(strDelete);
+        tvDelete.setText(getResources().getString(R.string.delete_zn));
         tvCopy = (TextView) findViewById(R.id.tv_copy);
-        tvCopy.setText(strCopy);
+        tvCopy.setText(getResources().getString(R.string.copy_zn));
         tvMove = (TextView) findViewById(R.id.tv_cut);
-        tvMove.setText(strCut);
+        tvMove.setText(getResources().getString(R.string.cut_zn));
         tvAll = (TextView) findViewById(R.id.tv_all);
-        tvAll.setText(strAll);
+        tvAll.setText(getResources().getString(R.string.all_zn));
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
         btnDelete.setOnClickListener(this);
         btnCopy = (LinearLayout) findViewById(R.id.btn_copy);
@@ -246,10 +190,10 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         btnAll = (LinearLayout) findViewById(R.id.btn_all);
         btnAll.setOnClickListener(this);
         btnPaste = (Button) findViewById(R.id.btn_paste);
-        btnPaste.setText(strPaste);
+        btnPaste.setText(getResources().getString(R.string.paste_zn));
         btnPaste.setOnClickListener(this);
         btnCancell = (Button) findViewById(R.id.btn_cancell);
-        btnCancell.setText(strCancel);
+        btnCancell.setText(getResources().getString(R.string.cancel_zn));
         btnCancell.setOnClickListener(this);
     }
 

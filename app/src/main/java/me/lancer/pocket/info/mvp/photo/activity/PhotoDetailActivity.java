@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -130,7 +129,7 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\n" + img+"\n分享自口袋");
+                intent.putExtra(Intent.EXTRA_TEXT, "看看我发现了什么宝贝(ง •̀_•́)ง\n" + img + "\n分享自@" + getResources().getString(R.string.app_name));
                 startActivity(Intent.createChooser(intent, "分享到"));
             } else if (view == btnDownload) {
                 new Thread(download).start();

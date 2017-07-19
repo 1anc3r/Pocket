@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,13 +45,6 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
     private List<ImageBean> mImageList = new ArrayList<>();
 
     private SharedPreferences pref;
-    private String language = "zn";
-    private String strConnectionSucceeded = "";
-    private String strNoConnection = "";
-    private String strConnectionFailed = "";
-    private String strShow = "";
-    private String strNoInternalExternalStorage = "";
-    private String strLoading = "";
 
     private Handler mHandler = new Handler() {
 
@@ -74,36 +66,15 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-        iLanguage();
         getImages();
         init();
-    }
-
-    public void iLanguage() {
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        language = pref.getString(getString(R.string.language_choice), "zn");
-        if (language.equals("zn")) {
-            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
-            strNoConnection = getResources().getString(R.string.no_connection_zn);
-            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
-            strShow = getResources().getString(R.string.image_zn);
-            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_zn);
-            strLoading = getResources().getString(R.string.loading_zn);
-        } else if (language.equals("en")) {
-            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
-            strNoConnection = getResources().getString(R.string.no_connection_en);
-            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
-            strShow = getResources().getString(R.string.image_en);
-            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_en);
-            strLoading = getResources().getString(R.string.loading_en);
-        }
     }
 
     private void init() {
         ivBack = (ImageView) findViewById(R.id.iv_back);
         ivBack.setOnClickListener(this);
         tvShow = (TextView) findViewById(R.id.tv_show);
-        tvShow.setText(strShow);
+        tvShow.setText(getResources().getString(R.string.image_zn));
         mGroupGridView = (GridView) findViewById(R.id.gv_all);
         mGroupGridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -120,10 +91,10 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
 
     private void getImages() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            Toast.makeText(this, strNoInternalExternalStorage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.no_internal_external_storage_zn), Toast.LENGTH_SHORT).show();
             return;
         }
-        mProgressDialog = ProgressDialog.show(this, null, strLoading);
+        mProgressDialog = ProgressDialog.show(this, null, getResources().getString(R.string.loading_zn));
         new Thread(new Runnable() {
 
             @Override

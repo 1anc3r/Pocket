@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.util.ContentGetterSetter;
-import me.lancer.pocket.url.BOOK_URL;
+import me.lancer.pocket.url.NOVEL_URL;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
@@ -50,7 +50,7 @@ public class ChapterModel {
                     for (int i = 0; i < chapterList.length(); i++) {
                         JSONObject chapter = chapterList.getJSONObject(i);
                         String title = chapter.getString("name");
-                        String link = BOOK_URL.CHAPTER_URL + chapter.getInt("chapter_id");
+                        String link = NOVEL_URL.CHAPTER_URL + chapter.getInt("chapter_id");
                         ChapterBean bean = new ChapterBean(title, link);
                         list.add(bean);
                     }

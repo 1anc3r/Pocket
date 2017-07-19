@@ -14,13 +14,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.tencent.connect.share.QQShare;
 
 import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
@@ -85,7 +83,7 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-                intent.putExtra(Intent.EXTRA_TEXT, "快看看我发现了什么宝贝\n" + link +"\n分享自口袋(ง •̀_•́)ง");
+                intent.putExtra(Intent.EXTRA_TEXT, "快看看我发现了什么宝贝(ง •̀_•́)ง\n" + link + "\n分享自@" + getResources().getString(R.string.app_name));
                 startActivity(Intent.createChooser(intent, "分享到"));
             } else if (view == btnDownload) {
                 new Thread(download).start();
