@@ -102,7 +102,7 @@ public class CalendarModel {
     }
 
     private void init() {
-        db = SQLiteDatabase.openOrCreateDatabase("/data/data/me.lancer.pocket/databases/pocket.db", null);
+        db = SQLiteDatabase.openOrCreateDatabase("/data/data/me.lancer.pocket/databases/calender.db", null);
         String createTable = "CREATE TABLE IF NOT EXISTS Calendar(_id INTEGER PRIMARY KEY AUTOINCREMENT, day INTEGER, time INTEGER, length INTEGER, name VARCHAR, location VARCHAR)";
         db.execSQL(createTable);
     }

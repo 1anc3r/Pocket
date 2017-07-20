@@ -425,8 +425,8 @@ public class SettingActivity extends BaseActivity {
             editor.putBoolean(Params.ISNIGHT, false);
             editor.apply();
             Colorful.config(SettingActivity.this)
-                    .primaryColor(Colorful.ThemeColor.RED)
-                    .accentColor(Colorful.ThemeColor.RED)
+                    .primaryColor(Colorful.ThemeColor.GREEN)
+                    .accentColor(Colorful.ThemeColor.GREEN)
                     .translucent(false)
                     .dark(false)
                     .apply();

@@ -48,8 +48,8 @@ public class App extends LitePalApplication {
                     .dark(isNight);
         } else {
             Colorful.defaults()
-                    .primaryColor(Colorful.ThemeColor.AMBER)
-                    .accentColor(Colorful.ThemeColor.AMBER)
+                    .primaryColor(Colorful.ThemeColor.GREEN)
+                    .accentColor(Colorful.ThemeColor.GREEN)
                     .translucent(false)
                     .dark(isNight);
         }

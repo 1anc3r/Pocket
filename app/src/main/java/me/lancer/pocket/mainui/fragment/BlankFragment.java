@@ -19,6 +19,10 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
+import me.lancer.pocket.mainui.activity.BlankActivity;
+import me.lancer.pocket.mainui.collect.CollectBean;
+import me.lancer.pocket.mainui.model.ModelAdapter;
+import me.lancer.pocket.mainui.model.ModelBean;
 import me.lancer.pocket.tool.mvp.calculator.activity.CalculatorActivity;
 import me.lancer.pocket.tool.mvp.calendar.activity.CalendarActivity;
 import me.lancer.pocket.tool.mvp.document.activity.DocumentActivity;
@@ -30,9 +34,6 @@ import me.lancer.pocket.tool.mvp.qrcode.activity.QRCodeActivity;
 import me.lancer.pocket.tool.mvp.translation.activity.TranslationActivity;
 import me.lancer.pocket.tool.mvp.video.activity.VideoActivity;
 import me.lancer.pocket.tool.mvp.weather.activity.WeatherActivity;
-import me.lancer.pocket.mainui.activity.BlankActivity;
-import me.lancer.pocket.mainui.model.ModelAdapter;
-import me.lancer.pocket.mainui.model.ModelBean;
 
 public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickListener, ModelAdapter.MyItemLongClickListener {
 
@@ -186,10 +187,10 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     break;
             }
         } else if (index == 1) {
-            if (postion == 0){
+            if (postion == 0) {
                 intent.setClass(getActivity(), ArticleActivity.class);
                 startActivity(intent);
-            }else{
+            } else {
                 intent.putExtra("index", postion);
                 intent.setClass(getActivity(), BlankActivity.class);
                 startActivity(intent);
@@ -198,7 +199,15 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     }
 
     @Override
-    public void onItemLongClick(View view, int postion) {
-
+    public void onItemLongClick(View view, final int postion) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                CollectBean bean = new CollectBean();
+//                bean.setType(index);
+//                bean.setCate(postion);
+//                bean.setTitle(mList.get(postion).getName());
+//            }
+//        }).start();
     }
 }
