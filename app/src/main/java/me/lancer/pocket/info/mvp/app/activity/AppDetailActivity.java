@@ -139,12 +139,17 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSnackbar(rvList, "下载功能暂不开放");
+//                showSnackbar(rvList, "下载功能暂不开放");
 //                Intent intent = new Intent();
 //                intent.setAction("android.intent.action.VIEW");
 //                Uri content_url = Uri.parse(bean.getDownLink());
 //                intent.setData(content_url);
 //                startActivity(intent);
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://www.coolapk.com/apk/"+bean.getPkgName());
+                intent.setData(content_url);
+                startActivity(intent);
             }
         });
         new Thread(loadDetail).start();
