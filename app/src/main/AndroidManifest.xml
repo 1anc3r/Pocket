@@ -132,15 +132,6 @@
             android:name=".info.mvp.comic.activity.ComicSearchActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".info.mvp.disease.activity.DiseaseActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".info.mvp.knowledge.activity.KnowledgeDetailActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".info.mvp.disease.activity.DiseaseDetailActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".tool.mvp.file.activity.FileActivity"
             android:launchMode="singleTask" />
         <activity
