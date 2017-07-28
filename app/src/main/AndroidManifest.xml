@@ -150,9 +150,6 @@
             android:name=".tool.mvp.document.activity.DocumentActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".tool.mvp.app.activity.AppActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".tool.mvp.calculator.activity.CalculatorActivity"
             android:launchMode="singleTask" />
         <activity
