@@ -31,6 +31,7 @@ import me.lancer.pocket.tool.mvp.image.activity.ImageActivity;
 import me.lancer.pocket.tool.mvp.morse.activity.MorseActivity;
 import me.lancer.pocket.tool.mvp.music.activity.MusicActivity;
 import me.lancer.pocket.tool.mvp.qrcode.activity.QRCodeActivity;
+import me.lancer.pocket.tool.mvp.todo.tasks.TasksActivity;
 import me.lancer.pocket.tool.mvp.translation.activity.TranslationActivity;
 import me.lancer.pocket.tool.mvp.video.activity.VideoActivity;
 import me.lancer.pocket.tool.mvp.weather.activity.WeatherActivity;
@@ -42,7 +43,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             "电话", "通讯录", "信息",
             "图片", "音乐", "视频",
             "文档", "应用", "存储",
-            "日历", /*"时钟","备忘录",*/
+            "日历", /*"时钟",*/"备忘录",
             "天气", "翻译", "摩斯电码",
             "计算器", "二维码", /*"带壳截图"*/};
     private String[] strInfos = {
@@ -54,7 +55,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
             R.mipmap.ic_photo_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
             R.mipmap.ic_folder_open_black_48dp, R.mipmap.ic_widgets_black_48dp, R.mipmap.ic_save_black_48dp,
-            R.mipmap.ic_event_black_48dp, /*R.mipmap.ic_watch_later_black_48dp,R.mipmap.ic_menu_black_48dp,*/
+            R.mipmap.ic_event_black_48dp, /*R.mipmap.ic_watch_later_black_48dp,*/R.mipmap.ic_menu_black_48dp,
             R.mipmap.ic_cloud_queue_black_48dp, R.mipmap.ic_translate_black_48dp, R.mipmap.ic_all_inclusive_black_48dp,
             R.mipmap.ic_calculator_black_48dp, R.mipmap.ic_qrcode_black_48dp};
     private int[] imgInfos = {
@@ -166,22 +167,26 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     startActivity(intent);
                     break;
                 case 10:
-                    intent.setClass(getActivity(), WeatherActivity.class);
+                    intent.setClass(getActivity(), TasksActivity.class);
                     startActivity(intent);
                     break;
                 case 11:
-                    intent.setClass(getActivity(), TranslationActivity.class);
+                    intent.setClass(getActivity(), WeatherActivity.class);
                     startActivity(intent);
                     break;
                 case 12:
-                    intent.setClass(getActivity(), MorseActivity.class);
+                    intent.setClass(getActivity(), TranslationActivity.class);
                     startActivity(intent);
                     break;
                 case 13:
-                    intent.setClass(getActivity(), CalculatorActivity.class);
+                    intent.setClass(getActivity(), MorseActivity.class);
                     startActivity(intent);
                     break;
                 case 14:
+                    intent.setClass(getActivity(), CalculatorActivity.class);
+                    startActivity(intent);
+                    break;
+                case 15:
                     intent.setClass(getActivity(), QRCodeActivity.class);
                     startActivity(intent);
                     break;

@@ -188,6 +188,29 @@
         <activity
             android:name=".tool.mvp.calendar.activity.CalendarExeActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".tool.mvp.todo.tasks.TasksActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".tool.mvp.todo.taskdetail.TaskDetailActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".tool.mvp.todo.addedittask.AddEditTaskActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".tool.mvp.todo.statistics.StatisticsActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName=".tool.mvp.todo.tasks.TasksActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="UnusedAttribute">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".tool.mvp.todo.tasks.TasksActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -16,5 +16,7 @@
     <dimen name="display2">45sp</dimen>
     <dimen name="display3">56sp</dimen>
     <dimen name="display4">112sp</dimen>
+
+    <dimen name="list_item_padding">8dp</dimen>
 </resources>
 

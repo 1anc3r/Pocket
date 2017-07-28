@@ -102,4 +102,44 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="add_task">新建To-Do</string>
+    <string name="edit_task">编辑To-Do</string>
+    <string name="task_marked_complete">已完成To-Do</string>
+    <string name="task_marked_active">待办To-Do</string>
+    <string name="loading_tasks_error">加载时出错</string>
+    <string name="completed_tasks_cleared">已清除已完成To-Do</string>
+    <string name="menu_filter">过滤</string>
+    <string name="menu_clear">清除完成</string>
+    <string name="menu_delete_task">删除To-Do</string>
+    <string name="navigation_view_header_title">To-Do</string>
+    <string name="title_hint">标题</string>
+    <string name="description_hint">输入待办事宜</string>
+    <string name="empty_task_message">不能为空</string>
+    <string name="successfully_saved_task_message">已保存To-Do</string>
+    <string name="list_title">To-Do列表</string>
+    <string name="statistics_title">统计</string>
+    <string name="statistics_no_tasks">没有To-Do</string>
+    <string name="statistics_active_tasks">待办To-Do : </string>
+    <string name="statistics_completed_tasks">已完成To-Do : </string>
+    <string name="statistics_error">加载统计时出错</string>
+    <string name="no_data">没有数据</string>
+    <string name="loading">正在加载...</string>
+
+    <string-array name="list_tasks_array">
+        <item>@string/nav_all</item>
+        <item>@string/nav_active</item>
+        <item>@string/nav_completed</item>
+    </string-array>
+    <string name="nav_all">所有</string>
+    <string name="nav_active">待办</string>
+    <string name="nav_completed">已完成</string>
+    <string name="label_all">所有To-Do</string>
+    <string name="label_active">待办To-Do</string>
+    <string name="label_completed">已完成To-Do</string>
+    <string name="no_tasks_all">没有To-Do</string>
+    <string name="no_tasks_active">没有待办To-Do</string>
+    <string name="no_tasks_completed">没有已完成To-Do</string>
+    <string name="no_tasks_add">新建To-Do</string>
+    <string name="refresh">刷新</string>
 </resources>
