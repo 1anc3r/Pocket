@@ -1,12 +1,7 @@
 package me.lancer.pocket.tool.mvp.contacts.activity;
 
-import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
@@ -29,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.ui.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.contacts.adapter.MessageAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.MessageBean;
 

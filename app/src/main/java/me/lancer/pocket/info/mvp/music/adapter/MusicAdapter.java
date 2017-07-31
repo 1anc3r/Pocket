@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.activity.MusicDetailActivity;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> {
 

@@ -3,7 +3,6 @@ package me.lancer.pocket.tool.mvp.calendar.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
@@ -26,7 +25,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.tool.mvp.calendar.CalendarPresenter;
 import me.lancer.pocket.tool.mvp.calendar.ICalendarView;

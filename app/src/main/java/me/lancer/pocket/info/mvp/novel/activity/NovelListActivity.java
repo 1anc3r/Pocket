@@ -6,34 +6,26 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
-import me.lancer.pocket.info.mvp.chapter.activity.ChapterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
 import me.lancer.pocket.info.mvp.novel.adapter.NovelImgAdapter;
-import me.lancer.pocket.info.mvp.novel.adapter.NovelTxtAdapter;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.

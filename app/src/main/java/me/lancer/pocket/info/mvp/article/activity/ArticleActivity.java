@@ -21,10 +21,10 @@ import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.ArticleBean;
 import me.lancer.pocket.info.mvp.article.ArticlePresenter;
 import me.lancer.pocket.info.mvp.article.IArticleView;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
-import me.lancer.pocket.mainui.application.Params;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class ArticleActivity extends PresenterActivity<ArticlePresenter> implements IArticleView {
 

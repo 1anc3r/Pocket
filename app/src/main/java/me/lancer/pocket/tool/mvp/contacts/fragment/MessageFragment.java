@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.fragment.BaseFragment;
+import me.lancer.pocket.ui.base.fragment.BaseFragment;
 import me.lancer.pocket.tool.mvp.contacts.adapter.ContactAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
 import me.lancer.pocket.tool.mvp.contacts.bean.MessageBean;

@@ -2,7 +2,7 @@ package me.lancer.pocket.tool.mvp.morse;
 
 import java.util.Map;
 
-import me.lancer.pocket.tool.mvp.base.IBasePresenter;
+import me.lancer.pocket.ui.base.IBasePresenter;
 
 /**
  * Created by HuangFangzhi on 2017/6/19.

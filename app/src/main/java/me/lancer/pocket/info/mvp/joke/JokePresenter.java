@@ -2,7 +2,7 @@ package me.lancer.pocket.info.mvp.joke;
 
 import java.util.List;
 
-import me.lancer.pocket.info.mvp.base.IBasePresenter;
+import me.lancer.pocket.ui.base.IBasePresenter;
 
 /**
  * Created by HuangFangzhi on 2017/3/13.

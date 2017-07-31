@@ -2,7 +2,7 @@ package me.lancer.pocket.tool.mvp.translation;
 
 import java.util.List;
 
-import me.lancer.pocket.tool.mvp.base.IBasePresenter;
+import me.lancer.pocket.ui.base.IBasePresenter;
 
 /**
  * Created by HuangFangzhi on 2017/6/16.

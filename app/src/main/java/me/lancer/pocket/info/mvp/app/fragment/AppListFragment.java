@@ -24,7 +24,7 @@ import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.AppPresenter;
 import me.lancer.pocket.info.mvp.app.IAppView;
 import me.lancer.pocket.info.mvp.app.adapter.AppGridAdapter;
-import me.lancer.pocket.info.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.base.fragment.PresenterFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.

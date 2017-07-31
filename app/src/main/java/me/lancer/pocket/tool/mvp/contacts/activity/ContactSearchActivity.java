@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.ui.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.contacts.adapter.ContactAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
 

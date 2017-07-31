@@ -21,13 +21,13 @@ import net.steamcrafted.loadtoast.LoadToast;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.music.IMusicView;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.MusicPresenter;
-import me.lancer.pocket.mainui.application.Params;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class MusicDetailActivity extends PresenterActivity<MusicPresenter> implements IMusicView {
 

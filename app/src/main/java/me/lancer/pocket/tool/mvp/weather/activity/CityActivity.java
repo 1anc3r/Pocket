@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.weather.CityBean;
 import me.lancer.pocket.tool.mvp.weather.IWeatherView;
 import me.lancer.pocket.tool.mvp.weather.WeatherBean;

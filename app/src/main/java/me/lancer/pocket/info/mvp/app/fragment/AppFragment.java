@@ -21,7 +21,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.app.activity.AppSearchActivity;
-import me.lancer.pocket.info.mvp.base.fragment.BaseFragment;
+import me.lancer.pocket.ui.base.fragment.BaseFragment;
 
 public class AppFragment extends BaseFragment {
 

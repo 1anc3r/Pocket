@@ -24,11 +24,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.ui.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.video.adapter.VideoAdapter;
 import me.lancer.pocket.tool.mvp.video.bean.VideoBean;
-import me.lancer.pocket.mainui.application.App;
+import me.lancer.pocket.ui.application.App;
 
 public class VideoActivity extends BaseActivity implements View.OnClickListener {
 

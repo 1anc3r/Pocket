@@ -93,21 +93,21 @@
                     android:overScrollMode="never"
                     android:scrollbars="none" />
 
-                <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
+                <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
                     android:id="@+id/tv_vers_log"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp" />
 
-                <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
+                <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
                     android:id="@+id/tv_remark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp" />
 
-                <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
+                <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
                     android:id="@+id/tv_intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

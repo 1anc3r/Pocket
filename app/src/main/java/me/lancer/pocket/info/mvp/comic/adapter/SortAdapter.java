@@ -20,7 +20,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.comic.ComicBean;
 import me.lancer.pocket.info.mvp.comic.activity.SortActivity;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 import me.lancer.pocket.util.DensityUtil;
 
 public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {

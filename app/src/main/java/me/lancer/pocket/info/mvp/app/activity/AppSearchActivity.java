@@ -1,30 +1,14 @@
 package me.lancer.pocket.info.mvp.app.activity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +20,7 @@ import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.AppPresenter;
 import me.lancer.pocket.info.mvp.app.IAppView;
 import me.lancer.pocket.info.mvp.app.adapter.AppGridAdapter;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 
 public class AppSearchActivity extends PresenterActivity<AppPresenter> implements IAppView {
 

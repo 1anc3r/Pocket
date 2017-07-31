@@ -22,12 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.chapter.ChapterBean;
 import me.lancer.pocket.info.mvp.chapter.ChapterPresenter;
 import me.lancer.pocket.info.mvp.chapter.IChapterView;
 import me.lancer.pocket.info.mvp.chapter.adapter.ChapterAdapter;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class ChapterActivity extends PresenterActivity<ChapterPresenter> implements IChapterView {
 

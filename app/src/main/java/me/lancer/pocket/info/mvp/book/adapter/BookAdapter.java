@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.book.BookBean;
 import me.lancer.pocket.info.mvp.book.activity.BookDetailActivity;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 

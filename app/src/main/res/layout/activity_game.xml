@@ -128,7 +128,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
+            <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
                 android:id="@+id/htv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
+            <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
                 android:id="@+id/htv_languages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -192,7 +192,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <me.lancer.pocket.mainui.view.htmltextview.HtmlTextView
+            <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
                 android:id="@+id/htv_requirements"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

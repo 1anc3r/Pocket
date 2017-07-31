@@ -39,10 +39,10 @@ import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.AppPresenter;
 import me.lancer.pocket.info.mvp.app.IAppView;
 import me.lancer.pocket.info.mvp.app.adapter.AppShotAdapter;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
-import me.lancer.pocket.mainui.application.Params;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class AppDetailActivity extends PresenterActivity<AppPresenter> implements IAppView {
 

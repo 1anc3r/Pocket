@@ -37,11 +37,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.ui.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.music.adapter.MusicAdapter;
 import me.lancer.pocket.tool.mvp.music.bean.MusicBean;
-import me.lancer.pocket.mainui.application.App;
+import me.lancer.pocket.ui.application.App;
 
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
 

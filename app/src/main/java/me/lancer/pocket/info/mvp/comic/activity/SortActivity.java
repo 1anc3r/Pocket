@@ -22,12 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.comic.ComicBean;
 import me.lancer.pocket.info.mvp.comic.ComicPresenter;
 import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 

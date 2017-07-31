@@ -19,7 +19,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.activity.AppDetailActivity;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class AppGridAdapter extends RecyclerView.Adapter<AppGridAdapter.ViewHolder> {
 

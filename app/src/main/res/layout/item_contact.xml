@@ -28,7 +28,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp">
 
-                <me.lancer.pocket.mainui.view.CircleImageView
+                <me.lancer.pocket.ui.view.CircleImageView
                     android:id="@+id/civ_head"
                     android:layout_width="48dp"
                     android:layout_height="48dp"

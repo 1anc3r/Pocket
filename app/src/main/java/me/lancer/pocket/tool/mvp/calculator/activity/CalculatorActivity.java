@@ -2,7 +2,6 @@ package me.lancer.pocket.tool.mvp.calculator.activity;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -14,7 +13,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.ui.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.calculator.model.Calculator;
 
 /**

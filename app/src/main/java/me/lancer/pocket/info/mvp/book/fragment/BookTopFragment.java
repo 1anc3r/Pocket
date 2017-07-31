@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.book.BookBean;
 import me.lancer.pocket.info.mvp.book.BookPresenter;
 import me.lancer.pocket.info.mvp.book.IBookView;

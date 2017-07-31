@@ -20,7 +20,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.activity.NewsDetailActivity;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 

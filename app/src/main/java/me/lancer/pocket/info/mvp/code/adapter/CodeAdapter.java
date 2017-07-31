@@ -18,7 +18,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.activity.CodeDetailActivity;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
 

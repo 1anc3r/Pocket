@@ -15,11 +15,11 @@ import android.widget.Spinner;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.tool.mvp.calendar.CalendarPresenter;
 import me.lancer.pocket.tool.mvp.calendar.ICalendarView;
-import me.lancer.pocket.mainui.view.ClearEditText;
+import me.lancer.pocket.ui.view.ClearEditText;
 
 public class CalendarExeActivity extends PresenterActivity<CalendarPresenter> implements ICalendarView {
 

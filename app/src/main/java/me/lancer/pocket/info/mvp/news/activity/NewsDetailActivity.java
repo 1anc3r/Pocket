@@ -29,14 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.news.INewsView;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.NewsPresenter;
 import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
-import me.lancer.pocket.mainui.application.Params;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class NewsDetailActivity extends PresenterActivity<NewsPresenter> implements INewsView {
 

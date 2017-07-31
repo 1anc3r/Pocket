@@ -17,7 +17,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class AppShotAdapter extends RecyclerView.Adapter<AppShotAdapter.ViewHolder> {
 

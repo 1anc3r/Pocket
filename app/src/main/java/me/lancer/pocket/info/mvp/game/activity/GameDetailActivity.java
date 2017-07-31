@@ -27,14 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.game.GameBean;
 import me.lancer.pocket.info.mvp.game.GamePresenter;
 import me.lancer.pocket.info.mvp.game.IGameView;
 import me.lancer.pocket.info.mvp.game.adapter.GameShotAdapter;
-import me.lancer.pocket.mainui.application.Params;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlHttpImageGetter;
-import me.lancer.pocket.mainui.view.htmltextview.HtmlTextView;
+import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
+import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class GameDetailActivity extends PresenterActivity<GamePresenter> implements IGameView {
 

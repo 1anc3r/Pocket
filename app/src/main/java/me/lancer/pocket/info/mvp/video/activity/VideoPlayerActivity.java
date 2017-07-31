@@ -17,7 +17,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.ui.base.activity.BaseActivity;
 import me.lancer.pocket.util.DensityUtil;
 
 public class VideoPlayerActivity extends BaseActivity {

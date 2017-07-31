@@ -19,8 +19,8 @@ import java.util.List;
 
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.image.adapter.ImageIAdapter;
-import me.lancer.pocket.info.mvp.base.activity.BaseActivity;
-import me.lancer.pocket.mainui.application.App;
+import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.application.App;
 import me.lancer.pocket.R;
 
 public class ImageIActivity extends BaseActivity implements View.OnClickListener {

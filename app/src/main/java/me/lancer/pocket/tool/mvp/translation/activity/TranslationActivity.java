@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.translation.ITranslationView;
 import me.lancer.pocket.tool.mvp.translation.TranslationBean;
 import me.lancer.pocket.tool.mvp.translation.TranslationPresenter;
 import me.lancer.pocket.tool.mvp.translation.adapter.TranslationAdapter;
-import me.lancer.pocket.mainui.view.ClearEditText;
+import me.lancer.pocket.ui.view.ClearEditText;
 
 public class TranslationActivity extends PresenterActivity<TranslationPresenter> implements ITranslationView {
 

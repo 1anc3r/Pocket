@@ -18,7 +18,7 @@ import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.contacts.activity.ContactActivity;
 import me.lancer.pocket.tool.mvp.contacts.activity.MessageActivity;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
-import me.lancer.pocket.mainui.view.CircleImageView;
+import me.lancer.pocket.ui.view.CircleImageView;
 
 /**
  * Created by HuangFangzhi on 2017/6/14.

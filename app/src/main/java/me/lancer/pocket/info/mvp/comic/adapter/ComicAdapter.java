@@ -21,7 +21,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.chapter.activity.ChapterActivity;
 import me.lancer.pocket.info.mvp.comic.ComicBean;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
 

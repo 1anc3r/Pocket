@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
 import me.lancer.pocket.info.mvp.novel.adapter.ChapterAdapter;
-import me.lancer.pocket.mainui.application.Params;
+import me.lancer.pocket.ui.application.Params;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
