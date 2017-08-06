@@ -211,6 +211,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".tool.mvp.todo.tasks.TasksActivity" />
         </activity>
+        <activity
+            android:name=".ui.toy.DragonActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:process=":live"
+            android:theme="@style/LiveActivityStyle" />
     </application>
 
 </manifest>

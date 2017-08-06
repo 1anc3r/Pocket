@@ -55,7 +55,6 @@ public class SettingActivity extends BaseActivity {
 
     private Toolbar toolbar;
     private LinearLayout llNight, llBright, llTheme, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
-    private Button btnLoginOut;
     private SwitchCompat scNight;
     private BottomSheetDialog listDialog;
     private AlertDialog aboutDialog;
@@ -526,11 +525,11 @@ public class SettingActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse("https://www.xiyoumobile.com/");
-                intent.setData(content_url);
-                startActivity(intent);
+                Intent intent1 = new Intent();
+                intent1.putExtra("link", "https://www.xiyoumobile.com/");
+                intent1.putExtra("title", "xiyoumobile.com");
+                intent1.setClass(SettingActivity.this, AboutActivity.class);
+                startActivity(intent1);
             }
         });
         TextView tvBlog = (TextView) aboutDialogView.findViewById(R.id.tv_blog);
@@ -538,11 +537,11 @@ public class SettingActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse("https://www.1anc3r.me");
-                intent.setData(content_url);
-                startActivity(intent);
+                Intent intent1 = new Intent();
+                intent1.putExtra("link", "https://www.1anc3r.me");
+                intent1.putExtra("title", "1anc3r.me");
+                intent1.setClass(SettingActivity.this, AboutActivity.class);
+                startActivity(intent1);
             }
         });
         TextView tvShare = (TextView) aboutDialogView.findViewById(R.id.tv_share);

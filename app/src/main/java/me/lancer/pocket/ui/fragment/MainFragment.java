@@ -24,6 +24,7 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.ui.base.fragment.BaseFragment;
 import me.lancer.pocket.ui.activity.SettingActivity;
+import me.lancer.pocket.ui.toy.DragonActivity;
 
 import static android.content.Intent.ACTION_VIEW;
 
@@ -141,10 +142,15 @@ public class MainFragment extends BaseFragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.menu_toy:
+                        Intent intent1 = new Intent();
+                        intent1.setClass(getActivity(), DragonActivity.class);
+                        startActivity(intent1);
+                        break;
                     case R.id.menu_setting:
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(), SettingActivity.class);
-                        startActivity(intent);
+                        Intent intent2 = new Intent();
+                        intent2.setClass(getActivity(), SettingActivity.class);
+                        startActivity(intent2);
                         break;
                 }
                 return true;

@@ -12,6 +12,11 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/menu_toy"
+        android:title="挂件"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_setting"
         android:title="设置"
         app:showAsAction="never" />
