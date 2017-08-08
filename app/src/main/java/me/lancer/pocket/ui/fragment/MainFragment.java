@@ -1,8 +1,12 @@
 package me.lancer.pocket.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,16 +26,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.tool.mvp.weather.CityBean;
+import me.lancer.pocket.tool.mvp.weather.IWeatherView;
+import me.lancer.pocket.tool.mvp.weather.WeatherBean;
+import me.lancer.pocket.tool.mvp.weather.WeatherPresenter;
 import me.lancer.pocket.ui.base.fragment.BaseFragment;
 import me.lancer.pocket.ui.activity.SettingActivity;
+import me.lancer.pocket.ui.base.fragment.PresenterFragment;
 import me.lancer.pocket.ui.toy.DragonActivity;
 
 import static android.content.Intent.ACTION_VIEW;
 
-public class MainFragment extends BaseFragment {
+public class MainFragment extends PresenterFragment<WeatherPresenter> implements IWeatherView {
 
     private Toolbar toolbar;
     private int index = 0;
+    private WeatherBean mBean = new WeatherBean();
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private String city = "CHBJ000000";
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    if (msg.obj != null) {
+                        mBean = (WeatherBean) msg.obj;
+                        String weather = mBean.getWeather();
+                        if (weather.contains("阴") || weather.contains("云")) {
+                            toolbar.setLogo(R.mipmap.ic_cloudy);
+                        } else if (weather.contains("晴")) {
+                            toolbar.setLogo(R.mipmap.ic_sunny);
+                        } else if (weather.contains("雨")) {
+                            toolbar.setLogo(R.mipmap.ic_rainy);
+                        } else if (weather.contains("雪")) {
+                            toolbar.setLogo(R.mipmap.ic_snowy);
+                        }
+                        toolbar.setTitle("   " + weather + "   " + mBean.getTemperature() + "℃");
+                    }
+                    break;
+            }
+        }
+    };
+
+    private Runnable loadWeather = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadWeather(city);
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +103,7 @@ public class MainFragment extends BaseFragment {
     private void initToolbar(View view) {
         toolbar = (Toolbar) view.findViewById(R.id.t_tab);
         toolbar.setTitle("   " + getResources().getString(R.string.app_name));
-        toolbar.setLogo(R.mipmap.ic_launcher);
+        toolbar.setLogo(R.mipmap.ic_cloudy);
         toolbar.setNavigationIcon(null);
     }
 
@@ -133,7 +183,16 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initData() {
-
+        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
+        if (getActivity().getIntent().getStringExtra("city") != null) {
+            city = getActivity().getIntent().getStringExtra("city");
+            editor = sharedPreferences.edit();
+            editor.putString("city", city);
+            editor.apply();
+        } else {
+            city = sharedPreferences.getString("city", "CHBJ000000");
+        }
+        new Thread(loadWeather).start();
     }
 
     private void inflateMenu() {
@@ -178,5 +237,45 @@ public class MainFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected WeatherPresenter onCreatePresenter() {
+        return new WeatherPresenter(this);
+    }
+
+    @Override
+    public void showMsg(String log) {
+        Message msg = new Message();
+        msg.what = 2;
+        msg.obj = log;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showLoad() {
+        Message msg = new Message();
+        msg.what = 1;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void hideLoad() {
+        Message msg = new Message();
+        msg.what = 0;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showWeather(WeatherBean bean) {
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = bean;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showCity(List<CityBean> list) {
+
     }
 }
