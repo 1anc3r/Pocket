@@ -69,7 +69,7 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_book, container, false);
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -97,7 +97,7 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
 //                handler.sendMessageDelayed(msg, 800);
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

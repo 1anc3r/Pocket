@@ -87,11 +87,7 @@ public class Dragon extends ApplicationAdapter {
         state.addAnimation(0, animate, true, 0);
     }
 
-    public void zoomBig() {
-        camera.zoom = 0.5f;
-    }
-
-    public void zoomSmall() {
-        camera.zoom = 1f;
+    public void zoom(float f) {
+        camera.zoom = f;
     }
 }

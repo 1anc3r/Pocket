@@ -52,23 +52,45 @@ public class DragonActivity extends AppActivity {
 
         dragonView.setOnTouchListener(new View.OnTouchListener() {
 
-            float lastX, lastY;
+            float lastX, lastY, base;
 
             public boolean onTouch(View v, MotionEvent event) {
                 final int action = event.getAction();
                 float x = event.getRawX();
                 float y = event.getRawY();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    lastX = x;
-                    lastY = y;
-                } else if (action == MotionEvent.ACTION_MOVE) {
-                    layoutParams.x += (int) (x - lastX);
-                    layoutParams.y += (int) (y - lastY);
-                    windowManager.updateViewLayout(dragonView, layoutParams);
-                    lastX = x;
-                    lastY = y;
-                } else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-                    dragon.setAnimate("flying");
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN: {
+                        lastX = x;
+                        lastY = y;
+                        break;
+                    }
+                    case MotionEvent.ACTION_MOVE: {
+                        if (event.getPointerCount() == 2) {
+                            float offsetX = event.getX(0) - event.getX(1);
+                            float offsetY = event.getY(0) - event.getY(1);
+                            float offset = (float) Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+                            if (base == 0) {
+                                base = offset;
+                            } else {
+                                if (offset - base >= 10 || offset - base <= -10) {
+                                    float scale = base / offset;
+                                    dragon.zoom(scale);
+                                }
+                            }
+                        } else if (event.getPointerCount() == 1) {
+                            layoutParams.x += (int) (x - lastX);
+                            layoutParams.y += (int) (y - lastY);
+                            windowManager.updateViewLayout(dragonView, layoutParams);
+                            lastX = x;
+                            lastY = y;
+                        }
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL: {
+
+                        break;
+                    }
                 }
                 return true;
             }

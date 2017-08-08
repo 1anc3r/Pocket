@@ -102,8 +102,8 @@ public class MainFragment extends PresenterFragment<WeatherPresenter> implements
 
     private void initToolbar(View view) {
         toolbar = (Toolbar) view.findViewById(R.id.t_tab);
-        toolbar.setTitle("   " + getResources().getString(R.string.app_name));
-        toolbar.setLogo(R.mipmap.ic_cloudy);
+//        toolbar.setTitle("   " + getResources().getString(R.string.app_name));
+//        toolbar.setLogo(R.mipmap.ic_cloudy);
         toolbar.setNavigationIcon(null);
     }
 
