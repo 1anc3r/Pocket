@@ -54,8 +54,8 @@ public class SettingActivity extends BaseActivity {
     private App app;
 
     private Toolbar toolbar;
-    private LinearLayout llNight, llBright, llTheme, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
-    private SwitchCompat scNight;
+    private LinearLayout llNight, llBright, llTheme, llCard, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
+    private SwitchCompat scNight, scCard;
     private BottomSheetDialog listDialog;
     private AlertDialog aboutDialog;
     private ProgressDialog progressDialog;
@@ -164,6 +164,8 @@ public class SettingActivity extends BaseActivity {
         llNight.setOnClickListener(vOnClickListener);
         llTheme = (LinearLayout) findViewById(R.id.ll_theme);
         llTheme.setOnClickListener(vOnClickListener);
+        llCard = (LinearLayout) findViewById(R.id.ll_card);
+        llCard.setOnClickListener(vOnClickListener);
         llBright = (LinearLayout) findViewById(R.id.ll_bright);
         llBright.setOnClickListener(vOnClickListener);
         llFunc = (LinearLayout) findViewById(R.id.ll_func);
@@ -179,6 +181,7 @@ public class SettingActivity extends BaseActivity {
         llAboutUs = (LinearLayout) findViewById(R.id.ll_about_us);
         llAboutUs.setOnClickListener(vOnClickListener);
         scNight = (SwitchCompat) findViewById(R.id.sc_night);
+        scCard = (SwitchCompat) findViewById(R.id.sc_card);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("正在加载,请稍后...");
         progressDialog.setCancelable(true);
@@ -192,6 +195,8 @@ public class SettingActivity extends BaseActivity {
 //        night = sharedPreferences.getBoolean(Params.ISNIGHT, false);
         scNight.setChecked(app.isNight());
         scNight.setClickable(false);
+        scCard.setChecked(app.isColorful());
+        scCard.setClickable(false);
         funcList.add("— 工具 —");
         funcList.add("电话、通讯录、信息 : \n" +
                 "\t\t\t\t/*\n" +
@@ -364,10 +369,12 @@ public class SettingActivity extends BaseActivity {
         public void onClick(View v) {
             if (v == llNight) {
                 switchLight();
-            } else if (v == llBright) {
-                showBrightSeekDialog();
             } else if (v == llTheme) {
                 showColorPickDialog();
+            } else if (v == llCard) {
+                switchColorful();
+            } else if (v == llBright) {
+                showBrightSeekDialog();
             } else if (v == llFunc) {
                 showListDialog(1, funcList);
             } else if (v == llProblem) {
@@ -430,6 +437,20 @@ public class SettingActivity extends BaseActivity {
                     .dark(false)
                     .apply();
             recreate();
+        }
+    }
+
+    private void switchColorful() {
+        if (!app.isColorful()) {
+            scCard.setChecked(true);
+            app.setColorful(true);
+            editor.putBoolean(Params.ISCOLORFUL, true);
+            editor.apply();
+        } else {
+            scCard.setChecked(false);
+            app.setColorful(false);
+            editor.putBoolean(Params.ISCOLORFUL, false);
+            editor.apply();
         }
     }
 

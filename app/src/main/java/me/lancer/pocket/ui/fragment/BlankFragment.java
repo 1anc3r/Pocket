@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.KeyEvent;
@@ -65,7 +66,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
 
     private RecyclerView mRecyclerView;
     private ModelAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private LinearLayoutManager mLinearLayoutManager;
     private List<ModelBean> mList = new ArrayList<>();
 
     @Override
@@ -91,8 +92,8 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         int width = wm.getDefaultDisplay().getWidth();
         int height = wm.getDefaultDisplay().getHeight();
         mRecyclerView = (RecyclerView) getView().findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
         for (int i = 0; i < names.length; i++) {

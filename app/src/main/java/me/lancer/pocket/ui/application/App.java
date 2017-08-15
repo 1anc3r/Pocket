@@ -28,13 +28,14 @@ public class App extends LitePalApplication {
     private RequestQueue mRequestQueue;
 
     public static Typeface TypeFace;
-    private boolean isPicture, isFirst, isNight;
+    private boolean isPicture, isFirst, isNight, isColorful;
 
     @Override
     public void onCreate() {
         super.onCreate();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         isNight = sharedPreferences.getBoolean(Params.ISNIGHT, false);
+        isColorful = sharedPreferences.getBoolean(Params.ISCOLORFUL, false);
 //        if (isNight) {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //        } else {
@@ -103,5 +104,13 @@ public class App extends LitePalApplication {
 
     public void setNight(boolean night) {
         isNight = night;
+    }
+
+    public boolean isColorful() {
+        return isColorful;
+    }
+
+    public void setColorful(boolean colorful) {
+        isColorful = colorful;
     }
 }
