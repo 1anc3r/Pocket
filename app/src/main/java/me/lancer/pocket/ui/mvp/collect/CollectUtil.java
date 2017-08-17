@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.collect;
+package me.lancer.pocket.ui.mvp.collect;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -11,17 +11,11 @@ import java.util.List;
  * Created by HuangFangzhi on 2017/3/13.
  */
 
-public class CollectModel {
+public final class CollectUtil {
 
-    ICollectPresenter presenter;
+    static SQLiteDatabase db;
 
-    SQLiteDatabase db;
-
-    public CollectModel(ICollectPresenter presenter) {
-        this.presenter = presenter;
-    }
-
-    public long add(CollectBean bean) {
+    public static long add(CollectBean bean) {
         init();
         ContentValues contentValues = new ContentValues();
         contentValues.put("type", bean.getType());
@@ -32,7 +26,7 @@ public class CollectModel {
         return db.insert("Collect", null, contentValues);
     }
 
-    public List<CollectBean> query() {
+    public static List<CollectBean> query() {
         init();
         List<CollectBean> list = new ArrayList<>();
         Cursor cursor = db.query("Collect", null, null, null, null, null, null);
@@ -52,7 +46,7 @@ public class CollectModel {
         return list;
     }
 
-    public int modify(CollectBean bean) {
+    public static int modify(CollectBean bean) {
         init();
         ContentValues contentValues = new ContentValues();
         contentValues.put("type", bean.getType());
@@ -65,14 +59,14 @@ public class CollectModel {
         return db.update("Collect", contentValues, whereClause, whereArgs);
     }
 
-    public int delete(CollectBean bean) {
+    public static int delete(CollectBean bean) {
         init();
         String whereClause = "_id=?";
         String[] whereArgs = {String.valueOf(bean.getId())};
         return db.delete("Collect", whereClause, whereArgs);
     }
 
-    private void init() {
+    private static void init() {
         db = SQLiteDatabase.openOrCreateDatabase("/data/data/me.lancer.pocket/databases/collect.db", null);
         String createTable = "CREATE TABLE IF NOT EXISTS Collect(_id INTEGER PRIMARY KEY AUTOINCREMENT, type INTEGER, cate INTEGER, title VARCHAR, cover VARCHAR, link VARCHAR)";
         db.execSQL(createTable);

@@ -42,7 +42,7 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.adapter.FileAdapter;
 import me.lancer.pocket.tool.mvp.file.bean.FileBean;
 import me.lancer.pocket.ui.application.App;

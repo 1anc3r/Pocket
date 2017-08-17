@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.translation.ITranslationView;
 import me.lancer.pocket.tool.mvp.translation.TranslationBean;
 import me.lancer.pocket.tool.mvp.translation.TranslationPresenter;

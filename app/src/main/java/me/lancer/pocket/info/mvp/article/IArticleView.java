@@ -1,6 +1,6 @@
 package me.lancer.pocket.info.mvp.article;
 
-import me.lancer.pocket.ui.base.IBaseView;
+import me.lancer.pocket.ui.mvp.base.IBaseView;
 
 /**
  * Created by HuangFangzhi on 2017/6/15.

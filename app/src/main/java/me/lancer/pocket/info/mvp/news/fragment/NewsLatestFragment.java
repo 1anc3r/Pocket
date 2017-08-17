@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.news.INewsView;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.NewsPresenter;

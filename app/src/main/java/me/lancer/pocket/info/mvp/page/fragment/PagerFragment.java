@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.PhotoPresenter;

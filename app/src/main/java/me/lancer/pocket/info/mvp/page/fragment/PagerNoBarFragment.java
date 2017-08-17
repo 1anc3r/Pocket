@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.fragment.BaseFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.ui.application.Params;
 
 public class PagerNoBarFragment extends BaseFragment {

@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.base.activity;
+package me.lancer.pocket.ui.mvp.base.activity;
 
 import android.app.Activity;
 import android.content.Context;

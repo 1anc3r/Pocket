@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.movie.IMovieView;
 import me.lancer.pocket.info.mvp.movie.MovieBean;
 import me.lancer.pocket.info.mvp.movie.MoviePresenter;

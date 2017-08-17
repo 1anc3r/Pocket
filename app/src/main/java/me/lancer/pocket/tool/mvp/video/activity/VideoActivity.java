@@ -24,7 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.video.adapter.VideoAdapter;
 import me.lancer.pocket.tool.mvp.video.bean.VideoBean;

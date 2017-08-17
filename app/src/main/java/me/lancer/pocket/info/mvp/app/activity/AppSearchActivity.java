@@ -20,7 +20,7 @@ import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.AppPresenter;
 import me.lancer.pocket.info.mvp.app.IAppView;
 import me.lancer.pocket.info.mvp.app.adapter.AppGridAdapter;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class AppSearchActivity extends PresenterActivity<AppPresenter> implements IAppView {
 

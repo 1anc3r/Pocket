@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.qrcode.bean.CuteR;
 import me.lancer.pocket.tool.mvp.qrcode.util.Util;
 

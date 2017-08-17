@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.page.fragment.PagerFragment;
 
 public class PhotoGalleryActivity extends BaseActivity {

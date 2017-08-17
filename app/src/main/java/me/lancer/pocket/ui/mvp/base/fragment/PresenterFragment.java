@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.base.fragment;
+package me.lancer.pocket.ui.mvp.base.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import me.lancer.pocket.ui.base.IBasePresenter;
+import me.lancer.pocket.ui.mvp.base.IBasePresenter;
 
 /**
  * Created by HuangFangzhi on 2016/12/15.

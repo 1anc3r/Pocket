@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.joke.IJokeView;
 import me.lancer.pocket.info.mvp.joke.JokeBean;
 import me.lancer.pocket.info.mvp.joke.JokePresenter;

@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.morse.IMorseView;
 import me.lancer.pocket.tool.mvp.morse.MorsePresenter;
 import me.lancer.pocket.tool.mvp.morse.adapter.MorseAdapter;

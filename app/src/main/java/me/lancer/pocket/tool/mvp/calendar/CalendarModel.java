@@ -98,7 +98,6 @@ public class CalendarModel {
         } else {
             presenter.deleteCalendarResult(result);
         }
-
     }
 
     private void init() {

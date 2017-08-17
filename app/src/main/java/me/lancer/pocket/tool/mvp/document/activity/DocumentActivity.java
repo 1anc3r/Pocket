@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.document.adapter.DocumentAdapter;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.file.bean.FileBean;

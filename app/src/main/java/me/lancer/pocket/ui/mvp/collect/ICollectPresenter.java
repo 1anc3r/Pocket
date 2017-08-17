@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.collect;
+package me.lancer.pocket.ui.mvp.collect;
 
 import java.util.List;
 

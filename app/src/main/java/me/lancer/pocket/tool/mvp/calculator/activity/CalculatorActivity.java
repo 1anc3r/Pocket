@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.calculator.model.Calculator;
 
 /**

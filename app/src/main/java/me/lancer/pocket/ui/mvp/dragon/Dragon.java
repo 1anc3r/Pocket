@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.toy;
+package me.lancer.pocket.ui.mvp.dragon;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

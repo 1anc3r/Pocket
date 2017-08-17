@@ -3,54 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <!--<yyydjk.com.library.CouponView-->
-        <!--android:layout_margin="4dp"-->
-        <!--android:id="@+id/cv_model"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical"-->
-        <!--app:cv_dash_line_color="@android:color/white"-->
-        <!--app:cv_dash_line_gap="6dp"-->
-        <!--app:cv_dash_line_margin_bottom="8dp"-->
-        <!--app:cv_dash_line_margin_left="8dp"-->
-        <!--app:cv_dash_line_margin_right="8dp"-->
-        <!--app:cv_dash_line_margin_top="8dp"-->
-        <!--app:cv_is_dash_line_bottom="true"-->
-        <!--app:cv_is_dash_line_left="true"-->
-        <!--app:cv_is_dash_line_right="true"-->
-        <!--app:cv_is_dash_line_top="true"-->
-        <!--app:cv_is_semicircle_bottom="false"-->
-        <!--app:cv_is_semicircle_left="false"-->
-        <!--app:cv_is_semicircle_right="false"-->
-        <!--app:cv_is_semicircle_top="false">-->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="20dp">
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/ll_model"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:orientation="vertical">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <!--<ImageView-->
-                <!--android:id="@+id/iv_icon"-->
-                <!--android:layout_width="48dp"-->
-                <!--android:layout_height="48dp"-->
-                <!--android:scaleType="fitXY"-->
-                <!--android:tint="@android:color/white" />-->
+            <TextView
+                android:id="@+id/left_top_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="-12dp"
+                android:background="@drawable/card_left_tag"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_name"-->
-                <!--android:textStyle="bold"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textColor="@android:color/white"-->
-                <!--android:textSize="16sp" />-->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:tint="@android:color/white" />
 
-        <!--</LinearLayout>-->
+            <TextView
+                android:id="@+id/right_bottom_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="-12dp"
+                android:background="@drawable/card_left_tag"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
 
-    <!--</yyydjk.com.library.CouponView>-->
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

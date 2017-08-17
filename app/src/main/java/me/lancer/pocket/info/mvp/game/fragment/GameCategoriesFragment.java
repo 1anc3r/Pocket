@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.game.GameBean;
 import me.lancer.pocket.info.mvp.game.GamePresenter;
 import me.lancer.pocket.info.mvp.game.IGameView;

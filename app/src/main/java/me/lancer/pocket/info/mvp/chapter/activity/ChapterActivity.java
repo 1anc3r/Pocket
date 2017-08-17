@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.chapter.ChapterBean;
 import me.lancer.pocket.info.mvp.chapter.ChapterPresenter;
 import me.lancer.pocket.info.mvp.chapter.IChapterView;

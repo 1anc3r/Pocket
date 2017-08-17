@@ -1,8 +1,8 @@
-package me.lancer.pocket.ui.collect;
+package me.lancer.pocket.ui.mvp.collect;
 
 import java.util.List;
 
-import me.lancer.pocket.ui.base.IBasePresenter;
+import me.lancer.pocket.ui.mvp.base.IBasePresenter;
 
 /**
  * Created by HuangFangzhi on 2017/3/13.
@@ -35,18 +35,18 @@ public class CollectPresenter implements IBasePresenter<ICollectView>, ICollectP
         }
     }
 
+    public void query() {
+        if (view != null) {
+            view.showLoad();
+            model.query();
+        }
+    }
+
     @Override
     public void addCollectResult(long result) {
         if (view != null) {
             view.showResult(result);
             view.hideLoad();
-        }
-    }
-
-    public void query() {
-        if (view != null) {
-            view.showLoad();
-            model.query();
         }
     }
 

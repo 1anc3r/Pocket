@@ -21,7 +21,7 @@ import net.steamcrafted.loadtoast.LoadToast;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.CodePresenter;
 import me.lancer.pocket.info.mvp.code.ICodeView;

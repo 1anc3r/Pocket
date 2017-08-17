@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.model;
+package me.lancer.pocket.ui.mvp.model;
 
 /**
  * Created by HuangFangzhi on 2017/6/13.

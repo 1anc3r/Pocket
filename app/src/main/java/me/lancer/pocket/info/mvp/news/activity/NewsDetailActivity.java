@@ -16,6 +16,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -29,12 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.news.INewsView;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.NewsPresenter;
 import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 

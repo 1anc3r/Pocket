@@ -21,7 +21,7 @@ import net.steamcrafted.loadtoast.LoadToast;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.music.IMusicView;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.MusicPresenter;

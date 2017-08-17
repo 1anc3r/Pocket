@@ -2,7 +2,7 @@ package me.lancer.pocket.info.mvp.news;
 
 import java.util.List;
 
-import me.lancer.pocket.ui.base.IBaseView;
+import me.lancer.pocket.ui.mvp.base.IBaseView;
 
 /**
  * Created by HuangFangzhi on 2017/3/13.

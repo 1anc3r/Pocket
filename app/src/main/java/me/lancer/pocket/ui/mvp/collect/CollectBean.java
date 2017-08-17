@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.collect;
+package me.lancer.pocket.ui.mvp.collect;
 
 /**
  * Created by HuangFangzhi on 2017/7/16.

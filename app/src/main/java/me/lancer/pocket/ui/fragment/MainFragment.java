@@ -30,10 +30,9 @@ import me.lancer.pocket.tool.mvp.weather.CityBean;
 import me.lancer.pocket.tool.mvp.weather.IWeatherView;
 import me.lancer.pocket.tool.mvp.weather.WeatherBean;
 import me.lancer.pocket.tool.mvp.weather.WeatherPresenter;
-import me.lancer.pocket.ui.base.fragment.BaseFragment;
 import me.lancer.pocket.ui.activity.SettingActivity;
-import me.lancer.pocket.ui.base.fragment.PresenterFragment;
-import me.lancer.pocket.ui.toy.DragonActivity;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.dragon.DragonActivity;
 
 import static android.content.Intent.ACTION_VIEW;
 

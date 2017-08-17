@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.app.fragment.AppFragment;
-import me.lancer.pocket.ui.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.book.fragment.BookFragment;
 import me.lancer.pocket.info.mvp.code.fragment.CodeFragment;
 import me.lancer.pocket.info.mvp.comic.fragment.ComicFragment;

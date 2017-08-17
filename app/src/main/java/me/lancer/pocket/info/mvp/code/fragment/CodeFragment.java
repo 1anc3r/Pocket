@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.base.fragment.BaseFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.code.activity.CodeSearchActivity;
 
 public class CodeFragment extends BaseFragment {

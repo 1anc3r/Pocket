@@ -1,8 +1,8 @@
-package me.lancer.pocket.ui.base.activity;
+package me.lancer.pocket.ui.mvp.base.activity;
 
 import android.os.Bundle;
 
-import me.lancer.pocket.ui.base.IBasePresenter;
+import me.lancer.pocket.ui.mvp.base.IBasePresenter;
 
 /**
  * Created by HuangFangzhi on 2016/12/13.

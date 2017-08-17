@@ -1,4 +1,4 @@
-package me.lancer.pocket.ui.toy;
+package me.lancer.pocket.ui.mvp.dragon;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -12,8 +12,6 @@ import android.view.WindowManager;
 
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AppActivity;
-
-import me.lancer.pocket.R;
 
 public class DragonActivity extends AppActivity {
 

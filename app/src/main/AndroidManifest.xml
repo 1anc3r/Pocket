@@ -212,7 +212,7 @@
                 android:value=".tool.mvp.todo.tasks.TasksActivity" />
         </activity>
         <activity
-            android:name=".ui.toy.DragonActivity"
+            android:name=".ui.mvp.dragon.DragonActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:finishOnTaskLaunch="false"
