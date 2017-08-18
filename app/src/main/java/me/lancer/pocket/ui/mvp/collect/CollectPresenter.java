@@ -35,6 +35,14 @@ public class CollectPresenter implements IBasePresenter<ICollectView>, ICollectP
         }
     }
 
+    @Override
+    public void addCollectResult(long result) {
+        if (view != null) {
+            view.showResult(result);
+            view.hideLoad();
+        }
+    }
+
     public void query() {
         if (view != null) {
             view.showLoad();
@@ -46,14 +54,6 @@ public class CollectPresenter implements IBasePresenter<ICollectView>, ICollectP
         if (view != null) {
             view.showLoad();
             model.query(title);
-        }
-    }
-
-    @Override
-    public void addCollectResult(long result) {
-        if (view != null) {
-            view.showResult(result);
-            view.hideLoad();
         }
     }
 
@@ -77,6 +77,13 @@ public class CollectPresenter implements IBasePresenter<ICollectView>, ICollectP
         if (view != null) {
             view.showResult(result);
             view.hideLoad();
+        }
+    }
+
+    public void delete() {
+        if (view != null) {
+            view.showLoad();
+            model.delete();
         }
     }
 

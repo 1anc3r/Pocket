@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity">
+
+    <item
+        android:id="@+id/menu_refresh"
+        android:title="刷新"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_clear"
+        android:title="清空"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_setting"
+        android:title="设置"
+        app:showAsAction="never" />
+
+</menu>

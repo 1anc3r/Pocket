@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.application.Params;
 import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 /**
@@ -30,6 +34,8 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             , R.color.green, R.color.lightgreen, R.color.lime
             , R.color.yellow, R.color.amber, R.color.orange
             , R.color.deeporange, R.color.black_float};
+
+    private String[] tags = {"文章", "趣闻", "段子", "图书", "音乐", "电影", "小说", "图片", "漫画", "视频", "游戏", "编程"};
 
     private Context context;
     private List<CollectBean> list;
@@ -68,8 +74,16 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
         } else {
             viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(color));
         }
-        viewHolder.textView.setText(list.get(position).getTitle());
-        viewHolder.tvTagRight.setText(list.get(position).getTitle());
+        if (list.get(position).getType() == 1) {
+            viewHolder.imageView.setVisibility(View.VISIBLE);
+            viewHolder.textView.setVisibility(View.GONE);
+            ViewCompat.setTransitionName(viewHolder.imageView, Params.TRANSITION_PIC);
+            Glide.with(context).load(list.get(position).getCover()).into(viewHolder.imageView);
+
+        } else {
+            viewHolder.textView.setText(list.get(position).getTitle());
+        }
+        viewHolder.tvTagRight.setText(tags[list.get(position).getCate()]);
         viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
     }
 
@@ -84,12 +98,6 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
     @Override
     public int getItemCount() {
         return list == null ? 0 : list.size();
-    }
-
-    public static Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
-        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
-        DrawableCompat.setTintList(wrappedDrawable, colors);
-        return wrappedDrawable;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -131,10 +139,10 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
     }
 
     public interface MyItemClickListener {
-        public void onItemClick(View view, int postion);
+        public void onItemClick(View view, int position);
     }
 
     public interface MyItemLongClickListener {
-        public void onItemLongClick(View view, int postion);
+        public void onItemLongClick(View view, int position);
     }
 }

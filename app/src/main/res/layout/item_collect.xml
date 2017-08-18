@@ -27,25 +27,26 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:background="@drawable/card_right_tag"
-                android:textColor="?attr/colorPrimary"/>
+                android:textColor="?attr/colorPrimary" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:gravity="center_vertical"
-                android:paddingLeft="36dp"
-                android:textColor="@android:color/white" />
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/imageView"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:gravity="center" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/left_top_tag"
@@ -53,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:background="@drawable/card_right_tag"
-                android:textColor="?attr/colorPrimary"/>
+                android:textColor="?attr/colorPrimary" />
 
         </LinearLayout>
 

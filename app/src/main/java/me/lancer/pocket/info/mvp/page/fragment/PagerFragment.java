@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,13 +25,17 @@ import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.PhotoPresenter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 
 public class PagerFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
 
     private String link;
     private ImageView imageView;
-    private FrameLayout flPhoto;
-    private Button btnSetting, btnShare, btnDownload;
+    private Button btnFavorite, btnShare, btnDownload;
+
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
 
     private Handler handler = new Handler() {
         @Override
@@ -70,8 +75,14 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         imageView = (ImageView) view.findViewById(R.id.imageView);
+        btnFavorite = (Button) view.findViewById(R.id.btn_favorite);
+        temps = CollectUtil.query(link, link);
+        if(temps.size() == 1) {
+            btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
+        }
         btnShare = (Button) view.findViewById(R.id.btn_share);
         btnDownload = (Button) view.findViewById(R.id.btn_download);
+        btnFavorite.setOnClickListener(vOnClickListener);
         btnShare.setOnClickListener(vOnClickListener);
         btnDownload.setOnClickListener(vOnClickListener);
     }
@@ -79,7 +90,20 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view == btnShare) {
+            if (view == btnFavorite) {
+                if(temps.size() == 1) {
+                    btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                } else {
+                    temp.setType(1);
+                    temp.setCate(7);
+                    temp.setCover(link);
+                    temp.setTitle(link);
+                    temp.setLink(link);
+                    btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
+                    CollectUtil.add(temp);
+                }
+            } else if (view == btnShare) {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "分享");

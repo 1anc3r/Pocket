@@ -43,6 +43,32 @@ public final class CollectUtil {
                 cursor.moveToNext();
             }
         }
+        cursor.close();
+        return list;
+    }
+
+    public static List<CollectBean> query(String title, String link) {
+        init();
+        List<CollectBean> list = new ArrayList<>();
+        Cursor cursor = db.query("Collect", null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                CollectBean bean = new CollectBean();
+                bean.setId(cursor.getInt(0));
+                bean.setType(cursor.getInt(1));
+                bean.setCate(cursor.getInt(2));
+                bean.setTitle(cursor.getString(3));
+                bean.setCover(cursor.getString(4));
+                bean.setLink(cursor.getString(5));
+                if(bean.getTitle().equals(title) && bean.getLink().equals(link)) {
+                    list.add(bean);
+                    cursor.close();
+                    return list;
+                }
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
         return list;
     }
 

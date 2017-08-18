@@ -12,10 +12,11 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.info.mvp.photo.activity.PhotoDetailActivity;
+import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
 import me.lancer.pocket.ui.application.Params;
 
 public class GameShotAdapter extends RecyclerView.Adapter<GameShotAdapter.ViewHolder> {
@@ -42,10 +43,15 @@ public class GameShotAdapter extends RecyclerView.Adapter<GameShotAdapter.ViewHo
             viewHolder.cvShot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    Intent intent = new Intent();
+//                    intent.putExtra("img", list.get(position));
+//                    intent.putExtra("title", "");
+//                    intent.setClass(context, PhotoDetailActivity.class);
+//                    context.startActivity(intent);
                     Intent intent = new Intent();
-                    intent.putExtra("img", list.get(position));
-                    intent.putExtra("title", "");
-                    intent.setClass(context, PhotoDetailActivity.class);
+                    intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
+                    intent.putExtra("position", position);
+                    intent.setClass(context, PhotoGalleryActivity.class);
                     context.startActivity(intent);
                 }
             });

@@ -4,7 +4,9 @@
     tools:context=".activity.MainActivity">
 
     <item
-        android:id="@+id/action_bottom_sheet_dialog"
-        android:title=""
-        app:showAsAction="never" />
+        android:id="@+id/menu_favorite"
+        android:icon="@mipmap/ic_favorite_border_white_24dp"
+        android:title="favorite"
+        app:showAsAction="always" />
+
 </menu>

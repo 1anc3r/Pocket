@@ -56,6 +56,7 @@ public class CollectModel {
                 cursor.moveToNext();
             }
         }
+        cursor.close();
         presenter.queryCollectResult(list);
     }
 
@@ -74,10 +75,12 @@ public class CollectModel {
                 bean.setLink(cursor.getString(5));
                 if(bean.getTitle().equals(title)) {
                     list.add(bean);
+                    break;
                 }
                 cursor.moveToNext();
             }
         }
+        cursor.close();
         presenter.queryCollectResult(list);
     }
 
@@ -96,6 +99,16 @@ public class CollectModel {
             presenter.modifyCollectResult(result);
         } else {
             presenter.modifyCollectResult(result);
+        }
+    }
+
+    public void delete() {
+        init();
+        int result = db.delete("Collect", null, null);
+        if (result == -1) {
+            presenter.deleteCollectResult(result);
+        } else {
+            presenter.deleteCollectResult(result);
         }
     }
 

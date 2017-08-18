@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -48,7 +49,11 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<NewsBean> mList = new ArrayList<>();
 
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
+
     private CollapsingToolbarLayout layout;
+    private FloatingActionButton fab;
     private ImageView ivImg;
     private HtmlTextView htvContent;
     private LoadToast loadToast;
@@ -134,6 +139,12 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         ivImg = (ImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(vOnClickListener);
+        temps = CollectUtil.query(title, link);
+        if(temps.size() == 1) {
+            fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+        }
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -157,6 +168,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         } else {
             htvContent.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
+            fab.setVisibility(View.GONE);
             new Thread(loadItem).start();
         }
     }
@@ -172,6 +184,26 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                 .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
+
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fab) {
+                if(temps.size() == 1) {
+                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                } else {
+                    temp.setType(0);
+                    temp.setCate(1);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    CollectUtil.add(temp);
+                }
+            }
+        }
+    };
 
     @Override
     protected void onDestroy() {

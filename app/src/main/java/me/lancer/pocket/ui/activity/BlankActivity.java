@@ -76,15 +76,15 @@ public class BlankActivity extends BaseActivity {
                 break;
             case 7:
                 bundle.putInt(getString(R.string.index), 0);
-                currentFragment = new ComicFragment();
+                currentFragment = new PhotoFragment();
                 break;
             case 8:
                 bundle.putInt(getString(R.string.index), 0);
-                currentFragment = new VideoFragment();
+                currentFragment = new ComicFragment();
                 break;
             case 9:
                 bundle.putInt(getString(R.string.index), 0);
-                currentFragment = new PhotoFragment();
+                currentFragment = new VideoFragment();
                 break;
             case 10:
                 bundle.putInt(getString(R.string.index), 0);

@@ -72,9 +72,6 @@
             android:launchMode="singleTask" />
         <activity android:name=".info.mvp.news.activity.NewsDetailActivity" />
         <activity
-            android:name=".info.mvp.photo.activity.PhotoDetailActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".info.mvp.photo.activity.PhotoGalleryActivity"
             android:launchMode="singleTask" />
         <activity

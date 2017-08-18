@@ -1,27 +1,32 @@
 package me.lancer.pocket.ui.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
+import me.lancer.pocket.info.mvp.news.activity.NewsDetailActivity;
+import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
+import me.lancer.pocket.ui.activity.BlankActivity;
+import me.lancer.pocket.ui.activity.SettingActivity;
 import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.ui.mvp.collect.CollectAdapter;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
@@ -49,6 +54,7 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                 case 2:
                     break;
                 case 3:
+                    new Thread(query).start();
                     break;
                 case 4:
                     if (msg.obj != null) {
@@ -90,6 +96,13 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
         }
     };
 
+    private Runnable clear = new Runnable() {
+        @Override
+        public void run() {
+            presenter.delete();
+        }
+    };
+
     public CollectFragment() {
     }
 
@@ -117,11 +130,7 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-        initData();
-    }
-
-    private void initData() {
-        new Thread(query).start();
+        inflateMenu();
     }
 
     private void initView(View view) {
@@ -146,22 +155,65 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
         mRecyclerView.setFocusableInTouchMode(true);
     }
 
-    @Override
-    public void onItemClick(View view, int postion) {
-
+    private void inflateMenu() {
+        toolbar.inflateMenu(R.menu.menu_favorite_list);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_refresh:
+                        new Thread(query).start();
+                        break;
+                    case R.id.menu_clear:
+                        new Thread(clear).start();
+                        break;
+                    case R.id.menu_setting:
+                        Intent intent2 = new Intent();
+                        intent2.setClass(getActivity(), SettingActivity.class);
+                        startActivity(intent2);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
-    public void onItemLongClick(View view, final int postion) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                CollectBean bean = new CollectBean();
-//                bean.setType(index);
-//                bean.setCate(postion);
-//                bean.setTitle(mList.get(postion).getName());
-//            }
-//        }).start();
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        List<String> list = new ArrayList<>();
+        switch (mList.get(position).getCate()) {
+            case 0:
+                intent.setClass(getActivity(), ArticleActivity.class);
+                startActivity(intent);
+                break;
+            case 1:
+                intent.setClass(getActivity(), NewsDetailActivity.class);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("img", mList.get(position).getCover());
+                intent.putExtra("link", mList.get(position).getLink());
+                startActivity(intent);
+                break;
+            case 7:
+                list.add(mList.get(position).getCover());
+                intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
+                intent.putExtra("position", 0);
+                intent.setClass(getActivity(), PhotoGalleryActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new Thread(query).start();
+    }
+
+    @Override
+    public void onItemLongClick(View view, final int position) {
+
     }
 
     @Override
