@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -126,12 +128,10 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle("收藏");
         ivImg = (ImageView) view.findViewById(R.id.iv_img);
-        SimpleDateFormat formatter = new SimpleDateFormat("HH");
-        int date = Integer.parseInt(formatter.format(new Date(System.currentTimeMillis())));
-        if (date > 6 && date < 18) {
-            ivImg.setImageResource(R.mipmap.ic_day);
+        if ((Math.random() * 16) > 8) {
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/summer.gif").into(ivImg);
         } else {
-            ivImg.setImageResource(R.mipmap.ic_night);
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/winter.gif").into(ivImg);
         }
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());

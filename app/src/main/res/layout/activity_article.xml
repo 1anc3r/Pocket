@@ -80,14 +80,35 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fam_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@mipmap/ic_cached_white_24dp"
-        app:backgroundTint="@color/green"
+        app:fab_addButtonColorNormal="?attr/colorPrimary"
+        app:fab_addButtonColorPressed="?attr/colorPrimaryDark"
+        app:fab_addButtonPlusIconColor="@color/white"
         app:layout_anchor="@id/abl_large"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"
+        app:fab_expandDirection="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@android:color/holo_green_light"
+            app:fab_colorPressed="@android:color/holo_green_dark"
+            app:fab_icon="@mipmap/ic_cached_white_24dp"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@android:color/holo_red_light"
+            app:fab_colorPressed="@android:color/holo_red_dark"
+            app:fab_icon="@mipmap/ic_favorite_border_white_24dp"
+            app:fab_size="mini" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>

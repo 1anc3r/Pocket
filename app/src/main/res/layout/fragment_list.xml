@@ -42,10 +42,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_cached_white_24dp"
         android:visibility="gone"
-        app:backgroundTint="@color/green"
-        app:rippleColor="@color/green_dark" />
+        app:backgroundTint="@android:color/holo_green_light"
+        app:rippleColor="@android:color/holo_green_dark" />
 
 </FrameLayout>

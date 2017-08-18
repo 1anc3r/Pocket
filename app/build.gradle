@@ -77,6 +77,7 @@ dependencies {
     compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
     compile 'com.github.sundeepk:compact-calendar-view:1.9.2-beta'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 }

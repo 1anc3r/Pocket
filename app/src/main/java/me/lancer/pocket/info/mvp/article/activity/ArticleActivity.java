@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -14,8 +13,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import net.steamcrafted.loadtoast.LoadToast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.ArticleBean;
@@ -28,7 +31,7 @@ import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class ArticleActivity extends PresenterActivity<ArticlePresenter> implements IArticleView {
 
-    private FloatingActionButton fab;
+    private FloatingActionButton fabRefresh;
     private CollapsingToolbarLayout layout;
     private ImageView ivImg;
     private HtmlTextView htvAuthor, htvContent;
@@ -98,8 +101,8 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabRefresh = (FloatingActionButton) findViewById(R.id.fab_refresh);
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loadToast.show();
@@ -108,7 +111,13 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
         });
         ivImg = (ImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-        Glide.with(this).load("https://www.dujin.org/sys/bing/1366.php").into(ivImg);
+        SimpleDateFormat formatter = new SimpleDateFormat("HH");
+        int date = Integer.parseInt(formatter.format(new Date(System.currentTimeMillis())));
+        if (date > 6 && date < 18) {
+            ivImg.setImageResource(R.mipmap.ic_day);
+        } else {
+            ivImg.setImageResource(R.mipmap.ic_night);
+        }
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
         htvAuthor = (HtmlTextView) findViewById(R.id.htv_author);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);

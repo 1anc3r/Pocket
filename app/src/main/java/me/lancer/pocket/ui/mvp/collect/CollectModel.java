@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -52,6 +53,28 @@ public class CollectModel {
                 bean.setCover(cursor.getString(4));
                 bean.setLink(cursor.getString(5));
                 list.add(bean);
+                cursor.moveToNext();
+            }
+        }
+        presenter.queryCollectResult(list);
+    }
+
+    public void query(String title) {
+        init();
+        List<CollectBean> list = new ArrayList<>();
+        Cursor cursor = db.query("Collect", null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                CollectBean bean = new CollectBean();
+                bean.setId(cursor.getInt(0));
+                bean.setType(cursor.getInt(1));
+                bean.setCate(cursor.getInt(2));
+                bean.setTitle(cursor.getString(3));
+                bean.setCover(cursor.getString(4));
+                bean.setLink(cursor.getString(5));
+                if(bean.getTitle().equals(title)) {
+                    list.add(bean);
+                }
                 cursor.moveToNext();
             }
         }

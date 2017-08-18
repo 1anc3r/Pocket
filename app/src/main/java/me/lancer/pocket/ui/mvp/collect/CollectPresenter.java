@@ -42,6 +42,13 @@ public class CollectPresenter implements IBasePresenter<ICollectView>, ICollectP
         }
     }
 
+    public void query(String title) {
+        if (view != null) {
+            view.showLoad();
+            model.query(title);
+        }
+    }
+
     @Override
     public void addCollectResult(long result) {
         if (view != null) {
