@@ -112,6 +112,28 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         }
     };
 
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fab) {
+                if(temps.size() == 1) {
+                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(0);
+                    temp.setCate(1);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,28 +208,6 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                 .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
-
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (view == fab) {
-                if(temps.size() == 1) {
-                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, link);
-                } else {
-                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(0);
-                    temp.setCate(1);
-                    temp.setCover(img);
-                    temp.setTitle(title);
-                    temp.setLink(link);
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, link);
-                }
-            }
-        }
-    };
 
     @Override
     protected void onDestroy() {

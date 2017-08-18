@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -14,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +30,8 @@ import me.lancer.pocket.info.mvp.chapter.ChapterPresenter;
 import me.lancer.pocket.info.mvp.chapter.IChapterView;
 import me.lancer.pocket.info.mvp.chapter.adapter.ChapterAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 
 public class ChapterActivity extends PresenterActivity<ChapterPresenter> implements IChapterView {
 
@@ -39,6 +43,10 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private FloatingActionButton fab;
+
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
 
     private Handler handler = new Handler() {
         @Override
@@ -71,6 +79,28 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         }
     };
 
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fab) {
+                if(temps.size() == 1) {
+                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(2);
+                    temp.setCate(11);
+                    temp.setCover(cover);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +111,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
     public void init() {
         link = getIntent().getStringExtra("link");
         title = getIntent().getStringExtra("title");
-        cover = getIntent().getStringExtra("cover");
+        cover = getIntent().getStringExtra("img");
         category = getIntent().getStringExtra("category");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
@@ -91,6 +121,14 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         ivCover = (ImageView) findViewById(R.id.imageView);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(vOnClickListener);
+        temps = CollectUtil.query(title, link);
+        if(temps.size() == 1) {
+            fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+        } else {
+            fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+        }
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

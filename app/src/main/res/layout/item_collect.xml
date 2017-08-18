@@ -29,16 +29,6 @@
                 android:background="@drawable/card_right_tag"
                 android:textColor="?attr/colorPrimary" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
@@ -49,12 +39,41 @@
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/left_top_tag"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:background="@drawable/card_right_tag"
-                android:textColor="?attr/colorPrimary" />
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/left_top_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="@drawable/card_right_tag"
+                    android:textColor="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textView_"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

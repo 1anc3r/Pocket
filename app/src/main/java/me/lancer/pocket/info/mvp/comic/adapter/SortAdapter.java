@@ -19,7 +19,7 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.comic.ComicBean;
-import me.lancer.pocket.info.mvp.comic.activity.ChapterActivity;
+import me.lancer.pocket.info.mvp.comic.activity.SortActivity;
 import me.lancer.pocket.ui.application.Params;
 import me.lancer.pocket.util.DensityUtil;
 
@@ -61,7 +61,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
                 viewHolder.container.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ChapterActivity.startActivity((Activity) context, list.get(position).getLink(), list.get(position).getCover(), list.get(position).getTitle(), viewHolder.ivCover);
+                        SortActivity.startActivity((Activity) context, list.get(position).getLink(), list.get(position).getCover(), list.get(position).getTitle(), viewHolder.ivCover);
                     }
                 });
             } else if (getItemViewType(position) == TYPE_TITLE) {

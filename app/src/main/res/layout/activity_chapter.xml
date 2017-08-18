@@ -62,7 +62,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@mipmap/ic_favorite_border_white_24dp"
         app:backgroundTint="@android:color/holo_red_light"
         app:rippleColor="@android:color/holo_red_dark"
         app:layout_anchor="@id/appBar"

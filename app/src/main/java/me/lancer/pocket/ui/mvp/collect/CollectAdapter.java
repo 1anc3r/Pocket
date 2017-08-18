@@ -75,16 +75,26 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
         } else {
             viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(color));
         }
-        if (list.get(position).getType() == 1) {
-            viewHolder.imageView.setVisibility(View.VISIBLE);
-            viewHolder.textView.setVisibility(View.GONE);
-            ViewCompat.setTransitionName(viewHolder.imageView, Params.TRANSITION_PIC);
-            Glide.with(context).load(list.get(position).getCover()).into(viewHolder.imageView);
-        }
         if (list.get(position).getType() == 0) {
             viewHolder.imageView.setVisibility(View.GONE);
             viewHolder.textView.setVisibility(View.VISIBLE);
+            viewHolder.textView_.setVisibility(View.GONE);
             viewHolder.textView.setText(list.get(position).getTitle());
+        }
+        if (list.get(position).getType() == 1) {
+            viewHolder.imageView.setVisibility(View.VISIBLE);
+            viewHolder.textView.setVisibility(View.GONE);
+            viewHolder.textView_.setVisibility(View.GONE);
+            ViewCompat.setTransitionName(viewHolder.imageView, Params.TRANSITION_PIC);
+            Glide.with(context).load(list.get(position).getCover()).into(viewHolder.imageView);
+        }
+        if (list.get(position).getType() == 2) {
+            viewHolder.imageView.setVisibility(View.VISIBLE);
+            viewHolder.textView.setVisibility(View.GONE);
+            viewHolder.textView_.setVisibility(View.VISIBLE);
+            viewHolder.textView_.setText(list.get(position).getTitle());
+            ViewCompat.setTransitionName(viewHolder.imageView, Params.TRANSITION_PIC);
+            Glide.with(context).load(list.get(position).getCover()).into(viewHolder.imageView);
         }
         viewHolder.tvTagRight.setText(tags[list.get(position).getCate()]);
         viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
@@ -106,7 +116,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public CardView cardView;
-        public TextView textView;
+        public TextView textView, textView_;
         public ImageView imageView;
         public TextView tvTagLeft, tvTagRight;
         private MyItemClickListener mListener;
@@ -116,6 +126,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             super(rootView);
             cardView = (CardView) rootView.findViewById(R.id.cardView);
             textView = (TextView) rootView.findViewById(R.id.textView);
+            textView_ = (TextView) rootView.findViewById(R.id.textView_);
             imageView = (ImageView) rootView.findViewById(R.id.imageView);
             tvTagLeft = (TextView) rootView.findViewById(R.id.left_top_tag);
             tvTagRight = (TextView) rootView.findViewById(R.id.right_top_tag);

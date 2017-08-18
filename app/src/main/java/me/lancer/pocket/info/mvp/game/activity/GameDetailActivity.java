@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -16,6 +17,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +35,8 @@ import me.lancer.pocket.info.mvp.game.GamePresenter;
 import me.lancer.pocket.info.mvp.game.IGameView;
 import me.lancer.pocket.info.mvp.game.adapter.GameShotAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
@@ -45,8 +49,12 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
     private GameShotAdapter adapter;
     private List<String> shots = new ArrayList<>();
     private LoadToast loadToast;
+    private FloatingActionButton fab;
 
-    private String title, img;
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
+
+    private String title, img, link;
     private int id;
 
     private Handler handler = new Handler() {
@@ -90,6 +98,28 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         }
     };
 
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fab) {
+                if(temps.size() == 1) {
+                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, String.valueOf(id));
+                } else {
+                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(2);
+                    temp.setCate(13);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(String.valueOf(id));
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, String.valueOf(id));
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +129,12 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
     }
 
     private void initData() {
-        id = getIntent().getIntExtra("id", 0);
+        link = getIntent().getStringExtra("link");
+        if (link == null) {
+            id = getIntent().getIntExtra("id", 0);
+        } else {
+            id = Integer.parseInt(link);
+        }
         title = getIntent().getStringExtra("title");
         img = getIntent().getStringExtra("img");
     }
@@ -116,6 +151,14 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         ivImg = (ImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(vOnClickListener);
+        temps = CollectUtil.query(title, String.valueOf(id));
+        if(temps.size() == 1) {
+            fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+        } else {
+            fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+        }
         tvDiscount = (TextView) findViewById(R.id.tv_discount);
         tvOriginal = (TextView) findViewById(R.id.tv_original);
         tvFinal = (TextView) findViewById(R.id.tv_final);

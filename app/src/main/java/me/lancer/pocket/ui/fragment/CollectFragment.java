@@ -23,6 +23,8 @@ import java.util.List;
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
 import me.lancer.pocket.info.mvp.book.activity.BookDetailActivity;
+import me.lancer.pocket.info.mvp.chapter.activity.ChapterActivity;
+import me.lancer.pocket.info.mvp.game.activity.GameDetailActivity;
 import me.lancer.pocket.info.mvp.movie.activity.MovieDetailActivity;
 import me.lancer.pocket.info.mvp.music.activity.MusicDetailActivity;
 import me.lancer.pocket.info.mvp.news.activity.NewsDetailActivity;
@@ -230,6 +232,20 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                 intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
                 intent.putExtra("position", 0);
                 intent.setClass(getActivity(), PhotoGalleryActivity.class);
+                startActivity(intent);
+                break;
+            case 11:
+                intent.setClass(getActivity(), ChapterActivity.class);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("img", mList.get(position).getCover());
+                intent.putExtra("link", mList.get(position).getLink());
+                startActivity(intent);
+                break;
+            case 13:
+                intent.setClass(getActivity(), GameDetailActivity.class);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("img", mList.get(position).getCover());
+                intent.putExtra("link", mList.get(position).getLink());
                 startActivity(intent);
                 break;
         }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -13,7 +14,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,8 +31,10 @@ import me.lancer.pocket.info.mvp.comic.ComicPresenter;
 import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 
-public class ChapterActivity extends PresenterActivity<ComicPresenter> implements IComicView {
+public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 
     private String link, title, cover;
     private Toolbar toolbar;
@@ -39,6 +44,7 @@ public class ChapterActivity extends PresenterActivity<ComicPresenter> implement
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private FloatingActionButton fab;
 
     private Handler handler = new Handler() {
         @Override
@@ -55,7 +61,7 @@ public class ChapterActivity extends PresenterActivity<ComicPresenter> implement
                 case 3:
                     if (msg.obj != null) {
                         mData = (List<ComicBean>) msg.obj;
-                        mAdapter = new ComicAdapter(ChapterActivity.this, mData);
+                        mAdapter = new ComicAdapter(SortActivity.this, mData);
                         mRecyclerView.setAdapter(mAdapter);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -82,6 +88,7 @@ public class ChapterActivity extends PresenterActivity<ComicPresenter> implement
         link = getIntent().getStringExtra("link");
         title = getIntent().getStringExtra("title");
         cover = getIntent().getStringExtra("cover");
+        Log.e("init: ", title+link);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
@@ -90,6 +97,8 @@ public class ChapterActivity extends PresenterActivity<ComicPresenter> implement
         ivCover = (ImageView) findViewById(R.id.imageView);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.GONE);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -113,7 +122,7 @@ public class ChapterActivity extends PresenterActivity<ComicPresenter> implement
 
     public static void startActivity(Activity activity, String link, String cover, String title, ImageView ImageView) {
         Intent intent = new Intent();
-        intent.setClass(activity, ChapterActivity.class);
+        intent.setClass(activity, SortActivity.class);
         intent.putExtra("link", link);
         intent.putExtra("title", title);
         intent.putExtra("cover", cover);
