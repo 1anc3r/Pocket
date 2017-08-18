@@ -148,8 +148,6 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     startActivity(intent);
                     break;
                 case 7:
-//                    intent.setClass(getActivity(), AppActivity.class);
-//                    startActivity(intent);
                     intent.putExtra("index", 1024);
                     intent.setClass(getActivity(), BlankActivity.class);
                     startActivity(intent);

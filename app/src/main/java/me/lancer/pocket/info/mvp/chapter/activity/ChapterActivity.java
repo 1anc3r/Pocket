@@ -111,7 +111,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
     public void init() {
         link = getIntent().getStringExtra("link");
         title = getIntent().getStringExtra("title");
-        cover = getIntent().getStringExtra("img");
+        cover = getIntent().getStringExtra("cover");
         category = getIntent().getStringExtra("category");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);

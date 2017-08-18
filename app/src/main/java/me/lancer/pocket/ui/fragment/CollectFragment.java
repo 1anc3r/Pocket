@@ -237,7 +237,7 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
             case 11:
                 intent.setClass(getActivity(), ChapterActivity.class);
                 intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("img", mList.get(position).getCover());
+                intent.putExtra("cover", mList.get(position).getCover());
                 intent.putExtra("link", mList.get(position).getLink());
                 startActivity(intent);
                 break;
