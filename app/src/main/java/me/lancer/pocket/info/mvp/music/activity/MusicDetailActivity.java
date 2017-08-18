@@ -12,12 +12,16 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
@@ -26,6 +30,8 @@ import me.lancer.pocket.info.mvp.music.IMusicView;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.MusicPresenter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
@@ -35,6 +41,9 @@ public class MusicDetailActivity extends PresenterActivity<MusicPresenter> imple
     private HtmlTextView htvInfo;
     private HtmlTextView htvContent;
     private LoadToast loadToast;
+
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
 
     private int type;
     private String title, img, link;
@@ -115,6 +124,44 @@ public class MusicDetailActivity extends PresenterActivity<MusicPresenter> imple
         } else if (type == 1) {
             new Thread(loadReviewerDetail).start();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_collect_item, menu);
+        MenuItem item = menu.findItem(R.id.menu_favorite);
+        temps = CollectUtil.query(title, link);
+        if(temps.size() == 1) {
+            item.setIcon(R.mipmap.ic_favorite_white_24dp);
+        } else {
+            item.setIcon(R.mipmap.ic_favorite_border_white_24dp);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_favorite:
+                item.setIcon(R.mipmap.ic_favorite_white_24dp);
+                if(temps.size() == 1) {
+                    item.setIcon(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    item.setIcon(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(0);
+                    temp.setCate(type + 5);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
+                break;
+        }
+        return true;
     }
 
     public static void startActivity(Activity activity, int type, String title, String img, String link, ImageView ImageView) {

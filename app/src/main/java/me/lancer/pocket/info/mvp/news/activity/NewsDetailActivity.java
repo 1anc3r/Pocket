@@ -144,6 +144,8 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         temps = CollectUtil.query(title, link);
         if(temps.size() == 1) {
             fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+        } else {
+            fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
@@ -192,14 +194,16 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                 if(temps.size() == 1) {
                     fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
                 } else {
+                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(1);
                     temp.setCover(img);
                     temp.setTitle(title);
                     temp.setLink(link);
-                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
                 }
             }
         }

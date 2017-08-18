@@ -1,13 +1,12 @@
 package me.lancer.pocket.ui.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,9 +22,11 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
+import me.lancer.pocket.info.mvp.book.activity.BookDetailActivity;
+import me.lancer.pocket.info.mvp.movie.activity.MovieDetailActivity;
+import me.lancer.pocket.info.mvp.music.activity.MusicDetailActivity;
 import me.lancer.pocket.info.mvp.news.activity.NewsDetailActivity;
 import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
-import me.lancer.pocket.ui.activity.BlankActivity;
 import me.lancer.pocket.ui.activity.SettingActivity;
 import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.ui.mvp.collect.CollectAdapter;
@@ -39,7 +40,7 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     private ImageView ivImg;
     private RecyclerView mRecyclerView;
     private CollectAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
+    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<CollectBean> mList = new ArrayList<>();
     private CollectBean temp;
 
@@ -60,7 +61,7 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                     if (msg.obj != null) {
                         mList.clear();
                         mList.addAll((List<CollectBean>) msg.obj);
-                        Log.e("Collect: ", ""+mList.size());
+                        Log.e("Collect: ", "" + mList.size());
                         mAdapter.notifyDataSetChanged();
                     }
                     break;
@@ -143,8 +144,8 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
             Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/winter.gif").into(ivImg);
         }
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new CollectAdapter(getActivity(), mList);
@@ -156,7 +157,7 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     }
 
     private void inflateMenu() {
-        toolbar.inflateMenu(R.menu.menu_favorite_list);
+        toolbar.inflateMenu(R.menu.menu_collect_list);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -181,11 +182,13 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     @Override
     public void onItemClick(View view, int position) {
         Intent intent = new Intent();
-        Bundle bundle = new Bundle();
         List<String> list = new ArrayList<>();
         switch (mList.get(position).getCate()) {
             case 0:
                 intent.setClass(getActivity(), ArticleActivity.class);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("content", mList.get(position).getCover());
+                intent.putExtra("author", mList.get(position).getLink());
                 startActivity(intent);
                 break;
             case 1:
@@ -195,7 +198,34 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                 intent.putExtra("link", mList.get(position).getLink());
                 startActivity(intent);
                 break;
+            case 3:
+            case 4:
+                intent.setClass(getActivity(), BookDetailActivity.class);
+                intent.putExtra("type", mList.get(position).getCate() - 3);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("img", mList.get(position).getCover());
+                intent.putExtra("link", mList.get(position).getLink());
+                startActivity(intent);
+                break;
+            case 5:
+            case 6:
+                intent.setClass(getActivity(), MusicDetailActivity.class);
+                intent.putExtra("type", mList.get(position).getCate() - 5);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("img", mList.get(position).getCover());
+                intent.putExtra("link", mList.get(position).getLink());
+                startActivity(intent);
+                break;
             case 7:
+            case 8:
+                intent.setClass(getActivity(), MovieDetailActivity.class);
+                intent.putExtra("type", mList.get(position).getCate() - 7);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("img", mList.get(position).getCover());
+                intent.putExtra("link", mList.get(position).getLink());
+                startActivity(intent);
+                break;
+            case 10:
                 list.add(mList.get(position).getCover());
                 intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
                 intent.putExtra("position", 0);

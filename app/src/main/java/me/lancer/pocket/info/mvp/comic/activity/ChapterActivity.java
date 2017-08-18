@@ -29,7 +29,7 @@ import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
 import me.lancer.pocket.ui.application.Params;
 
-public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
+public class ChapterActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 
     private String link, title, cover;
     private Toolbar toolbar;
@@ -55,7 +55,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                 case 3:
                     if (msg.obj != null) {
                         mData = (List<ComicBean>) msg.obj;
-                        mAdapter = new ComicAdapter(SortActivity.this, mData);
+                        mAdapter = new ComicAdapter(ChapterActivity.this, mData);
                         mRecyclerView.setAdapter(mAdapter);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -113,7 +113,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
 
     public static void startActivity(Activity activity, String link, String cover, String title, ImageView ImageView) {
         Intent intent = new Intent();
-        intent.setClass(activity, SortActivity.class);
+        intent.setClass(activity, ChapterActivity.class);
         intent.putExtra("link", link);
         intent.putExtra("title", title);
         intent.putExtra("cover", cover);

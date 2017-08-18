@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,9 +73,9 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
                         SimpleDateFormat formatter = new SimpleDateFormat("HH");
                         int date = Integer.parseInt(formatter.format(new Date(System.currentTimeMillis())));
                         if (date > Integer.parseInt(mBean.getSunrise().split(":")[0]) && date < (12 + Integer.parseInt(mBean.getSunrise().split(":")[0]))) {
-                            ivImg.setImageResource(R.mipmap.ic_day);
+                            Glide.with(WeatherActivity.this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_day.png").into(ivImg);
                         } else {
-                            ivImg.setImageResource(R.mipmap.ic_night);
+                            Glide.with(WeatherActivity.this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_night.png").into(ivImg);
                         }
                         String weather = mBean.getWeather();
                         if (weather.contains("阴") || weather.contains("云")) {

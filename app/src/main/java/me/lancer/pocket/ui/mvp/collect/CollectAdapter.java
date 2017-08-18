@@ -7,6 +7,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             , R.color.yellow, R.color.amber, R.color.orange
             , R.color.deeporange, R.color.black_float};
 
-    private String[] tags = {"文章", "趣闻", "段子", "图书", "音乐", "电影", "小说", "图片", "漫画", "视频", "游戏", "编程"};
+    private String[] tags = {"文章", "趣闻", "段子", "图书", "书评", "音乐", "乐评", "电影", "影评", "小说", "图片", "漫画", "视频", "游戏", "编程"};
 
     private Context context;
     private List<CollectBean> list;
@@ -79,10 +80,11 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             viewHolder.textView.setVisibility(View.GONE);
             ViewCompat.setTransitionName(viewHolder.imageView, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getCover()).into(viewHolder.imageView);
-        } else {
-            viewHolder.textView.setText(list.get(position).getTitle());
-            viewHolder.textView.setVisibility(View.VISIBLE);
+        }
+        if (list.get(position).getType() == 0) {
             viewHolder.imageView.setVisibility(View.GONE);
+            viewHolder.textView.setVisibility(View.VISIBLE);
+            viewHolder.textView.setText(list.get(position).getTitle());
         }
         viewHolder.tvTagRight.setText(tags[list.get(position).getCate()]);
         viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));

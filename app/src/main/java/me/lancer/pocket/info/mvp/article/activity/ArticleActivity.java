@@ -18,7 +18,9 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import net.steamcrafted.loadtoast.LoadToast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.ArticleBean;
@@ -26,16 +28,22 @@ import me.lancer.pocket.info.mvp.article.ArticlePresenter;
 import me.lancer.pocket.info.mvp.article.IArticleView;
 import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class ArticleActivity extends PresenterActivity<ArticlePresenter> implements IArticleView {
 
-    private FloatingActionButton fabRefresh;
+    private FloatingActionButton fabRefresh, fabFavorite;
     private CollapsingToolbarLayout layout;
     private ImageView ivImg;
     private HtmlTextView htvAuthor, htvContent;
     private LoadToast loadToast;
+    private String title, author, content;
+
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
 
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -53,11 +61,14 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
                     if (msg.obj != null) {
                         loadToast.success();
                         ArticleBean ab = (ArticleBean) msg.obj;
-                        layout.setTitle(ab.getTitle());
-                        if (ab.getContent() != null) {
+                        title = ab.getTitle();
+                        layout.setTitle(title);
+                        if (ab.getAuthor() != null) {
+                            author = ab.getAuthor();
                             htvAuthor.setHtml(ab.getAuthor(), new HtmlHttpImageGetter(htvAuthor));
                         }
                         if (ab.getContent() != null) {
+                            content = ab.getContent();
                             htvContent.setHtml(ab.getContent(), new HtmlHttpImageGetter(htvContent));
                         }
                     }
@@ -90,7 +101,17 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
     }
 
     private void initData() {
-        new Thread(loadDaily).start();
+        title = getIntent().getStringExtra("title");
+        content = getIntent().getStringExtra("content");
+        author = getIntent().getStringExtra("author");
+        if (title == null && content == null) {
+            new Thread(loadDaily).start();
+        } else {
+            layout.setTitle(title);
+            htvAuthor.setHtml(author, new HtmlHttpImageGetter(htvAuthor));
+            htvContent.setHtml(content, new HtmlHttpImageGetter(htvContent));
+            loadToast.success();
+        }
     }
 
     private void initView() {
@@ -109,14 +130,38 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
                 new Thread(loadRandom).start();
             }
         });
+        fabFavorite = (FloatingActionButton) findViewById(R.id.fab_favorite);
+        fabFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(temps.size() == 1) {
+                    fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, author);
+                } else {
+                    fabFavorite.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(0);
+                    temp.setCate(0);
+                    temp.setCover(content);
+                    temp.setTitle(title);
+                    temp.setLink(author);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, author);
+                }
+            }
+        });
+        temps = CollectUtil.query(title, author);
+        if(temps.size() == 1) {
+            fabFavorite.setImageResource(R.mipmap.ic_favorite_white_24dp);
+        } else {
+            fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+        }
         ivImg = (ImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-        SimpleDateFormat formatter = new SimpleDateFormat("HH");
-        int date = Integer.parseInt(formatter.format(new Date(System.currentTimeMillis())));
-        if (date > 6 && date < 18) {
-            ivImg.setImageResource(R.mipmap.ic_day);
+        if ((Math.random() * 16) > 8) {
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_day.png").into(ivImg);
         } else {
-            ivImg.setImageResource(R.mipmap.ic_night);
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_night.png").into(ivImg);
         }
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
         htvAuthor = (HtmlTextView) findViewById(R.id.htv_author);

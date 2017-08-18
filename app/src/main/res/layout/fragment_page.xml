@@ -45,7 +45,6 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="8dp"
-                    android:background="@mipmap/ic_favorite_border_white_24dp"
                     android:backgroundTint="@color/white" />
 
                 <Button

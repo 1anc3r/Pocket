@@ -7,14 +7,19 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import org.polaric.colorful.CActivity;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.tool.mvp.weather.activity.WeatherActivity;
 
 public class AboutActivity extends CActivity {
 
     Toolbar toolbar;
+    ImageView imageView;
     WebView webView;
 
     String link, title;
@@ -30,6 +35,8 @@ public class AboutActivity extends CActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        imageView = (ImageView) findViewById(R.id.imageView);
+        Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_saber.jpg").into(imageView);
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);

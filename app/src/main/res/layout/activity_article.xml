@@ -106,7 +106,6 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@android:color/holo_red_light"
             app:fab_colorPressed="@android:color/holo_red_dark"
-            app:fab_icon="@mipmap/ic_favorite_border_white_24dp"
             app:fab_size="mini" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

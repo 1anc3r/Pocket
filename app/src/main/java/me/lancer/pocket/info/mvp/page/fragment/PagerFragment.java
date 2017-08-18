@@ -79,6 +79,8 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
         temps = CollectUtil.query(link, link);
         if(temps.size() == 1) {
             btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
+        } else {
+            btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_border_white_24dp);
         }
         btnShare = (Button) view.findViewById(R.id.btn_share);
         btnDownload = (Button) view.findViewById(R.id.btn_download);
@@ -94,14 +96,16 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
                 if(temps.size() == 1) {
                     btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(link, link);
                 } else {
+                    btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(1);
-                    temp.setCate(7);
+                    temp.setCate(10);
                     temp.setCover(link);
                     temp.setTitle(link);
                     temp.setLink(link);
-                    btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
                     CollectUtil.add(temp);
+                    temps = CollectUtil.query(link, link);
                 }
             } else if (view == btnShare) {
                 Intent intent = new Intent(Intent.ACTION_SEND);

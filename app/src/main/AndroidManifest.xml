@@ -120,7 +120,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".info.mvp.comic.activity.SortActivity"
+            android:name=".info.mvp.comic.activity.ChapterActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".info.mvp.page.activity.PagerActivity"
