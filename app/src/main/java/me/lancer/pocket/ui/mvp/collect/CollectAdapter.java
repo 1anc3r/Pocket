@@ -79,9 +79,10 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             viewHolder.textView.setVisibility(View.GONE);
             ViewCompat.setTransitionName(viewHolder.imageView, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getCover()).into(viewHolder.imageView);
-
         } else {
             viewHolder.textView.setText(list.get(position).getTitle());
+            viewHolder.textView.setVisibility(View.VISIBLE);
+            viewHolder.imageView.setVisibility(View.GONE);
         }
         viewHolder.tvTagRight.setText(tags[list.get(position).getCate()]);
         viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
