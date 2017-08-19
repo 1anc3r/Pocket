@@ -29,9 +29,9 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private MusicAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<MusicBean> mList = new ArrayList<>();
+    private MusicAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<MusicBean> list = new ArrayList<>();
 
     private int pager = 0, last = 0;
 
@@ -50,13 +50,13 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
                 case 3:
                     if (msg.obj != null) {
                         if (pager == 0) {
-                            mList = (List<MusicBean>) msg.obj;
-                            mAdapter = new MusicAdapter(getActivity(), mList);
-                            rvList.setAdapter(mAdapter);
+                            list = (List<MusicBean>) msg.obj;
+                            adapter = new MusicAdapter(getActivity(), list);
+                            rvList.setAdapter(adapter);
                         } else {
-                            mList.addAll((List<MusicBean>) msg.obj);
+                            list.addAll((List<MusicBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager * 10 + i);
+                                adapter.notifyItemInserted(pager * 10 + i);
                             }
                         }
                     }
@@ -103,19 +103,19 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
             }
         });
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(getContext());
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new MusicAdapter(getActivity(), mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new MusicAdapter(getActivity(), list);
+        rvList.setAdapter(adapter);
         rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     pager += 20;
                     new Thread(loadReviewer).start();
                 }
@@ -124,7 +124,7 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = mLinearLayoutManager.findLastVisibleItemPosition();
+                last = layoutManager.findLastVisibleItemPosition();
             }
         });
     }

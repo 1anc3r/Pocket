@@ -29,9 +29,9 @@ public class ContactSearchActivity extends BaseActivity {
 
     private Toolbar toolbar;
     private RecyclerView rvList;
-    private ContactAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<ContactBean> mList = new ArrayList<>();
+    private ContactAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<ContactBean> list = new ArrayList<>();
 
     private String keyword;
 
@@ -47,9 +47,9 @@ public class ContactSearchActivity extends BaseActivity {
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<ContactBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll((List<ContactBean>) msg.obj);
+                        adapter.notifyDataSetChanged();
                     }
                     break;
             }
@@ -73,10 +73,10 @@ public class ContactSearchActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         rvList = (RecyclerView) findViewById(R.id.rv_result);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        rvList.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new ContactAdapter(this, mList, 1);
-        rvList.setAdapter(mAdapter);
+        layoutManager = new LinearLayoutManager(this);
+        rvList.setLayoutManager(layoutManager);
+        adapter = new ContactAdapter(this, list, 1);
+        rvList.setAdapter(adapter);
     }
 
     private void initData() {

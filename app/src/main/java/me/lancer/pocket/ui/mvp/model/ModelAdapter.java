@@ -123,7 +123,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         public CardView cardView;
         public ImageView imageView;
         public TextView tvTagLeft, tvTagRight;
-        private MyItemClickListener mListener;
+        private MyItemClickListener listener;
         private MyItemLongClickListener mLongClickListener;
 
         public ViewHolder(View rootView, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
@@ -135,7 +135,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
             imageView = (ImageView) rootView.findViewById(R.id.imageView);
             tvTagLeft = (TextView) rootView.findViewById(R.id.left_top_tag);
             tvTagRight = (TextView) rootView.findViewById(R.id.right_bottom_tag);
-            this.mListener = listener;
+            this.listener = listener;
             this.mLongClickListener = longClickListener;
             rootView.setOnClickListener(this);
             rootView.setOnLongClickListener(this);
@@ -143,8 +143,8 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            if (mListener != null) {
-                mListener.onItemClick(view, getPosition());
+            if (listener != null) {
+                listener.onItemClick(view, getPosition());
             }
         }
 

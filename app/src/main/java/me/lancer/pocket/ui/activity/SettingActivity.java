@@ -63,7 +63,7 @@ public class SettingActivity extends BaseActivity {
     private int screenMode;
     private int screenBrightness;
 
-    private List<String> funcList = new ArrayList<>(), problemList = new ArrayList<>(), logList = new ArrayList<>();
+    private List<String> funcList = new ArrayList<>(), problelist = new ArrayList<>(), logList = new ArrayList<>();
     private List<RepositoryBean> reList = new ArrayList<>();
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     private final String root = Environment.getExternalStorageDirectory() + "/";
@@ -342,24 +342,24 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t * ——数据来源 : GithubRanking\n" +
                 "\t\t\t\t * （github-ranking.com）\n" +
                 "\t\t\t\t */");
-        problemList.add("Q : 主页上的搜索栏好像并没有什么用...");
-        problemList.add("A : 因为模块比较多, 各模块的搜索接口还没有统一, 个别模块中有搜索功能, 下一个版本搜索功能会上线. 如果您对搜索功能有什么好的建议或意见请通过意见反馈通道或者发送邮件联系1anc3r. ");
-        problemList.add("Q : 为什么 \"信息\" 列表不显示联系人的名字?");
-        problemList.add("A : 因为1anc3r太懒了, 没有将 \"信息\" 列表和 \"联系人\" 列表进行比对╮(╯_╰)╭. ");
-        problemList.add("Q : 为什么发送了短信却没有记录?");
-        problemList.add("A : 1anc3r在虚拟机上测试时没问题, 但是真机测试时也无法写入数据库, 目前正在努力寻找解决方法. ");
-        problemList.add("Q : 为什么 \"文档\" 和 \"应用\" 加载时间很久?");
-        problemList.add("A : Android没有提供 \"文档\" 的访问接口, 1anc3r是通过遍历文件系统来识别文档的(๑•́ ₃•̀๑); " +
+        problelist.add("Q : 主页上的搜索栏好像并没有什么用...");
+        problelist.add("A : 因为模块比较多, 各模块的搜索接口还没有统一, 个别模块中有搜索功能, 下一个版本搜索功能会上线. 如果您对搜索功能有什么好的建议或意见请通过意见反馈通道或者发送邮件联系1anc3r. ");
+        problelist.add("Q : 为什么 \"信息\" 列表不显示联系人的名字?");
+        problelist.add("A : 因为1anc3r太懒了, 没有将 \"信息\" 列表和 \"联系人\" 列表进行比对╮(╯_╰)╭. ");
+        problelist.add("Q : 为什么发送了短信却没有记录?");
+        problelist.add("A : 1anc3r在虚拟机上测试时没问题, 但是真机测试时也无法写入数据库, 目前正在努力寻找解决方法. ");
+        problelist.add("Q : 为什么 \"文档\" 和 \"应用\" 加载时间很久?");
+        problelist.add("A : Android没有提供 \"文档\" 的访问接口, 1anc3r是通过遍历文件系统来识别文档的(๑•́ ₃•̀๑); " +
                 " \"应用\" 加载时间长是因为您的手机安装的应用太多了, 第二次加载会快一丢丢(ง •̀_•́)ง. ");
-        problemList.add("Q : \"天气\" 中选择的城市没有数据怎么办, 而且别的天气应用都可以定位城市, 为什么你的 \"天气\" 没办法定位城市?");
-        problemList.add("A : \"天气\" 数据来自中央天气, 没有数据的话1anc3r也造不出来. 没有加入定位的原因是中央天气的城市代码和高德地图的城市代码不一样. ");
-        problemList.add("Q : \"资讯\" 中数据加载时间长或者加载不出来怎么办?");
-        problemList.add("A : 首先, 检查您的网络是否可用; 其次, 下拉刷新可以解决一部分问题.\n" +
+        problelist.add("Q : \"天气\" 中选择的城市没有数据怎么办, 而且别的天气应用都可以定位城市, 为什么你的 \"天气\" 没办法定位城市?");
+        problelist.add("A : \"天气\" 数据来自中央天气, 没有数据的话1anc3r也造不出来. 没有加入定位的原因是中央天气的城市代码和高德地图的城市代码不一样. ");
+        problelist.add("Q : \"资讯\" 中数据加载时间长或者加载不出来怎么办?");
+        problelist.add("A : 首先, 检查您的网络是否可用; 其次, 下拉刷新可以解决一部分问题.\n" +
                 "(Ps. \"游戏\" 数据来自Steam, \"编程\" 数据来自Github, 这俩货访问速度肯定比其他国内站点慢)");
-        problemList.add("Q : 以后还有什么新功能模块?");
-        problemList.add("A : 目前1anc3r的想法是加入日历、时钟、备忘录、收藏、通话短信统计. 如果你有什么有趣的API的话不妨联系1anc3r.");
-        problemList.add("Q : 1anc3r, 1anc3r, 你的程序又崩溃了!");
-        problemList.add("A : 方法一, 通过 \"意见反馈\" 撩一撩1anc3r; 方法二, 发送邮件至huangfangzhi0@foxmail.com");
+        problelist.add("Q : 以后还有什么新功能模块?");
+        problelist.add("A : 目前1anc3r的想法是加入日历、时钟、备忘录、收藏、通话短信统计. 如果你有什么有趣的API的话不妨联系1anc3r.");
+        problelist.add("Q : 1anc3r, 1anc3r, 你的程序又崩溃了!");
+        problelist.add("A : 方法一, 通过 \"意见反馈\" 撩一撩1anc3r; 方法二, 发送邮件至huangfangzhi0@foxmail.com");
     }
 
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
@@ -376,7 +376,7 @@ public class SettingActivity extends BaseActivity {
             } else if (v == llFunc) {
                 showListDialog(1, funcList);
             } else if (v == llProblem) {
-                showListDialog(2, problemList);
+                showListDialog(2, problelist);
             } else if (v == llUpdate) {
                 new Thread(update).start();
             } else if (v == llFeedback) {

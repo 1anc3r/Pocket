@@ -45,9 +45,9 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
     private TextView tvTitle, tvAuthor, tvIntro, tvWordCount, tvFollowCount, tvRetentRatio;
     private LoadToast loadToast;
     private RecyclerView rvList;
-    private ChapterAdapter mAdapter;
+    private ChapterAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<NovelBean.Chapters> mList = new ArrayList<>();
+    private List<NovelBean.Chapters> list = new ArrayList<>();
 
     private String value1, value2, value4;
     private int value3;
@@ -80,10 +80,10 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
                 case 4:
                     if (msg.obj != null) {
                         loadToast.success();
-                        mList.clear();
-                        mList.addAll((List<NovelBean.Chapters>) msg.obj);
-                        mAdapter = new ChapterAdapter(NovelDetailActivity.this, mList);
-                        rvList.setAdapter(mAdapter);
+                        list.clear();
+                        list.addAll((List<NovelBean.Chapters>) msg.obj);
+                        adapter = new ChapterAdapter(NovelDetailActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
                     break;
             }
@@ -126,8 +126,8 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new ChapterAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new ChapterAdapter(this, list);
+        rvList.setAdapter(adapter);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
         loadToast.setText("玩命加载中...");
@@ -191,12 +191,12 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != -1) {
             int position = resultCode;
-            if (position == mList.size()) {
+            if (position == list.size()) {
                 showSnackbar(rvList, "这是终章.");
             } else if (position == -1) {
                 showSnackbar(rvList, "这是首章.");
             } else {
-                NovelReadActivity.startActivity(this, position, mList.get(position).getTitle(), mList.get(position).getLink());
+                NovelReadActivity.startActivity(this, position, list.get(position).getTitle(), list.get(position).getLink());
             }
         }
     }

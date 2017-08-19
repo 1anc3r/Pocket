@@ -31,9 +31,9 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
     private Toolbar toolbar;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private ComicAdapter mAdapter;
+    private ComicAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<ComicBean> mList = new ArrayList<>();
+    private List<ComicBean> list = new ArrayList<>();
 
     private String keyword;
 
@@ -51,9 +51,9 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList = (List<ComicBean>) msg.obj;
-                        mAdapter = new ComicAdapter(ComicSearchActivity.this, mList);
-                        rvList.setAdapter(mAdapter);
+                        list = (List<ComicBean>) msg.obj;
+                        adapter = new ComicAdapter(ComicSearchActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -97,8 +97,8 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new ComicAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new ComicAdapter(this, list);
+        rvList.setAdapter(adapter);
     }
 
     private void initData() {

@@ -41,10 +41,10 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
     private Toolbar toolbar;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private CityAdapter mAdapter;
+    private CityAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
 
-    private List<CityBean> mList = new ArrayList<>();
+    private List<CityBean> list = new ArrayList<>();
     private List<String> now = new ArrayList<>();
     private List<String> city = new ArrayList<>();
     private List<String> town = new ArrayList<>();
@@ -69,14 +69,14 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
                         now.clear();
                         town.clear();
                         city.clear();
-                        mList = (List<CityBean>) msg.obj;
-                        for (CityBean bean : mList) {
+                        list = (List<CityBean>) msg.obj;
+                        for (CityBean bean : list) {
                             if (!now.contains(bean.getCityName())) {
                                 city.add(bean.getCityName());
                                 now.add(bean.getCityName());
                             }
                         }
-                        mAdapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                     }
                     break;
                 case 4:
@@ -156,10 +156,10 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
         layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new CityAdapter(this, now);
-        mAdapter.setOnItemClickListener(this);
-        mAdapter.setOnItemLongClickListener(this);
-        rvList.setAdapter(mAdapter);
+        adapter = new CityAdapter(this, now);
+        adapter.setOnItemClickListener(this);
+        adapter.setOnItemLongClickListener(this);
+        rvList.setAdapter(adapter);
     }
 
     @Override
@@ -178,7 +178,7 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
                 if (now.contains(query)) {
                     Intent intent = new Intent();
                     String id = "CHBJ000000";
-                    for (CityBean bean : mList) {
+                    for (CityBean bean : list) {
                         if (bean.getTownName().equals(query)) {
                             id = bean.getId();
                         }
@@ -229,7 +229,7 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
             Intent intent = new Intent();
             String id = "CHBJ000000";
             String temp = now.get(postion);
-            for (CityBean bean : mList) {
+            for (CityBean bean : list) {
                 if (bean.getTownName().equals(temp)) {
                     id = bean.getId();
                 }
@@ -242,14 +242,14 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
             flag = 1;
             town.clear();
             String temp = now.get(postion);
-            for (CityBean bean : mList) {
+            for (CityBean bean : list) {
                 if (bean.getCityName().equals(temp)) {
                     town.add(bean.getTownName());
                 }
             }
             now.clear();
             now.addAll(town);
-            mAdapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();
         }
     }
 

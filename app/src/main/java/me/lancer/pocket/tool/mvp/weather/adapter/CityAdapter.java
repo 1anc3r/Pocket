@@ -54,13 +54,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public TextView tvStr;
-        private MyItemClickListener mListener;
+        private MyItemClickListener listener;
         private MyItemLongClickListener mLongClickListener;
 
         public ViewHolder(View rootView, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
             super(rootView);
             tvStr = (TextView) rootView.findViewById(R.id.tv_string);
-            this.mListener = listener;
+            this.listener = listener;
             this.mLongClickListener = longClickListener;
             rootView.setOnClickListener(this);
             rootView.setOnLongClickListener(this);
@@ -68,8 +68,8 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            if (mListener != null) {
-                mListener.onItemClick(view, getPosition());
+            if (listener != null) {
+                listener.onItemClick(view, getPosition());
             }
         }
 

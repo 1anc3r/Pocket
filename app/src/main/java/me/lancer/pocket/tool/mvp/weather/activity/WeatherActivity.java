@@ -47,10 +47,10 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
             tvSportBrief, tvSportDetail;
 
     private RecyclerView rvList;
-    private FutureAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
+    private FutureAdapter adapter;
+    private LinearLayoutManager layoutManager;
     private WeatherBean mBean = new WeatherBean();
-    private List<FutureBean> mList = new ArrayList<>();
+    private List<FutureBean> list = new ArrayList<>();
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -101,9 +101,9 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
                         tvFluDetail.setText(mBean.getFluDetails());
                         tvSportBrief.setText("运动指数 — " + mBean.getSportBrief());
                         tvSportDetail.setText(mBean.getSportDetails());
-                        mList.clear();
-                        mList.addAll(mBean.getFuture());
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll(mBean.getFuture());
+                        adapter.notifyDataSetChanged();
                     }
                     break;
             }
@@ -173,11 +173,11 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
         tvSportBrief = (TextView) findViewById(R.id.tv_sport_brief);
         tvSportDetail = (TextView) findViewById(R.id.tv_sport_detail);
         rvList = (RecyclerView) findViewById(R.id.rv_future);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(this);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new FutureAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new FutureAdapter(this, list);
+        rvList.setAdapter(adapter);
         new Thread(loadWeather).start();
     }
 

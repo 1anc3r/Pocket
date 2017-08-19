@@ -39,7 +39,7 @@ public class CalendarActivity extends PresenterActivity<CalendarPresenter> imple
     private CalendarView mCalendarView;
     private FloatingActionButton mFab;
 
-    private List<CalendarBean> mList = new ArrayList<>();
+    private List<CalendarBean> list = new ArrayList<>();
     private boolean isExpanded = false;
     private CalendarBean temp;
 
@@ -64,9 +64,9 @@ public class CalendarActivity extends PresenterActivity<CalendarPresenter> imple
                     break;
                 case 4:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<CalendarBean>) msg.obj);
-                        mCalendarView.updateCalendar(mList);
+                        list.clear();
+                        list.addAll((List<CalendarBean>) msg.obj);
+                        mCalendarView.updateCalendar(list);
                     }
                     break;
             }

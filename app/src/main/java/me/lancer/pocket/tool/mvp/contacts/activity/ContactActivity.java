@@ -31,9 +31,9 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
     private ImageView ivImg, ivArg1, ivArg2;
     private TextView tvPhone, tvCallLog;
     private RecyclerView rvList;
-    private ContactAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<ContactBean> mList = new ArrayList<>();
+    private ContactAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<ContactBean> list = new ArrayList<>();
 
     private String name, number, img;
 
@@ -70,17 +70,17 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
         ivArg2 = (ImageView) findViewById(R.id.iv_arg2);
         ivArg2.setOnClickListener(this);
         rvList = (RecyclerView) findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setAutoMeasureEnabled(true);
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setAutoMeasureEnabled(true);
+        rvList.setLayoutManager(layoutManager);
         rvList.setHasFixedSize(true);
         rvList.setNestedScrollingEnabled(false);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new ContactAdapter(this, mList, 0);
-        mAdapter.setHasStableIds(true);
-        rvList.setAdapter(mAdapter);
-        if (mList.size() > 0) {
+        adapter = new ContactAdapter(this, list, 0);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
+        if (list.size() > 0) {
             tvCallLog.setVisibility(View.VISIBLE);
         } else {
             tvCallLog.setVisibility(View.GONE);
@@ -134,7 +134,7 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
                 item.setType(type);
                 item.setDate(date);
                 item.setDuration(duration);
-                mList.add(item);
+                list.add(item);
             }
         }
         startManagingCursor(cursor);

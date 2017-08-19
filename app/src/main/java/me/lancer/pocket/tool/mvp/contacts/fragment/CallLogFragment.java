@@ -27,9 +27,9 @@ import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
 public class CallLogFragment extends BaseFragment {
 
     private RecyclerView rvList;
-    private ContactAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<ContactBean> mList = new ArrayList<>();
+    private ContactAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<ContactBean> list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,10 +51,10 @@ public class CallLogFragment extends BaseFragment {
 
     private void initView(View view) {
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        rvList.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new ContactAdapter(getActivity(), mList, 0);
-        rvList.setAdapter(mAdapter);
+        layoutManager = new LinearLayoutManager(getActivity());
+        rvList.setLayoutManager(layoutManager);
+        adapter = new ContactAdapter(getActivity(), list, 0);
+        rvList.setAdapter(adapter);
     }
 
     private void getCallLog() {
@@ -89,7 +89,7 @@ public class CallLogFragment extends BaseFragment {
                 item.setType(type);
                 item.setDate(date);
                 item.setDuration(duration);
-                mList.add(item);
+                list.add(item);
             }
         }
         getActivity().startManagingCursor(cursor);

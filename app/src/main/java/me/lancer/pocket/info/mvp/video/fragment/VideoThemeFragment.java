@@ -29,9 +29,9 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private VideoAdapter mAdapter;
+    private VideoAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<VideoBean> mList = new ArrayList<>();
+    private List<VideoBean> list = new ArrayList<>();
 
     private int pager = 0;
 
@@ -49,9 +49,9 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<VideoBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll((List<VideoBean>) msg.obj);
+                        adapter.notifyDataSetChanged();
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -99,8 +99,8 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new VideoAdapter(getActivity(), mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new VideoAdapter(getActivity(), list);
+        rvList.setAdapter(adapter);
     }
 
     @Override

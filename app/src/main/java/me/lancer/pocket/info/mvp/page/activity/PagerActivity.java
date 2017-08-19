@@ -22,7 +22,7 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
 
     private String link;
     private List<PageBean> mData = new ArrayList<PageBean>();
-    private PageAdapter mAdapter;
+    private PageAdapter adapter;
     private ViewPager viewPager;
 
     private Handler handler = new Handler() {
@@ -38,7 +38,7 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
                 case 3:
                     if (msg.obj != null) {
                         mData = (List<PageBean>) msg.obj;
-                        mAdapter.refreshData(mData);
+                        adapter.refreshData(mData);
                     }
                     break;
             }
@@ -61,9 +61,9 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
 
     public void init() {
         link = getIntent().getStringExtra("link");
-        mAdapter = new PageAdapter(mData, getSupportFragmentManager());
+        adapter = new PageAdapter(mData, getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setAdapter(mAdapter);
+        viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         new Thread(loadTop).start();
     }

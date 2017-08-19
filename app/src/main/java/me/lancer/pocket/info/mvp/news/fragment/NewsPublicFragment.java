@@ -29,9 +29,9 @@ public class NewsPublicFragment extends PresenterFragment<NewsPresenter> impleme
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private NewsAdapter mAdapter;
+    private NewsAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<NewsBean> mList = new ArrayList<>();
+    private List<NewsBean> list = new ArrayList<>();
 
     private int page = 1, last = 0, flag = 0, load = 0;
 
@@ -49,16 +49,16 @@ public class NewsPublicFragment extends PresenterFragment<NewsPresenter> impleme
                     break;
                 case 3:
                     if (msg.obj != null && load == 1) {
-                        int size = mList.size();
-                        mList.addAll((List<NewsBean>) msg.obj);
+                        int size = list.size();
+                        list.addAll((List<NewsBean>) msg.obj);
                         for (int i = 0; i < ((List<NewsBean>) msg.obj).size() + 1; i++) {
-                            mAdapter.notifyItemInserted(size + 1 + i);
+                            adapter.notifyItemInserted(size + 1 + i);
                         }
                         load = 0;
                     } else {
-                        mList.clear();
-                        mList.addAll((List<NewsBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll((List<NewsBean>) msg.obj);
+                        adapter.notifyDataSetChanged();
                         load = 0;
                     }
                     swipeRefresh.setRefreshing(false);
@@ -107,15 +107,15 @@ public class NewsPublicFragment extends PresenterFragment<NewsPresenter> impleme
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new NewsAdapter(getActivity(), mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new NewsAdapter(getActivity(), list);
+        rvList.setAdapter(adapter);
         rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     load = 1;
                     page += 1;
                     new Thread(loadPublic).start();

@@ -36,9 +36,9 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
     private Toolbar toolbar;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private NovelImgAdapter mAdapter;
+    private NovelImgAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<NovelBean> mList = new ArrayList<>();
+    private List<NovelBean> list = new ArrayList<>();
 
     private int type, value3, value4, last = 0;
     private String value1, value2;
@@ -57,8 +57,8 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.addAll((List<NovelBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        list.addAll((List<NovelBean>) msg.obj);
+                        adapter.notifyDataSetChanged();
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -130,8 +130,8 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new NovelImgAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new NovelImgAdapter(this, list);
+        rvList.setAdapter(adapter);
 
         rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -139,7 +139,7 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount() && type == 2) {
+                        && last + 1 == adapter.getItemCount() && type == 2) {
                     value3 += 10;
                     new Thread(loadCate).start();
                 }

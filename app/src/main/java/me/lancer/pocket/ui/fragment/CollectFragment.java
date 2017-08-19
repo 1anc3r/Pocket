@@ -42,10 +42,10 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     private Toolbar toolbar;
     private ImageView ivImg;
     private RecyclerView rvList;
-    private CollectAdapter mAdapter;
+    private CollectAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
 
-    private List<CollectBean> mList = new ArrayList<>();
+    private List<CollectBean> list = new ArrayList<>();
     private CollectBean temp;
 
     private Handler handler = new Handler() {
@@ -63,10 +63,10 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                     break;
                 case 4:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<CollectBean>) msg.obj);
-                        Log.e("Collect: ", "" + mList.size());
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll((List<CollectBean>) msg.obj);
+                        Log.e("Collect: ", "" + list.size());
+                        adapter.notifyDataSetChanged();
                     }
                     break;
             }
@@ -153,10 +153,10 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new CollectAdapter(getActivity(), mList);
-        mAdapter.setOnItemClickListener(this);
-        mAdapter.setOnItemLongClickListener(this);
-        rvList.setAdapter(mAdapter);
+        adapter = new CollectAdapter(getActivity(), list);
+        adapter.setOnItemClickListener(this);
+        adapter.setOnItemLongClickListener(this);
+        rvList.setAdapter(adapter);
         rvList.setFocusable(true);
         rvList.setFocusableInTouchMode(true);
     }
@@ -188,50 +188,50 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     public void onItemClick(View view, int position) {
         Intent intent = new Intent();
         List<String> list = new ArrayList<>();
-        switch (mList.get(position).getCate()) {
+        switch (list.get(position).getCate()) {
             case 0:
                 intent.setClass(getActivity(), ArticleActivity.class);
-                intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("content", mList.get(position).getCover());
-                intent.putExtra("author", mList.get(position).getLink());
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("content", list.get(position).getCover());
+                intent.putExtra("author", list.get(position).getLink());
                 startActivity(intent);
                 break;
             case 1:
                 intent.setClass(getActivity(), NewsDetailActivity.class);
-                intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("img", mList.get(position).getCover());
-                intent.putExtra("link", mList.get(position).getLink());
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("img", list.get(position).getCover());
+                intent.putExtra("link", list.get(position).getLink());
                 startActivity(intent);
                 break;
             case 3:
             case 4:
                 intent.setClass(getActivity(), BookDetailActivity.class);
-                intent.putExtra("type", mList.get(position).getCate() - 3);
-                intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("img", mList.get(position).getCover());
-                intent.putExtra("link", mList.get(position).getLink());
+                intent.putExtra("type", list.get(position).getCate() - 3);
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("img", list.get(position).getCover());
+                intent.putExtra("link", list.get(position).getLink());
                 startActivity(intent);
                 break;
             case 5:
             case 6:
                 intent.setClass(getActivity(), MusicDetailActivity.class);
-                intent.putExtra("type", mList.get(position).getCate() - 5);
-                intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("img", mList.get(position).getCover());
-                intent.putExtra("link", mList.get(position).getLink());
+                intent.putExtra("type", list.get(position).getCate() - 5);
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("img", list.get(position).getCover());
+                intent.putExtra("link", list.get(position).getLink());
                 startActivity(intent);
                 break;
             case 7:
             case 8:
                 intent.setClass(getActivity(), MovieDetailActivity.class);
-                intent.putExtra("type", mList.get(position).getCate() - 7);
-                intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("img", mList.get(position).getCover());
-                intent.putExtra("link", mList.get(position).getLink());
+                intent.putExtra("type", list.get(position).getCate() - 7);
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("img", list.get(position).getCover());
+                intent.putExtra("link", list.get(position).getLink());
                 startActivity(intent);
                 break;
             case 10:
-                list.add(mList.get(position).getCover());
+                list.add(list.get(position).getCover());
                 intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
                 intent.putExtra("position", 0);
                 intent.setClass(getActivity(), PhotoGalleryActivity.class);
@@ -239,16 +239,16 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                 break;
             case 11:
                 intent.setClass(getActivity(), ChapterActivity.class);
-                intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("cover", mList.get(position).getCover());
-                intent.putExtra("link", mList.get(position).getLink());
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("cover", list.get(position).getCover());
+                intent.putExtra("link", list.get(position).getLink());
                 startActivity(intent);
                 break;
             case 13:
                 intent.setClass(getActivity(), GameDetailActivity.class);
-                intent.putExtra("title", mList.get(position).getTitle());
-                intent.putExtra("img", mList.get(position).getCover());
-                intent.putExtra("link", mList.get(position).getLink());
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("img", list.get(position).getCover());
+                intent.putExtra("link", list.get(position).getLink());
                 startActivity(intent);
                 break;
         }

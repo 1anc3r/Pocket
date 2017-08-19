@@ -62,9 +62,9 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             R.mipmap.ic_live_tv_black_48dp, R.mipmap.ic_extension_black_48dp, R.mipmap.ic_code_black_48dp};
 
     private RecyclerView rvList;
-    private ModelAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<ModelBean> mList = new ArrayList<>();
+    private ModelAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<ModelBean> list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,17 +89,17 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         int width = wm.getDefaultDisplay().getWidth();
         int height = wm.getDefaultDisplay().getHeight();
         rvList = (RecyclerView) getView().findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(getContext());
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
         for (int i = 0; i < names.length; i++) {
-            mList.add(new ModelBean(names[i], icons[i]));
+            list.add(new ModelBean(names[i], icons[i]));
         }
-        mAdapter = new ModelAdapter(getActivity(), mList, width);
-        mAdapter.setOnItemClickListener(this);
-        mAdapter.setOnItemLongClickListener(this);
-        rvList.setAdapter(mAdapter);
+        adapter = new ModelAdapter(getActivity(), list, width);
+        adapter.setOnItemClickListener(this);
+        adapter.setOnItemLongClickListener(this);
+        rvList.setAdapter(adapter);
         rvList.setFocusable(true);
         rvList.setFocusableInTouchMode(true);
         rvList.setOnKeyListener(OnKeyListener);
@@ -109,7 +109,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_MENU) {
-                mAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 return true;
             }
             return false;

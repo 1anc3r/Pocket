@@ -25,9 +25,9 @@ import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
 public class ContactFragment extends BaseFragment {
 
     private RecyclerView rvList;
-    private ContactAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<ContactBean> mList = new ArrayList<>();
+    private ContactAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<ContactBean> list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,10 +49,10 @@ public class ContactFragment extends BaseFragment {
 
     private void initView(View view) {
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        rvList.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new ContactAdapter(getActivity(), mList, 1);
-        rvList.setAdapter(mAdapter);
+        layoutManager = new LinearLayoutManager(getActivity());
+        rvList.setLayoutManager(layoutManager);
+        adapter = new ContactAdapter(getActivity(), list, 1);
+        rvList.setAdapter(adapter);
     }
 
     private void getContacts() {
@@ -71,7 +71,7 @@ public class ContactFragment extends BaseFragment {
                 ContactBean item = new ContactBean();
                 item.setName(name);
                 item.setNumber(number);
-                mList.add(item);
+                list.add(item);
             }
         }
         getActivity().startManagingCursor(cursor);

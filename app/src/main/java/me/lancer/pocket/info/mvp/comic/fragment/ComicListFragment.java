@@ -29,9 +29,9 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private ComicAdapter mAdapter;
+    private ComicAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<ComicBean> mList = new ArrayList<>();
+    private List<ComicBean> list = new ArrayList<>();
 
     private Handler handler = new Handler() {
         @Override
@@ -47,9 +47,9 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<ComicBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll((List<ComicBean>) msg.obj);
+                        adapter.notifyDataSetChanged();
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -96,8 +96,8 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new ComicAdapter(getActivity(), mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new ComicAdapter(getActivity(), list);
+        rvList.setAdapter(adapter);
     }
 
     @Override

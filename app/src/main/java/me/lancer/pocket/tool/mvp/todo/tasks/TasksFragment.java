@@ -56,7 +56,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     private TasksContract.Presenter mPresenter;
 
-    private TasksAdapter mListAdapter;
+    private TasksAdapter listAdapter;
 
     private View mNoTasksView;
 
@@ -81,7 +81,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListAdapter = new TasksAdapter(new ArrayList<Task>(0), mItemListener);
+        listAdapter = new TasksAdapter(new ArrayList<Task>(0), mItelistener);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
         // Set up tasks view
         ListView listView = (ListView) root.findViewById(R.id.tasks_list);
-        listView.setAdapter(mListAdapter);
+        listView.setAdapter(listAdapter);
         mFilteringLabelView = (TextView) root.findViewById(R.id.filteringLabel);
         mTasksView = (LinearLayout) root.findViewById(R.id.tasksLL);
 
@@ -209,7 +209,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     /**
      * Listener for clicks on tasks in the ListView.
      */
-    TaskItemListener mItemListener = new TaskItemListener() {
+    TaskItelistener mItelistener = new TaskItelistener() {
         @Override
         public void onTaskClick(Task clickedTask) {
             mPresenter.openTaskDetails(clickedTask);
@@ -246,7 +246,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     @Override
     public void showTasks(List<Task> tasks) {
-        mListAdapter.replaceData(tasks);
+        listAdapter.replaceData(tasks);
 
         mTasksView.setVisibility(View.VISIBLE);
         mNoTasksView.setVisibility(View.GONE);
@@ -355,11 +355,11 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     private static class TasksAdapter extends BaseAdapter {
 
         private List<Task> mTasks;
-        private TaskItemListener mItemListener;
+        private TaskItelistener mItelistener;
 
-        public TasksAdapter(List<Task> tasks, TaskItemListener itemListener) {
+        public TasksAdapter(List<Task> tasks, TaskItelistener itelistener) {
             setList(tasks);
-            mItemListener = itemListener;
+            mItelistener = itelistener;
         }
 
         public void replaceData(List<Task> tasks) {
@@ -415,9 +415,9 @@ public class TasksFragment extends Fragment implements TasksContract.View {
                 @Override
                 public void onClick(View v) {
                     if (!task.isCompleted()) {
-                        mItemListener.onCompleteTaskClick(task);
+                        mItelistener.onCompleteTaskClick(task);
                     } else {
-                        mItemListener.onActivateTaskClick(task);
+                        mItelistener.onActivateTaskClick(task);
                     }
                 }
             });
@@ -425,7 +425,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
             rowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mItemListener.onTaskClick(task);
+                    mItelistener.onTaskClick(task);
                 }
             });
 
@@ -433,7 +433,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         }
     }
 
-    public interface TaskItemListener {
+    public interface TaskItelistener {
 
         void onTaskClick(Task clickedTask);
 

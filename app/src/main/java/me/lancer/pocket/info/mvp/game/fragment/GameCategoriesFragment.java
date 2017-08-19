@@ -29,9 +29,9 @@ public class GameCategoriesFragment extends PresenterFragment<GamePresenter> imp
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private GameAdapter mAdapter;
+    private GameAdapter adapter;
     private GridLayoutManager mGridLayoutManager;
-    private List<GameBean> mList = new ArrayList<>();
+    private List<GameBean> list = new ArrayList<>();
 
     private int pager = 0, last = 0, type = 0;
     private String[] keywords = {"specials", "top_sellers", "new_releases", "coming_soon"};
@@ -51,13 +51,13 @@ public class GameCategoriesFragment extends PresenterFragment<GamePresenter> imp
                 case 3:
                     if (msg.obj != null) {
                         if (pager == 0) {
-                            mList = (List<GameBean>) msg.obj;
-                            mAdapter = new GameAdapter(getActivity(), 1, mList);
-                            rvList.setAdapter(mAdapter);
+                            list = (List<GameBean>) msg.obj;
+                            adapter = new GameAdapter(getActivity(), 1, list);
+                            rvList.setAdapter(adapter);
                         } else {
-                            mList.addAll((List<GameBean>) msg.obj);
+                            list.addAll((List<GameBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager * 10 + i);
+                                adapter.notifyItemInserted(pager * 10 + i);
                             }
                         }
                     }
@@ -110,9 +110,9 @@ public class GameCategoriesFragment extends PresenterFragment<GamePresenter> imp
         rvList.setLayoutManager(mGridLayoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new GameAdapter(getActivity(), 1, mList);
-        mAdapter.setHasStableIds(true);
-        rvList.setAdapter(mAdapter);
+        adapter = new GameAdapter(getActivity(), 1, list);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
     }
 
     @Override

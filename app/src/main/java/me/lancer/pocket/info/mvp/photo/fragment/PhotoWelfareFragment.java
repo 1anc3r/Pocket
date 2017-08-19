@@ -29,9 +29,9 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private PhotoAdapter mAdapter;
+    private PhotoAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<PhotoBean> mList = new ArrayList<>();
+    private List<PhotoBean> list = new ArrayList<>();
 
     private int pager = 1, last = 0;
 
@@ -50,13 +50,13 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
                 case 3:
                     if (msg.obj != null) {
                         if (pager == 1) {
-                            mList.clear();
-                            mList.addAll((List<PhotoBean>) msg.obj);
-                            mAdapter.notifyDataSetChanged();
+                            list.clear();
+                            list.addAll((List<PhotoBean>) msg.obj);
+                            adapter.notifyDataSetChanged();
                         } else {
-                            mList.addAll((List<PhotoBean>) msg.obj);
+                            list.addAll((List<PhotoBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted((pager - 1) * 10 + i);
+                                adapter.notifyItemInserted((pager - 1) * 10 + i);
                             }
                         }
                     }
@@ -107,15 +107,15 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new PhotoAdapter(getActivity(), mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new PhotoAdapter(getActivity(), list);
+        rvList.setAdapter(adapter);
         rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     pager += 1;
                     new Thread(loadWelfare).start();
                 }

@@ -29,9 +29,9 @@ public class NovelCateFragment extends PresenterFragment<NovelPresenter> impleme
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private NovelTxtAdapter mAdapter;
+    private NovelTxtAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<NovelBean> mList = new ArrayList<>();
+    private List<NovelBean> list = new ArrayList<>();
 
     private Handler handler = new Handler() {
         @Override
@@ -47,9 +47,9 @@ public class NovelCateFragment extends PresenterFragment<NovelPresenter> impleme
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<NovelBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll((List<NovelBean>) msg.obj);
+                        adapter.notifyDataSetChanged();
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -96,8 +96,8 @@ public class NovelCateFragment extends PresenterFragment<NovelPresenter> impleme
         layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new NovelTxtAdapter(getActivity(), mList, 2);
-        rvList.setAdapter(mAdapter);
+        adapter = new NovelTxtAdapter(getActivity(), list, 2);
+        rvList.setAdapter(adapter);
     }
 
     @Override

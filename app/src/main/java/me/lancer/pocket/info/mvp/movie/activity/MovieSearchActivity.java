@@ -31,9 +31,9 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
     private Toolbar toolbar;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private MovieAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<MovieBean> mList = new ArrayList<>();
+    private MovieAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<MovieBean> list = new ArrayList<>();
 
     private String keyword;
 
@@ -51,9 +51,9 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList = (List<MovieBean>) msg.obj;
-                        mAdapter = new MovieAdapter(MovieSearchActivity.this, mList);
-                        rvList.setAdapter(mAdapter);
+                        list = (List<MovieBean>) msg.obj;
+                        adapter = new MovieAdapter(MovieSearchActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -93,12 +93,12 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
             }
         });
         rvList = (RecyclerView) findViewById(R.id.rv_result);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(this);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new MovieAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new MovieAdapter(this, list);
+        rvList.setAdapter(adapter);
     }
 
     private void initData() {

@@ -31,7 +31,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private NewsAdapter mAdapter;
+    private NewsAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
     private List<NewsBean> mDayList = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                         mDayList.clear();
                         mDayList.add(new NewsBean(1, "— 今日 —"));
                         mDayList.addAll((List<NewsBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -68,7 +68,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                         mDayList.add(new NewsBean(1, "— " + date + " —"));
                         mDayList.addAll((List<NewsBean>) msg.obj);
                         for (int i = 0; i < ((List<NewsBean>) msg.obj).size() + 1; i++) {
-                            mAdapter.notifyItemInserted(size + 1 + i);
+                            adapter.notifyItemInserted(size + 1 + i);
                         }
                         load = 0;
                     }
@@ -127,15 +127,15 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new NewsAdapter(getActivity(), mDayList);
-        rvList.setAdapter(mAdapter);
+        adapter = new NewsAdapter(getActivity(), mDayList);
+        rvList.setAdapter(adapter);
         rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     load = 1;
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
                     date = formatter.format(new Date(System.currentTimeMillis() - 24 * 3600 * 1000 * (flag++)));

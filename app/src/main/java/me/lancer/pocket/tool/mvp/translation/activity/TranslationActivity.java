@@ -34,9 +34,9 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
     private ClearEditText etTrans;
     private LinearLayout llRes;
     private RecyclerView rvList;
-    private TranslationAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<TranslationBean> mList = new ArrayList<>();
+    private TranslationAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<TranslationBean> list = new ArrayList<>();
     private Map<String, String> mMap = new HashMap<>();
 
     private String keyword;
@@ -55,15 +55,15 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
                     if (msg.obj != null) {
                         if (etTrans.getText().length() > 0) {
                             llRes.setVisibility(View.VISIBLE);
-                            mList.clear();
-                            mList.addAll((List<TranslationBean>) msg.obj);
+                            list.clear();
+                            list.addAll((List<TranslationBean>) msg.obj);
                             mMap.clear();
-                            for (int i = 0; i < mList.size(); i++) {
-                                if (mList.get(i).getPos() != null && mList.get(i).getD() != null) {
-                                    if (mMap.get(mList.get(i).getPos()) == null) {
-                                        mMap.put(mList.get(i).getPos(), mList.get(i).getD());
+                            for (int i = 0; i < list.size(); i++) {
+                                if (list.get(i).getPos() != null && list.get(i).getD() != null) {
+                                    if (mMap.get(list.get(i).getPos()) == null) {
+                                        mMap.put(list.get(i).getPos(), list.get(i).getD());
                                     } else {
-                                        mMap.put(mList.get(i).getPos(), mMap.get(mList.get(i).getPos()) + ";" + mList.get(i).getD());
+                                        mMap.put(list.get(i).getPos(), mMap.get(list.get(i).getPos()) + ";" + list.get(i).getD());
                                     }
                                 }
                             }
@@ -85,7 +85,7 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
                             } else {
                                 tvRes.setVisibility(View.GONE);
                             }
-                            mAdapter.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
                         } else {
                             llRes.setVisibility(View.GONE);
                         }
@@ -143,11 +143,11 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
         });
         llRes = (LinearLayout) findViewById(R.id.ll_res);
         rvList = (RecyclerView) findViewById(R.id.rv_res);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(this);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new TranslationAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new TranslationAdapter(this, list);
+        rvList.setAdapter(adapter);
     }
 
     @Override

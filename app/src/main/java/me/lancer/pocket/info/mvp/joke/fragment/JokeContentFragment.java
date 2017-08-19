@@ -31,9 +31,9 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
     private FloatingActionButton fabRefresh;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private JokeAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<JokeBean> mList = new ArrayList<>();
+    private JokeAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<JokeBean> list = new ArrayList<>();
 
     private int type = 0;
 
@@ -51,10 +51,10 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<JokeBean>) msg.obj);
-                        mAdapter = new JokeAdapter(getActivity(), mList);
-                        rvList.setAdapter(mAdapter);
+                        list.clear();
+                        list.addAll((List<JokeBean>) msg.obj);
+                        adapter = new JokeAdapter(getActivity(), list);
+                        rvList.setAdapter(adapter);
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -119,13 +119,13 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
             }
         });
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(getContext());
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new JokeAdapter(getActivity(), mList);
-        mAdapter.setHasStableIds(true);
-        rvList.setAdapter(mAdapter);
+        adapter = new JokeAdapter(getActivity(), list);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
         fabRefresh = (FloatingActionButton) view.findViewById(R.id.fab_refresh);
         fabRefresh.setVisibility(View.VISIBLE);
         fabRefresh.setOnClickListener(new View.OnClickListener() {

@@ -28,9 +28,9 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private NewsAdapter mAdapter;
+    private NewsAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<NewsBean> mList = new ArrayList<>();
+    private List<NewsBean> list = new ArrayList<>();
 
     private Handler handler = new Handler() {
         @Override
@@ -46,9 +46,9 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.addAll((List<NewsBean>) msg.obj);
-                        mAdapter.notifyDataSetChanged();
+                        list.clear();
+                        list.addAll((List<NewsBean>) msg.obj);
+                        adapter.notifyDataSetChanged();
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -94,8 +94,8 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
-        mAdapter = new NewsAdapter(getActivity(), mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new NewsAdapter(getActivity(), list);
+        rvList.setAdapter(adapter);
     }
 
     @Override

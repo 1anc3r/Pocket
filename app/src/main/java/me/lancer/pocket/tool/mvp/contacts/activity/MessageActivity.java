@@ -33,9 +33,9 @@ public class MessageActivity extends BaseActivity {
     private EditText etMsg;
     private Button btnSend;
     private RecyclerView rvList;
-    private MessageAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<MessageBean> mList = new ArrayList<>();
+    private MessageAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<MessageBean> list = new ArrayList<>();
 
     private String name, number, action = "me.lancer.pocket";
 
@@ -45,9 +45,9 @@ public class MessageActivity extends BaseActivity {
             switch (msg.what) {
                 case 0:
                     showSnackbar(rvList, "发送成功");
-                    mList.clear();
+                    list.clear();
                     getMessages(number);
-                    mAdapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
                     etMsg.setText("");
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
@@ -87,13 +87,13 @@ public class MessageActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         rvList = (RecyclerView) findViewById(R.id.rv_chat);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setReverseLayout(true);
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new MessageAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
-        if (mList.size() > 0) {
+        adapter = new MessageAdapter(this, list);
+        rvList.setAdapter(adapter);
+        if (list.size() > 0) {
             rvList.scrollToPosition(0);
         }
         etMsg = (EditText) findViewById(R.id.et_msg);
@@ -131,7 +131,7 @@ public class MessageActivity extends BaseActivity {
                 item.setNumber(number);
                 item.setType(type);
                 item.setDate(date);
-                mList.add(item);
+                list.add(item);
             }
         }
         startManagingCursor(cursor);

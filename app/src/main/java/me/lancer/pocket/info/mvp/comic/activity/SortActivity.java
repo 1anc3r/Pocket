@@ -39,7 +39,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
     private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private ComicAdapter mAdapter;
+    private ComicAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
     private List<ComicBean> mData = new ArrayList<ComicBean>();
 
@@ -60,8 +60,8 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                 case 3:
                     if (msg.obj != null) {
                         mData = (List<ComicBean>) msg.obj;
-                        mAdapter = new ComicAdapter(SortActivity.this, mData);
-                        rvList.setAdapter(mAdapter);
+                        adapter = new ComicAdapter(SortActivity.this, mData);
+                        rvList.setAdapter(adapter);
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -114,8 +114,8 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new ComicAdapter(this, mData);
-        rvList.setAdapter(mAdapter);
+        adapter = new ComicAdapter(this, mData);
+        rvList.setAdapter(adapter);
         new Thread(loadTop).start();
     }
 

@@ -31,9 +31,9 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
     private Toolbar toolbar;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private MusicAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<MusicBean> mList = new ArrayList<>();
+    private MusicAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<MusicBean> list = new ArrayList<>();
 
     private String keyword;
 
@@ -51,9 +51,9 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList = (List<MusicBean>) msg.obj;
-                        mAdapter = new MusicAdapter(MusicSearchActivity.this, mList);
-                        rvList.setAdapter(mAdapter);
+                        list = (List<MusicBean>) msg.obj;
+                        adapter = new MusicAdapter(MusicSearchActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
@@ -93,12 +93,12 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
             }
         });
         rvList = (RecyclerView) findViewById(R.id.rv_result);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        rvList.setLayoutManager(mLinearLayoutManager);
+        layoutManager = new LinearLayoutManager(this);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new MusicAdapter(this, mList);
-        rvList.setAdapter(mAdapter);
+        adapter = new MusicAdapter(this, list);
+        rvList.setAdapter(adapter);
     }
 
     private void initData() {

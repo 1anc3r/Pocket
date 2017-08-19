@@ -29,9 +29,9 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
-    private PhotoAdapter mAdapter;
+    private PhotoAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<PhotoBean> mList = new ArrayList<>();
+    private List<PhotoBean> list = new ArrayList<>();
 
     private int last = 0, flag = 0, load = 0;
     private final String[] typeen = {"art", "beach", "car", "ocean", "sunset", "business", "flowers",
@@ -57,13 +57,13 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.add(new PhotoBean(1, typezn[flag]));
-                        mList.addAll((List<PhotoBean>) msg.obj);
-                        mAdapter = new PhotoAdapter(getActivity(), mList);
-                        rvList.setAdapter(mAdapter);
+                        list.clear();
+                        list.add(new PhotoBean(1, typezn[flag]));
+                        list.addAll((List<PhotoBean>) msg.obj);
+                        adapter = new PhotoAdapter(getActivity(), list);
+                        rvList.setAdapter(adapter);
 //                        for (int i = 0; i < ((List<PhotoBean>) msg.obj).size()+1; i++) {
-//                            mAdapter.notifyItemInserted(i);
+//                            adapter.notifyItemInserted(i);
 //                        }
                     }
                     load = 0;
@@ -79,11 +79,11 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
                 case 11:
                 case 12:
                 case 13:
-                    int len = mList.size();
-                    mList.add(new PhotoBean(1, typezn[flag]));
-                    mList.addAll((List<PhotoBean>) msg.obj);
+                    int len = list.size();
+                    list.add(new PhotoBean(1, typezn[flag]));
+                    list.addAll((List<PhotoBean>) msg.obj);
                     for (int i = 0; i < ((List<PhotoBean>) msg.obj).size() + 1; i++) {
-                        mAdapter.notifyItemInserted(len + i);
+                        adapter.notifyItemInserted(len + i);
                     }
                     load = 0;
                     swipeRefresh.setRefreshing(false);
@@ -136,16 +136,16 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        mAdapter = new PhotoAdapter(getActivity(), mList);
-        mAdapter.setHasStableIds(true);
-        rvList.setAdapter(mAdapter);
+        adapter = new PhotoAdapter(getActivity(), list);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
         rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int Phototate) {
                 super.onScrollStateChanged(recyclerView, Phototate);
                 if (Phototate == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     if (flag < 30 && load == 0) {
                         load = 1;
                         flag += 1;
