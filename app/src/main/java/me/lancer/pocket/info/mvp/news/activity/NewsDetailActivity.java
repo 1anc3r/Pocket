@@ -60,6 +60,20 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     private int id;
     private String title, img, link;
 
+    private Runnable loadDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadDetail(link);
+        }
+    };
+
+    private Runnable loadItem = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadItem(id);
+        }
+    };
+
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -94,20 +108,6 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                     }
                     break;
             }
-        }
-    };
-
-    private Runnable loadDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadDetail(link);
-        }
-    };
-
-    private Runnable loadItem = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadItem(id);
         }
     };
 

@@ -80,8 +80,6 @@ public class MainActivity extends BaseActivity {
     private void initNavigationViewHeader() {
         navigationView = (NavigationView) findViewById(R.id.nv_main);
         disableNavigationViewScrollbars(navigationView);
-        View view = navigationView.inflateHeaderView(R.layout.drawer_header);
-//        LinearLayout llDrawer = (LinearLayout) view.findViewById(R.id.ll_drawer);
         navigationView.setNavigationItemSelectedListener(new NavigationItemSelected());
     }
 

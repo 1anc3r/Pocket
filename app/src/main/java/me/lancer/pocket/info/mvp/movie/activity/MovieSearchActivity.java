@@ -37,6 +37,13 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
 
     private String keyword;
 
+    private Runnable loadQuery = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopMovie(keyword);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -61,19 +68,19 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
         }
     };
 
-    private Runnable loadQuery = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopMovie(keyword);
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        initData();
         initView();
+        initData();
+    }
+
+    private void initData() {
+        keyword = getIntent().getStringExtra("query");
+        if (keyword != null) {
+            new Thread(loadQuery).start();
+        }
     }
 
     private void initView() {
@@ -99,13 +106,6 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
         rvList.setHasFixedSize(true);
         adapter = new MovieAdapter(this, list);
         rvList.setAdapter(adapter);
-    }
-
-    private void initData() {
-        keyword = getIntent().getStringExtra("query");
-        if (keyword != null) {
-            new Thread(loadQuery).start();
-        }
     }
 
     @Override

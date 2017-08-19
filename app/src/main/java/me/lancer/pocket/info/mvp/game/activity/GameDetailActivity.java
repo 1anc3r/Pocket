@@ -56,27 +56,14 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
 
     private String title, img, link;
     private int id;
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+
+    private Runnable loadDetail = new Runnable() {
         @Override
-        public void onClick(View view) {
-            if (view == fabCollect) {
-                if (temps.size() == 1) {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, String.valueOf(id));
-                } else {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(2);
-                    temp.setCate(13);
-                    temp.setCover(img);
-                    temp.setTitle(title);
-                    temp.setLink(String.valueOf(id));
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, String.valueOf(id));
-                }
-            }
+        public void run() {
+            presenter.loadDetail(id);
         }
     };
+
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -110,10 +97,26 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
             }
         }
     };
-    private Runnable loadDetail = new Runnable() {
+
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
-        public void run() {
-            presenter.loadDetail(id);
+        public void onClick(View view) {
+            if (view == fabCollect) {
+                if (temps.size() == 1) {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, String.valueOf(id));
+                } else {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(2);
+                    temp.setCate(13);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(String.valueOf(id));
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, String.valueOf(id));
+                }
+            }
         }
     };
 

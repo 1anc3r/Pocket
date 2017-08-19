@@ -34,6 +34,13 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
 
     private String title, img, link;
 
+    private Runnable loadDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadDetail(link);
+        }
+    };
+
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -53,13 +60,6 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
                     }
                     break;
             }
-        }
-    };
-
-    private Runnable loadDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadDetail(link);
         }
     };
 

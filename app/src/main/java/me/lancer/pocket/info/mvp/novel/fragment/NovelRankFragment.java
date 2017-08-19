@@ -33,6 +33,13 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
     private StaggeredGridLayoutManager layoutManager;
     private List<NovelBean> list = new ArrayList<>();
 
+    private Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadRank();
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,13 +61,6 @@ public class NovelRankFragment extends PresenterFragment<NovelPresenter> impleme
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadRank();
         }
     };
 

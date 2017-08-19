@@ -43,7 +43,6 @@ public class PhotoFragment extends BaseFragment {
                 getActivity().finish();
             }
         });
-//        ((BlankActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();
         initSearchView();
@@ -76,13 +75,6 @@ public class PhotoFragment extends BaseFragment {
         data.putString("title", "美景");
         newfragment.setArguments(data);
         adapter.addFrag(newfragment, "美景");
-
-//        newfragment = new PhotoThemeFragment();
-//        data = new Bundle();
-//        data.putInt("id", 0);
-//        data.putString("title", "分类");
-//        newfragment.setArguments(data);
-//        adapter.addFrag(newfragment, "分类");
 
         viewPager.setAdapter(adapter);
         if (getArguments() != null) {
@@ -144,10 +136,6 @@ public class PhotoFragment extends BaseFragment {
             }
         });
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

@@ -50,11 +50,18 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
     private LoadToast loadToast;
     private TextView tvContent, tvPrev, tvNext;
 
-    private String value1, value2;
     private int position, screenMode, screenBrightness;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private boolean night = false;
+    private String value1, value2;
+
+    private Runnable loadDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadContent(value2);
+        }
+    };
 
     private Handler handler = new Handler() {
         @Override
@@ -77,12 +84,6 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         }
     };
 
-    private Runnable loadDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadContent(value2);
-        }
-    };
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -162,7 +163,6 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
                 break;
             case R.id.menu_theme:
                 switchLight();
-//                showColorPickDialog();
                 break;
             case R.id.menu_bright:
                 showBrightDialog();

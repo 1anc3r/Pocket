@@ -35,11 +35,6 @@ public class App extends LitePalApplication {
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         isNight = sharedPreferences.getBoolean(Params.ISNIGHT, false);
         isColorful = sharedPreferences.getBoolean(Params.ISCOLORFUL, false);
-//        if (isNight) {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//        } else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//        }
         if (isNight) {
             Colorful.defaults()
                     .primaryColor(Colorful.ThemeColor.DEEP_ORANGE)

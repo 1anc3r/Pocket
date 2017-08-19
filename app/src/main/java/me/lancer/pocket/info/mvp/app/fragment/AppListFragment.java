@@ -32,19 +32,6 @@ import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 
 public class AppListFragment extends PresenterFragment<AppPresenter> implements IAppView {
 
-    Comparator AppComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            AppBean app1 = (AppBean) obj1;
-            AppBean app2 = (AppBean) obj2;
-            if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) < 0)
-                return -1;
-            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) == 0)
-                return 0;
-            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) > 0)
-                return 1;
-            return 0;
-        }
-    };
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private AppGridAdapter adapter;
@@ -52,6 +39,48 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
     private List<AppBean> list = new ArrayList<>();
     private int type = 0, pager = 1, last = 0, load = 0;
     private String query;
+
+    private Runnable loadLocal = new Runnable() {
+        @Override
+        public void run() {
+            List<PackageInfo> packages = getActivity().getPackageManager().getInstalledPackages(0);
+            List<AppBean> temp = new ArrayList<>();
+            for (int i = 0; i < packages.size(); i++) {
+                PackageInfo packageInfo = packages.get(i);
+                ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+                if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) > 0) {
+
+                } else {
+                    AppBean appInfo = new AppBean();
+                    appInfo.setVersCode(packageInfo.versionCode);
+                    appInfo.setApkName(packageInfo.applicationInfo.loadLabel(getActivity().getPackageManager()).toString());
+                    appInfo.setPkgName(packageInfo.packageName);
+                    appInfo.setVersNum(packageInfo.versionName);
+                    appInfo.setIcon(packageInfo.applicationInfo.loadIcon(getActivity().getPackageManager()));
+                    temp.add(appInfo);
+                }
+            }
+            Message msg = new Message();
+            msg.what = 5;
+            msg.obj = temp;
+            handler.sendMessage(msg);
+        }
+    };
+
+    private Runnable loadHomepage = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadHomepage(pager);
+        }
+    };
+    
+    private Runnable loadSearch = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadSearch(query, pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -95,42 +124,18 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
             }
         }
     };
-    private Runnable loadLocal = new Runnable() {
-        @Override
-        public void run() {
-            List<PackageInfo> packages = getActivity().getPackageManager().getInstalledPackages(0);
-            List<AppBean> temp = new ArrayList<>();
-            for (int i = 0; i < packages.size(); i++) {
-                PackageInfo packageInfo = packages.get(i);
-                ApplicationInfo applicationInfo = packageInfo.applicationInfo;
-                if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) > 0) {
 
-                } else {
-                    AppBean appInfo = new AppBean();
-                    appInfo.setVersCode(packageInfo.versionCode);
-                    appInfo.setApkName(packageInfo.applicationInfo.loadLabel(getActivity().getPackageManager()).toString());
-                    appInfo.setPkgName(packageInfo.packageName);
-                    appInfo.setVersNum(packageInfo.versionName);
-                    appInfo.setIcon(packageInfo.applicationInfo.loadIcon(getActivity().getPackageManager()));
-                    temp.add(appInfo);
-                }
-            }
-            Message msg = new Message();
-            msg.what = 5;
-            msg.obj = temp;
-            handler.sendMessage(msg);
-        }
-    };
-    private Runnable loadHomepage = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadHomepage(pager);
-        }
-    };
-    private Runnable loadSearch = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadSearch(query, pager);
+    Comparator AppComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            AppBean app1 = (AppBean) obj1;
+            AppBean app2 = (AppBean) obj2;
+            if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) < 0)
+                return -1;
+            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) == 0)
+                return 0;
+            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) > 0)
+                return 1;
+            return 0;
         }
     };
 

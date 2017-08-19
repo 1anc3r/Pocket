@@ -583,7 +583,6 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                handler.post(changed);
             }
         });
     }

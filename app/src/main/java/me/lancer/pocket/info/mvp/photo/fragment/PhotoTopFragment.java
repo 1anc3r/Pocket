@@ -35,6 +35,13 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
 
     private int pager = 1, last = 0;
 
+    private Runnable loadLatest = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadLatest(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadLatest = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadLatest(pager);
         }
     };
 

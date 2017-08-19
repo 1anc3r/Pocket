@@ -59,6 +59,13 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
     private String id, title, img;
     private AppBean bean;
 
+    private Runnable loadDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadDetail(id);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -86,13 +93,6 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
                     }
                     break;
             }
-        }
-    };
-
-    private Runnable loadDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadDetail(id);
         }
     };
 

@@ -28,7 +28,7 @@ import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class BookSearchActivity extends PresenterActivity<BookPresenter> implements IBookView {
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private BookAdapter adapter;
@@ -36,6 +36,13 @@ public class BookSearchActivity extends PresenterActivity<BookPresenter> impleme
     private List<BookBean> list = new ArrayList<>();
 
     private String keyword;
+
+    private Runnable loadQuery = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopBook(keyword);
+        }
+    };
 
     private Handler handler = new Handler() {
         @Override
@@ -58,13 +65,6 @@ public class BookSearchActivity extends PresenterActivity<BookPresenter> impleme
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadQuery = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopBook(keyword);
         }
     };
 

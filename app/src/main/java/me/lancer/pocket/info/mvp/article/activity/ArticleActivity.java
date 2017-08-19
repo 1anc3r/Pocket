@@ -44,6 +44,20 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
 
     private String title, author, content;
 
+    private Runnable loadRandom = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadRandom();
+        }
+    };
+
+    private Runnable loadDaily = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadDaily();
+        }
+    };
+
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -73,20 +87,6 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
                     }
                     break;
             }
-        }
-    };
-
-    private Runnable loadRandom = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadRandom();
-        }
-    };
-
-    private Runnable loadDaily = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadDaily();
         }
     };
 

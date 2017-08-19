@@ -232,30 +232,6 @@ public class GameModel {
                 if (pc.has("recommended")) {
                     requirements += pc.getString("recommended") + "<br>";
                 }
-//                if (data.getJSONArray("mac_requirements").length() == 0) {
-//                    ("mac", "mac_requirements");
-//                } else {
-//                    ("mac", "mac:" + data.getJSONObject("mac_requirements").toString());
-//                    JSONObject mac = data.getJSONObject("mac_requirements");
-//                    if (mac.has("minimum")) {
-//                        requirements += mac.getString("minimum") + "<br>";
-//                    }
-//                    if (mac.has("recommended")) {
-//                        requirements += mac.getString("recommended") + "<br>";
-//                    }
-//                }
-//                if (data.getJSONArray("linux_requirements").length() == 0) {
-//                    ("linux", "linux_requirements");
-//                } else {
-//                    ("linux", "linux:" + data.getJSONObject("linux_requirements").toString());
-//                    JSONObject linux = data.getJSONObject("linux_requirements");
-//                    if (linux.has("minimum")) {
-//                        requirements += linux.getString("minimum") + "<br>";
-//                    }
-//                    if (linux.has("recommended")) {
-//                        requirements += linux.getString("recommended") + "<br>";
-//                    }
-//                }
                 bean.setRequirements(requirements);
                 bean.setDevelopers((String) data.getJSONArray("developers").get(0));
                 bean.setPublishers((String) data.getJSONArray("publishers").get(0));

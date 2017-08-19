@@ -37,6 +37,27 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
 
     private int type = 0;
 
+    private Runnable loadText = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadText();
+        }
+    };
+
+    private Runnable loadImage = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadImage();
+        }
+    };
+
+    private Runnable loadVideo = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadVideo();
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -59,27 +80,6 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadText = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadText();
-        }
-    };
-
-    private Runnable loadImage = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadImage();
-        }
-    };
-
-    private Runnable loadVideo = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadVideo();
         }
     };
 

@@ -33,7 +33,6 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     private Context context;
     private List<ModelBean> list;
-    private int card;
 
     private MyItemClickListener mItemClickListener;
     private MyItemLongClickListener mItemLongClickListener;
@@ -41,18 +40,6 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
     public ModelAdapter(Context context, List<ModelBean> list) {
         this.context = context;
         this.list = list;
-    }
-
-    public ModelAdapter(Context context, List<ModelBean> list, int card) {
-        this.context = context;
-        this.list = list;
-        this.card = card;
-    }
-
-    public static Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
-        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
-        DrawableCompat.setTintList(wrappedDrawable, colors);
-        return wrappedDrawable;
     }
 
     @Override
@@ -63,22 +50,6 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ModelAdapter.ViewHolder viewHolder, int position) {
-//        if (((App)(((BaseActivity)context).getApplication())).isNight()) {
-//            viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[16]));
-//        } else {
-//            viewHolder.cvModel.setBackgroundColor(context.getResources().getColor(colors[(int) (Math.random() * 16)]));
-//        }
-//            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewHolder.llModel.getLayoutParams();
-//        params.width = (card - DensityUtil.dip2px(context, 32)) / 3;
-//        params.height = params.width;
-//        if (Math.random() * 3 > 2) {
-//            params.height = params.width * 3 / 2;
-//        } else {
-//            params.height = params.width;
-//        }
-//        viewHolder.llModel.setLayoutParams(params);
-//        viewHolder.tvName.setText(list.get(position).getName());
-//        viewHolder.ivIcon.setImageResource(list.get(position).getImage());
         int color;
         if (((App) (((BaseActivity) context).getApplication())).isColorful()) {
             color = colors[(int) (Math.random() * 16)];
@@ -90,13 +61,8 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         } else {
             viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(color));
         }
-//        if(position % 2 == 0) {
         viewHolder.tvTagLeft.setText(list.get(position).getName());
-//            viewHolder.tvTagRight.setText("");
-//        } else {
-//            viewHolder.tvTagLeft.setText("");
         viewHolder.tvTagRight.setText(list.get(position).getName());
-//        }
         viewHolder.tvTagLeft.setTextColor(context.getResources().getColorStateList(color));
         viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
         viewHolder.imageView.setImageResource(list.get(position).getImage());
@@ -125,9 +91,6 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        //        public CouponView cvModel;
-//        public LinearLayout llModel;
-//        public ImageView ivIcon;
         public CardView cardView;
         public ImageView imageView;
         public TextView tvTagLeft, tvTagRight;
@@ -136,9 +99,6 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
         public ViewHolder(View rootView, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
             super(rootView);
-//            cvModel = (CouponView) rootView.findViewById(R.id.cv_model);
-//            llModel = (LinearLayout) rootView.findViewById(R.id.ll_model);
-//            ivIcon = (ImageView) rootView.findViewById(R.id.iv_icon);
             cardView = (CardView) rootView.findViewById(R.id.cardView);
             imageView = (ImageView) rootView.findViewById(R.id.imageView);
             tvTagLeft = (TextView) rootView.findViewById(R.id.left_top_tag);

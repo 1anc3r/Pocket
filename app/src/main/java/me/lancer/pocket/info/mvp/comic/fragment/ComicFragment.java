@@ -150,10 +150,6 @@ public class ComicFragment extends BaseFragment {
         });
     }
 
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
-
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();

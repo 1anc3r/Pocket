@@ -32,6 +32,13 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
     private StaggeredGridLayoutManager layoutManager;
     private List<NewsBean> list = new ArrayList<>();
 
+    private Runnable loadHotest = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadHotest();
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -53,13 +60,6 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadHotest = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadHotest();
         }
     };
 

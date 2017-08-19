@@ -35,6 +35,13 @@ public class MovieReviewerFragment extends PresenterFragment<MoviePresenter> imp
 
     private int pager = 0, last = 0;
 
+    private Runnable loadReviewer = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadReviewer(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class MovieReviewerFragment extends PresenterFragment<MoviePresenter> imp
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadReviewer = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadReviewer(pager);
         }
     };
 

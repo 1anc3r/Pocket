@@ -35,6 +35,13 @@ public class BookTopFragment extends PresenterFragment<BookPresenter> implements
 
     private int pager = 0, last = 0;
 
+    private Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopBook(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class BookTopFragment extends PresenterFragment<BookPresenter> implements
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopBook(pager);
         }
     };
 

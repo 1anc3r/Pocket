@@ -37,6 +37,13 @@ public class CodeSearchActivity extends PresenterActivity<CodePresenter> impleme
 
     private String keyword;
 
+    private Runnable loadQuery = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadSearching(keyword);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -58,13 +65,6 @@ public class CodeSearchActivity extends PresenterActivity<CodePresenter> impleme
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadQuery = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadSearching(keyword);
         }
     };
 

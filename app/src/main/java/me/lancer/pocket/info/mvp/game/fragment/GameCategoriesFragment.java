@@ -36,6 +36,13 @@ public class GameCategoriesFragment extends PresenterFragment<GamePresenter> imp
     private int pager = 0, last = 0, type = 0;
     private String[] keywords = {"specials", "top_sellers", "new_releases", "coming_soon"};
 
+    private Runnable loadCategories = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadCategories(keywords[type]);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -64,13 +71,6 @@ public class GameCategoriesFragment extends PresenterFragment<GamePresenter> imp
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadCategories = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadCategories(keywords[type]);
         }
     };
 

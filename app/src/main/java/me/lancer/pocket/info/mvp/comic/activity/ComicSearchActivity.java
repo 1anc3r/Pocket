@@ -37,6 +37,13 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
 
     private String keyword;
 
+    private Runnable loadQuery = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadList(keyword);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -58,13 +65,6 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadQuery = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadList(keyword);
         }
     };
 

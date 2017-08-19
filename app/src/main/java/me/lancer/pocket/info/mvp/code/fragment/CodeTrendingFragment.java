@@ -36,6 +36,13 @@ public class CodeTrendingFragment extends PresenterFragment<CodePresenter> imple
     private int last = 0;
     private String since = "daily";
 
+    private Runnable loadTrending = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTrending(since);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -57,13 +64,6 @@ public class CodeTrendingFragment extends PresenterFragment<CodePresenter> imple
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTrending = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTrending(since);
         }
     };
 

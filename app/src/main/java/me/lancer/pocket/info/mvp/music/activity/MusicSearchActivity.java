@@ -37,6 +37,13 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
 
     private String keyword;
 
+    private Runnable loadQuery = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopMusic(keyword);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -58,13 +65,6 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadQuery = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopMusic(keyword);
         }
     };
 

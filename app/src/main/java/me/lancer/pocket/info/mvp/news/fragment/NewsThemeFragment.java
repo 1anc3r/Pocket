@@ -33,6 +33,13 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
     private StaggeredGridLayoutManager layoutManager;
     private List<NewsBean> list = new ArrayList<>();
 
+    private Runnable loadList = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadList();
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,13 +61,6 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadList = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadList();
         }
     };
 

@@ -65,7 +65,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                         intent.putExtra("img", list.get(position).getImg());
                         intent.setClass(context, MovieDetailActivity.class);
                         context.startActivity(intent);
-//                        MovieDetailActivity.startActivity((Activity) context, 0, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getMainLink(), viewHolder.ivCover);
                     } else {
                         Intent intent = new Intent();
                         intent.putExtra("title", list.get(position).getMainTitle());
@@ -74,7 +73,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                         intent.putExtra("img", list.get(position).getImg());
                         intent.setClass(context, MovieDetailActivity.class);
                         context.startActivity(intent);
-//                        MovieDetailActivity.startActivity((Activity) context, 1, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getSubLink(), viewHolder.ivCover);
                     }
                 }
             });

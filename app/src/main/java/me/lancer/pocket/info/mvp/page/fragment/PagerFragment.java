@@ -36,6 +36,13 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
 
+    private Runnable download = new Runnable() {
+        @Override
+        public void run() {
+            presenter.download(link, (new Date().toString()));
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -48,12 +55,6 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
         }
     };
 
-    private Runnable download = new Runnable() {
-        @Override
-        public void run() {
-            presenter.download(link, (new Date().toString()));
-        }
-    };
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -102,6 +103,10 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init(view);
+    }
+
+    private void init(View view) {
         imageView = (ImageView) view.findViewById(R.id.imageView);
         btnFavorite = (Button) view.findViewById(R.id.btn_favorite);
         temps = CollectUtil.query(link, link);

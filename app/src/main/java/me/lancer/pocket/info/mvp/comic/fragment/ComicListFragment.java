@@ -33,6 +33,13 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
     private StaggeredGridLayoutManager layoutManager;
     private List<ComicBean> list = new ArrayList<>();
 
+    private Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadList();
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,13 +61,6 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadList();
         }
     };
 

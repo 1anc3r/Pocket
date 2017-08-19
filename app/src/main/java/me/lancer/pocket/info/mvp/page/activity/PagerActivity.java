@@ -25,6 +25,13 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
     private PageAdapter adapter;
     private ViewPager viewPager;
 
+    private Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadList(link);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -42,13 +49,6 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
                     }
                     break;
             }
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadList(link);
         }
     };
 

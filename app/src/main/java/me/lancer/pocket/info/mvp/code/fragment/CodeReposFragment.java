@@ -35,6 +35,13 @@ public class CodeReposFragment extends PresenterFragment<CodePresenter> implemen
 
     private int pager = 1, last = 0;
 
+    private Runnable loadRepositories = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadRepositories(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class CodeReposFragment extends PresenterFragment<CodePresenter> implemen
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadRepositories = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadRepositories(pager);
         }
     };
 

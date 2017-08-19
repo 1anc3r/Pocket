@@ -58,7 +58,6 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
                 viewHolder.ivCover.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        PhotoDetailNoBarActivity.startActivity((Activity) context, list.get(position).getImg(), list.get(position).getText(), viewHolder.ivCover);
                         ArrayList<String> gallery = new ArrayList<String>();
                         for (JokeBean bean : list) {
                             gallery.add(bean.getImg());

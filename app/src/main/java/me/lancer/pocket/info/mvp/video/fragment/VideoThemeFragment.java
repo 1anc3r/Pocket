@@ -35,6 +35,13 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
 
     private int pager = 0;
 
+    private Runnable loadTheme = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTheme(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -56,13 +63,6 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTheme = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTheme(pager);
         }
     };
 

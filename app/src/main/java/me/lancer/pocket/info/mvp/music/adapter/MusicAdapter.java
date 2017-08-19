@@ -68,7 +68,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                         intent.putExtra("img", list.get(position).getImg());
                         intent.setClass(context, MusicDetailActivity.class);
                         context.startActivity(intent);
-//                        MusicDetailActivity.startActivity((Activity) context, 0, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getMainLink(), viewHolder.ivCover);
                     } else {
                         Intent intent = new Intent();
                         intent.putExtra("title", list.get(position).getMainTitle());
@@ -77,7 +76,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                         intent.putExtra("img", list.get(position).getImg());
                         intent.setClass(context, MusicDetailActivity.class);
                         context.startActivity(intent);
-//                        MusicDetailActivity.startActivity((Activity) context, 1, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getSubLink(), viewHolder.ivCover);
                     }
                 }
             });

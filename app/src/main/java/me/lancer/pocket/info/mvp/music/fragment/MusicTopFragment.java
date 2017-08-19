@@ -35,6 +35,13 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
 
     private int pager = 0, last = 0;
 
+    private Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopMusic(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopMusic(pager);
         }
     };
 

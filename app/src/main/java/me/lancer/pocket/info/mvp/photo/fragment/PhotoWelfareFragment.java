@@ -35,6 +35,13 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
 
     private int pager = 1, last = 0;
 
+    private Runnable loadWelfare = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadWelfare(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadWelfare = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadWelfare(pager);
         }
     };
 

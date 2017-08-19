@@ -94,10 +94,6 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     }
 
     private void initView(String[] names, int[] icons) {
-        WindowManager wm = (WindowManager) getContext()
-                .getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();
-        int height = wm.getDefaultDisplay().getHeight();
         rvList = (RecyclerView) getView().findViewById(R.id.rv_list);
         layoutManager = new LinearLayoutManager(getContext());
         rvList.setLayoutManager(layoutManager);
@@ -106,7 +102,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         for (int i = 0; i < names.length; i++) {
             list.add(new ModelBean(names[i], icons[i]));
         }
-        adapter = new ModelAdapter(getActivity(), list, width);
+        adapter = new ModelAdapter(getActivity(), list);
         adapter.setOnItemClickListener(this);
         adapter.setOnItemLongClickListener(this);
         rvList.setAdapter(adapter);

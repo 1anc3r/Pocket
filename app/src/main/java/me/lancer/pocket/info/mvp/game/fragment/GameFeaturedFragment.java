@@ -35,6 +35,13 @@ public class GameFeaturedFragment extends PresenterFragment<GamePresenter> imple
 
     private int pager = 0, last = 0;
 
+    private Runnable loadFeatured = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadFeatured();
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class GameFeaturedFragment extends PresenterFragment<GamePresenter> imple
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadFeatured = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadFeatured();
         }
     };
 

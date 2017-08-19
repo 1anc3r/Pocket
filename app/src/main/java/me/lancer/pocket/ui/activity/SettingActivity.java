@@ -64,6 +64,7 @@ public class SettingActivity extends BaseActivity {
     private int screenBrightness;
     private List<String> funcList = new ArrayList<>(), problelist = new ArrayList<>(), logList = new ArrayList<>();
     private List<RepositoryBean> reList = new ArrayList<>();
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -211,7 +212,6 @@ public class SettingActivity extends BaseActivity {
         app = (App) this.getApplication();
         sharedPreferences = this.getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-//        night = sharedPreferences.getBoolean(Params.ISNIGHT, false);
         scNight.setChecked(app.isNight());
         scNight.setClickable(false);
         scCard.setChecked(app.isColorful());
@@ -233,10 +233,6 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t * 一个普通的日历\n" +
                 "\t\t\t\t * 需要手动添加事项\n" +
                 "\t\t\t\t */");
-//        funcList.add("时钟 : \n" +
-//                "\t\t\t\t正在卖力开发中...");
-//        funcList.add("备忘录 : \n" +
-//                "\t\t\t\t正在卖力开发中...");
         funcList.add("天气 : \n" +
                 "\t\t\t\t/*\n" +
                 "\t\t\t\t * 天气信息 : 提供全国各城市的天气信息\n" +

@@ -48,6 +48,20 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
     private int type;
     private String title, img, link;
 
+    private Runnable loadReviewerDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadReviewerDetail(link);
+        }
+    };
+
+    private Runnable loadTopDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopDetail(link);
+        }
+    };
+
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -69,20 +83,6 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
                     }
                     break;
             }
-        }
-    };
-
-    private Runnable loadReviewerDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadReviewerDetail(link);
-        }
-    };
-
-    private Runnable loadTopDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopDetail(link);
         }
     };
 

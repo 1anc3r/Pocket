@@ -47,6 +47,10 @@ public class VideoPlayerActivity extends BaseActivity {
         initView();
     }
 
+    private void initData() {
+        aid = getIntent().getIntExtra("aid", 0);
+    }
+
     private void initView() {
         wvVideo = (WebView) findViewById(R.id.wv_video);
         wvVideo.setOnTouchListener(new View.OnTouchListener() {
@@ -78,10 +82,6 @@ public class VideoPlayerActivity extends BaseActivity {
         });
         videoUrl = "http://www.bilibili.com/video/av" + aid;
         wvVideo.loadUrl(videoUrl);
-    }
-
-    private void initData() {
-        aid = getIntent().getIntExtra("aid", 0);
     }
 
     @Override

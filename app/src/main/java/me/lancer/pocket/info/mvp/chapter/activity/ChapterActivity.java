@@ -55,6 +55,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
             presenter.loadList(link);
         }
     };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -79,6 +80,28 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         }
     };
 
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fabCollect) {
+                if (temps.size() == 1) {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(2);
+                    temp.setCate(11);
+                    temp.setCover(cover);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +122,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
         fabCollect = (FloatingActionButton) findViewById(R.id.fab_collect);
+        fabCollect.setVisibility(View.VISIBLE);
         fabCollect.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, link);
         if (temps.size() == 1) {
@@ -125,28 +149,6 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         rvList.setAdapter(adapter);
         new Thread(loadTop).start();
     }
-
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (view == fabCollect) {
-                if (temps.size() == 1) {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, link);
-                } else {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(2);
-                    temp.setCate(11);
-                    temp.setCover(cover);
-                    temp.setTitle(title);
-                    temp.setLink(link);
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, link);
-                }
-            }
-        }
-    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

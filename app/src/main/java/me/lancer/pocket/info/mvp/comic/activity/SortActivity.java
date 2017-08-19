@@ -44,6 +44,13 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
 
     private String link, title, cover;
 
+    private Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadSortContent(link);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -65,13 +72,6 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadSortContent(link);
         }
     };
 

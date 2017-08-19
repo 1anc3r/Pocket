@@ -35,6 +35,13 @@ public class NewsPublicFragment extends PresenterFragment<NewsPresenter> impleme
 
     private int page = 1, last = 0, flag = 0, load = 0;
 
+    private Runnable loadPublic = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadPublic(page);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -64,13 +71,6 @@ public class NewsPublicFragment extends PresenterFragment<NewsPresenter> impleme
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadPublic = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadPublic(page);
         }
     };
 

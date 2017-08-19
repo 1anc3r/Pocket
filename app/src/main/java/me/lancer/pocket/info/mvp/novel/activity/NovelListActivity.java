@@ -43,6 +43,27 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
     private int type, value3, value4, last = 0;
     private String value1, value2;
 
+    private Runnable loadRank = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadRank(value1);
+        }
+    };
+
+    private Runnable loadCate = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadCate(value1, value2, value3, value4);
+        }
+    };
+
+    private Runnable loadSearch = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadSearch(value1);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -65,38 +86,6 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
             }
         }
     };
-
-    private Runnable loadRank = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadRank(value1);
-        }
-    };
-
-    private Runnable loadCate = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadCate(value1, value2, value3, value4);
-        }
-    };
-
-    private Runnable loadSearch = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadSearch(value1);
-        }
-    };
-
-    public static void startActivity(Activity activity, int type, String value1, String value2, int value3, int value4) {
-        Intent intent = new Intent();
-        intent.setClass(activity, NovelListActivity.class);
-        intent.putExtra("type", type);
-        intent.putExtra("value1", value1);
-        intent.putExtra("value2", value2);
-        intent.putExtra("value3", value3);
-        intent.putExtra("value4", value4);
-        ActivityCompat.startActivity(activity, intent, new Bundle());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,6 +209,17 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
                 new Thread(loadSearch).start();
                 break;
         }
+    }
+
+    public static void startActivity(Activity activity, int type, String value1, String value2, int value3, int value4) {
+        Intent intent = new Intent();
+        intent.setClass(activity, NovelListActivity.class);
+        intent.putExtra("type", type);
+        intent.putExtra("value1", value1);
+        intent.putExtra("value2", value2);
+        intent.putExtra("value3", value3);
+        intent.putExtra("value4", value4);
+        ActivityCompat.startActivity(activity, intent, new Bundle());
     }
 
     @Override

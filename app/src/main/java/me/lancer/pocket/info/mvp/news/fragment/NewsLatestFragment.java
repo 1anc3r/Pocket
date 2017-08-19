@@ -38,6 +38,20 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
     private int last = 0, flag = 0, load = 0;
     private String date;
 
+    private Runnable loadLatest = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadLatest();
+        }
+    };
+
+    private Runnable loadBefore = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadBefore(date);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -77,20 +91,6 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                 case 5:
                     break;
             }
-        }
-    };
-
-    private Runnable loadLatest = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadLatest();
-        }
-    };
-
-    private Runnable loadBefore = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadBefore(date);
         }
     };
 

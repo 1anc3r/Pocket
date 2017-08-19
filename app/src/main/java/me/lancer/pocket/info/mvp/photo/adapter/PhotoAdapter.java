@@ -60,7 +60,6 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 viewHolder.ivCover.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), list.get(position).getTitle(), viewHolder.ivCover);
                         ArrayList<String> gallery = new ArrayList<String>();
                         for (PhotoBean bean : list) {
                             gallery.add(bean.getImgLarge());

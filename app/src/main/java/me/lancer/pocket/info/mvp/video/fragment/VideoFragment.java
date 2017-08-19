@@ -43,7 +43,6 @@ public class VideoFragment extends BaseFragment {
                 getActivity().finish();
             }
         });
-//        ((BlankActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();
         initSearchView();
@@ -190,10 +189,6 @@ public class VideoFragment extends BaseFragment {
             }
         });
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

@@ -35,6 +35,13 @@ public class MovieTopFragment extends PresenterFragment<MoviePresenter> implemen
 
     private int pager = 0, last = 0;
 
+    private Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopMovie(pager);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,13 +70,6 @@ public class MovieTopFragment extends PresenterFragment<MoviePresenter> implemen
                     swipeRefresh.setRefreshing(false);
                     break;
             }
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopMovie(pager);
         }
     };
 

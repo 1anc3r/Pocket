@@ -43,11 +43,6 @@ public class GameShotAdapter extends RecyclerView.Adapter<GameShotAdapter.ViewHo
             viewHolder.cvShot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent();
-//                    intent.putExtra("img", list.get(position));
-//                    intent.putExtra("title", "");
-//                    intent.setClass(context, PhotoDetailActivity.class);
-//                    context.startActivity(intent);
                     Intent intent = new Intent();
                     intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
                     intent.putExtra("position", position);

@@ -52,6 +52,13 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
     private String value1, value2, value4;
     private int value3;
 
+    private Runnable loadDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadDetail(value1);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -89,23 +96,6 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
             }
         }
     };
-
-    private Runnable loadDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadDetail(value1);
-        }
-    };
-
-    public static void startActivity(Activity activity, String value1, String value2, int value3, String value4) {
-        Intent intent = new Intent();
-        intent.setClass(activity, NovelDetailActivity.class);
-        intent.putExtra("value1", value1);
-        intent.putExtra("value2", value2);
-        intent.putExtra("value3", value3);
-        intent.putExtra("value4", value4);
-        ActivityCompat.startActivity(activity, intent, new Bundle());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,6 +174,16 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
                         "\t\t\t\t * （www.zhuishushenqi.com）\n" +
                         "\t\t\t\t */");
         builder.show();
+    }
+
+    public static void startActivity(Activity activity, String value1, String value2, int value3, String value4) {
+        Intent intent = new Intent();
+        intent.setClass(activity, NovelDetailActivity.class);
+        intent.putExtra("value1", value1);
+        intent.putExtra("value2", value2);
+        intent.putExtra("value3", value3);
+        intent.putExtra("value4", value4);
+        ActivityCompat.startActivity(activity, intent, new Bundle());
     }
 
     @Override

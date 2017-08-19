@@ -43,7 +43,6 @@ public class GameFragment extends BaseFragment {
                 getActivity().finish();
             }
         });
-//        ((BlankActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();
         initSearchView();
@@ -62,13 +61,6 @@ public class GameFragment extends BaseFragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-
-//        Fragment newfragment = new GameFeaturedFragment();
-//        Bundle data = new Bundle();
-//        data.putInt("id", 0);
-//        data.putString("title", "精选");
-//        newfragment.setArguments(data);
-//        adapter.addFrag(newfragment, "精选");
 
         Fragment newfragment = new GameCategoriesFragment();
         Bundle data = new Bundle();
@@ -157,10 +149,6 @@ public class GameFragment extends BaseFragment {
             }
         });
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
