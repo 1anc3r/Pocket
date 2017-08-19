@@ -27,11 +27,9 @@ import me.lancer.pocket.info.mvp.music.adapter.MusicAdapter;
 
 public class MusicTopFragment extends PresenterFragment<MusicPresenter> implements IMusicView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private MusicAdapter mAdapter;
-
     private LinearLayoutManager mLinearLayoutManager;
     private List<MusicBean> mList = new ArrayList<>();
 
@@ -42,10 +40,10 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -54,7 +52,7 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
                         if (pager == 0) {
                             mList = (List<MusicBean>) msg.obj;
                             mAdapter = new MusicAdapter(getActivity(), mList);
-                            mRecyclerView.setAdapter(mAdapter);
+                            rvList.setAdapter(mAdapter);
                         } else {
                             mList.addAll((List<MusicBean>) msg.obj);
                             for (int i = 0; i < 25; i++) {
@@ -62,7 +60,7 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
                             }
                         }
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -95,23 +93,23 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 pager = 0;
                 new Thread(loadTop).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new MusicAdapter(getActivity(), mList);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList.setAdapter(mAdapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

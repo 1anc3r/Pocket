@@ -27,12 +27,10 @@ import me.lancer.pocket.info.mvp.photo.adapter.PhotoAdapter;
 
 public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private PhotoAdapter mAdapter;
-
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<PhotoBean> mList = new ArrayList<>();
 
     private int pager = 1, last = 0;
@@ -42,10 +40,10 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -54,8 +52,6 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
                         if (pager == 1) {
                             mList.clear();
                             mList.addAll((List<PhotoBean>) msg.obj);
-//                            mAdapter = new PhotoAdapter(getActivity(), mList);
-//                            mRecyclerView.setAdapter(mAdapter);
                             mAdapter.notifyDataSetChanged();
                         } else {
                             mList.addAll((List<PhotoBean>) msg.obj);
@@ -64,7 +60,7 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
                             }
                         }
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -97,27 +93,22 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Message msg = new Message();
-//                msg.what = 0;
-//                handler.sendMessageDelayed(msg, 800);
                 pager = 1;
                 new Thread(loadLatest).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        mRecyclerView.setHasFixedSize(true);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new PhotoAdapter(getActivity(), mList);
-//        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList.setAdapter(mAdapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -132,7 +123,7 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+                last = getMax(layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]));
             }
         });
     }

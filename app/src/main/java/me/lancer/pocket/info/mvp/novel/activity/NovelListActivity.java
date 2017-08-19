@@ -33,14 +33,11 @@ import me.lancer.pocket.info.mvp.novel.adapter.NovelImgAdapter;
 
 public class NovelListActivity extends PresenterActivity<NovelPresenter> implements INovelView {
 
-    Toolbar toolbar;
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private Toolbar toolbar;
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private NovelImgAdapter mAdapter;
-
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<NovelBean> mList = new ArrayList<>();
 
     private int type, value3, value4, last = 0;
@@ -51,10 +48,10 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -63,7 +60,7 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
                         mList.addAll((List<NovelBean>) msg.obj);
                         mAdapter.notifyDataSetChanged();
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -120,23 +117,23 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
             }
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_result);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_result);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 load(type);
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList = (RecyclerView) findViewById(R.id.rv_result);
+        layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new NovelImgAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
 
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -151,7 +148,7 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+                last = getMax(layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]));
             }
         });
         load(type);

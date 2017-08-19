@@ -29,10 +29,8 @@ import me.lancer.pocket.tool.mvp.contacts.bean.MessageBean;
 
 public class MessageFragment extends BaseFragment {
 
-    private RecyclerView mRecyclerView;
-
+    private RecyclerView rvList;
     private ContactAdapter mAdapter;
-
     private LinearLayoutManager mLinearLayoutManager;
     private Map<String, List<MessageBean>> messages = new HashMap<>();
     private List<ContactBean> contacts = new ArrayList<>();
@@ -57,11 +55,11 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        rvList.setLayoutManager(mLinearLayoutManager);
         mAdapter = new ContactAdapter(getActivity(), contacts, 2);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     private void getMessages() {

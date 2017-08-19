@@ -28,12 +28,10 @@ import me.lancer.pocket.info.mvp.joke.adapter.JokeAdapter;
 
 public class JokeContentFragment extends PresenterFragment<JokePresenter> implements IJokeView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
     private FloatingActionButton fabRefresh;
-
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private JokeAdapter mAdapter;
-
     private LinearLayoutManager mLinearLayoutManager;
     private List<JokeBean> mList = new ArrayList<>();
 
@@ -44,10 +42,10 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -56,9 +54,9 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
                         mList.clear();
                         mList.addAll((List<JokeBean>) msg.obj);
                         mAdapter = new JokeAdapter(getActivity(), mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        rvList.setAdapter(mAdapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -112,22 +110,22 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 initData();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new JokeAdapter(getActivity(), mList);
         mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
         fabRefresh = (FloatingActionButton) view.findViewById(R.id.fab_refresh);
         fabRefresh.setVisibility(View.VISIBLE);
         fabRefresh.setOnClickListener(new View.OnClickListener() {

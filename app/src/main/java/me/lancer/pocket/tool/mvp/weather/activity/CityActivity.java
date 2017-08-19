@@ -39,10 +39,10 @@ import me.lancer.pocket.tool.mvp.weather.adapter.CityAdapter;
 public class CityActivity extends PresenterActivity<WeatherPresenter> implements IWeatherView, CityAdapter.MyItemClickListener, CityAdapter.MyItemLongClickListener {
 
     private Toolbar toolbar;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private CityAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
 
     private List<CityBean> mList = new ArrayList<>();
     private List<String> now = new ArrayList<>();
@@ -57,10 +57,10 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -144,22 +144,22 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(loadFile).start();
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
+        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new CityAdapter(this, now);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override

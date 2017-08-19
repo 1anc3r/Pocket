@@ -33,8 +33,7 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
     private TextView tvRes;
     private ClearEditText etTrans;
     private LinearLayout llRes;
-
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private TranslationAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private List<TranslationBean> mList = new ArrayList<>();
@@ -143,12 +142,12 @@ public class TranslationActivity extends PresenterActivity<TranslationPresenter>
             }
         });
         llRes = (LinearLayout) findViewById(R.id.ll_res);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_res);
+        rvList = (RecyclerView) findViewById(R.id.rv_res);
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new TranslationAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override

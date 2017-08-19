@@ -32,7 +32,7 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private ComicAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<ComicBean> mList = new ArrayList<>();
 
     private String keyword;
@@ -93,8 +93,8 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
             }
         });
         rvList = (RecyclerView) findViewById(R.id.rv_result);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
         mAdapter = new ComicAdapter(this, mList);

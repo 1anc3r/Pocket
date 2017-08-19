@@ -34,25 +34,26 @@ import me.lancer.pocket.ui.application.Params;
 
 public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 
-    private String link, title, cover;
     private Toolbar toolbar;
     private ImageView ivCover;
-    private List<ComicBean> mData = new ArrayList<ComicBean>();
-    private ComicAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private RecyclerView rvList;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private FloatingActionButton fab;
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private ComicAdapter mAdapter;
+    private StaggeredGridLayoutManager layoutManager;
+    private List<ComicBean> mData = new ArrayList<ComicBean>();
+
+    private String link, title, cover;
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -62,7 +63,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                         mAdapter = new ComicAdapter(SortActivity.this, mData);
                         rvList.setAdapter(mAdapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -97,9 +98,9 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         Glide.with(this).load(cover).into(ivCover);
         fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setVisibility(View.GONE);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 //                new Thread(loadTop).start();
@@ -109,8 +110,8 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
             }
         });
         rvList = (RecyclerView) findViewById(R.id.recyclerView);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
         mAdapter = new ComicAdapter(this, mData);

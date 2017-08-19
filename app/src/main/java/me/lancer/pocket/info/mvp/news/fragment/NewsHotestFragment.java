@@ -26,10 +26,10 @@ import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 
 public class NewsHotestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private NewsAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<NewsBean> mList = new ArrayList<>();
 
     private Handler handler = new Handler() {
@@ -37,10 +37,10 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -50,7 +50,7 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
                         mList.addAll((List<NewsBean>) msg.obj);
                         mAdapter.notifyDataSetChanged();
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -83,17 +83,17 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(loadHotest).start();
             }
         });
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
         mAdapter = new NewsAdapter(getActivity(), mList);
         rvList.setAdapter(mAdapter);
     }

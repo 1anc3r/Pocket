@@ -27,14 +27,13 @@ import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
 
 public class ContactActivity extends BaseActivity implements View.OnClickListener {
 
-    private RecyclerView mRecyclerView;
-    private ContactAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<ContactBean> mList = new ArrayList<>();
-
     private CollapsingToolbarLayout layout;
     private ImageView ivImg, ivArg1, ivArg2;
     private TextView tvPhone, tvCallLog;
+    private RecyclerView rvList;
+    private ContactAdapter mAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
+    private List<ContactBean> mList = new ArrayList<>();
 
     private String name, number, img;
 
@@ -70,17 +69,17 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
         ivArg1.setOnClickListener(this);
         ivArg2 = (ImageView) findViewById(R.id.iv_arg2);
         ivArg2.setOnClickListener(this);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setAutoMeasureEnabled(true);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setHasFixedSize(true);
+        rvList.setNestedScrollingEnabled(false);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new ContactAdapter(this, mList, 0);
         mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
         if (mList.size() > 0) {
             tvCallLog.setVisibility(View.VISIBLE);
         } else {

@@ -32,7 +32,7 @@ public class MessageActivity extends BaseActivity {
 
     private EditText etMsg;
     private Button btnSend;
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private MessageAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private List<MessageBean> mList = new ArrayList<>();
@@ -44,7 +44,7 @@ public class MessageActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    showSnackbar(mRecyclerView, "发送成功");
+                    showSnackbar(rvList, "发送成功");
                     mList.clear();
                     getMessages(number);
                     mAdapter.notifyDataSetChanged();
@@ -53,7 +53,7 @@ public class MessageActivity extends BaseActivity {
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     break;
                 case 1:
-                    showSnackbar(mRecyclerView, "发送失败");
+                    showSnackbar(rvList, "发送失败");
                     break;
 
             }
@@ -86,15 +86,15 @@ public class MessageActivity extends BaseActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_chat);
+        rvList = (RecyclerView) findViewById(R.id.rv_chat);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setReverseLayout(true);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new MessageAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
         if (mList.size() > 0) {
-            mRecyclerView.scrollToPosition(0);
+            rvList.scrollToPosition(0);
         }
         etMsg = (EditText) findViewById(R.id.et_msg);
         btnSend = (Button) findViewById(R.id.btn_send);

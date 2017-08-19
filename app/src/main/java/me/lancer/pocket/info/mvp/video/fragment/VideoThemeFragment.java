@@ -27,44 +27,33 @@ import me.lancer.pocket.info.mvp.video.adapter.VideoAdapter;
 
 public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implements IVideoView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private VideoAdapter mAdapter;
-
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<VideoBean> mList = new ArrayList<>();
 
-    private int pager = 0, last = 0;
+    private int pager = 0;
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
                 case 3:
                     if (msg.obj != null) {
-//                        if (pager == 0) {
                         mList.clear();
                         mList.addAll((List<VideoBean>) msg.obj);
-//                            mAdapter = new VideoAdapter(getActivity(), mList);
-//                            mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
-//                        } else {
-//                            mList.addAll((List<VideoBean>) msg.obj);
-//                            for (int i = 0; i < 10; i++) {
-//                                mAdapter.notifyItemInserted(pager*10 + i);
-//                            }
-//                        }
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -98,26 +87,20 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Message msg = new Message();
-//                msg.what = 0;
-//                handler.sendMessageDelayed(msg, 800);
-//                pager = 0;
                 new Thread(loadTheme).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        mRecyclerView.setHasFixedSize(true);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new VideoAdapter(getActivity(), mList);
-//        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override

@@ -27,11 +27,9 @@ import me.lancer.pocket.info.mvp.game.adapter.GameAdapter;
 
 public class GameFeaturedFragment extends PresenterFragment<GamePresenter> implements IGameView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private GameAdapter mAdapter;
-
     private GridLayoutManager mGridLayoutManager;
     private List<GameBean> mList = new ArrayList<>();
 
@@ -42,10 +40,10 @@ public class GameFeaturedFragment extends PresenterFragment<GamePresenter> imple
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -54,7 +52,7 @@ public class GameFeaturedFragment extends PresenterFragment<GamePresenter> imple
                         if (pager == 0) {
                             mList = (List<GameBean>) msg.obj;
                             mAdapter = new GameAdapter(getActivity(), 1, mList);
-                            mRecyclerView.setAdapter(mAdapter);
+                            rvList.setAdapter(mAdapter);
                         } else {
                             mList.addAll((List<GameBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
@@ -62,7 +60,7 @@ public class GameFeaturedFragment extends PresenterFragment<GamePresenter> imple
                             }
                         }
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -95,23 +93,23 @@ public class GameFeaturedFragment extends PresenterFragment<GamePresenter> imple
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 pager = 0;
                 new Thread(loadFeatured).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         mGridLayoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mGridLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new GameAdapter(getActivity(), 1, mList);
         mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override

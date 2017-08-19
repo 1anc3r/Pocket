@@ -27,10 +27,10 @@ import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
 
 public class ComicListFragment extends PresenterFragment<ComicPresenter> implements IComicView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private ComicAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<ComicBean> mList = new ArrayList<>();
 
     private Handler handler = new Handler() {
@@ -38,10 +38,10 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -51,7 +51,7 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
                         mList.addAll((List<ComicBean>) msg.obj);
                         mAdapter.notifyDataSetChanged();
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -84,17 +84,17 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(loadTop).start();
             }
         });
         rvList = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new ComicAdapter(getActivity(), mList);
         rvList.setAdapter(mAdapter);

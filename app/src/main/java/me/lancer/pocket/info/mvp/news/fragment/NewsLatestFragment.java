@@ -29,10 +29,10 @@ import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 
 public class NewsLatestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private NewsAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<NewsBean> mDayList = new ArrayList<>();
 
     private int last = 0, flag = 0, load = 0;
@@ -43,10 +43,10 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -57,7 +57,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                         mDayList.addAll((List<NewsBean>) msg.obj);
                         mAdapter.notifyDataSetChanged();
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 4:
                     if (msg.obj != null && load == 1) {
@@ -72,7 +72,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                         }
                         load = 0;
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 5:
                     break;
@@ -114,9 +114,9 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 flag = 0;
@@ -124,8 +124,8 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
             }
         });
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new NewsAdapter(getActivity(), mDayList);
         rvList.setAdapter(mAdapter);
@@ -146,7 +146,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+                last = getMax(layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]));
             }
         });
     }

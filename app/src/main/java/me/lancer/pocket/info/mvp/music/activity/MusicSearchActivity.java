@@ -28,13 +28,10 @@ import me.lancer.pocket.info.mvp.music.adapter.MusicAdapter;
 
 public class MusicSearchActivity extends PresenterActivity<MusicPresenter> implements IMusicView {
 
-    Toolbar toolbar;
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private Toolbar toolbar;
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private MusicAdapter mAdapter;
-
     private LinearLayoutManager mLinearLayoutManager;
     private List<MusicBean> mList = new ArrayList<>();
 
@@ -45,10 +42,10 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -56,9 +53,9 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
                     if (msg.obj != null) {
                         mList = (List<MusicBean>) msg.obj;
                         mAdapter = new MusicAdapter(MusicSearchActivity.this, mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        rvList.setAdapter(mAdapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -87,21 +84,21 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_result);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_result);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(loadQuery).start();
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);
+        rvList = (RecyclerView) findViewById(R.id.rv_result);
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new MusicAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     private void initData() {

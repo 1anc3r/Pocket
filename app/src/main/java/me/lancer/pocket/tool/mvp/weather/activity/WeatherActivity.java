@@ -46,7 +46,7 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
             tvFluBrief, tvFluDetail,
             tvSportBrief, tvSportDetail;
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private FutureAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private WeatherBean mBean = new WeatherBean();
@@ -172,12 +172,12 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
         tvFluDetail = (TextView) findViewById(R.id.tv_flu_detail);
         tvSportBrief = (TextView) findViewById(R.id.tv_sport_brief);
         tvSportDetail = (TextView) findViewById(R.id.tv_sport_detail);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_future);
+        rvList = (RecyclerView) findViewById(R.id.rv_future);
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new FutureAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
         new Thread(loadWeather).start();
     }
 

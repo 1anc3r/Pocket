@@ -42,9 +42,9 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
     private Toolbar toolbar;
     private ClearEditText etChar, etCode;
     private FloatingActionButton fab;
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private MorseAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
 
     private List<String> mList = new ArrayList<>();
     private Map<String, String> ch2co = new HashMap<>();
@@ -156,12 +156,12 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
         etCode.setOnClickListener(this);
         fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(this);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_morse);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        rvList = (RecyclerView) findViewById(R.id.rv_morse);
+        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new MorseAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override

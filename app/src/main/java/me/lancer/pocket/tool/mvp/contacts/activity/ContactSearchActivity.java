@@ -27,12 +27,9 @@ import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
 
 public class ContactSearchActivity extends BaseActivity {
 
-    Toolbar toolbar;
-
-    private RecyclerView mRecyclerView;
-
+    private Toolbar toolbar;
+    private RecyclerView rvList;
     private ContactAdapter mAdapter;
-
     private LinearLayoutManager mLinearLayoutManager;
     private List<ContactBean> mList = new ArrayList<>();
 
@@ -75,11 +72,11 @@ public class ContactSearchActivity extends BaseActivity {
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);
+        rvList = (RecyclerView) findViewById(R.id.rv_result);
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        rvList.setLayoutManager(mLinearLayoutManager);
         mAdapter = new ContactAdapter(this, mList, 1);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     private void initData() {

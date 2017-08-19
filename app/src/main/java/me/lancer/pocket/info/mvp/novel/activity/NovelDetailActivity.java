@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,9 +44,9 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
     private ImageView ivImg;
     private TextView tvTitle, tvAuthor, tvIntro, tvWordCount, tvFollowCount, tvRetentRatio;
     private LoadToast loadToast;
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private ChapterAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<NovelBean.Chapters> mList = new ArrayList<>();
 
     private String value1, value2, value4;
@@ -84,7 +83,7 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
                         mList.clear();
                         mList.addAll((List<NovelBean.Chapters>) msg.obj);
                         mAdapter = new ChapterAdapter(NovelDetailActivity.this, mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        rvList.setAdapter(mAdapter);
                     }
                     break;
             }
@@ -122,13 +121,13 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         tvWordCount = (TextView) findViewById(R.id.tv_word_count);
         tvFollowCount = (TextView) findViewById(R.id.tv_follow_count);
         tvRetentRatio = (TextView) findViewById(R.id.tv_retent_ratio);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_chapter);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList = (RecyclerView) findViewById(R.id.rv_chapter);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new ChapterAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
         loadToast.setText("玩命加载中...");
@@ -193,9 +192,9 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         if (resultCode != -1) {
             int position = resultCode;
             if (position == mList.size()) {
-                showSnackbar(mRecyclerView, "这是终章.");
+                showSnackbar(rvList, "这是终章.");
             } else if (position == -1) {
-                showSnackbar(mRecyclerView, "这是首章.");
+                showSnackbar(rvList, "这是首章.");
             } else {
                 NovelReadActivity.startActivity(this, position, mList.get(position).getTitle(), mList.get(position).getLink());
             }

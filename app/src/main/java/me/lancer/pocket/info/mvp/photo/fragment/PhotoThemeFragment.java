@@ -27,12 +27,10 @@ import me.lancer.pocket.info.mvp.photo.adapter.PhotoAdapter;
 
 public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private PhotoAdapter mAdapter;
-
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<PhotoBean> mList = new ArrayList<>();
 
     private int last = 0, flag = 0, load = 0;
@@ -50,10 +48,10 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -63,13 +61,13 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
                         mList.add(new PhotoBean(1, typezn[flag]));
                         mList.addAll((List<PhotoBean>) msg.obj);
                         mAdapter = new PhotoAdapter(getActivity(), mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        rvList.setAdapter(mAdapter);
 //                        for (int i = 0; i < ((List<PhotoBean>) msg.obj).size()+1; i++) {
 //                            mAdapter.notifyItemInserted(i);
 //                        }
                     }
                     load = 0;
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 4:
                 case 5:
@@ -88,7 +86,7 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
                         mAdapter.notifyItemInserted(len + i);
                     }
                     load = 0;
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -121,9 +119,9 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Message msg = new Message();
@@ -133,15 +131,15 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
 //                new Thread(loadTheme).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new PhotoAdapter(getActivity(), mList);
         mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList.setAdapter(mAdapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int Phototate) {
@@ -159,7 +157,7 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+                last = getMax(layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]));
             }
         });
     }

@@ -41,9 +41,10 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
 
     private Toolbar toolbar;
     private ImageView ivImg;
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private CollectAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private StaggeredGridLayoutManager layoutManager;
+
     private List<CollectBean> mList = new ArrayList<>();
     private CollectBean temp;
 
@@ -147,17 +148,17 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
         } else {
             Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/winter.gif").into(ivImg);
         }
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new CollectAdapter(getActivity(), mList);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setFocusable(true);
-        mRecyclerView.setFocusableInTouchMode(true);
+        rvList.setAdapter(mAdapter);
+        rvList.setFocusable(true);
+        rvList.setFocusableInTouchMode(true);
     }
 
     private void inflateMenu() {
