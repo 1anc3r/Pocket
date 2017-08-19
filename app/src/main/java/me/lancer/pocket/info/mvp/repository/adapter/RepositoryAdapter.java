@@ -79,7 +79,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
         public ViewHolder(View rootView) {
             super(rootView);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
             tvContent = (TextView) rootView.findViewById(R.id.tv_content);
             tvDownload = (TextView) rootView.findViewById(R.id.tv_arg1);

@@ -154,7 +154,7 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
         etChar.setOnClickListener(this);
         etCode = (ClearEditText) findViewById(R.id.et_code);
         etCode.setOnClickListener(this);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_morse);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);

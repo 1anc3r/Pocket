@@ -43,11 +43,6 @@ public class AppShotAdapter extends RecyclerView.Adapter<AppShotAdapter.ViewHold
             viewHolder.cvShot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent();
-//                    intent.putExtra("img", list.get(position));
-//                    intent.putExtra("title", "");
-//                    intent.setClass(context, PhotoDetailActivity.class);
-//                    context.startActivity(intent);
                     Intent intent = new Intent();
                     intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
                     intent.putExtra("position", position);
@@ -71,7 +66,7 @@ public class AppShotAdapter extends RecyclerView.Adapter<AppShotAdapter.ViewHold
         public ViewHolder(View rootView) {
             super(rootView);
             cvShot = (CardView) rootView.findViewById(R.id.cv_shot);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
         }
     }
 }

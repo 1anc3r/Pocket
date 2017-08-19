@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +48,7 @@ public class MainActivity extends BaseActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         initNavigationViewHeader();
         initFragment(savedInstanceState);
-        setNeedsMenuKey();
+//        setNeedsMenuKey();
     }
 
     private void initFragment(Bundle savedInstanceState) {
@@ -56,6 +57,24 @@ public class MainActivity extends BaseActivity {
         bundle.putInt(getString(R.string.index), 0);
         currentFragment.setArguments(bundle);
         switchContent(currentFragment);
+    }
+
+    public void initDrawer(Toolbar toolbar) {
+        if (toolbar != null) {
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close) {
+                @Override
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
+                }
+
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    super.onDrawerClosed(drawerView);
+                }
+            };
+            actionBarDrawerToggle.syncState();
+            drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        }
     }
 
     private void initNavigationViewHeader() {

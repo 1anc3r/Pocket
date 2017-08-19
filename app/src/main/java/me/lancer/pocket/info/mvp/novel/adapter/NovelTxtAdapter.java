@@ -99,7 +99,7 @@ public class NovelTxtAdapter extends RecyclerView.Adapter<NovelTxtAdapter.ViewHo
         public ViewHolder(View rootView) {
             super(rootView);
             cardView = (CardView) rootView.findViewById(R.id.cv_novel);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }

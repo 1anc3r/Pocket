@@ -169,14 +169,6 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
                 Message msg = new Message();
                 msg.what = 0;
                 handler.sendMessageDelayed(msg, 800);
-//                pager = 1;
-//                mList.clear();
-//                if (type == 1) {
-//                    new Thread(loadHomepage).start();
-//                } else if (type == 2) {
-//                    query = getArguments().getString("query");
-//                    new Thread(loadSearch).start();
-//                }
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);

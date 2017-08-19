@@ -1,7 +1,5 @@
 package me.lancer.pocket.info.mvp.article;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -33,7 +33,7 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<AppBean> mList = new ArrayList<>();
 
-    private int type = 0, pager = 1, last = 0, load = 0;
+    private int pager = 1, last = 0, load = 0;
     private String query;
 
     private Handler handler = new Handler() {
@@ -115,14 +115,6 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
                 Message msg = new Message();
                 msg.what = 0;
                 handler.sendMessageDelayed(msg, 800);
-//                pager = 1;
-//                mList.clear();
-//                if (type == 1) {
-//                    new Thread(loadHomepage).start();
-//                } else if (type == 2) {
-//                    query = getArguments().getString("query");
-//                    new Thread(loadSearch).start();
-//                }
             }
         });
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);

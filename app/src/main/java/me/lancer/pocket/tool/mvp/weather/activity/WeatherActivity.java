@@ -146,7 +146,7 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
         }
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_weather);
         layout.setTitle("天气");
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,7 +156,7 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
                 finish();
             }
         });
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         ivWeather = (ImageView) findViewById(R.id.iv_weather);
         tvTemperature = (TextView) findViewById(R.id.tv_temperature);
         tvAirQuality = (TextView) findViewById(R.id.tv_air_quality);

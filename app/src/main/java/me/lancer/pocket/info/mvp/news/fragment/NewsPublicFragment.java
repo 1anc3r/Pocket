@@ -15,17 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.news.INewsView;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.NewsPresenter;
 import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class NewsHotestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
+public class NewsPublicFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -35,8 +35,7 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<NewsBean> mList = new ArrayList<>();
 
-    private int last = 0, flag = 0, load = 0;
-    private String date;
+    private int page = 1, last = 0, flag = 0, load = 0;
 
     private Handler handler = new Handler() {
         @Override
@@ -51,12 +50,18 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
                 case 2:
                     break;
                 case 3:
-                    if (msg.obj != null) {
+                    if (msg.obj != null && load == 1) {
+                        int size = mList.size();
+                        mList.addAll((List<NewsBean>) msg.obj);
+                        for (int i = 0; i < ((List<NewsBean>) msg.obj).size() + 1; i++) {
+                            mAdapter.notifyItemInserted(size + 1 + i);
+                        }
+                        load = 0;
+                    } else {
                         mList.clear();
                         mList.addAll((List<NewsBean>) msg.obj);
-//                        mAdapter = new NewsAdapter(getActivity(), mList);
-//                        mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
+                        load = 0;
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
@@ -64,10 +69,10 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
         }
     };
 
-    private Runnable loadHotest = new Runnable() {
+    private Runnable loadPublic = new Runnable() {
         @Override
         public void run() {
-            presenter.loadHotest();
+            presenter.loadPublic(page);
         }
     };
 
@@ -86,7 +91,7 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
     }
 
     private void initData() {
-        new Thread(loadHotest).start();
+        new Thread(loadPublic).start();
     }
 
     private void initView(View view) {
@@ -96,21 +101,44 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Message msg = new Message();
-//                msg.what = 0;
-//                handler.sendMessageDelayed(msg, 800);
                 flag = 0;
-                new Thread(loadHotest).start();
+                new Thread(loadPublic).start();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        mRecyclerView.setHasFixedSize(true);
         mAdapter = new NewsAdapter(getActivity(), mList);
-//        mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && last + 1 == mAdapter.getItemCount()) {
+                    load = 1;
+                    page += 1;
+                    new Thread(loadPublic).start();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+            }
+        });
+    }
+
+    private int getMax(int[] arr) {
+        int len = arr.length;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < len; i++) {
+            max = Math.max(max, arr[i]);
+        }
+        return max;
     }
 
     @Override
@@ -131,15 +159,15 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
 
     @Override
     public void showHotest(List<NewsBean> list) {
-        Message msg = new Message();
-        msg.what = 3;
-        msg.obj = list;
-        handler.sendMessage(msg);
+
     }
 
     @Override
     public void showPublic(List<NewsBean> list) {
-
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = list;
+        handler.sendMessage(msg);
     }
 
     @Override

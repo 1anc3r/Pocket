@@ -31,8 +31,6 @@ import me.lancer.pocket.info.mvp.comic.ComicPresenter;
 import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
 import me.lancer.pocket.ui.application.Params;
-import me.lancer.pocket.ui.mvp.collect.CollectBean;
-import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 
 public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 
@@ -97,7 +95,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         ivCover = (ImageView) findViewById(R.id.imageView);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setVisibility(View.GONE);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);

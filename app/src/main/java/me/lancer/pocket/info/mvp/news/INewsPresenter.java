@@ -8,10 +8,6 @@ import java.util.List;
 
 public interface INewsPresenter {
 
-    void loadHotestSuccess(List<NewsBean> list);
-
-    void loadHotestFailure(String log);
-
     void loadLatestSuccess(List<NewsBean> list);
 
     void loadLatestFailure(String log);
@@ -19,6 +15,14 @@ public interface INewsPresenter {
     void loadBeforeSuccess(List<NewsBean> list);
 
     void loadBeforeFailure(String log);
+
+    void loadHotestSuccess(List<NewsBean> list);
+
+    void loadHotestFailure(String log);
+
+    void loadPublicSuccess(List<NewsBean> list);
+
+    void loadPublicFailure(String log);
 
     void loadListSuccess(List<NewsBean> list);
 

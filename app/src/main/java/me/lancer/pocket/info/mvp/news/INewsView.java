@@ -10,11 +10,13 @@ import me.lancer.pocket.ui.mvp.base.IBaseView;
 
 public interface INewsView extends IBaseView {
 
-    void showHotest(List<NewsBean> list);
-
     void showLatest(List<NewsBean> list);
 
     void showBefore(List<NewsBean> list);
+
+    void showHotest(List<NewsBean> list);
+
+    void showPublic(List<NewsBean> list);
 
     void showList(List<NewsBean> list);
 

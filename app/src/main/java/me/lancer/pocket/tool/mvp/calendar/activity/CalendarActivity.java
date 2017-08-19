@@ -147,7 +147,7 @@ public class CalendarActivity extends PresenterActivity<CalendarPresenter> imple
                 startActivityForResult(intent, 0);
             }
         });
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab = (FloatingActionButton) findViewById(R.id.fab_collect);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

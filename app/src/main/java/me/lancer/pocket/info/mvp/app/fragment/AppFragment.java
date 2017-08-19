@@ -45,7 +45,6 @@ public class AppFragment extends BaseFragment {
                 getActivity().finish();
             }
         });
-//        ((BlankActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();
         initSearchView();
@@ -129,20 +128,6 @@ public class AppFragment extends BaseFragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-//                    case R.id.menu_about:
-//                        Intent intent0 = new Intent();
-//                        intent0.putExtra("link", "https://github.com/1anc3r");
-//                        intent0.putExtra("title", "Github");
-//                        intent0.setClass(getActivity(), AboutActivity.class);
-//                        startActivity(intent0);
-//                        break;
-//                    case R.id.menu_blog:
-//                        Intent intent1 = new Intent();
-//                        intent1.putExtra("link", "https://www.1anc3r.me");
-//                        intent1.putExtra("title", "Blog");
-//                        intent1.setClass(getActivity(), AboutActivity.class);
-//                        startActivity(intent1);
-//                        break;
                     case R.id.menu_about:
                         showAboutDialog();
                         break;
@@ -158,10 +143,6 @@ public class AppFragment extends BaseFragment {
         builder.setMessage("");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()

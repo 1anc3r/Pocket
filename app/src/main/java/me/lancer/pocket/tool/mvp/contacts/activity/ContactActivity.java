@@ -62,7 +62,7 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
         }
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_phone);
         layout.setTitle(name);
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         tvCallLog = (TextView) findViewById(R.id.tv_call_log);
         tvPhone = (TextView) findViewById(R.id.tv_phone);
         tvPhone.setText(number);

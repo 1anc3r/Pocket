@@ -23,25 +23,15 @@ public class NewsModel {
 
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     String newsUrl = "http://news-at.zhihu.com/api/4/news/";
-    String beforeUrl = "http://news-at.zhihu.com/api/4/news/before/";
     String latestUrl = "http://news-at.zhihu.com/api/4/news/latest";
+    String beforeUrl = "http://news-at.zhihu.com/api/4/news/before/";
     String hotestUrl = "http://news-at.zhihu.com/api/3/news/hot";
+    String publicUrl = "http://v.juhe.cn/weixin/query?key=26ce25ffcfc907a26263e2b0e3e23676&pno=%d&ps=21";
     String itemUrl = "http://news-at.zhihu.com/api/4/theme/";
     String listUrl = "http://news-at.zhihu.com/api/4/themes";
 
     public NewsModel(INewsPresenter presenter) {
         this.presenter = presenter;
-    }
-
-    public void loadHotest() {
-        String content = contentGetterSetter.getContentFromHtml("News.loadHotest", hotestUrl);
-        List<NewsBean> list;
-        if (!content.contains("获取失败!")) {
-            list = getHotestNewsFromContent(content);
-            presenter.loadHotestSuccess(list);
-        } else {
-            presenter.loadHotestFailure(content);
-        }
     }
 
     public void loadLatest() {
@@ -63,6 +53,28 @@ public class NewsModel {
             presenter.loadBeforeSuccess(list);
         } else {
             presenter.loadBeforeFailure(content);
+        }
+    }
+
+    public void loadHotest() {
+        String content = contentGetterSetter.getContentFromHtml("News.loadHotest", hotestUrl);
+        List<NewsBean> list;
+        if (!content.contains("获取失败!")) {
+            list = getHotestNewsFromContent(content);
+            presenter.loadHotestSuccess(list);
+        } else {
+            presenter.loadHotestFailure(content);
+        }
+    }
+
+    public void loadPublic(int page) {
+        String content = contentGetterSetter.getContentFromHtml("News.loadPublic", String.format(publicUrl, page));
+        List<NewsBean> list;
+        if (!content.contains("获取失败!")) {
+            list = getPublicNewsFromContent(content);
+            presenter.loadPublicSuccess(list);
+        } else {
+            presenter.loadPublicFailure(content);
         }
     }
 
@@ -99,6 +111,33 @@ public class NewsModel {
         }
     }
 
+    public List<NewsBean> getLatestNewsFromContent(String content) {
+        try {
+            List<NewsBean> list = new ArrayList<>();
+            JSONObject jbNews = new JSONObject(content);
+            JSONArray jaNews = jbNews.getJSONArray("stories");
+            for (int i = 0; i < jaNews.length(); i++) {
+                NewsBean bean = new NewsBean();
+                JSONObject jbItem = jaNews.getJSONObject(i);
+                bean.setId(jbItem.getInt("id"));
+                if (i == 0) {
+                    bean.setType(-1);
+                } else {
+                    bean.setType(0);
+                }
+                bean.setTitle(jbItem.getString("title"));
+                JSONArray jaImg = jbItem.getJSONArray("images");
+                bean.setImg(jaImg.get(0).toString());
+                bean.setLink(newsUrl + bean.getId());
+                list.add(bean);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public List<NewsBean> getHotestNewsFromContent(String content) {
         try {
             List<NewsBean> list = new ArrayList<>();
@@ -121,27 +160,28 @@ public class NewsModel {
         }
     }
 
-    public List<NewsBean> getLatestNewsFromContent(String content) {
+    private List<NewsBean> getPublicNewsFromContent(String content) {
         try {
             List<NewsBean> list = new ArrayList<>();
-            JSONObject jbNews = new JSONObject(content);
-            JSONArray jaNews = jbNews.getJSONArray("stories");
-            for (int i = 0; i < jaNews.length(); i++) {
-                NewsBean bean = new NewsBean();
-                JSONObject jbItem = jaNews.getJSONObject(i);
-                bean.setId(jbItem.getInt("id"));
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
+            JSONObject all = new JSONObject(content);
+            int errorCode = all.getInt("error_code");
+            String reason = all.getString("reason");
+            if(errorCode == 0 && reason.equals("请求成功")){
+                JSONObject result = all.getJSONObject("result");
+                JSONArray jist = result.getJSONArray("list");
+                for (int i = 0; i < jist.length(); i++) {
+                    NewsBean bean = new NewsBean();
+                    JSONObject jbItem = jist.getJSONObject(i);
+                    bean.setId(-1);
                     bean.setType(0);
+                    bean.setTitle(jbItem.getString("title"));
+                    bean.setImg(jbItem.getString("firstImg"));
+                    bean.setLink(jbItem.getString("url"));
+                    list.add(bean);
                 }
-                bean.setTitle(jbItem.getString("title"));
-                JSONArray jaImg = jbItem.getJSONArray("images");
-                bean.setImg(jaImg.get(0).toString());
-                bean.setLink(newsUrl + bean.getId());
-                list.add(bean);
+                return list;
             }
-            return list;
+            return null;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

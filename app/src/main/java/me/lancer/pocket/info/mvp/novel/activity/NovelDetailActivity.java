@@ -133,7 +133,7 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
             actionBar.setTitle(value2);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvAuthor = (TextView) findViewById(R.id.tv_author);
         tvIntro = (TextView) findViewById(R.id.tv_intro);

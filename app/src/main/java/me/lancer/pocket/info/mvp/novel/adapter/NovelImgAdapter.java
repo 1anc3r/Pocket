@@ -83,7 +83,7 @@ public class NovelImgAdapter extends RecyclerView.Adapter<NovelImgAdapter.ViewHo
             super(rootView);
             cvNovel = (CardView) rootView.findViewById(R.id.cv_novel);
             llNovel = (LinearLayout) rootView.findViewById(R.id.ll_novel);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
             tvAuthor = (TextView) rootView.findViewById(R.id.tv_author);
             tvIntro = (TextView) rootView.findViewById(R.id.tv_intro);

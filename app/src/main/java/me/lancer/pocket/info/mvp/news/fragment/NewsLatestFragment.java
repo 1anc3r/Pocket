@@ -57,8 +57,6 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                         mDayList.clear();
                         mDayList.add(new NewsBean(1, "— 今日 —"));
                         mDayList.addAll((List<NewsBean>) msg.obj);
-//                        mAdapter = new NewsAdapter(getActivity(), mDayList);
-//                        mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -198,6 +196,11 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
         msg.what = 5;
         msg.obj = list;
         handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showPublic(List<NewsBean> list) {
+
     }
 
     @Override

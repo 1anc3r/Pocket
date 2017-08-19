@@ -29,6 +29,7 @@ import me.lancer.pocket.info.mvp.movie.activity.MovieDetailActivity;
 import me.lancer.pocket.info.mvp.music.activity.MusicDetailActivity;
 import me.lancer.pocket.info.mvp.news.activity.NewsDetailActivity;
 import me.lancer.pocket.info.mvp.photo.activity.PhotoGalleryActivity;
+import me.lancer.pocket.ui.activity.MainActivity;
 import me.lancer.pocket.ui.activity.SettingActivity;
 import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.ui.mvp.collect.CollectAdapter;
@@ -139,7 +140,8 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     private void initView(View view) {
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle("收藏");
-        ivImg = (ImageView) view.findViewById(R.id.iv_img);
+        ((MainActivity) getActivity()).initDrawer(toolbar);
+        ivImg = (ImageView) view.findViewById(R.id.iv_cover);
         if ((Math.random() * 16) > 8) {
             Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/summer.gif").into(ivImg);
         } else {

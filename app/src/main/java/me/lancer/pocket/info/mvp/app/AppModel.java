@@ -2,7 +2,6 @@ package me.lancer.pocket.info.mvp.app;
 
 import android.util.Log;
 
-import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -10,10 +9,6 @@ import com.squareup.okhttp.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -135,7 +130,6 @@ public class AppModel {
             JSONObject jsonObject = new JSONObject(content);
             JSONObject field = jsonObject.getJSONObject("field");
             bean.setId(field.getString("aid"));
-//            bean.setApkName(field.getString("title"));
             bean.setPkgName(field.getString("apkname"));
             bean.setVersCode(field.getInt("apkversioncode"));
             bean.setVersNum(field.getString("apkversionname"));

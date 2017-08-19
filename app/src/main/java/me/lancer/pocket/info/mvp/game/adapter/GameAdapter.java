@@ -81,7 +81,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         public ViewHolder(View rootView) {
             super(rootView);
             cvGame = (CardView) rootView.findViewById(R.id.cv_game);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
             ivWindows = (ImageView) rootView.findViewById(R.id.iv_windows);
             ivMac = (ImageView) rootView.findViewById(R.id.iv_mac);
             ivLinux = (ImageView) rootView.findViewById(R.id.iv_linux);

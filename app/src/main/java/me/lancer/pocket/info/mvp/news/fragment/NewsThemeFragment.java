@@ -129,6 +129,11 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
     }
 
     @Override
+    public void showPublic(List<NewsBean> list) {
+
+    }
+
+    @Override
     public void showLatest(List<NewsBean> list) {
 
     }

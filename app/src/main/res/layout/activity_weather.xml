@@ -27,7 +27,7 @@
                 app:layout_collapseParallaxMultiplier="1">
 
                 <ImageView
-                    android:id="@+id/iv_img"
+                    android:id="@+id/iv_cover"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
@@ -362,7 +362,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_collect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"

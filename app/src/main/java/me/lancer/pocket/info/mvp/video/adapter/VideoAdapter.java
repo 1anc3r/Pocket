@@ -110,7 +110,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         public ViewHolder(View rootView) {
             super(rootView);
             cvLarge = (CardView) rootView.findViewById(R.id.cv_large);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }

@@ -63,8 +63,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     }
                 });
             } else if (getItemViewType(position) == TYPE_CONTENtoolbar) {
-//                StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
-//                layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
                 ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
@@ -104,7 +102,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         public ViewHolder(View rootView) {
             super(rootView);
             cvLarge = (CardView) rootView.findViewById(R.id.cv_large);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }

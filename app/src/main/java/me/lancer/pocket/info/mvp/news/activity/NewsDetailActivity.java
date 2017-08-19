@@ -17,16 +17,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,22 +43,23 @@ import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class NewsDetailActivity extends PresenterActivity<NewsPresenter> implements INewsView {
 
-    private RecyclerView mRecyclerView;
-    private NewsAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private List<NewsBean> mList = new ArrayList<>();
+    private CollapsingToolbarLayout layout;
+    private FloatingActionButton fabCollect;
+    private ImageView ivCover;
+    private HtmlTextView htvContent;
+    private WebView wvContent;
+    private LoadToast loadToast;
+
+    private RecyclerView rvList;
+    private NewsAdapter adapter;
+    private StaggeredGridLayoutManager layoutManager;
+    private List<NewsBean> list = new ArrayList<>();
+    
+    private int id;
+    private String title, img, link;
 
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
-
-    private CollapsingToolbarLayout layout;
-    private FloatingActionButton fab;
-    private ImageView ivImg;
-    private HtmlTextView htvContent;
-    private LoadToast loadToast;
-
-    private int id;
-    private String title, img, link;
 
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -78,8 +78,8 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                         loadToast.success();
                         NewsBean nb = (NewsBean) msg.obj;
                         layout.setTitle(nb.getTitle());
-                        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-                        Glide.with(NewsDetailActivity.this).load(nb.getImg()).into(ivImg);
+                        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
+                        Glide.with(NewsDetailActivity.this).load(nb.getImg()).into(ivCover);
                         if (nb.getContent() != null) {
                             htvContent.setHtml(nb.getContent(), new HtmlHttpImageGetter(htvContent));
                         }
@@ -88,10 +88,10 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                 case 4:
                     if (msg.obj != null) {
                         loadToast.success();
-                        mList.clear();
-                        mList.addAll((List<NewsBean>) msg.obj);
-                        mAdapter = new NewsAdapter(NewsDetailActivity.this, mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        list.clear();
+                        list.addAll((List<NewsBean>) msg.obj);
+                        adapter = new NewsAdapter(NewsDetailActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
                     break;
             }
@@ -115,13 +115,13 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view == fab) {
+            if (view == fabCollect) {
                 if(temps.size() == 1) {
-                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(title, link);
                 } else {
-                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(1);
                     temp.setCover(img);
@@ -143,7 +143,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     }
 
     private void initData() {
-        id = getIntent().getIntExtra("id", 2);
+        id = getIntent().getIntExtra("id", -1);
         title = getIntent().getStringExtra("title");
         img = getIntent().getStringExtra("img");
         link = getIntent().getStringExtra("link");
@@ -156,43 +156,60 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
+        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl);
         layout.setTitle(title);
-        ivImg = (ImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-        Glide.with(this).load(img).into(ivImg);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(vOnClickListener);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
+        Glide.with(this).load(img).into(ivCover);
+        fabCollect = (FloatingActionButton) findViewById(R.id.fab_collect);
+        fabCollect.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, link);
         if(temps.size() == 1) {
-            fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
-            fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mStaggeredGridLayoutManager.setAutoMeasureEnabled(true);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new NewsAdapter(this, mList);
-        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        wvContent = (WebView) findViewById(R.id.wv_content);
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setAutoMeasureEnabled(true);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setHasFixedSize(true);
+        rvList.setNestedScrollingEnabled(false);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
+        adapter = new NewsAdapter(this, list);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
         loadToast.setText("玩命加载中...");
         loadToast.show();
-        if (link != null && !link.equals("")) {
+        if (link != null && !link.equals("") && id != -1) {
             htvContent.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
+            wvContent.setVisibility(View.GONE);
+            rvList.setVisibility(View.GONE);
             new Thread(loadDetail).start();
-        } else {
+        } else if (link != null && !link.equals("") && id == -1) {
+            wvContent.setVisibility(View.VISIBLE);
             htvContent.setVisibility(View.GONE);
-            mRecyclerView.setVisibility(View.VISIBLE);
-            fab.setVisibility(View.GONE);
+            rvList.setVisibility(View.GONE);
+            wvContent.getSettings().setJavaScriptEnabled(true);
+            wvContent.requestFocus();
+            wvContent.setWebViewClient(new WebViewClient() {
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+                    loadToast.success();
+                    return true;
+                }
+            });
+            wvContent.loadUrl(link);
+        } else {
+            rvList.setVisibility(View.VISIBLE);
+            htvContent.setVisibility(View.GONE);
+            wvContent.setVisibility(View.GONE);
+            fabCollect.setVisibility(View.GONE);
             new Thread(loadItem).start();
         }
     }
@@ -211,7 +228,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
 
     @Override
     protected void onDestroy() {
-        ivImg.destroyDrawingCache();
+        ivCover.destroyDrawingCache();
         htvContent.destroyDrawingCache();
         super.onDestroy();
     }
@@ -223,6 +240,11 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
 
     @Override
     public void showHotest(List<NewsBean> list) {
+
+    }
+
+    @Override
+    public void showPublic(List<NewsBean> list) {
 
     }
 
@@ -277,21 +299,5 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         Message msg = new Message();
         msg.what = 0;
         handler.sendMessage(msg);
-    }
-
-
-    public static String getMD5(String val) throws NoSuchAlgorithmException {
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-        md5.update(val.getBytes());
-        byte[] m = md5.digest();
-        return getString(m);
-    }
-
-    private static String getString(byte[] b) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < b.length; i++) {
-            sb.append(b[i]);
-        }
-        return sb.toString();
     }
 }

@@ -110,7 +110,7 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
         htvInfo = (HtmlTextView) findViewById(R.id.htv_info);

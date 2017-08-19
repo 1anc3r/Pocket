@@ -28,29 +28,6 @@ public class NewsPresenter implements IBasePresenter<INewsView>, INewsPresenter 
         this.view = null;
     }
 
-    public void loadHotest() {
-        if (view != null) {
-            view.showLoad();
-            model.loadHotest();
-        }
-    }
-
-    @Override
-    public void loadHotestSuccess(List<NewsBean> list) {
-        if (view != null) {
-            view.showHotest(list);
-            view.hideLoad();
-        }
-    }
-
-    @Override
-    public void loadHotestFailure(String log) {
-        if (log != null && log.length() > 0 && view != null) {
-            view.showMsg(log);
-            view.hideLoad();
-        }
-    }
-
     public void loadLatest() {
         if (view != null) {
             view.showLoad();
@@ -91,6 +68,52 @@ public class NewsPresenter implements IBasePresenter<INewsView>, INewsPresenter 
 
     @Override
     public void loadBeforeFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadHotest() {
+        if (view != null) {
+            view.showLoad();
+            model.loadHotest();
+        }
+    }
+
+    @Override
+    public void loadHotestSuccess(List<NewsBean> list) {
+        if (view != null) {
+            view.showHotest(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadHotestFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadPublic(int page) {
+        if (view != null) {
+            view.showLoad();
+            model.loadPublic(page);
+        }
+    }
+
+    @Override
+    public void loadPublicSuccess(List<NewsBean> list) {
+        if (view != null) {
+            view.showPublic(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadPublicFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();

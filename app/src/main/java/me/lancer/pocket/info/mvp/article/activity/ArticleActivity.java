@@ -17,9 +17,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
@@ -156,14 +154,14 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
         } else {
             fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         if ((Math.random() * 16) > 8) {
             Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_day.png").into(ivImg);
         } else {
             Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_night.png").into(ivImg);
         }
-        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
+        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl);
         htvAuthor = (HtmlTextView) findViewById(R.id.htv_author);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
         loadToast = new LoadToast(this);

@@ -30,6 +30,7 @@ import me.lancer.pocket.tool.mvp.weather.CityBean;
 import me.lancer.pocket.tool.mvp.weather.IWeatherView;
 import me.lancer.pocket.tool.mvp.weather.WeatherBean;
 import me.lancer.pocket.tool.mvp.weather.WeatherPresenter;
+import me.lancer.pocket.ui.activity.MainActivity;
 import me.lancer.pocket.ui.activity.SettingActivity;
 import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.ui.mvp.dragon.DragonActivity;
@@ -68,7 +69,7 @@ public class MainFragment extends PresenterFragment<WeatherPresenter> implements
                         } else if (weather.contains("雪")) {
                             toolbar.setLogo(R.mipmap.ic_snowy);
                         }
-                        toolbar.setTitle("   " + weather + "   " + mBean.getTemperature() + "℃");
+                        toolbar.setTitle("  " + weather + "   " + mBean.getTemperature() + "℃");
                     }
                     break;
             }
@@ -101,9 +102,7 @@ public class MainFragment extends PresenterFragment<WeatherPresenter> implements
 
     private void initToolbar(View view) {
         toolbar = (Toolbar) view.findViewById(R.id.t_tab);
-//        toolbar.setTitle("   " + getResources().getString(R.string.app_name));
-//        toolbar.setLogo(R.mipmap.ic_cloudy);
-        toolbar.setNavigationIcon(null);
+        ((MainActivity) getActivity()).initDrawer(toolbar);
     }
 
     private void initTabLayout(View view) {

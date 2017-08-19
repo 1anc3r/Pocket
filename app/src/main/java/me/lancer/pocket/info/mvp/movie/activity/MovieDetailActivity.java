@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -111,7 +110,7 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
         htvInfo = (HtmlTextView) findViewById(R.id.htv_info);

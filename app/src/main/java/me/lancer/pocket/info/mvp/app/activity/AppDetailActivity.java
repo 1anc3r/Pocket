@@ -117,9 +117,9 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
+        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl);
         layout.setTitle(title);
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
         tvVersNum = (TextView) findViewById(R.id.tv_vers_num);
@@ -139,15 +139,9 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                showSnackbar(rvList, "下载功能暂不开放");
-//                Intent intent = new Intent();
-//                intent.setAction("android.intent.action.VIEW");
-//                Uri content_url = Uri.parse(bean.getDownLink());
-//                intent.setData(content_url);
-//                startActivity(intent);
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse("https://www.coolapk.com/apk/"+bean.getPkgName());
+                Uri content_url = Uri.parse("https://www.coolapk.com/apk/" + bean.getPkgName());
                 intent.setData(content_url);
                 startActivity(intent);
             }

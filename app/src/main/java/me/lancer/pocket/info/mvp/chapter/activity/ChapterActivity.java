@@ -121,7 +121,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         ivCover = (ImageView) findViewById(R.id.imageView);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, link);
         if(temps.size() == 1) {

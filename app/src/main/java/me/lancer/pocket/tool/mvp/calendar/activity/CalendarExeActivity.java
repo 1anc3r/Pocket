@@ -122,7 +122,7 @@ public class CalendarExeActivity extends PresenterActivity<CalendarPresenter> im
         sStartTime.setOnItemSelectedListener(onItemSelectedListener);
         sEndTime = (Spinner) findViewById(R.id.s_end);
         sEndTime.setOnItemSelectedListener(onItemSelectedListener);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab = (FloatingActionButton) findViewById(R.id.fab_collect);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

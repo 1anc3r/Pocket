@@ -148,10 +148,10 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_img);
+        ivImg = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivImg);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, String.valueOf(id));
         if(temps.size() == 1) {

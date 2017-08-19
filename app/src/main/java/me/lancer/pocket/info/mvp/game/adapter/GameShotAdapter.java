@@ -71,7 +71,7 @@ public class GameShotAdapter extends RecyclerView.Adapter<GameShotAdapter.ViewHo
         public ViewHolder(View rootView) {
             super(rootView);
             cvShot = (CardView) rootView.findViewById(R.id.cv_shot);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
         }
     }
 }

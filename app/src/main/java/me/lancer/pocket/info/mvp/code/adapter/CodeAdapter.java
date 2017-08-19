@@ -98,7 +98,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
             super(rootView);
             cvSmall = (CardView) rootView.findViewById(R.id.cv_code);
             tvRank = (TextView) rootView.findViewById(R.id.tv_rank);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_img);
+            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvName = (TextView) rootView.findViewById(R.id.tv_title);
             tvStar = (TextView) rootView.findViewById(R.id.tv_star);
         }
