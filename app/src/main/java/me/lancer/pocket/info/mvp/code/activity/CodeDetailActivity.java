@@ -21,19 +21,18 @@ import net.steamcrafted.loadtoast.LoadToast;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.CodePresenter;
 import me.lancer.pocket.info.mvp.code.ICodeView;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class CodeDetailActivity extends PresenterActivity<CodePresenter> implements ICodeView {
 
     private WebView wvContent;
     private LoadToast loadToast;
 
-    private int type;
-    private String title, star, rank, img, link;
+    private String title, img, link;
 
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -74,8 +73,6 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
 
     private void initData() {
         title = getIntent().getStringExtra("title");
-        star = getIntent().getStringExtra("star");
-        rank = getIntent().getStringExtra("rank");
         img = getIntent().getStringExtra("img");
         link = getIntent().getStringExtra("link");
     }

@@ -25,13 +25,11 @@ import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 public class AppSearchActivity extends PresenterActivity<AppPresenter> implements IAppView {
 
     Toolbar toolbar;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
-    private AppGridAdapter mAdapter;
-
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private List<AppBean> mList = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private AppGridAdapter adapter;
+    private StaggeredGridLayoutManager layoutManager;
+    private List<AppBean> list = new ArrayList<>();
 
     private int pager = 1, last = 0, load = 0;
     private String query;
@@ -41,40 +39,40 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList = (List<AppBean>) msg.obj;
-                        mAdapter = new AppGridAdapter(AppSearchActivity.this, mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        list = (List<AppBean>) msg.obj;
+                        adapter = new AppGridAdapter(AppSearchActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 4:
                     if (msg.obj != null && load == 1) {
-                        int size = mList.size();
-                        mList.addAll((List<AppBean>) msg.obj);
+                        int size = list.size();
+                        list.addAll((List<AppBean>) msg.obj);
                         for (int i = 0; i < ((List<AppBean>) msg.obj).size(); i++) {
-                            mAdapter.notifyItemInserted(size + i);
+                            adapter.notifyItemInserted(size + i);
                         }
                         load = 0;
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 5:
                     if (msg.obj != null) {
-                        mList.addAll((List<AppBean>) msg.obj);
-                        Collections.sort(mList, AppComparator);
-                        mAdapter = new AppGridAdapter(AppSearchActivity.this, mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        list.addAll((List<AppBean>) msg.obj);
+                        Collections.sort(list, AppComparator);
+                        adapter = new AppGridAdapter(AppSearchActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -107,9 +105,9 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_result);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_result);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Message msg = new Message();
@@ -117,20 +115,20 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
                 handler.sendMessageDelayed(msg, 800);
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new AppGridAdapter(this, mList);
-        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList = (RecyclerView) findViewById(R.id.rv_result);
+        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        adapter = new AppGridAdapter(this, list);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     load = 1;
                     pager += 1;
                     new Thread(loadSearch).start();
@@ -140,7 +138,7 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+                last = getMax(layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]));
             }
         });
         new Thread(loadSearch).start();

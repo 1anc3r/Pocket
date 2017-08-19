@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.book.BookBean;
 import me.lancer.pocket.info.mvp.book.BookPresenter;
 import me.lancer.pocket.info.mvp.book.IBookView;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
@@ -37,16 +37,16 @@ import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class BookDetailActivity extends PresenterActivity<BookPresenter> implements IBookView {
 
-    private ImageView ivImg;
+    private ImageView ivCover;
     private HtmlTextView htvInfo;
     private HtmlTextView htvContent;
     private LoadToast loadToast;
 
-    private List<CollectBean> temps = new ArrayList<>();
-    private CollectBean temp = new CollectBean();
-
     private int type;
     private String title, img, link;
+
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
 
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -110,9 +110,9 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
-        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-        Glide.with(this).load(img).into(ivImg);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
+        Glide.with(this).load(img).into(ivCover);
         htvInfo = (HtmlTextView) findViewById(R.id.htv_info);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
         loadToast = new LoadToast(this);
@@ -179,7 +179,7 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ivImg.destroyDrawingCache();
+        ivCover.destroyDrawingCache();
         htvInfo.destroyDrawingCache();
         htvContent.destroyDrawingCache();
     }

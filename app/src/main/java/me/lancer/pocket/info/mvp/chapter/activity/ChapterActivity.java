@@ -24,50 +24,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.chapter.ChapterBean;
 import me.lancer.pocket.info.mvp.chapter.ChapterPresenter;
 import me.lancer.pocket.info.mvp.chapter.IChapterView;
 import me.lancer.pocket.info.mvp.chapter.adapter.ChapterAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 
 public class ChapterActivity extends PresenterActivity<ChapterPresenter> implements IChapterView {
 
-    private String link, title, cover, category;
     private Toolbar toolbar;
     private ImageView ivCover;
-    private List<ChapterBean> mData = new ArrayList<ChapterBean>();
-    private ChapterAdapter mAdapter;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private RecyclerView mRecyclerView;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private FloatingActionButton fab;
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private ChapterAdapter adapter;
+    private StaggeredGridLayoutManager layoutManager;
+    private List<ChapterBean> list = new ArrayList<>();
+    private FloatingActionButton fabCollect;
 
+    private String link, title, cover;
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
-
-    private Handler handler = new Handler() {
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    break;
-                case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    if (msg.obj != null) {
-                        mData = (List<ChapterBean>) msg.obj;
-                        mAdapter = new ChapterAdapter(ChapterActivity.this, mData);
-                        mRecyclerView.setAdapter(mAdapter);
-                    }
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    break;
+        public void onClick(View view) {
+            if (view == fabCollect) {
+                if(temps.size() == 1) {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(2);
+                    temp.setCate(11);
+                    temp.setCover(cover);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
             }
         }
     };
@@ -78,25 +75,26 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
             presenter.loadList(link);
         }
     };
-
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+    private Handler handler = new Handler() {
         @Override
-        public void onClick(View view) {
-            if (view == fab) {
-                if(temps.size() == 1) {
-                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, link);
-                } else {
-                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(2);
-                    temp.setCate(11);
-                    temp.setCover(cover);
-                    temp.setTitle(title);
-                    temp.setLink(link);
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, link);
-                }
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    swipeRefresh.setRefreshing(false);
+                    break;
+                case 1:
+                    swipeRefresh.setRefreshing(true);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    if (msg.obj != null) {
+                        list = (List<ChapterBean>) msg.obj;
+                        adapter = new ChapterAdapter(ChapterActivity.this, list);
+                        rvList.setAdapter(adapter);
+                    }
+                    swipeRefresh.setRefreshing(false);
+                    break;
             }
         }
     };
@@ -112,7 +110,6 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         link = getIntent().getStringExtra("link");
         title = getIntent().getStringExtra("title");
         cover = getIntent().getStringExtra("cover");
-        category = getIntent().getStringExtra("category");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
@@ -121,32 +118,31 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         ivCover = (ImageView) findViewById(R.id.imageView);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
-        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
-        fab.setOnClickListener(vOnClickListener);
+        fabCollect = (FloatingActionButton) findViewById(R.id.fab_collect);
+        fabCollect.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, link);
         if(temps.size() == 1) {
-            fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
-            fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                new Thread(loadTop).start();
                 Message msg = new Message();
                 msg.what = 0;
                 handler.sendMessageDelayed(msg, 800);
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new ChapterAdapter(this, mData);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList = (RecyclerView) findViewById(R.id.recyclerView);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
+        adapter = new ChapterAdapter(this, list);
+        rvList.setAdapter(adapter);
         new Thread(loadTop).start();
     }
 

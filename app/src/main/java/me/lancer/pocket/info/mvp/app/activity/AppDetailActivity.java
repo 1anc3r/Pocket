@@ -39,15 +39,15 @@ import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.AppPresenter;
 import me.lancer.pocket.info.mvp.app.IAppView;
 import me.lancer.pocket.info.mvp.app.adapter.AppShotAdapter;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class AppDetailActivity extends PresenterActivity<AppPresenter> implements IAppView {
 
     private CollapsingToolbarLayout layout;
-    private ImageView ivImg;
+    private ImageView ivCover;
     private TextView tvVersNum, tvInfo;
     private HtmlTextView tvRemark, tvIntro, tvVersLog;
     private RatingBar rbStar;
@@ -119,9 +119,9 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
         }
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl);
         layout.setTitle(title);
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
-        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-        Glide.with(this).load(img).into(ivImg);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
+        Glide.with(this).load(img).into(ivCover);
         tvVersNum = (TextView) findViewById(R.id.tv_vers_num);
         tvInfo = (TextView) findViewById(R.id.tv_info);
         tvVersLog = (HtmlTextView) findViewById(R.id.tv_vers_log);
@@ -221,7 +221,7 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
 
     @Override
     protected void onDestroy() {
-        ivImg.destroyDrawingCache();
+        ivCover.destroyDrawingCache();
         super.onDestroy();
     }
 

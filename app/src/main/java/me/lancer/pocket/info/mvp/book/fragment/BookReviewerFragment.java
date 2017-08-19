@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.book.BookBean;
 import me.lancer.pocket.info.mvp.book.BookPresenter;
 import me.lancer.pocket.info.mvp.book.IBookView;
 import me.lancer.pocket.info.mvp.book.adapter.BookAdapter;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
@@ -27,13 +27,11 @@ import me.lancer.pocket.info.mvp.book.adapter.BookAdapter;
 
 public class BookReviewerFragment extends PresenterFragment<BookPresenter> implements IBookView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
-    private BookAdapter mAdapter;
-
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<BookBean> mList = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private BookAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<BookBean> list = new ArrayList<>();
 
     private int pager = 0, last = 0;
 
@@ -42,27 +40,27 @@ public class BookReviewerFragment extends PresenterFragment<BookPresenter> imple
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
                 case 3:
                     if (msg.obj != null) {
                         if (pager == 0) {
-                            mList = (List<BookBean>) msg.obj;
-                            mAdapter = new BookAdapter(getActivity(), mList);
-                            mRecyclerView.setAdapter(mAdapter);
+                            list = (List<BookBean>) msg.obj;
+                            adapter = new BookAdapter(getActivity(), list);
+                            rvList.setAdapter(adapter);
                         } else {
-                            mList.addAll((List<BookBean>) msg.obj);
+                            list.addAll((List<BookBean>) msg.obj);
                             for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager * 10 + i);
+                                adapter.notifyItemInserted(pager * 10 + i);
                             }
                         }
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -95,30 +93,30 @@ public class BookReviewerFragment extends PresenterFragment<BookPresenter> imple
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 pager = 0;
                 new Thread(loadReviewer).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new BookAdapter(getActivity(), mList);
-        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
+        layoutManager = new LinearLayoutManager(getContext());
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
+        adapter = new BookAdapter(getActivity(), list);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     pager += 20;
                     new Thread(loadReviewer).start();
                 }
@@ -127,7 +125,7 @@ public class BookReviewerFragment extends PresenterFragment<BookPresenter> imple
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = mLinearLayoutManager.findLastVisibleItemPosition();
+                last = layoutManager.findLastVisibleItemPosition();
             }
         });
     }

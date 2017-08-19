@@ -1,7 +1,5 @@
 package me.lancer.pocket.info.mvp.book;
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

@@ -20,23 +20,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.CodePresenter;
 import me.lancer.pocket.info.mvp.code.ICodeView;
 import me.lancer.pocket.info.mvp.code.adapter.CodeAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class CodeSearchActivity extends PresenterActivity<CodePresenter> implements ICodeView {
 
     Toolbar toolbar;
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
-    private CodeAdapter mAdapter;
-
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<CodeBean> mList = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private CodeAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<CodeBean> list = new ArrayList<>();
 
     private String keyword;
 
@@ -45,20 +42,20 @@ public class CodeSearchActivity extends PresenterActivity<CodePresenter> impleme
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList = (List<CodeBean>) msg.obj;
-                        mAdapter = new CodeAdapter(CodeSearchActivity.this, mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        list = (List<CodeBean>) msg.obj;
+                        adapter = new CodeAdapter(CodeSearchActivity.this, list);
+                        rvList.setAdapter(adapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -87,21 +84,21 @@ public class CodeSearchActivity extends PresenterActivity<CodePresenter> impleme
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_result);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_result);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(loadQuery).start();
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new CodeAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList = (RecyclerView) findViewById(R.id.rv_result);
+        layoutManager = new LinearLayoutManager(this);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
+        adapter = new CodeAdapter(this, list);
+        rvList.setAdapter(adapter);
     }
 
     private void initData() {

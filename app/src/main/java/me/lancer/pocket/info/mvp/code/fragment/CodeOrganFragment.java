@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.CodePresenter;
 import me.lancer.pocket.info.mvp.code.ICodeView;
 import me.lancer.pocket.info.mvp.code.adapter.CodeAdapter;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
@@ -27,13 +27,11 @@ import me.lancer.pocket.info.mvp.code.adapter.CodeAdapter;
 
 public class CodeOrganFragment extends PresenterFragment<CodePresenter> implements ICodeView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
-    private CodeAdapter mAdapter;
-
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<CodeBean> mList = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private CodeAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<CodeBean> list = new ArrayList<>();
 
     private int pager = 1, last = 0;
 
@@ -42,27 +40,27 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
                 case 3:
                     if (msg.obj != null) {
                         if (pager == 1) {
-                            mList = (List<CodeBean>) msg.obj;
-                            mAdapter = new CodeAdapter(getActivity(), mList);
-                            mRecyclerView.setAdapter(mAdapter);
+                            list = (List<CodeBean>) msg.obj;
+                            adapter = new CodeAdapter(getActivity(), list);
+                            rvList.setAdapter(adapter);
                         } else {
-                            mList.addAll((List<CodeBean>) msg.obj);
+                            list.addAll((List<CodeBean>) msg.obj);
                             for (int i = 0; i < 100; i++) {
-                                mAdapter.notifyItemInserted(pager * 100 + i);
+                                adapter.notifyItemInserted(pager * 100 + i);
                             }
                         }
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -95,29 +93,29 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 pager = 1;
                 new Thread(loadOrganizations).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new CodeAdapter(getActivity(), mList);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
+        layoutManager = new LinearLayoutManager(getContext());
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
+        adapter = new CodeAdapter(getActivity(), list);
+        rvList.setAdapter(adapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     pager += 1;
                     new Thread(loadOrganizations).start();
                 }
@@ -126,7 +124,7 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = mLinearLayoutManager.findLastVisibleItemPosition();
+                last = layoutManager.findLastVisibleItemPosition();
             }
         });
     }

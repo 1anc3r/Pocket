@@ -48,8 +48,6 @@ public class AppFragment extends BaseFragment {
         initTabLayout(view);
         inflateMenu();
         initSearchView();
-        initView();
-        initData();
     }
 
     private void initTabLayout(View view) {
@@ -113,13 +111,6 @@ public class AppFragment extends BaseFragment {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-    }
-
-    private void initView() {
-    }
-
-    private void initData() {
-
     }
 
     private void inflateMenu() {

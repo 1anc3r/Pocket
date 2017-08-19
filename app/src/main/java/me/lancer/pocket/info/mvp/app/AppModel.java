@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.url.APP_URL;
-import me.lancer.pocket.util.ContentGetterSetter;
 
 /**
  * Created by HuangFangzhi on 2017/3/13.
@@ -24,8 +23,6 @@ import me.lancer.pocket.util.ContentGetterSetter;
 public class AppModel {
 
     IAppPresenter presenter;
-
-    ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
 
     public AppModel(IAppPresenter presenter) {
         this.presenter = presenter;

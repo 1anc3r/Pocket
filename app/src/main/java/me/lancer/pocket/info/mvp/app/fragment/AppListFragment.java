@@ -32,13 +32,11 @@ import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 
 public class AppListFragment extends PresenterFragment<AppPresenter> implements IAppView {
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
-    private AppGridAdapter mAdapter;
-
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private List<AppBean> mList = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private AppGridAdapter adapter;
+    private StaggeredGridLayoutManager layoutManager;
+    private List<AppBean> list = new ArrayList<>();
 
     private int type = 0, pager = 1, last = 0, load = 0;
     private String query;
@@ -48,40 +46,40 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList = (List<AppBean>) msg.obj;
-                        mAdapter = new AppGridAdapter(getActivity(), mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        list = (List<AppBean>) msg.obj;
+                        adapter = new AppGridAdapter(getActivity(), list);
+                        rvList.setAdapter(adapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 4:
                     if (msg.obj != null && load == 1) {
-                        int size = mList.size();
-                        mList.addAll((List<AppBean>) msg.obj);
+                        int size = list.size();
+                        list.addAll((List<AppBean>) msg.obj);
                         for (int i = 0; i < ((List<AppBean>) msg.obj).size(); i++) {
-                            mAdapter.notifyItemInserted(size + i);
+                            adapter.notifyItemInserted(size + i);
                         }
                         load = 0;
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 5:
                     if (msg.obj != null) {
-                        mList.addAll((List<AppBean>) msg.obj);
-                        Collections.sort(mList, AppComparator);
-                        mAdapter = new AppGridAdapter(getActivity(), mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        list.addAll((List<AppBean>) msg.obj);
+                        Collections.sort(list, AppComparator);
+                        adapter = new AppGridAdapter(getActivity(), list);
+                        rvList.setAdapter(adapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -146,10 +144,10 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
         type = getArguments().getInt("id", 0);
         if (type == 0) {
             if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                showSnackbar(mRecyclerView, "未找到存储卡");
+                showSnackbar(rvList, "未找到存储卡");
             } else {
                 new Thread(loadLocal).start();
-                mSwipeRefreshLayout.setRefreshing(true);
+                swipeRefresh.setRefreshing(true);
             }
         } else if (type == 1) {
             new Thread(loadHomepage).start();
@@ -161,9 +159,9 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Message msg = new Message();
@@ -171,20 +169,20 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
                 handler.sendMessageDelayed(msg, 800);
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new AppGridAdapter(getActivity(), mList);
-        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
+        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        adapter = new AppGridAdapter(getActivity(), list);
+        adapter.setHasStableIds(true);
+        rvList.setAdapter(adapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && last + 1 == mAdapter.getItemCount()) {
+                        && last + 1 == adapter.getItemCount()) {
                     load = 1;
                     pager += 1;
                     if (type == 1) {
@@ -199,7 +197,7 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+                last = getMax(layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]));
             }
         });
     }

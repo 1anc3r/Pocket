@@ -24,8 +24,8 @@ import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.ArticleBean;
 import me.lancer.pocket.info.mvp.article.ArticlePresenter;
 import me.lancer.pocket.info.mvp.article.IArticleView;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
@@ -35,9 +35,10 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
 
     private FloatingActionButton fabRefresh, fabFavorite;
     private CollapsingToolbarLayout layout;
-    private ImageView ivImg;
+    private ImageView ivCover;
     private HtmlTextView htvAuthor, htvContent;
     private LoadToast loadToast;
+
     private String title, author, content;
 
     private List<CollectBean> temps = new ArrayList<>();
@@ -154,12 +155,12 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
         } else {
             fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
-        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         if ((Math.random() * 16) > 8) {
-            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_day.png").into(ivImg);
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_day.png").into(ivCover);
         } else {
-            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_night.png").into(ivImg);
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_night.png").into(ivCover);
         }
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl);
         htvAuthor = (HtmlTextView) findViewById(R.id.htv_author);
