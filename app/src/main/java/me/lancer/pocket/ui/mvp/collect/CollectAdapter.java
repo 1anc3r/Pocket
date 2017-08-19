@@ -67,9 +67,9 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             color = colors[position % 16];
         }
         if (((App) (((BaseActivity) context).getApplication())).isNight()) {
-            viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(colors[16]));
+            viewHolder.cv.setCardBackgroundColor(context.getResources().getColor(colors[16]));
         } else {
-            viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(color));
+            viewHolder.cv.setCardBackgroundColor(context.getResources().getColor(color));
         }
         if (list.get(position).getType() == 0) {
             viewHolder.imageView.setVisibility(View.GONE);
@@ -119,7 +119,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        public CardView cardView;
+        public CardView cv;
         public TextView textView, textView_;
         public ImageView imageView;
         public TextView tvTagLeft, tvTagRight;
@@ -128,9 +128,9 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
 
         public ViewHolder(View rootView, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
             super(rootView);
-            cardView = (CardView) rootView.findViewById(R.id.cardView);
-            textView = (TextView) rootView.findViewById(R.id.textView);
-            textView_ = (TextView) rootView.findViewById(R.id.textView_);
+            cv = (CardView) rootView.findViewById(R.id.cv);
+            textView = (TextView) rootView.findViewById(R.id.tv);
+            textView_ = (TextView) rootView.findViewById(R.id.tv_);
             imageView = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTagLeft = (TextView) rootView.findViewById(R.id.left_top_tag);
             tvTagRight = (TextView) rootView.findViewById(R.id.right_top_tag);

@@ -97,20 +97,20 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cardView;
+        public CardView cv;
         public LinearLayout container;
         public ImageView ivCover, ivIconLeft, ivIconRight;
         public TextView tvTitle, tvCategory;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cardView = (CardView) rootView.findViewById(R.id.cardView);
+            cv = (CardView) rootView.findViewById(R.id.cv);
             container = (LinearLayout) rootView.findViewById(R.id.container);
-            ivCover = (ImageView) rootView.findViewById(R.id.ivCover);
-            ivIconLeft = (ImageView) rootView.findViewById(R.id.ivIconLeft);
-            ivIconRight = (ImageView) rootView.findViewById(R.id.ivIconRight);
-            tvTitle = (TextView) rootView.findViewById(R.id.tvTitle);
-            tvCategory = (TextView) rootView.findViewById(R.id.tvCategory);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivIconLeft = (ImageView) rootView.findViewById(R.id.iv_icon_left);
+            ivIconRight = (ImageView) rootView.findViewById(R.id.iv_icon_right);
+            tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
+            tvCategory = (TextView) rootView.findViewById(R.id.tv_category);
         }
     }
 }

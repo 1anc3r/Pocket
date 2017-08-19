@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
+    android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/ivCover"
+            android:id="@+id/iv_cover"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop" />
@@ -28,7 +28,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/ivIconLeft"
+                android:id="@+id/iv_icon_left"
                 android:layout_width="24dp"
                 android:layout_height="30dp"
                 android:scaleType="centerCrop"
@@ -40,7 +40,7 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -55,7 +55,7 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:id="@+id/ivIconRight"
+                android:id="@+id/iv_icon_right"
                 android:layout_width="24dp"
                 android:layout_height="30dp"
                 android:scaleType="centerCrop"
@@ -64,7 +64,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvCategory"
+            android:id="@+id/tv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"

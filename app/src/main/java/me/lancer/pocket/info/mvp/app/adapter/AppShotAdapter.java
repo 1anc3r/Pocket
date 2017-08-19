@@ -40,7 +40,7 @@ public class AppShotAdapter extends RecyclerView.Adapter<AppShotAdapter.ViewHold
         if (list.get(position) != null) {
             ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position)).into(viewHolder.ivCover);
-            viewHolder.cvShot.setOnClickListener(new View.OnClickListener() {
+            viewHolder.cv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
@@ -60,12 +60,12 @@ public class AppShotAdapter extends RecyclerView.Adapter<AppShotAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cvShot;
+        public CardView cv;
         public ImageView ivCover;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvShot = (CardView) rootView.findViewById(R.id.cv_shot);
+            cv = (CardView) rootView.findViewById(R.id.cv);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
         }
     }

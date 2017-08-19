@@ -93,7 +93,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvMedimu = (CardView) rootView.findViewById(R.id.cv_medimu);
+            cvMedimu = (CardView) rootView.findViewById(R.id.cv);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
             tvContent = (TextView) rootView.findViewById(R.id.htv_content);

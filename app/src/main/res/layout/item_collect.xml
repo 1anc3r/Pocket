@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
@@ -39,7 +39,7 @@
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -62,7 +62,7 @@
                     android:textColor="?attr/colorPrimary" />
 
                 <TextView
-                    android:id="@+id/textView_"
+                    android:id="@+id/tv_"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

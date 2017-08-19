@@ -53,7 +53,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
                 viewHolder.tvStar.setText(bean.getStar());
                 ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
                 Glide.with(context).load(bean.getImg()).into(viewHolder.ivCover);
-                viewHolder.cvSmall.setOnClickListener(new View.OnClickListener() {
+                viewHolder.cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         CodeDetailActivity.startActivity((Activity) context, list.get(position).getName(), list.get(position).getStar(), list.get(position).getRank(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivCover);
@@ -63,7 +63,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
                 viewHolder.ivCover.setVisibility(View.GONE);
                 viewHolder.tvName.setText(bean.getName());
                 viewHolder.tvStar.setText(bean.getStar());
-                viewHolder.cvSmall.setOnClickListener(new View.OnClickListener() {
+                viewHolder.cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         CodeDetailActivity.startActivity((Activity) context, list.get(position).getName(), list.get(position).getStar(), list.get(position).getLink());
@@ -90,13 +90,13 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cvSmall;
+        public CardView cv;
         public ImageView ivCover;
         public TextView tvRank, tvName, tvStar;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvSmall = (CardView) rootView.findViewById(R.id.cv_code);
+            cv = (CardView) rootView.findViewById(R.id.cv);
             tvRank = (TextView) rootView.findViewById(R.id.tv_rank);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvName = (TextView) rootView.findViewById(R.id.tv_title);

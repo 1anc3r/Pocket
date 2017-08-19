@@ -101,7 +101,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvJoke = (CardView) rootView.findViewById(R.id.cv_great);
+            cvJoke = (CardView) rootView.findViewById(R.id.cv);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvText = (TextView) rootView.findViewById(R.id.tv_title);
         }

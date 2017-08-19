@@ -56,7 +56,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
                 ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
-                viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
+                viewHolder.cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         NewsDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getTitle(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivCover);
@@ -66,7 +66,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
                 ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
                 Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
-                viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
+                viewHolder.cv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         NewsDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getTitle(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivCover);
@@ -95,13 +95,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cvLarge;
+        public CardView cv;
         public ImageView ivCover;
         public TextView tvTitle;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvLarge = (CardView) rootView.findViewById(R.id.cv_large);
+            cv = (CardView) rootView.findViewById(R.id.cv);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }

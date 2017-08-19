@@ -54,9 +54,9 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
             color = colors[position % 16];
         }
         if (((App) (((BaseActivity) context).getApplication())).isNight()) {
-            viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(colors[16]));
+            viewHolder.cv.setCardBackgroundColor(context.getResources().getColor(colors[16]));
         } else {
-            viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(color));
+            viewHolder.cv.setCardBackgroundColor(context.getResources().getColor(color));
         }
         viewHolder.tvTagLeft.setText(list.get(position).getName());
         viewHolder.tvTagRight.setText(list.get(position).getName());
@@ -88,7 +88,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        public CardView cardView;
+        public CardView cv;
         public ImageView imageView;
         public TextView tvTagLeft, tvTagRight;
         private MyItemClickListener listener;
@@ -96,7 +96,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
 
         public ViewHolder(View rootView, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
             super(rootView);
-            cardView = (CardView) rootView.findViewById(R.id.cardView);
+            cv = (CardView) rootView.findViewById(R.id.cv);
             imageView = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTagLeft = (TextView) rootView.findViewById(R.id.left_top_tag);
             tvTagRight = (TextView) rootView.findViewById(R.id.right_bottom_tag);
