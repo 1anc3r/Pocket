@@ -62,7 +62,7 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
     public void init() {
         link = getIntent().getStringExtra("link");
         adapter = new PageAdapter(list, getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = (ViewPager) findViewById(R.id.vp);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         new Thread(loadTop).start();

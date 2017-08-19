@@ -34,9 +34,9 @@ public class AboutActivity extends CActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.iv_cover);
         Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_saber.jpg").into(imageView);
-        webView = (WebView) findViewById(R.id.webView);
+        webView = (WebView) findViewById(R.id.wv_content);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setUseWideViewPort(true);

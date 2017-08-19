@@ -118,7 +118,7 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_result);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -128,7 +128,7 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
                 handler.sendMessageDelayed(msg, 800);
             }
         });
-        rvList = (RecyclerView) findViewById(R.id.rv_result);
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
         layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());

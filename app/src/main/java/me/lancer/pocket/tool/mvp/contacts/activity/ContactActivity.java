@@ -53,13 +53,13 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_phone);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_phone);
+        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl);
         layout.setTitle(name);
         ivCover = (ImageView) findViewById(R.id.iv_cover);
         tvCallLog = (TextView) findViewById(R.id.tv_call_log);

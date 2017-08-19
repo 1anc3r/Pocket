@@ -99,7 +99,7 @@ public class CalendarActivity extends PresenterActivity<CalendarPresenter> imple
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.abl);
         mCompactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         mCompactCalendarView.setLocale(TimeZone.getDefault(), Locale.ENGLISH);
         mCompactCalendarView.setUseThreeLetterAbbreviation(true);

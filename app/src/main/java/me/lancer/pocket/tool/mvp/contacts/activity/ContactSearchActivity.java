@@ -72,7 +72,7 @@ public class ContactSearchActivity extends BaseActivity {
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        rvList = (RecyclerView) findViewById(R.id.rv_result);
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
         layoutManager = new LinearLayoutManager(this);
         rvList.setLayoutManager(layoutManager);
         adapter = new ContactAdapter(this, list, 1);

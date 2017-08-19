@@ -84,7 +84,7 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
 
     private void initView(View view) {
 
-        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -92,7 +92,7 @@ public class ComicListFragment extends PresenterFragment<ComicPresenter> impleme
                 new Thread(loadTop).start();
             }
         });
-        rvList = (RecyclerView) view.findViewById(R.id.recyclerView);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());

@@ -1,9 +1,6 @@
 package me.lancer.pocket.ui.mvp.model;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -100,7 +97,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         public ViewHolder(View rootView, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
             super(rootView);
             cardView = (CardView) rootView.findViewById(R.id.cardView);
-            imageView = (ImageView) rootView.findViewById(R.id.imageView);
+            imageView = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTagLeft = (TextView) rootView.findViewById(R.id.left_top_tag);
             tvTagRight = (TextView) rootView.findViewById(R.id.right_bottom_tag);
             this.listener = listener;

@@ -91,7 +91,7 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_result);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -99,7 +99,7 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
                 new Thread(loadQuery).start();
             }
         });
-        rvList = (RecyclerView) findViewById(R.id.rv_result);
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
         layoutManager = new LinearLayoutManager(this);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());

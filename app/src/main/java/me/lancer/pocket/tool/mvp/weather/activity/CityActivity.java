@@ -141,7 +141,7 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_list);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

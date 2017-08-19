@@ -38,7 +38,6 @@ import me.lancer.pocket.ui.view.ClearEditText;
 @SuppressWarnings("ALL")
 public class MorseActivity extends PresenterActivity<MorsePresenter> implements IMorseView, View.OnClickListener {
 
-    private LinearLayout llMorse;
     private Toolbar toolbar;
     private ClearEditText etChar, etCode;
     private FloatingActionButton fab;
@@ -125,7 +124,6 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
     }
 
     private void initView() {
-        llMorse = (LinearLayout) findViewById(R.id.ll_morse);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("摩斯电码");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -196,9 +194,9 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
         ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         if (et.getText().toString().length() > 0) {
             cm.setText(et.getText());
-            showSnackbar(llMorse, "复制成功(ง •̀_•́)ง");
+            showSnackbar(rvList, "复制成功(ง •̀_•́)ง");
         } else {
-            showSnackbar(llMorse, "没有内容(๑•́ ₃•̀๑)");
+            showSnackbar(rvList, "没有内容(๑•́ ₃•̀๑)");
         }
     }
 

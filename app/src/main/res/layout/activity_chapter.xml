@@ -8,14 +8,14 @@
     tools:context=".info.mvp.chapter.activity.ChapterActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
+        android:id="@+id/abl"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
+            android:id="@+id/ctl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -25,7 +25,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -44,13 +44,13 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+        android:id="@+id/srl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rv_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp" />
@@ -64,7 +64,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:visibility="gone"
         app:backgroundTint="@android:color/holo_red_light"
-        app:layout_anchor="@id/appBar"
+        app:layout_anchor="@id/abl"
         app:layout_anchorGravity="bottom|end"
         app:rippleColor="@android:color/holo_red_dark" />
 

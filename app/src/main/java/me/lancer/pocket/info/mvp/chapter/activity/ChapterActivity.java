@@ -118,7 +118,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ivCover = (ImageView) findViewById(R.id.imageView);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
         fabCollect = (FloatingActionButton) findViewById(R.id.fab_collect);
@@ -130,7 +130,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         } else {
             fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -140,7 +140,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
                 handler.sendMessageDelayed(msg, 800);
             }
         });
-        rvList = (RecyclerView) findViewById(R.id.recyclerView);
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());

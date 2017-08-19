@@ -110,7 +110,7 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
 
     private void initView(View view) {
 
-        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

@@ -7,13 +7,13 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/abl_weather"
+        android:id="@+id/abl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/ctl_weather"
+            android:id="@+id/ctl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="?attr/colorPrimary"
@@ -36,7 +36,7 @@
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/t_weather"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
@@ -368,7 +368,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_domain_white_24dp"
         app:backgroundTint="?attr/colorPrimary"
-        app:layout_anchor="@id/abl_weather"
+        app:layout_anchor="@id/abl"
         app:layout_anchorGravity="bottom|end" />
 
 </android.support.design.widget.CoordinatorLayout>

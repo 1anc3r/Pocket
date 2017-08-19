@@ -37,7 +37,7 @@ public class PagerNoBarFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imageView = (ImageView) view.findViewById(R.id.imageView);
+        imageView = (ImageView) view.findViewById(R.id.iv_cover);
     }
 
     @Override

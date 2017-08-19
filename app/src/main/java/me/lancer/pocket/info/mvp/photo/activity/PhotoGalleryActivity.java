@@ -35,7 +35,7 @@ public class PhotoGalleryActivity extends BaseActivity {
         list = getIntent().getStringArrayListExtra("gallery");
         position = getIntent().getIntExtra("position", 0);
         adapter = new PageAdapter(list, getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = (ViewPager) findViewById(R.id.vp);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setCurrentItem(position);

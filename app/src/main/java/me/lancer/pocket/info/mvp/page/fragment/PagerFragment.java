@@ -107,7 +107,7 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
     }
 
     private void init(View view) {
-        imageView = (ImageView) view.findViewById(R.id.imageView);
+        imageView = (ImageView) view.findViewById(R.id.iv_cover);
         btnFavorite = (Button) view.findViewById(R.id.btn_favorite);
         temps = CollectUtil.query(link, link);
         if (temps.size() == 1) {

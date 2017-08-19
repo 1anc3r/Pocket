@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -16,7 +15,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -103,10 +101,10 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ivCover = (ImageView) findViewById(R.id.imageView);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -116,7 +114,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                 handler.sendMessageDelayed(msg, 800);
             }
         });
-        rvList = (RecyclerView) findViewById(R.id.recyclerView);
+        rvList = (RecyclerView) findViewById(R.id.rv_list);
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());

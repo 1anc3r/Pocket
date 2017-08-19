@@ -35,7 +35,7 @@ public class JokeFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) view.findViewById(R.id.t_tab);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle("段子");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

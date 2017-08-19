@@ -131,7 +131,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             cardView = (CardView) rootView.findViewById(R.id.cardView);
             textView = (TextView) rootView.findViewById(R.id.textView);
             textView_ = (TextView) rootView.findViewById(R.id.textView_);
-            imageView = (ImageView) rootView.findViewById(R.id.imageView);
+            imageView = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTagLeft = (TextView) rootView.findViewById(R.id.left_top_tag);
             tvTagRight = (TextView) rootView.findViewById(R.id.right_top_tag);
             this.listener = listener;

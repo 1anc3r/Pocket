@@ -136,13 +136,13 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.t_weather);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_weather);
+        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl);
         layout.setTitle("天气");
         fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(new View.OnClickListener() {

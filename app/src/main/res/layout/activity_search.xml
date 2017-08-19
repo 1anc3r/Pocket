@@ -13,14 +13,14 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/srl_result"
+        android:id="@+id/srl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_result"
+            android:id="@+id/rv_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never"

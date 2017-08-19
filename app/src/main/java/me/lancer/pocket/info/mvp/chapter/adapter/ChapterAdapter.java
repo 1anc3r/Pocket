@@ -58,7 +58,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
 
         public ViewHolder(View rootView) {
             super(rootView);
-            tvTitle = (TextView) rootView.findViewById(R.id.tvTitle);
+            tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }
 }

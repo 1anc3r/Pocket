@@ -8,14 +8,14 @@
     tools:context=".ui.activity.AboutActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
+        android:id="@+id/abl"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
+            android:id="@+id/ctl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -25,7 +25,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -54,7 +54,7 @@
             android:orientation="vertical">
 
             <WebView
-                android:id="@+id/webView"
+                android:id="@+id/wv_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></WebView>
 

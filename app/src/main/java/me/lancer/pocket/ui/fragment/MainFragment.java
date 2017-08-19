@@ -101,7 +101,7 @@ public class MainFragment extends PresenterFragment<WeatherPresenter> implements
     }
 
     private void initToolbar(View view) {
-        toolbar = (Toolbar) view.findViewById(R.id.t_tab);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((MainActivity) getActivity()).initDrawer(toolbar);
     }
 
