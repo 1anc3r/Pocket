@@ -95,13 +95,13 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cvJoke;
+        public CardView cv;
         public ImageView ivCover;
         public TextView tvText;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvJoke = (CardView) rootView.findViewById(R.id.cv);
+            cv = (CardView) rootView.findViewById(R.id.cv);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvText = (TextView) rootView.findViewById(R.id.tv_title);
         }

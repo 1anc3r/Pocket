@@ -54,7 +54,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             viewHolder.tvContent.setText(list.get(position).getAuthor() + temp);
             ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
-            viewHolder.cvMedimu.setOnClickListener(new View.OnClickListener() {
+            viewHolder.cv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (list.get(position).getSubTitle() == null || list.get(position).getSubTitle().equals("")) {
@@ -86,14 +86,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cvMedimu;
+        public CardView cv;
         public ImageView ivCover;
         public TextView tvTitle, tvContent;
         public RatingBar rbRating;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvMedimu = (CardView) rootView.findViewById(R.id.cv);
+            cv = (CardView) rootView.findViewById(R.id.cv);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
             tvContent = (TextView) rootView.findViewById(R.id.htv_content);
