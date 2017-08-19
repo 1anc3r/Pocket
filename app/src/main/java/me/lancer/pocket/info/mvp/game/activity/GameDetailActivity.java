@@ -47,10 +47,10 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
     private HtmlTextView htvLanguages, htvDescription, htvRequirements;
     private RecyclerView rvList;
     private GameShotAdapter adapter;
-    private List<String> shots = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
     private LoadToast loadToast;
-    private FloatingActionButton fab;
 
+    private FloatingActionButton fabCollect;
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
 
@@ -59,13 +59,13 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
     View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view == fab) {
+            if (view == fabCollect) {
                 if (temps.size() == 1) {
-                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(title, String.valueOf(id));
                 } else {
-                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(2);
                     temp.setCate(13);
                     temp.setCover(img);
@@ -102,8 +102,8 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
                         htvLanguages.setHtml(bb.getSupportedLanguages(), new HtmlHttpImageGetter(htvLanguages));
                         htvDescription.setHtml(bb.getDescription(), new HtmlHttpImageGetter(htvDescription));
                         htvRequirements.setHtml(bb.getRequirements(), new HtmlHttpImageGetter(htvRequirements));
-                        shots = bb.getScreenshots();
-                        adapter = new GameShotAdapter(GameDetailActivity.this, shots);
+                        list = bb.getScreenshots();
+                        adapter = new GameShotAdapter(GameDetailActivity.this, list);
                         rvList.setAdapter(adapter);
                     }
                     break;
@@ -159,13 +159,13 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         ivCover = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(img).into(ivCover);
-        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
-        fab.setOnClickListener(vOnClickListener);
+        fabCollect = (FloatingActionButton) findViewById(R.id.fab_collect);
+        fabCollect.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, String.valueOf(id));
         if (temps.size() == 1) {
-            fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
-            fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
         tvDiscount = (TextView) findViewById(R.id.tv_discount);
         tvOriginal = (TextView) findViewById(R.id.tv_original);
@@ -180,7 +180,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvList.setLayoutManager(llm);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        adapter = new GameShotAdapter(this, shots);
+        adapter = new GameShotAdapter(this, list);
         rvList.setAdapter(adapter);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);

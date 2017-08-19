@@ -44,43 +44,22 @@ import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 public class NewsDetailActivity extends PresenterActivity<NewsPresenter> implements INewsView {
 
     private CollapsingToolbarLayout layout;
-    private FloatingActionButton fabCollect;
     private ImageView ivCover;
     private HtmlTextView htvContent;
     private WebView wvContent;
     private LoadToast loadToast;
-
     private RecyclerView rvList;
     private NewsAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
     private List<NewsBean> list = new ArrayList<>();
 
+    private FloatingActionButton fabCollect;
+    private List<CollectBean> temps = new ArrayList<>();
+    private CollectBean temp = new CollectBean();
+
     private int id;
     private String title, img, link;
 
-    private List<CollectBean> temps = new ArrayList<>();
-    private CollectBean temp = new CollectBean();
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (view == fabCollect) {
-                if (temps.size() == 1) {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, link);
-                } else {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(0);
-                    temp.setCate(1);
-                    temp.setCover(img);
-                    temp.setTitle(title);
-                    temp.setLink(link);
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, link);
-                }
-            }
-        }
-    };
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -117,12 +96,14 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
             }
         }
     };
+
     private Runnable loadDetail = new Runnable() {
         @Override
         public void run() {
             presenter.loadDetail(link);
         }
     };
+
     private Runnable loadItem = new Runnable() {
         @Override
         public void run() {
@@ -221,6 +202,28 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
             new Thread(loadItem).start();
         }
     }
+
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fabCollect) {
+                if (temps.size() == 1) {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(0);
+                    temp.setCate(1);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
+            }
+        }
+    };
 
     @Override
     protected void onDestroy() {

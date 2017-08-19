@@ -21,7 +21,7 @@ import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 public class PagerActivity extends PresenterActivity<PagePresenter> implements IPageView {
 
     private String link;
-    private List<PageBean> mData = new ArrayList<PageBean>();
+    private List<PageBean> list = new ArrayList<PageBean>();
     private PageAdapter adapter;
     private ViewPager viewPager;
 
@@ -37,8 +37,8 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mData = (List<PageBean>) msg.obj;
-                        adapter.refreshData(mData);
+                        list = (List<PageBean>) msg.obj;
+                        adapter.refreshData(list);
                     }
                     break;
             }
@@ -61,7 +61,7 @@ public class PagerActivity extends PresenterActivity<PagePresenter> implements I
 
     public void init() {
         link = getIntent().getStringExtra("link");
-        adapter = new PageAdapter(mData, getSupportFragmentManager());
+        adapter = new PageAdapter(list, getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);

@@ -45,7 +45,6 @@ public class ComicFragment extends BaseFragment {
                 getActivity().finish();
             }
         });
-//        ((BlankActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();
         initSearchView();

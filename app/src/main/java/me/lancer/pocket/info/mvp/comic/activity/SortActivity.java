@@ -36,12 +36,11 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
 
     private Toolbar toolbar;
     private ImageView ivCover;
-    private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private ComicAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<ComicBean> mData = new ArrayList<ComicBean>();
+    private List<ComicBean> list = new ArrayList<>();
 
     private String link, title, cover;
 
@@ -59,8 +58,8 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mData = (List<ComicBean>) msg.obj;
-                        adapter = new ComicAdapter(SortActivity.this, mData);
+                        list = (List<ComicBean>) msg.obj;
+                        adapter = new ComicAdapter(SortActivity.this, list);
                         rvList.setAdapter(adapter);
                     }
                     swipeRefresh.setRefreshing(false);
@@ -107,14 +106,11 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         ivCover = (ImageView) findViewById(R.id.imageView);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
         Glide.with(this).load(cover).into(ivCover);
-        fab = (FloatingActionButton) findViewById(R.id.fab_collect);
-        fab.setVisibility(View.GONE);
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                new Thread(loadTop).start();
                 Message msg = new Message();
                 msg.what = 0;
                 handler.sendMessageDelayed(msg, 800);
@@ -125,7 +121,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
-        adapter = new ComicAdapter(this, mData);
+        adapter = new ComicAdapter(this, list);
         rvList.setAdapter(adapter);
         new Thread(loadTop).start();
     }

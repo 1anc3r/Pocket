@@ -33,16 +33,16 @@ import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class ArticleActivity extends PresenterActivity<ArticlePresenter> implements IArticleView {
 
-    private FloatingActionButton fabRefresh, fabFavorite;
+    private FloatingActionButton fabRefresh, fabCollect;
     private CollapsingToolbarLayout layout;
     private ImageView ivCover;
     private HtmlTextView htvAuthor, htvContent;
     private LoadToast loadToast;
 
-    private String title, author, content;
-
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
+
+    private String title, author, content;
 
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -129,16 +129,16 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
                 new Thread(loadRandom).start();
             }
         });
-        fabFavorite = (FloatingActionButton) findViewById(R.id.fab_favorite);
-        fabFavorite.setOnClickListener(new View.OnClickListener() {
+        fabCollect = (FloatingActionButton) findViewById(R.id.fab_favorite);
+        fabCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (temps.size() == 1) {
-                    fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(title, author);
                 } else {
-                    fabFavorite.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(0);
                     temp.setCover(content);
@@ -151,9 +151,9 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
         });
         temps = CollectUtil.query(title, author);
         if (temps.size() == 1) {
-            fabFavorite.setImageResource(R.mipmap.ic_favorite_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
-            fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+            fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
         }
         ivCover = (ImageView) findViewById(R.id.iv_cover);
         ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);

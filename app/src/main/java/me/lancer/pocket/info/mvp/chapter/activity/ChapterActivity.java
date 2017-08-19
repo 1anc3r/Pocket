@@ -42,32 +42,12 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
     private ChapterAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
     private List<ChapterBean> list = new ArrayList<>();
-    private FloatingActionButton fabCollect;
 
-    private String link, title, cover;
+    private FloatingActionButton fabCollect;
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (view == fabCollect) {
-                if (temps.size() == 1) {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, link);
-                } else {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(2);
-                    temp.setCate(11);
-                    temp.setCover(cover);
-                    temp.setTitle(title);
-                    temp.setLink(link);
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, link);
-                }
-            }
-        }
-    };
+
+    private String link, title, cover;
 
     private Runnable loadTop = new Runnable() {
         @Override
@@ -98,18 +78,6 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
             }
         }
     };
-
-    public static void startActivity(Activity activity, String link, String cover, String title, String category, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, ChapterActivity.class);
-        intent.putExtra("link", link);
-        intent.putExtra("title", title);
-        intent.putExtra("cover", cover);
-        intent.putExtra("category", category);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, "transitionPic");
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +126,28 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         new Thread(loadTop).start();
     }
 
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fabCollect) {
+                if (temps.size() == 1) {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(2);
+                    temp.setCate(11);
+                    temp.setCover(cover);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
+            }
+        }
+    };
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -169,6 +159,18 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    public static void startActivity(Activity activity, String link, String cover, String title, String category, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, ChapterActivity.class);
+        intent.putExtra("link", link);
+        intent.putExtra("title", title);
+        intent.putExtra("cover", cover);
+        intent.putExtra("category", category);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, "transitionPic");
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

@@ -10,12 +10,12 @@ public abstract class StackAdapter<T> extends CardStackView.Adapter<CardStackVie
 
     private final Context mContext;
     private final LayoutInflater mInflater;
-    private List<T> mData;
+    private List<T> list;
 
     public StackAdapter(Context context) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
-        this.mData = new ArrayList();
+        this.list = new ArrayList();
     }
 
     public void updateData(List<T> data) {
@@ -24,9 +24,9 @@ public abstract class StackAdapter<T> extends CardStackView.Adapter<CardStackVie
     }
 
     public void setData(List<T> data) {
-        this.mData.clear();
+        this.list.clear();
         if (data != null) {
-            this.mData.addAll(data);
+            this.list.addAll(data);
         }
     }
 
@@ -48,11 +48,11 @@ public abstract class StackAdapter<T> extends CardStackView.Adapter<CardStackVie
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return list.size();
     }
 
     public T getItem(int position) {
-        return this.mData.get(position);
+        return this.list.get(position);
     }
 
 }

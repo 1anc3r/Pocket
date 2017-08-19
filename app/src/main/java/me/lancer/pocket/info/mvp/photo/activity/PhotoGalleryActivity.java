@@ -17,7 +17,7 @@ import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class PhotoGalleryActivity extends BaseActivity {
 
-    private List<String> mData = new ArrayList<String>();
+    private List<String> list = new ArrayList<String>();
     private PageAdapter adapter;
     private ViewPager viewPager;
     private int position;
@@ -32,9 +32,9 @@ public class PhotoGalleryActivity extends BaseActivity {
     }
 
     public void init() {
-        mData = getIntent().getStringArrayListExtra("gallery");
+        list = getIntent().getStringArrayListExtra("gallery");
         position = getIntent().getIntExtra("position", 0);
-        adapter = new PageAdapter(mData, getSupportFragmentManager());
+        adapter = new PageAdapter(list, getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);

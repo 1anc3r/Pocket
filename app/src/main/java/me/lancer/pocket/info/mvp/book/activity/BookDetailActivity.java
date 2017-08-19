@@ -42,11 +42,11 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
     private HtmlTextView htvContent;
     private LoadToast loadToast;
 
-    private int type;
-    private String title, img, link;
-
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
+
+    private int type;
+    private String title, img, link;
 
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
