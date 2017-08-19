@@ -1,13 +1,13 @@
 package me.lancer.pocket.tool.mvp.calendar.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,11 +25,11 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.tool.mvp.calendar.CalendarPresenter;
 import me.lancer.pocket.tool.mvp.calendar.ICalendarView;
 import me.lancer.pocket.tool.mvp.calendar.view.CalendarView;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class CalendarActivity extends PresenterActivity<CalendarPresenter> implements ICalendarView {
 
@@ -55,7 +55,7 @@ public class CalendarActivity extends PresenterActivity<CalendarPresenter> imple
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        if ((long)msg.obj == -1){
+                        if ((long) msg.obj == -1) {
                             showSnackbar(mCalendarView, "操作失败!");
                         } else {
                             showSnackbar(mCalendarView, "操作成功!");
@@ -180,7 +180,7 @@ public class CalendarActivity extends PresenterActivity<CalendarPresenter> imple
     public void setTitle(String subtitle) {
         TextView datePickerTextView = (TextView) findViewById(R.id.date_picker_text_view);
         if (datePickerTextView != null) {
-            datePickerTextView.setText(subtitle+"月");
+            datePickerTextView.setText(subtitle + "月");
         }
     }
 

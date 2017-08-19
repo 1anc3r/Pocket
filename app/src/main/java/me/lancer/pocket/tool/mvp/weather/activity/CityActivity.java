@@ -4,12 +4,12 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.weather.CityBean;
 import me.lancer.pocket.tool.mvp.weather.IWeatherView;
 import me.lancer.pocket.tool.mvp.weather.WeatherBean;
 import me.lancer.pocket.tool.mvp.weather.WeatherPresenter;
 import me.lancer.pocket.tool.mvp.weather.adapter.CityAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class CityActivity extends PresenterActivity<WeatherPresenter> implements IWeatherView, CityAdapter.MyItemClickListener, CityAdapter.MyItemLongClickListener {
 
@@ -51,7 +51,33 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
 
     private String content;
     private int flag = 0;
-
+    private Runnable loadFile = new Runnable() {
+        @Override
+        public void run() {
+            AssetManager assetManager = CityActivity.this.getAssets();
+            try {
+                InputStream is = assetManager.open("citycode.json");
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                StringBuffer stringBuffer = new StringBuffer();
+                String temp = null;
+                while ((temp = br.readLine()) != null) {
+                    stringBuffer.append(temp);
+                }
+                content = stringBuffer.toString();
+                Message msg = new Message();
+                msg.what = 4;
+                handler.sendMessage(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    private Runnable loadCity = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadCity(content);
+        }
+    };
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -83,35 +109,6 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
                     new Thread(loadCity).start();
                     break;
             }
-        }
-    };
-
-    private Runnable loadFile = new Runnable() {
-        @Override
-        public void run() {
-            AssetManager assetManager = CityActivity.this.getAssets();
-            try {
-                InputStream is = assetManager.open("citycode.json");
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                StringBuffer stringBuffer = new StringBuffer();
-                String temp = null;
-                while ((temp = br.readLine()) != null) {
-                    stringBuffer.append(temp);
-                }
-                content = stringBuffer.toString();
-                Message msg = new Message();
-                msg.what = 4;
-                handler.sendMessage(msg);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    private Runnable loadCity = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadCity(content);
         }
     };
 
@@ -214,11 +211,11 @@ public class CityActivity extends PresenterActivity<WeatherPresenter> implements
         builder.setTitle("天气");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 天气信息 : 提供全国各城市的天气信息\n" +
-                "\t\t\t\t * 城市选择 : 然而并不能定位\n" +
-                "\t\t\t\t * ——数据来源 : 中央天气\n" +
-                "\t\t\t\t * （tj.nineton.cn/Heart/index）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 天气信息 : 提供全国各城市的天气信息\n" +
+                        "\t\t\t\t * 城市选择 : 然而并不能定位\n" +
+                        "\t\t\t\t * ——数据来源 : 中央天气\n" +
+                        "\t\t\t\t * （tj.nineton.cn/Heart/index）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
 

@@ -32,17 +32,17 @@
 
     <TextView
         android:id="@+id/task_detail_title"
-        android:layout_toRightOf="@id/task_detail_complete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/task_detail_complete"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
         android:id="@+id/task_detail_description"
-        android:layout_toRightOf="@id/task_detail_complete"
-        android:layout_below="@id/task_detail_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/task_detail_title"
+        android:layout_toRightOf="@id/task_detail_complete"
         android:text="Medium Text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

@@ -60,7 +60,7 @@ public final class CollectUtil {
                 bean.setTitle(cursor.getString(3));
                 bean.setCover(cursor.getString(4));
                 bean.setLink(cursor.getString(5));
-                if(bean.getTitle().equals(title) && bean.getLink().equals(link)) {
+                if (bean.getTitle().equals(title) && bean.getLink().equals(link)) {
                     list.add(bean);
                     cursor.close();
                     return list;

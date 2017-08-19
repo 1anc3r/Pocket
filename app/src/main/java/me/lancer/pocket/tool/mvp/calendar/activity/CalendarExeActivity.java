@@ -1,9 +1,9 @@
 package me.lancer.pocket.tool.mvp.calendar.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,10 +15,10 @@ import android.widget.Spinner;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.tool.mvp.calendar.CalendarPresenter;
 import me.lancer.pocket.tool.mvp.calendar.ICalendarView;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.view.ClearEditText;
 
 public class CalendarExeActivity extends PresenterActivity<CalendarPresenter> implements ICalendarView {
@@ -84,6 +84,31 @@ public class CalendarExeActivity extends PresenterActivity<CalendarPresenter> im
         @Override
         public void run() {
             presenter.delete(temp);
+        }
+    };
+    private AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            if (parent == sWeek) {
+                temp.setDay((int) (id + 1));
+            } else if (parent == sStartTime) {
+                if (id < 4) {
+                    temp.setTime((int) (id + 1));
+                } else {
+                    temp.setTime((int) (id));
+                }
+            } else if (parent == sEndTime) {
+                if (temp.getTime() < 5) {
+                    temp.setLength((int) ((id + 2) - temp.getTime()));
+                } else {
+                    temp.setLength((int) (id + 1) - temp.getTime());
+                }
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
         }
     };
 
@@ -170,32 +195,6 @@ public class CalendarExeActivity extends PresenterActivity<CalendarPresenter> im
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            if (parent == sWeek) {
-                temp.setDay((int) (id + 1));
-            } else if (parent == sStartTime) {
-                if (id < 4) {
-                    temp.setTime((int) (id + 1));
-                } else {
-                    temp.setTime((int) (id));
-                }
-            } else if (parent == sEndTime) {
-                if (temp.getTime() < 5) {
-                    temp.setLength((int) ((id + 2) - temp.getTime()));
-                } else {
-                    temp.setLength((int) (id + 1) - temp.getTime());
-                }
-            }
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-        }
-    };
 
     @Override
     protected CalendarPresenter onCreatePresenter() {

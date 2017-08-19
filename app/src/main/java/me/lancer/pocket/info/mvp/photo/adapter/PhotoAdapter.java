@@ -62,7 +62,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                     public void onClick(View view) {
 //                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), list.get(position).getTitle(), viewHolder.ivImg);
                         ArrayList<String> gallery = new ArrayList<String>();
-                        for (PhotoBean bean : list){
+                        for (PhotoBean bean : list) {
                             gallery.add(bean.getImgLarge());
                         }
                         Intent intent = new Intent();

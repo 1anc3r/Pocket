@@ -22,17 +22,17 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import java.io.File;
 import java.util.List;
 
-import me.lancer.pocket.tool.mvp.file.bean.FileBean;
 import me.lancer.pocket.R;
+import me.lancer.pocket.tool.mvp.file.bean.FileBean;
 import me.lancer.pocket.util.FileTypeRefereeUtil;
 
 public class FileAdapter extends BaseAdapter {
 
+    protected LayoutInflater mInflater;
     private List<FileBean> fileList;
     private List<String> searchList;
     private List<String> posList;
     private Handler mHandler;
-    protected LayoutInflater mInflater;
 
     public FileAdapter(Context context, List<FileBean> fileList, List<String> posList, List<String> searchList, Handler mHandler) {
         this.fileList = fileList;

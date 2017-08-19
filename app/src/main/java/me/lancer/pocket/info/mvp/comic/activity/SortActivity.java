@@ -25,12 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.comic.ComicBean;
 import me.lancer.pocket.info.mvp.comic.ComicPresenter;
 import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 
@@ -76,6 +76,17 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         }
     };
 
+    public static void startActivity(Activity activity, String link, String cover, String title, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, SortActivity.class);
+        intent.putExtra("link", link);
+        intent.putExtra("title", title);
+        intent.putExtra("cover", cover);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, "transitionPic");
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +98,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         link = getIntent().getStringExtra("link");
         title = getIntent().getStringExtra("title");
         cover = getIntent().getStringExtra("cover");
-        Log.e("init: ", title+link);
+        Log.e("init: ", title + link);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
@@ -117,17 +128,6 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         adapter = new ComicAdapter(this, mData);
         rvList.setAdapter(adapter);
         new Thread(loadTop).start();
-    }
-
-    public static void startActivity(Activity activity, String link, String cover, String title, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, SortActivity.class);
-        intent.putExtra("link", link);
-        intent.putExtra("title", title);
-        intent.putExtra("cover", cover);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, "transitionPic");
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

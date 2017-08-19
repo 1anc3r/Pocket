@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.novel.activity.NovelListActivity;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 
 public class NovelFragment extends BaseFragment {
 
@@ -87,35 +87,6 @@ public class NovelFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -143,18 +114,14 @@ public class NovelFragment extends BaseFragment {
         builder.setTitle("小说");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 排行 : 小说排行榜\n" +
-                "\t\t\t\t * 分类 : 小说各分区\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
-                "\t\t\t\t * ——数据来源 : 追书神器\n" +
-                "\t\t\t\t * （www.zhuishushenqi.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 排行 : 小说排行榜\n" +
+                        "\t\t\t\t * 分类 : 小说各分区\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
+                        "\t\t\t\t * ——数据来源 : 追书神器\n" +
+                        "\t\t\t\t * （www.zhuishushenqi.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -176,5 +143,38 @@ public class NovelFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

@@ -1,9 +1,5 @@
 package me.lancer.pocket.ui.mvp.base;
 
-import java.util.List;
-
-import me.lancer.pocket.ui.mvp.collect.CollectBean;
-
 /**
  * Created by HuangFangzhi on 2016/12/13.
  */

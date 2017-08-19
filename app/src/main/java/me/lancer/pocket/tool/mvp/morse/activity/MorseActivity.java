@@ -29,10 +29,10 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.morse.IMorseView;
 import me.lancer.pocket.tool.mvp.morse.MorsePresenter;
 import me.lancer.pocket.tool.mvp.morse.adapter.MorseAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.view.ClearEditText;
 
 @SuppressWarnings("ALL")
@@ -52,7 +52,33 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
 
     private String content;
     private long charTime, codeTime;
-
+    private Runnable loadFile = new Runnable() {
+        @Override
+        public void run() {
+            AssetManager assetManager = MorseActivity.this.getAssets();
+            try {
+                InputStream is = assetManager.open("morsealphabet.json");
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                StringBuffer stringBuffer = new StringBuffer();
+                String temp = null;
+                while ((temp = br.readLine()) != null) {
+                    stringBuffer.append(temp);
+                }
+                content = stringBuffer.toString();
+                Message msg = new Message();
+                msg.what = 4;
+                handler.sendMessage(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    private Runnable loadMorse = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadMorse(content);
+        }
+    };
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -83,43 +109,6 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
                     new Thread(loadMorse).start();
                     break;
             }
-        }
-    };
-
-    private Runnable loadFile = new Runnable() {
-        @Override
-        public void run() {
-            AssetManager assetManager = MorseActivity.this.getAssets();
-            try {
-                InputStream is = assetManager.open("morsealphabet.json");
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                StringBuffer stringBuffer = new StringBuffer();
-                String temp = null;
-                while ((temp = br.readLine()) != null) {
-                    stringBuffer.append(temp);
-                }
-                content = stringBuffer.toString();
-                Message msg = new Message();
-                msg.what = 4;
-                handler.sendMessage(msg);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    private class mComparator implements Comparator {
-        public int compare(Object o1, Object o2) {
-            String s1 = (String) o1;
-            String s2 = (String) o2;
-            return s1.compareTo(s2);
-        }
-    }
-
-    private Runnable loadMorse = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadMorse(content);
         }
     };
 
@@ -246,5 +235,13 @@ public class MorseActivity extends PresenterActivity<MorsePresenter> implements 
         msg.what = 3;
         msg.obj = map;
         handler.sendMessage(msg);
+    }
+
+    private class mComparator implements Comparator {
+        public int compare(Object o1, Object o2) {
+            String s1 = (String) o1;
+            String s2 = (String) o2;
+            return s1.compareTo(s2);
+        }
     }
 }

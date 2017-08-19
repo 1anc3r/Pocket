@@ -8,8 +8,8 @@
 
     <SeekBar
         android:id="@+id/sb_vorb"
-        android:max="255"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:max="255" />
 
 </LinearLayout>

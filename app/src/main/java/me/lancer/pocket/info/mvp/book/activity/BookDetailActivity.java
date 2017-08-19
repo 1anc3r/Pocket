@@ -86,6 +86,18 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
         }
     };
 
+    public static void startActivity(Activity activity, int type, String title, String img, String link, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, BookDetailActivity.class);
+        intent.putExtra("type", type);
+        intent.putExtra("title", title);
+        intent.putExtra("img", img);
+        intent.putExtra("link", link);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +144,7 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
         inflater.inflate(R.menu.menu_collect_item, menu);
         MenuItem item = menu.findItem(R.id.menu_favorite);
         temps = CollectUtil.query(title, link);
-        if(temps.size() == 1) {
+        if (temps.size() == 1) {
             item.setIcon(R.mipmap.ic_favorite_white_24dp);
         } else {
             item.setIcon(R.mipmap.ic_favorite_border_white_24dp);
@@ -145,7 +157,7 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
         switch (item.getItemId()) {
             case R.id.menu_favorite:
                 item.setIcon(R.mipmap.ic_favorite_white_24dp);
-                if(temps.size() == 1) {
+                if (temps.size() == 1) {
                     item.setIcon(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(title, link);
@@ -162,18 +174,6 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
                 break;
         }
         return true;
-    }
-
-    public static void startActivity(Activity activity, int type, String title, String img, String link, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, BookDetailActivity.class);
-        intent.putExtra("type", type);
-        intent.putExtra("title", title);
-        intent.putExtra("img", img);
-        intent.putExtra("link", link);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

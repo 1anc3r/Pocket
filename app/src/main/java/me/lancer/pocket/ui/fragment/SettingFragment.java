@@ -50,23 +50,33 @@ import me.lancer.pocket.util.ContentGetterSetter;
 
 public class SettingFragment extends Fragment {
 
+    private final String root = Environment.getExternalStorageDirectory() + "/";
+    ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     private App app;
-
     private LinearLayout llNight, llTheme, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
     private SwitchCompat scNight;
     private BottomSheetDialog listDialog;
     private AlertDialog aboutDialog;
     private ProgressDialog progressDialog;
-
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private boolean night = false;
-
     private List<String> funcList = new ArrayList<>(), problelist = new ArrayList<>();
     private List<RepositoryBean> reList = new ArrayList<>();
-    ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
-    private final String root = Environment.getExternalStorageDirectory() + "/";
-
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    if (msg.obj != null) {
+                        reList = (List<RepositoryBean>) msg.obj;
+                        showRepositoryDialog(reList);
+                        progressDialog.dismiss();
+                    }
+                    break;
+            }
+        }
+    };
     private Runnable repository = new Runnable() {
         @Override
         public void run() {
@@ -96,18 +106,67 @@ public class SettingFragment extends Fragment {
             }
         }
     };
-
-    private Handler handler = new Handler() {
+    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    if (msg.obj != null) {
-                        reList = (List<RepositoryBean>) msg.obj;
-                        showRepositoryDialog(reList);
-                        progressDialog.dismiss();
+        public void onClick(View v) {
+            if (v == llNight) {
+                if (!night) {
+//                    editor.putBoolean(mParams.ISNIGHT, true);
+//                    editor.apply();
+//                    scNight.setChecked(true);
+//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    recreate();
+                    scNight.setChecked(true);
+                    editor.putBoolean(Params.ISNIGHT, true);
+                    editor.apply();
+                    Colorful.config(getActivity())
+                            .translucent(false)
+                            .dark(true)
+                            .apply();
+                    getActivity().recreate();
+                } else {
+//                    editor.putBoolean(mParams.ISNIGHT, false);
+//                    editor.apply();
+//                    scNight.setChecked(false);
+//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    recreate();
+                    scNight.setChecked(false);
+                    editor.putBoolean(Params.ISNIGHT, false);
+                    editor.apply();
+                    Colorful.config(getActivity())
+                            .translucent(false)
+                            .dark(false)
+                            .apply();
+                    getActivity().recreate();
+                }
+                night = !night;
+            } else if (v == llTheme) {
+                ColorPickerDialog dialog = new ColorPickerDialog(getActivity());
+                dialog.setTitle("切换主题");
+                dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(Colorful.ThemeColor themeColor) {
+                        Colorful.config(getActivity())
+                                .primaryColor(themeColor)
+                                .accentColor(themeColor)
+                                .translucent(false)
+                                .dark(night)
+                                .apply();
+                        getActivity().recreate();
                     }
-                    break;
+                });
+                dialog.show();
+            } else if (v == llFunc) {
+                showListDialog(1, funcList);
+            } else if (v == llProblem) {
+                showListDialog(2, problelist);
+            } else if (v == llFeedback) {
+                Instabug.invoke(InstabugInvocationMode.NEW_CHAT);
+            } else if (v == llDownload) {
+                new Thread(repository).start();
+                progressDialog.show();
+            } else if (v == llAboutUs) {
+                aboutDialog.show();
             }
         }
     };
@@ -174,7 +233,7 @@ public class SettingFragment extends Fragment {
         funcList.add("翻译 : \n" +
                 "\t\t\t\t — 翻译支持 : 必应词典\n\t\t\t\t（http://cn.bing.com/dict/）");
         funcList.add("摩斯电码 : \n" +
-                "\t\t\t\t在字符串和摩斯电码之间任意转换\n"+
+                "\t\t\t\t在字符串和摩斯电码之间任意转换\n" +
                 "\t\t\t\t长按粘贴, 双击复制\n");
         funcList.add("计算器 : \n" +
                 "\t\t\t\t这是一个支持多项式运算的计算器, 由栈实现");
@@ -258,71 +317,6 @@ public class SettingFragment extends Fragment {
         problelist.add("Q : 1anc3r, 1anc3r, 你的程序又崩溃了!");
         problelist.add("A : 方法一, 通过 \"意见反馈\" 撩一撩1anc3r; 方法二, 发送邮件至huangfangzhi0@foxmail.com");
     }
-
-    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v == llNight) {
-                if (!night) {
-//                    editor.putBoolean(mParams.ISNIGHT, true);
-//                    editor.apply();
-//                    scNight.setChecked(true);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    recreate();
-                    scNight.setChecked(true);
-                    editor.putBoolean(Params.ISNIGHT, true);
-                    editor.apply();
-                    Colorful.config(getActivity())
-                            .translucent(false)
-                            .dark(true)
-                            .apply();
-                    getActivity().recreate();
-                } else {
-//                    editor.putBoolean(mParams.ISNIGHT, false);
-//                    editor.apply();
-//                    scNight.setChecked(false);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    recreate();
-                    scNight.setChecked(false);
-                    editor.putBoolean(Params.ISNIGHT, false);
-                    editor.apply();
-                    Colorful.config(getActivity())
-                            .translucent(false)
-                            .dark(false)
-                            .apply();
-                    getActivity().recreate();
-                }
-                night = !night;
-            } else if (v == llTheme) {
-                ColorPickerDialog dialog = new ColorPickerDialog(getActivity());
-                dialog.setTitle("切换主题");
-                dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
-                    @Override
-                    public void onColorSelected(Colorful.ThemeColor themeColor) {
-                        Colorful.config(getActivity())
-                                .primaryColor(themeColor)
-                                .accentColor(themeColor)
-                                .translucent(false)
-                                .dark(night)
-                                .apply();
-                        getActivity().recreate();
-                    }
-                });
-                dialog.show();
-            } else if (v == llFunc) {
-                showListDialog(1, funcList);
-            } else if (v == llProblem) {
-                showListDialog(2, problelist);
-            } else if (v == llFeedback) {
-                Instabug.invoke(InstabugInvocationMode.NEW_CHAT);
-            } else if (v == llDownload) {
-                new Thread(repository).start();
-                progressDialog.show();
-            } else if (v == llAboutUs) {
-                aboutDialog.show();
-            }
-        }
-    };
 
     public void showListDialog(int type, List<String> list) {
         if (type == 1) {

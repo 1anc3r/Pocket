@@ -59,22 +59,22 @@
                 android:id="@+id/htv_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="?android:attr/textColorPrimary"
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:paddingTop="16dp" />
+                android:paddingTop="16dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
 
             <me.lancer.pocket.ui.view.htmltextview.HtmlTextView
                 android:id="@+id/htv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:paddingTop="8dp" />
+                android:paddingTop="8dp"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -87,9 +87,9 @@
         app:fab_addButtonColorNormal="?attr/colorPrimary"
         app:fab_addButtonColorPressed="?attr/colorPrimaryDark"
         app:fab_addButtonPlusIconColor="@color/white"
+        app:fab_expandDirection="left"
         app:layout_anchor="@id/abl"
-        app:layout_anchorGravity="bottom|end"
-        app:fab_expandDirection="left">
+        app:layout_anchorGravity="bottom|end">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_refresh"

@@ -25,11 +25,11 @@ import me.lancer.pocket.tool.mvp.file.bean.FileBean;
 
 public class DocumentAdapter extends BaseAdapter {
 
+    protected LayoutInflater mInflater;
     private List<FileBean> fileList;
     private List<String> searchList;
     private List<String> posList;
     private Handler mHandler;
-    protected LayoutInflater mInflater;
 
     public DocumentAdapter(Context context, List<FileBean> fileList, List<String> posList, List<String> searchList, Handler mHandler) {
         this.fileList = fileList;

@@ -37,17 +37,14 @@ public class CuteR {
 
     private static final int WHITE = 0xFFFFFFFF;
     private static final int BLACK = 0xFF000000;
-
-    private static int[] patternCenters;
-    private static int scaleQR;
     private static final int MAX_INPUT_GIF_SIZE = 480;
     private static final int SCALE_NORMAL_QR = 10;
-
     private static final float FULL_LOGO_QR = 507.1f;
     private static final float LOGO_BACKGROUND = 140.7f;
     private static final float LOGO_SIZE = 126.7f;
-
     private static final int MAX_LOGO_SIZE = 1080;
+    private static int[] patternCenters;
+    private static int scaleQR;
 
     public static Bitmap Product(String txt, Bitmap input, boolean colorful, int color) {
         Bitmap QRImage = null;

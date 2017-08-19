@@ -85,35 +85,6 @@ public class JokeFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -141,17 +112,13 @@ public class JokeFragment extends BaseFragment {
         builder.setTitle("段子");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 段子 : 内涵段子的热辣段子\n" +
-                "\t\t\t\t * 图片 : 内涵段子的爆笑图片\n" +
-                "\t\t\t\t * ——数据来源 : 内涵段子\n" +
-                "\t\t\t\t * （neihanshequ.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 段子 : 内涵段子的热辣段子\n" +
+                        "\t\t\t\t * 图片 : 内涵段子的爆笑图片\n" +
+                        "\t\t\t\t * ——数据来源 : 内涵段子\n" +
+                        "\t\t\t\t * （neihanshequ.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -168,5 +135,38 @@ public class JokeFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

@@ -32,24 +32,28 @@ import org.polaric.colorful.CActivity;
 import java.lang.reflect.Method;
 
 public class AppActivity extends CActivity implements AndroidApplicationBase {
+    static {
+        GdxNativesLoader.load();
+    }
+
+    protected final Array<Runnable> runnables = new Array();
+    protected final Array<Runnable> executedRunnables = new Array();
+    protected final Array<LifecycleListener> lifecycleListeners = new Array();
+    private final Array<AndroidEventListener> androidEventListeners = new Array();
+    public Handler handler;
     protected AndroidGraphics graphics;
     protected AndroidInput input;
     protected AndroidAudio audio;
     protected AndroidFiles files;
     protected AndroidNet net;
     protected ApplicationListener listener;
-    public Handler handler;
     protected boolean firstResume = true;
-    protected final Array<Runnable> runnables = new Array();
-    protected final Array<Runnable> executedRunnables = new Array();
-    protected final Array<LifecycleListener> lifecycleListeners = new Array();
-    private final Array<AndroidEventListener> androidEventListeners = new Array();
     protected int logLevel = 2;
     protected boolean useImmersiveMode = false;
     protected boolean hideStatusBar = false;
+    AndroidClipboard clipboard;
     private int wasFocusChanged = -1;
     private boolean isWaitingForAudio = false;
-    AndroidClipboard clipboard;
 
     public AppActivity() {
     }
@@ -346,12 +350,12 @@ public class AppActivity extends CActivity implements AndroidApplicationBase {
         }
     }
 
-    public void setLogLevel(int logLevel) {
-        this.logLevel = logLevel;
-    }
-
     public int getLogLevel() {
         return this.logLevel;
+    }
+
+    public void setLogLevel(int logLevel) {
+        this.logLevel = logLevel;
     }
 
     public void addLifecycleListener(LifecycleListener listener) {
@@ -414,9 +418,5 @@ public class AppActivity extends CActivity implements AndroidApplicationBase {
 
     public Handler getHandler() {
         return this.handler;
-    }
-
-    static {
-        GdxNativesLoader.load();
     }
 }

@@ -24,6 +24,70 @@ public class VideoModel {
         this.presenter = presenter;
     }
 
+    public static String decodeUnicode(String str) {
+        char ch;
+        int len = str.length();
+        StringBuffer buffer = new StringBuffer(len);
+        for (int x = 0; x < len; ) {
+            ch = str.charAt(x++);
+            if (ch == '\\') {
+                ch = str.charAt(x++);
+                if (ch == 'u') {
+                    int value = 0;
+                    for (int i = 0; i < 4; i++) {
+                        ch = str.charAt(x++);
+                        switch (ch) {
+                            case '0':
+                            case '1':
+                            case '2':
+                            case '3':
+                            case '4':
+                            case '5':
+                            case '6':
+                            case '7':
+                            case '8':
+                            case '9':
+                                value = (value << 4) + ch - '0';
+                                break;
+                            case 'a':
+                            case 'b':
+                            case 'c':
+                            case 'd':
+                            case 'e':
+                            case 'f':
+                                value = (value << 4) + 10 + ch - 'a';
+                                break;
+                            case 'A':
+                            case 'B':
+                            case 'C':
+                            case 'D':
+                            case 'E':
+                            case 'F':
+                                value = (value << 4) + 10 + ch - 'A';
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    buffer.append((char) value);
+                } else {
+                    if (ch == 't')
+                        ch = '\t';
+                    else if (ch == 'r')
+                        ch = '\r';
+                    else if (ch == 'n')
+                        ch = '\n';
+                    else if (ch == 'f')
+                        ch = '\f';
+                    buffer.append(ch);
+                }
+            } else {
+                buffer.append(ch);
+            }
+        }
+        return buffer.toString();
+    }
+
     public void loadTheme(int pager) {
         String content = contentGetterSetter.getContentFromHtml("Video.loadTheme", ThemeUrl);
         List<VideoBean> list;
@@ -286,70 +350,6 @@ public class VideoModel {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public static String decodeUnicode(String str) {
-        char ch;
-        int len = str.length();
-        StringBuffer buffer = new StringBuffer(len);
-        for (int x = 0; x < len; ) {
-            ch = str.charAt(x++);
-            if (ch == '\\') {
-                ch = str.charAt(x++);
-                if (ch == 'u') {
-                    int value = 0;
-                    for (int i = 0; i < 4; i++) {
-                        ch = str.charAt(x++);
-                        switch (ch) {
-                            case '0':
-                            case '1':
-                            case '2':
-                            case '3':
-                            case '4':
-                            case '5':
-                            case '6':
-                            case '7':
-                            case '8':
-                            case '9':
-                                value = (value << 4) + ch - '0';
-                                break;
-                            case 'a':
-                            case 'b':
-                            case 'c':
-                            case 'd':
-                            case 'e':
-                            case 'f':
-                                value = (value << 4) + 10 + ch - 'a';
-                                break;
-                            case 'A':
-                            case 'B':
-                            case 'C':
-                            case 'D':
-                            case 'E':
-                            case 'F':
-                                value = (value << 4) + 10 + ch - 'A';
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    buffer.append((char) value);
-                } else {
-                    if (ch == 't')
-                        ch = '\t';
-                    else if (ch == 'r')
-                        ch = '\r';
-                    else if (ch == 'n')
-                        ch = '\n';
-                    else if (ch == 'f')
-                        ch = '\f';
-                    buffer.append(ch);
-                }
-            } else {
-                buffer.append(ch);
-            }
-        }
-        return buffer.toString();
     }
 
     public VideoBean getDetailFromContent(String content) {

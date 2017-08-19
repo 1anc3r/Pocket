@@ -20,28 +20,30 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.test.espresso.core.deps.guava.collect.Lists;
 
-import me.lancer.pocket.tool.mvp.todo.data.Task;
-import me.lancer.pocket.tool.mvp.todo.data.source.TasksDataSource;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import me.lancer.pocket.tool.mvp.todo.data.Task;
+import me.lancer.pocket.tool.mvp.todo.data.source.TasksDataSource;
 
 /**
  * Implementation of the data source that adds a latency simulating network.
  */
 public class TasksRemoteDataSource implements TasksDataSource {
 
-    private static TasksRemoteDataSource INSTANCE;
-
     private static final int SERVICE_LATENCY_IN_MILLIS = 5000;
-
     private final static Map<String, Task> TASKS_SERVICE_DATA;
+    private static TasksRemoteDataSource INSTANCE;
 
     static {
         TASKS_SERVICE_DATA = new LinkedHashMap<>(2);
         addTask("Build tower in Pisa", "Ground looks good, no foundation work required.");
         addTask("Finish bridge in Tacoma", "Found awesome girders at half the cost!");
+    }
+
+    // Prevent direct instantiation.
+    private TasksRemoteDataSource() {
     }
 
     public static TasksRemoteDataSource getInstance() {
@@ -50,9 +52,6 @@ public class TasksRemoteDataSource implements TasksDataSource {
         }
         return INSTANCE;
     }
-
-    // Prevent direct instantiation.
-    private TasksRemoteDataSource() {}
 
     private static void addTask(String title, String description) {
         Task newTask = new Task(title, description);

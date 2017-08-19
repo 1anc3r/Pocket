@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.music.activity.MusicSearchActivity;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 
 public class MusicFragment extends BaseFragment {
 
@@ -87,35 +87,6 @@ public class MusicFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -143,19 +114,15 @@ public class MusicFragment extends BaseFragment {
         builder.setTitle("音乐");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 乐评 : 豆瓣音乐的最受欢迎乐评\n" +
-                "\t\t\t\t * 乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
-                "\t\t\t\t *        搜索你想了解的音乐信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣音乐\n" +
-                "\t\t\t\t * （music.douban.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 乐评 : 豆瓣音乐的最受欢迎乐评\n" +
+                        "\t\t\t\t * 乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                        "\t\t\t\t *        搜索你想了解的音乐信息\n" +
+                        "\t\t\t\t * ——数据来源 : 豆瓣音乐\n" +
+                        "\t\t\t\t * （music.douban.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -176,5 +143,38 @@ public class MusicFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

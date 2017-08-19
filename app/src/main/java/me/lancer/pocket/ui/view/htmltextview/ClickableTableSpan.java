@@ -30,11 +30,11 @@ public abstract class ClickableTableSpan extends ClickableSpan {
     // Otherwise, we end up removing the clicking from earlier tables.
     public abstract ClickableTableSpan newInstance();
 
-    public void setTableHtml(String tableHtml) {
-        this.tableHtml = tableHtml;
-    }
-
     public String getTableHtml() {
         return tableHtml;
+    }
+
+    public void setTableHtml(String tableHtml) {
+        this.tableHtml = tableHtml;
     }
 }

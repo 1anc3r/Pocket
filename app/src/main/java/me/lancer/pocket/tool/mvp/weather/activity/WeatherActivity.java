@@ -25,16 +25,18 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.weather.CityBean;
 import me.lancer.pocket.tool.mvp.weather.FutureBean;
 import me.lancer.pocket.tool.mvp.weather.IWeatherView;
 import me.lancer.pocket.tool.mvp.weather.WeatherBean;
 import me.lancer.pocket.tool.mvp.weather.WeatherPresenter;
 import me.lancer.pocket.tool.mvp.weather.adapter.FutureAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class WeatherActivity extends PresenterActivity<WeatherPresenter> implements IWeatherView {
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     private CollapsingToolbarLayout layout;
     private FloatingActionButton fab;
     private ImageView ivImg, ivWeather;
@@ -45,15 +47,11 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
             tvTravelBrief, tvTravelDetail,
             tvFluBrief, tvFluDetail,
             tvSportBrief, tvSportDetail;
-
     private RecyclerView rvList;
     private FutureAdapter adapter;
     private LinearLayoutManager layoutManager;
     private WeatherBean mBean = new WeatherBean();
     private List<FutureBean> list = new ArrayList<>();
-
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     private String city = "CHBJ000000";
 
     private Handler handler = new Handler() {

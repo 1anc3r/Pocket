@@ -47,7 +47,12 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
 
     private List<CollectBean> list = new ArrayList<>();
     private CollectBean temp;
-
+    private Runnable query = new Runnable() {
+        @Override
+        public void run() {
+            presenter.query();
+        }
+    };
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -72,14 +77,6 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
             }
         }
     };
-
-    private Runnable query = new Runnable() {
-        @Override
-        public void run() {
-            presenter.query();
-        }
-    };
-
     private Runnable add = new Runnable() {
         @Override
         public void run() {

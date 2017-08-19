@@ -19,9 +19,6 @@ import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.article.activity.ArticleActivity;
-import me.lancer.pocket.ui.activity.BlankActivity;
-import me.lancer.pocket.ui.mvp.model.ModelAdapter;
-import me.lancer.pocket.ui.mvp.model.ModelBean;
 import me.lancer.pocket.tool.mvp.calculator.activity.CalculatorActivity;
 import me.lancer.pocket.tool.mvp.calendar.activity.CalendarActivity;
 import me.lancer.pocket.tool.mvp.document.activity.DocumentActivity;
@@ -34,6 +31,9 @@ import me.lancer.pocket.tool.mvp.todo.tasks.TasksActivity;
 import me.lancer.pocket.tool.mvp.translation.activity.TranslationActivity;
 import me.lancer.pocket.tool.mvp.video.activity.VideoActivity;
 import me.lancer.pocket.tool.mvp.weather.activity.WeatherActivity;
+import me.lancer.pocket.ui.activity.BlankActivity;
+import me.lancer.pocket.ui.mvp.model.ModelAdapter;
+import me.lancer.pocket.ui.mvp.model.ModelBean;
 
 public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickListener, ModelAdapter.MyItemLongClickListener {
 
@@ -65,6 +65,16 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     private ModelAdapter adapter;
     private LinearLayoutManager layoutManager;
     private List<ModelBean> list = new ArrayList<>();
+    private View.OnKeyListener OnKeyListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_MENU) {
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,17 +114,6 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         rvList.setFocusableInTouchMode(true);
         rvList.setOnKeyListener(OnKeyListener);
     }
-
-    private View.OnKeyListener OnKeyListener = new View.OnKeyListener() {
-        @Override
-        public boolean onKey(View v, int keyCode, KeyEvent event) {
-            if (keyCode == KeyEvent.KEYCODE_MENU) {
-                adapter.notifyDataSetChanged();
-                return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     public void onItemClick(View view, int postion) {

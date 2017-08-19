@@ -45,10 +45,62 @@ public class HtmlTagHandler implements Html.TagHandler {
     public static final String UNORDERED_LIST = "HTML_TEXTVIEW_ESCAPED_UL_TAG";
     public static final String ORDERED_LIST = "HTML_TEXTVIEW_ESCAPED_OL_TAG";
     public static final String LIST_ITEM = "HTML_TEXTVIEW_ESCAPED_LI_TAG";
+    private static final int indent = 10;
+    private static final int listItemIndent = indent * 2;
+    private static final BulletSpan bullet = new BulletSpan(indent);
     private final TextPaint mTextPaint;
-
+    /**
+     * Keeps track of lists (ol, ul). On bottom of Stack is the outermost list
+     * and on top of Stack is the most nested list
+     */
+    Stack<String> lists = new Stack<>();
+    /**
+     * List indentation in pixels. Nested lists use multiple of this.
+     */
+    /**
+     * Tracks indexes of ordered lists so that after a nested list ends
+     * we can continue with correct index of outer list
+     */
+    Stack<Integer> olNextIndex = new Stack<>();
+    /**
+     * Running HTML table string based off of the root table tag. Root table tag being the tag which
+     * isn't embedded within any other table tag. Example:
+     * <!-- This is the root level opening table tag. This is where we keep track of tables. -->
+     * <table>
+     * ...
+     * <table> <!-- Non-root table tags -->
+     * ...
+     * </table>
+     * ...
+     * </table>
+     * <!-- This is the root level closing table tag and the end of the string we track. -->
+     */
+    StringBuilder tableHtmlBuilder = new StringBuilder();
+    /**
+     * Tells us which level of table tag we're on; ultimately used to find the root table tag.
+     */
+    int tableTagLevel = 0;
+    private me.lancer.pocket.ui.view.htmltextview.ClickableTableSpan clickableTableSpan;
+    private me.lancer.pocket.ui.view.htmltextview.DrawTableLinkSpan drawTableLinkSpan;
     public HtmlTagHandler(TextPaint textPaint) {
         mTextPaint = textPaint;
+    }
+
+    /**
+     * Get last marked position of a specific tag kind (private class)
+     */
+    private static Object getLast(Editable text, Class kind) {
+        Object[] objs = text.getSpans(0, text.length(), kind);
+        if (objs.length == 0) {
+            return null;
+        } else {
+            for (int i = objs.length; i > 0; i--) {
+                if (text.getSpanFlags(objs[i - 1]) == Spannable.SPAN_MARK_MARK) {
+                    return objs[i - 1];
+                }
+            }
+            return null;
+        }
     }
 
     /**
@@ -73,71 +125,6 @@ public class HtmlTagHandler implements Html.TagHandler {
         html = html.replace("</li>", "</" + LIST_ITEM + ">");
 
         return html;
-    }
-
-    /**
-     * Keeps track of lists (ol, ul). On bottom of Stack is the outermost list
-     * and on top of Stack is the most nested list
-     */
-    Stack<String> lists = new Stack<>();
-    /**
-     * Tracks indexes of ordered lists so that after a nested list ends
-     * we can continue with correct index of outer list
-     */
-    Stack<Integer> olNextIndex = new Stack<>();
-    /**
-     * List indentation in pixels. Nested lists use multiple of this.
-     */
-    /**
-     * Running HTML table string based off of the root table tag. Root table tag being the tag which
-     * isn't embedded within any other table tag. Example:
-     * <!-- This is the root level opening table tag. This is where we keep track of tables. -->
-     * <table>
-     * ...
-     * <table> <!-- Non-root table tags -->
-     * ...
-     * </table>
-     * ...
-     * </table>
-     * <!-- This is the root level closing table tag and the end of the string we track. -->
-     */
-    StringBuilder tableHtmlBuilder = new StringBuilder();
-    /**
-     * Tells us which level of table tag we're on; ultimately used to find the root table tag.
-     */
-    int tableTagLevel = 0;
-
-    private static final int indent = 10;
-    private static final int listItemIndent = indent * 2;
-    private static final BulletSpan bullet = new BulletSpan(indent);
-    private me.lancer.pocket.ui.view.htmltextview.ClickableTableSpan clickableTableSpan;
-    private me.lancer.pocket.ui.view.htmltextview.DrawTableLinkSpan drawTableLinkSpan;
-
-    private static class Ul {
-    }
-
-    private static class Ol {
-    }
-
-    private static class Code {
-    }
-
-    private static class Center {
-    }
-
-    private static class Strike {
-    }
-
-    private static class Table {
-    }
-
-    private static class Tr {
-    }
-
-    private static class Th {
-    }
-
-    private static class Td {
     }
 
     @Override
@@ -354,28 +341,38 @@ public class HtmlTagHandler implements Html.TagHandler {
         return extractedSpanText;
     }
 
-    /**
-     * Get last marked position of a specific tag kind (private class)
-     */
-    private static Object getLast(Editable text, Class kind) {
-        Object[] objs = text.getSpans(0, text.length(), kind);
-        if (objs.length == 0) {
-            return null;
-        } else {
-            for (int i = objs.length; i > 0; i--) {
-                if (text.getSpanFlags(objs[i - 1]) == Spannable.SPAN_MARK_MARK) {
-                    return objs[i - 1];
-                }
-            }
-            return null;
-        }
-    }
-
     public void setClickableTableSpan(me.lancer.pocket.ui.view.htmltextview.ClickableTableSpan clickableTableSpan) {
         this.clickableTableSpan = clickableTableSpan;
     }
 
     public void setDrawTableLinkSpan(DrawTableLinkSpan drawTableLinkSpan) {
         this.drawTableLinkSpan = drawTableLinkSpan;
+    }
+
+    private static class Ul {
+    }
+
+    private static class Ol {
+    }
+
+    private static class Code {
+    }
+
+    private static class Center {
+    }
+
+    private static class Strike {
+    }
+
+    private static class Table {
+    }
+
+    private static class Tr {
+    }
+
+    private static class Th {
+    }
+
+    private static class Td {
     }
 } 

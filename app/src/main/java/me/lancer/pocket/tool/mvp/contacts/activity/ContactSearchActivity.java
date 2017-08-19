@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.contacts.adapter.ContactAdapter;
 import me.lancer.pocket.tool.mvp.contacts.bean.ContactBean;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class ContactSearchActivity extends BaseActivity {
 
@@ -122,10 +122,10 @@ public class ContactSearchActivity extends BaseActivity {
         builder.setTitle("电话、通讯录、信息");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 电话 : 列出手机上的通话记录\n" +
-                "\t\t\t\t * 通讯录 : 列出手机上的联系人\n" +
-                "\t\t\t\t * 信息 : 列出手机上的短信记录\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 电话 : 列出手机上的通话记录\n" +
+                        "\t\t\t\t * 通讯录 : 列出手机上的联系人\n" +
+                        "\t\t\t\t * 信息 : 列出手机上的短信记录\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
 

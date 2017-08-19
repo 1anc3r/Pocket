@@ -18,9 +18,9 @@ package me.lancer.pocket.tool.mvp.todo.data.source;
 
 import android.support.annotation.NonNull;
 
-import me.lancer.pocket.tool.mvp.todo.data.Task;
-
 import java.util.List;
+
+import me.lancer.pocket.tool.mvp.todo.data.Task;
 
 /**
  * Main entry point for accessing tasks data.
@@ -31,20 +31,6 @@ import java.util.List;
  * operation on database or network should be executed in a different thread.
  */
 public interface TasksDataSource {
-
-    interface LoadTasksCallback {
-
-        void onTasksLoaded(List<Task> tasks);
-
-        void onDataNotAvailable();
-    }
-
-    interface GetTaskCallback {
-
-        void onTaskLoaded(Task task);
-
-        void onDataNotAvailable();
-    }
 
     void getTasks(@NonNull LoadTasksCallback callback);
 
@@ -67,4 +53,18 @@ public interface TasksDataSource {
     void deleteAllTasks();
 
     void deleteTask(@NonNull String taskId);
+
+    interface LoadTasksCallback {
+
+        void onTasksLoaded(List<Task> tasks);
+
+        void onDataNotAvailable();
+    }
+
+    interface GetTaskCallback {
+
+        void onTaskLoaded(Task task);
+
+        void onDataNotAvailable();
+    }
 }

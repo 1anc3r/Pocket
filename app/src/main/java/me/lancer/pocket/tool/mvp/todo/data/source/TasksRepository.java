@@ -19,13 +19,13 @@ package me.lancer.pocket.tool.mvp.todo.data.source;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import me.lancer.pocket.tool.mvp.todo.data.Task;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import me.lancer.pocket.tool.mvp.todo.data.Task;
 
 import static com.bumptech.glide.util.Preconditions.checkNotNull;
 

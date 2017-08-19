@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.game.GameBean;
 import me.lancer.pocket.info.mvp.game.GamePresenter;
 import me.lancer.pocket.info.mvp.game.IGameView;
 import me.lancer.pocket.info.mvp.game.adapter.GameShotAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
@@ -56,7 +56,27 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
 
     private String title, img, link;
     private int id;
-
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fab) {
+                if (temps.size() == 1) {
+                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, String.valueOf(id));
+                } else {
+                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(2);
+                    temp.setCate(13);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(String.valueOf(id));
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, String.valueOf(id));
+                }
+            }
+        }
+    };
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -90,7 +110,6 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
             }
         }
     };
-
     private Runnable loadDetail = new Runnable() {
         @Override
         public void run() {
@@ -98,27 +117,16 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         }
     };
 
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (view == fab) {
-                if(temps.size() == 1) {
-                    fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, String.valueOf(id));
-                } else {
-                    fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(2);
-                    temp.setCate(13);
-                    temp.setCover(img);
-                    temp.setTitle(title);
-                    temp.setLink(String.valueOf(id));
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, String.valueOf(id));
-                }
-            }
-        }
-    };
+    public static void startActivity(Activity activity, int id, String title, String img, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, GameDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("title", title);
+        intent.putExtra("img", img);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +162,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, String.valueOf(id));
-        if(temps.size() == 1) {
+        if (temps.size() == 1) {
             fab.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
             fab.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
@@ -179,17 +187,6 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
         loadToast.setText("玩命加载中...");
         loadToast.show();
         new Thread(loadDetail).start();
-    }
-
-    public static void startActivity(Activity activity, int id, String title, String img, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, GameDetailActivity.class);
-        intent.putExtra("id", id);
-        intent.putExtra("title", title);
-        intent.putExtra("img", img);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

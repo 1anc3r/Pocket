@@ -28,10 +28,10 @@
                 android:id="@+id/iv_cover"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:padding="10dp"
                 android:layout_gravity="center"
-                android:transitionName="transImg"
-                android:scaleType="centerCrop" />
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:transitionName="transImg" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,8 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:textColor="?android:attr/textColorPrimary"
                     android:maxLines="1"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp" />
 
                 <TextView
@@ -70,9 +70,9 @@
 
                     <TextView
                         android:id="@+id/tv_arg1"
-                        android:textColor="@color/blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/blue"
                         android:textSize="14sp" />
 
                     <TextView
@@ -82,9 +82,9 @@
 
                     <TextView
                         android:id="@+id/tv_arg2"
-                        android:textColor="@color/blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/blue"
                         android:textSize="14sp" />
 
                 </LinearLayout>

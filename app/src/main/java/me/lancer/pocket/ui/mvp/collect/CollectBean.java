@@ -13,7 +13,7 @@ public class CollectBean {
     private String title;
     private String cover;
 
-    public CollectBean(){
+    public CollectBean() {
 
     }
 

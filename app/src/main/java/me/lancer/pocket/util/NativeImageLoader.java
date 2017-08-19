@@ -11,8 +11,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NativeImageLoader {
-    private LruCache<String, Bitmap> mMemoryCache;
     private static NativeImageLoader mInstance = new NativeImageLoader();
+    private LruCache<String, Bitmap> mMemoryCache;
     private ExecutorService mImageThreadPool = Executors.newFixedThreadPool(1);
 
     private NativeImageLoader() {

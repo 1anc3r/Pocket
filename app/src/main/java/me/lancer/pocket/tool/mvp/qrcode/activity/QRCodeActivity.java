@@ -64,29 +64,29 @@ import me.lancer.pocket.tool.mvp.qrcode.util.Util;
 import pl.droidsonroids.gif.GifDrawable;
 
 public class QRCodeActivity extends ActionBarActivity {
+    public final static String PREF_GUIDE_VERSION = "version";
     private final static String TAG = "QRCodeActivity";
     private final static int REQUEST_PICK_IMAGE = 1;
     private final static int REQUEST_SEND_QR_TEXT = 2;
     private final static int REQUEST_PICK_QR_IMAGE = 3;
     private final static int REQUEST_DETECT_QR_IMAGE = 4;
     private final static int REQUEST_SAVE_FILE = 5;
-
     private final static String PREF_TEXT_FOR_QR = "text";
     private final static String PREF_MODE_FOR_QR = "mode";
-    public final static String PREF_GUIDE_VERSION = "version";
-
     private final static int MAX_INPUT_BITMAP_WIDTH = 720;
     private final static int MAX_INPUT_BITMAP_HEIGHT = 1280;
 
     private final static int COLOR_BRIGHTNESS_THRESHOLD = 0x7f;
-
+    private static final int NORMAL_MODE = 0;
+    private static final int PICTURE_MODE = 1;
+    private static final int LOGO_MODE = 2;
+    private static final int EMBED_MODE = 3;
+    final private int[] modeGuide = {R.mipmap.guide_img, R.mipmap.guide_img_logo, R.mipmap.guide_img_embed};
+    AHBottomNavigation mBottomNavigation;
     private boolean mConverting;
-
     private CropImageView pickPhoto;
-
     private MenuItem convertMenu;
     private MenuItem addTextMenu;
-
     private MenuItem shareMenu;
     private MenuItem saveMenu;
     private MenuItem revertMenu;
@@ -95,46 +95,40 @@ public class QRCodeActivity extends ActionBarActivity {
     private MenuItem modeMenu;
     private MenuItem scanMenu;
     private MenuItem detectMenu;
-
-    AHBottomNavigation mBottomNavigation;
-
     private LinearLayout editTextView;
-
     private EditText mEditTextView;
     private ImageView qrButton;
     private Button setTextButton;
-
     private String qrText;
     private Bitmap mOriginBitmap;
     private Bitmap mQRBitmap;
     private Bitmap mCropImage;
-
     private File shareQr;
     private File gifQr;
-
     private boolean doubleBackToExitPressedOnce;
-
     private ProgressBar mProgressBar;
-
     private boolean mGif;
     private GifDrawable mGifDrawable;
-
     private Bitmap[] gifArray;
     private Bitmap[] QRGifArray;
-
     private int mCurrentMode = -1;
-
-    private static final int NORMAL_MODE = 0;
-    private static final int PICTURE_MODE = 1;
-    private static final int LOGO_MODE = 2;
-    private static final int EMBED_MODE = 3;
-
     private CropImageView.CropPosSize mCropSize;
     private boolean mPickImage;
     private boolean mScan;
-
     private int mColor = Color.rgb(0x28, 0x32, 0x60);
-    final private int[] modeGuide = {R.mipmap.guide_img, R.mipmap.guide_img_logo, R.mipmap.guide_img_embed};
+
+    public static String getMyVersion(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            if (null == packageInfo.versionName) {
+                return "Unknown";
+            } else {
+                return packageInfo.versionName;
+            }
+        } catch (Exception e) {
+            return "Unknown";
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -891,7 +885,6 @@ public class QRCodeActivity extends ActionBarActivity {
         };
     }
 
-
     public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
@@ -957,6 +950,10 @@ public class QRCodeActivity extends ActionBarActivity {
         }
     }
 
+//    private String _(int id) {
+//        return getResources().getString(id);
+//    }
+
     private void saveQrText(String txt) {
         if (qrText == txt) {
             return;
@@ -980,33 +977,16 @@ public class QRCodeActivity extends ActionBarActivity {
         editor.commit();
     }
 
-//    private String _(int id) {
-//        return getResources().getString(id);
-//    }
-
     private void openAbout() {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setTitle("二维码");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 扫描 : 调用后置摄像头扫描二维码\n" +
-                "\t\t\t\t * 识别 : 识别本机图片中的二维码\n" +
-                "\t\t\t\t * ——使用开源库 : （github.com/scola/Qart）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 扫描 : 调用后置摄像头扫描二维码\n" +
+                        "\t\t\t\t * 识别 : 识别本机图片中的二维码\n" +
+                        "\t\t\t\t * ——使用开源库 : （github.com/scola/Qart）\n" +
+                        "\t\t\t\t */");
         builder.show();
-    }
-
-    public static String getMyVersion(Context context) {
-        try {
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            if (null == packageInfo.versionName) {
-                return "Unknown";
-            } else {
-                return packageInfo.versionName;
-            }
-        } catch (Exception e) {
-            return "Unknown";
-        }
     }
 
     public boolean isStoragePermissionGranted(int request) {

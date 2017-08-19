@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.info.mvp.app.fragment.AppFragment;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.book.fragment.BookFragment;
 import me.lancer.pocket.info.mvp.code.fragment.CodeFragment;
 import me.lancer.pocket.info.mvp.comic.fragment.ComicFragment;
@@ -24,6 +23,7 @@ import me.lancer.pocket.info.mvp.novel.fragment.NovelFragment;
 import me.lancer.pocket.info.mvp.photo.fragment.PhotoFragment;
 import me.lancer.pocket.info.mvp.video.fragment.VideoFragment;
 import me.lancer.pocket.tool.mvp.contacts.fragment.ContactsFragment;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class BlankActivity extends BaseActivity {
 

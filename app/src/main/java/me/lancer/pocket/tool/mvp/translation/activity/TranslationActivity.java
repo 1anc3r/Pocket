@@ -1,9 +1,9 @@
 package me.lancer.pocket.tool.mvp.translation.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.Map;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.tool.mvp.translation.ITranslationView;
 import me.lancer.pocket.tool.mvp.translation.TranslationBean;
 import me.lancer.pocket.tool.mvp.translation.TranslationPresenter;
 import me.lancer.pocket.tool.mvp.translation.adapter.TranslationAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.view.ClearEditText;
 
 public class TranslationActivity extends PresenterActivity<TranslationPresenter> implements ITranslationView {

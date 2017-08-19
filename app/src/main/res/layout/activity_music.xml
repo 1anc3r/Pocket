@@ -6,19 +6,19 @@
         android:id="@+id/ll_titile"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical"
         android:background="?attr/colorPrimary"
         android:clipToPadding="true"
         android:elevation="3dp"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:gravity="center_vertical|left"
             android:padding="12dp"
-            android:src="@mipmap/ic_arrow_back_white_24dp"
-            android:gravity="center_vertical|left" />
+            android:src="@mipmap/ic_arrow_back_white_24dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,9 +43,9 @@
             android:id="@+id/iv_search"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:gravity="center_vertical|left"
             android:padding="12dp"
-            android:src="@mipmap/ic_search_white_24dp"
-            android:gravity="center_vertical|left" />
+            android:src="@mipmap/ic_search_white_24dp" />
 
     </LinearLayout>
 
@@ -54,10 +54,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_titile"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:divider="?android:colorBackground"
         android:dividerHeight="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:scrollbars="none" />
 
     <LinearLayout
@@ -88,8 +88,8 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:backgroundTint="?attr/colorBackgroundFloating"
-                android:background="@mipmap/ic_delete_white_24dp" />
+                android:background="@mipmap/ic_delete_white_24dp"
+                android:backgroundTint="?attr/colorBackgroundFloating" />
 
             <TextView
                 android:layout_width="1dp"
@@ -122,8 +122,8 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:backgroundTint="?attr/colorBackgroundFloating"
-                android:background="@mipmap/ic_menu_copy_holo_dark" />
+                android:background="@mipmap/ic_menu_copy_holo_dark"
+                android:backgroundTint="?attr/colorBackgroundFloating" />
 
             <TextView
                 android:layout_width="1dp"
@@ -156,8 +156,8 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:backgroundTint="?attr/colorBackgroundFloating"
-                android:background="@mipmap/ic_menu_cut_holo_dark" />
+                android:background="@mipmap/ic_menu_cut_holo_dark"
+                android:backgroundTint="?attr/colorBackgroundFloating" />
 
             <TextView
                 android:layout_width="1dp"
@@ -190,8 +190,8 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:backgroundTint="?attr/colorBackgroundFloating"
-                android:background="@mipmap/ic_done_all_white_24dp" />
+                android:background="@mipmap/ic_done_all_white_24dp"
+                android:backgroundTint="?attr/colorBackgroundFloating" />
 
             <TextView
                 android:layout_width="1dp"

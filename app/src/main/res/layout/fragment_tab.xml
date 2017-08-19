@@ -14,10 +14,10 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/t_tab"
             android:layout_width="match_parent"
-            app:navigationIcon="@mipmap/ic_arrow_back_white_24dp"
-            android:navigationIcon="@mipmap/ic_arrow_back_white_24dp"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:navigationIcon="@mipmap/ic_arrow_back_white_24dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@mipmap/ic_arrow_back_white_24dp">
 
             <TextView
                 android:id="@+id/toolbar_title"

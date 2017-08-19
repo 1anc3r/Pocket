@@ -515,27 +515,6 @@ public class FileUtil {
         return null;
     }
 
-    /**
-     * 递归获取所有文件
-     *
-     * @param root
-     * @param ext  指定扩展名
-     */
-    private synchronized void getAllFiles(File root, String ext) {
-        List<File> list = new ArrayList<>();
-        File files[] = root.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.isDirectory()) {
-                    getAllFiles(f, ext);
-                } else {
-                    if (f.getName().endsWith(ext) && f.length() > 50)
-                        list.add(f);
-                }
-            }
-        }
-    }
-
     public static String getCharset(String fileName) {
         BufferedInputStream bis = null;
         String charset = "GBK";
@@ -643,6 +622,27 @@ public class FileUtil {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 递归获取所有文件
+     *
+     * @param root
+     * @param ext  指定扩展名
+     */
+    private synchronized void getAllFiles(File root, String ext) {
+        List<File> list = new ArrayList<>();
+        File files[] = root.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    getAllFiles(f, ext);
+                } else {
+                    if (f.getName().endsWith(ext) && f.length() > 50)
+                        list.add(f);
+                }
+            }
         }
     }
 }

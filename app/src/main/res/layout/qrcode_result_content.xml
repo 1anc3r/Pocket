@@ -17,9 +17,9 @@
         android:id="@+id/qr_result_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
         android:layout_marginTop="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         android:src="@mipmap/guide_img" />
 
     <TextView
@@ -28,10 +28,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginTop="30dp"
-        android:textSize="14sp"
-        android:textColor="?android:attr/textColorLink"
         android:text="https://github.com/scola/Qart"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorLink"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/ss_text"
@@ -39,10 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginTop="10dp"
-        android:visibility="invisible"
-        android:textSize="14sp"
-        android:textColor="?android:attr/textColorLink"
         android:text="ss://"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorLink"
+        android:textSize="14sp"
+        android:visibility="invisible" />
 
 </LinearLayout>

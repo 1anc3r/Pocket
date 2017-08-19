@@ -42,23 +42,23 @@ public class NovelImgAdapter extends RecyclerView.Adapter<NovelImgAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         if (list.get(position) != null) {
             NovelBean bean = list.get(position);
-                viewHolder.tvTitle.setText(bean.getTitle());
-                viewHolder.tvAuthor.setText(bean.getAuthor());
-                viewHolder.tvIntro.setText(bean.getIntro());
-                viewHolder.tvInfo.setText(bean.getCount()+"人在追 | "+bean.getRatio()+"读者留存");
-                if (list.get(position).getCover()!=null) {
-                    ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                    Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivImg);
-                }else{
-                    viewHolder.ivImg.setVisibility(View.GONE);
-                    viewHolder.tvTitle.setGravity(Gravity.CENTER);
+            viewHolder.tvTitle.setText(bean.getTitle());
+            viewHolder.tvAuthor.setText(bean.getAuthor());
+            viewHolder.tvIntro.setText(bean.getIntro());
+            viewHolder.tvInfo.setText(bean.getCount() + "人在追 | " + bean.getRatio() + "读者留存");
+            if (list.get(position).getCover() != null) {
+                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
+                Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivImg);
+            } else {
+                viewHolder.ivImg.setVisibility(View.GONE);
+                viewHolder.tvTitle.setGravity(Gravity.CENTER);
+            }
+            viewHolder.llNovel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    NovelDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getTitle(), list.get(position).getCount(), list.get(position).getRatio());
                 }
-                viewHolder.llNovel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        NovelDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getTitle(), list.get(position).getCount(), list.get(position).getRatio());
-                    }
-                });
+            });
         }
     }
 

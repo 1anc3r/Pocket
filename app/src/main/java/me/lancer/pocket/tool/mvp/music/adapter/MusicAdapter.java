@@ -25,18 +25,18 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import java.io.File;
 import java.util.List;
 
+import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.image.bean.ImageViewBean;
 import me.lancer.pocket.tool.mvp.music.bean.MusicBean;
 import me.lancer.pocket.tool.mvp.music.bean.MusicUtil;
-import me.lancer.pocket.R;
 
 public class MusicAdapter extends BaseAdapter {
 
+    protected LayoutInflater mInflater;
     private Context context;
     private List<String> posList;
     private List<String> searchList;
     private List<MusicBean> musicList;
-    protected LayoutInflater mInflater;
     private Point mPoint = new Point(0, 0);//用来封装ImageView的宽和高的对象
 
     private Handler mHandler;

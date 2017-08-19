@@ -42,15 +42,42 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.adapter.FileAdapter;
 import me.lancer.pocket.tool.mvp.file.bean.FileBean;
 import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.util.FileTypeRefereeUtil;
 
 public class FileActivity extends BaseActivity implements View.OnClickListener {
 
+    private final static int SCAN_OK = 1;
     App app;
+    Comparator PosComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            String str1 = (String) obj1;
+            String str2 = (String) obj2;
+            if (Integer.parseInt(str1) < Integer.parseInt(str2))
+                return -1;
+            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
+                return 0;
+            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
+                return 1;
+            return 0;
+        }
+    };
+    Comparator NameComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            FileBean file1 = (FileBean) obj1;
+            FileBean file2 = (FileBean) obj2;
+            if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) < 0)
+                return -1;
+            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) == 0)
+                return 0;
+            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) > 0)
+                return 1;
+            return 0;
+        }
+    };
     private TextView tvPath, tvShow;
     private ListView lvFile;
     private EditText etSearch;
@@ -58,25 +85,84 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
     private ImageView ivBack, ivSearch;
     private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
     private TextView tvDelete, tvCopy, tvMove, tvShare, tvAll;
-
-    private final static int SCAN_OK = 1;
-
     private FileAdapter adapter;
     private List<FileBean> fileList = new ArrayList<>();
     private List<FileBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
+    Runnable deleteFile = new Runnable() {
+
+        @Override
+        public void run() {
+            Collections.sort(posList, PosComparator);
+            for (int i = 0; i < posList.size(); i++) {
+                String deletePath = fileList.get(Integer.parseInt(posList.get(i))).getPath();
+                File deleteFile = new File(deletePath);
+                if (deleteFile.isFile()) {
+                    if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
+                        deleteFile.delete();
+                        showSnackbar(lvFile, "删除成功!");
+                    } else {
+                        showSnackbar(lvFile, "删除失败!");
+                    }
+                } else if (deleteFile.isDirectory()) {
+                    deleteDir(deleteFile);
+                }
+            }
+            int count = 0;
+            for (int i = 0; i < posList.size(); i++) {
+                fileList.remove(fileList.get(Integer.parseInt(posList.get(i)) - count));
+                count++;
+            }
+            posList.clear();
+            lvFile.requestLayout();
+            adapter.notifyDataSetChanged();
+        }
+    };
     private List<String> srcList = new ArrayList<>();
     private List<String> searchList = new ArrayList<>();
     private String searchStr = new String();
+    Runnable changed = new Runnable() {
+
+        @Override
+        public void run() {
+            searchStr = etSearch.getText().toString();
+            searchList.clear();
+            searchList.add(searchStr);
+            fileList.clear();
+            getContactSub(fileList, searchStr);
+            Collections.sort(fileList, NameComparator);
+            adapter.notifyDataSetChanged();
+        }
+    };
     private Handler handler = new Handler();
     private String method;
     private String parentpath;
     private File parentfile;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Boolean isAll = false;
+    Runnable selectAllFile = new Runnable() {
 
+        @Override
+        public void run() {
+            if (isAll == false) {
+                posList.clear();
+                for (int i = 0; i < fileList.size(); i++) {
+                    posList.add("" + i);
+                }
+                isAll = true;
+                llBottom.setVisibility(View.VISIBLE);
+            } else {
+                posList.clear();
+                isAll = false;
+                if (method.equals("in") || method.equals("out") || method.equals("download")) {
+                    llBottom.setVisibility(View.GONE);
+                }
+            }
+            lvFile.requestLayout();
+            adapter.notifyDataSetChanged();
+        }
+    };
     private SharedPreferences pref;
-
     private Handler lHandler = new Handler() {
 
         @Override
@@ -94,7 +180,60 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             }
         }
     };
+    Runnable getFile = new Runnable() {
 
+        @Override
+        public void run() {
+            fileList.clear();
+            File root = new File(parentpath);
+            if (root.isDirectory()) {
+                File fileis[] = root.listFiles();
+                if (fileis != null) {
+                    for (File filei : fileis) {
+                        if (filei.isDirectory() && filei.exists() && filei.canRead() && filei.canWrite()) {
+                            File fileiis[] = filei.listFiles();
+                            List<String> childs = new ArrayList<>();
+                            for (File fileii : fileiis) {
+                                if (fileiis != null) {
+                                    if (filei.exists() && filei.canRead() && filei.canWrite()) {
+                                        childs.add(fileii.getAbsolutePath());
+                                    }
+                                }
+                            }
+                            fileList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                            refenList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                        } else if (filei.exists() && filei.isFile() && filei.canRead() && filei.canWrite()) {
+                            List<String> childs = new ArrayList<>();
+                            fileList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                            refenList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                        }
+                    }
+                }
+            }
+            lHandler.sendEmptyMessage(SCAN_OK);
+        }
+    };
+    Runnable back2parent = new Runnable() {
+
+        @Override
+        public void run() {
+            if (parentpath.equals(Environment.getExternalStorageDirectory().getAbsolutePath()) || parentpath.equals("/mnt/ext_sdcard") || parentpath.equals("/mnt/ext_sdcard/")) {
+                setResult(RESULT_OK, null);
+                finish();
+            } else {
+                parentfile = new File(parentpath);
+                parentpath = parentfile.getParent();
+                tvPath.setText(parentpath);
+                fileList.clear();
+                posList.clear();
+                lHandler.post(getFile);
+            }
+        }
+    };
     private Handler mHandler = new Handler() {
 
         @Override
@@ -115,6 +254,19 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             }
         }
     };
+
+    private static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] list = dir.list();
+            for (int i = 0; i < list.length; i++) {
+                boolean success = deleteDir(new File(dir, list[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -391,19 +543,6 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private static boolean deleteDir(File dir) {
-        if (dir.isDirectory()) {
-            String[] list = dir.list();
-            for (int i = 0; i < list.length; i++) {
-                boolean success = deleteDir(new File(dir, list[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-        }
-        return dir.delete();
-    }
-
     private void openFile(File file) {
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -457,155 +596,4 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             }
         }
     }
-
-    Runnable selectAllFile = new Runnable() {
-
-        @Override
-        public void run() {
-            if (isAll == false) {
-                posList.clear();
-                for (int i = 0; i < fileList.size(); i++) {
-                    posList.add("" + i);
-                }
-                isAll = true;
-                llBottom.setVisibility(View.VISIBLE);
-            } else {
-                posList.clear();
-                isAll = false;
-                if (method.equals("in") || method.equals("out") || method.equals("download")) {
-                    llBottom.setVisibility(View.GONE);
-                }
-            }
-            lvFile.requestLayout();
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable getFile = new Runnable() {
-
-        @Override
-        public void run() {
-            fileList.clear();
-            File root = new File(parentpath);
-            if (root.isDirectory()) {
-                File fileis[] = root.listFiles();
-                if (fileis != null) {
-                    for (File filei : fileis) {
-                        if (filei.isDirectory() && filei.exists() && filei.canRead() && filei.canWrite()) {
-                            File fileiis[] = filei.listFiles();
-                            List<String> childs = new ArrayList<>();
-                            for (File fileii : fileiis) {
-                                if (fileiis != null) {
-                                    if (filei.exists() && filei.canRead() && filei.canWrite()) {
-                                        childs.add(fileii.getAbsolutePath());
-                                    }
-                                }
-                            }
-                            fileList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
-                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
-                            refenList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
-                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
-                        } else if (filei.exists() && filei.isFile() && filei.canRead() && filei.canWrite()) {
-                            List<String> childs = new ArrayList<>();
-                            fileList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
-                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
-                            refenList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
-                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
-                        }
-                    }
-                }
-            }
-            lHandler.sendEmptyMessage(SCAN_OK);
-        }
-    };
-
-    Runnable back2parent = new Runnable() {
-
-        @Override
-        public void run() {
-            if (parentpath.equals(Environment.getExternalStorageDirectory().getAbsolutePath()) || parentpath.equals("/mnt/ext_sdcard") || parentpath.equals("/mnt/ext_sdcard/")) {
-                setResult(RESULT_OK, null);
-                finish();
-            } else {
-                parentfile = new File(parentpath);
-                parentpath = parentfile.getParent();
-                tvPath.setText(parentpath);
-                fileList.clear();
-                posList.clear();
-                lHandler.post(getFile);
-            }
-        }
-    };
-
-    Runnable deleteFile = new Runnable() {
-
-        @Override
-        public void run() {
-            Collections.sort(posList, PosComparator);
-            for (int i = 0; i < posList.size(); i++) {
-                String deletePath = fileList.get(Integer.parseInt(posList.get(i))).getPath();
-                File deleteFile = new File(deletePath);
-                if (deleteFile.isFile()) {
-                    if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
-                        deleteFile.delete();
-                        showSnackbar(lvFile, "删除成功!");
-                    } else {
-                        showSnackbar(lvFile, "删除失败!");
-                    }
-                } else if (deleteFile.isDirectory()) {
-                    deleteDir(deleteFile);
-                }
-            }
-            int count = 0;
-            for (int i = 0; i < posList.size(); i++) {
-                fileList.remove(fileList.get(Integer.parseInt(posList.get(i)) - count));
-                count++;
-            }
-            posList.clear();
-            lvFile.requestLayout();
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable changed = new Runnable() {
-
-        @Override
-        public void run() {
-            searchStr = etSearch.getText().toString();
-            searchList.clear();
-            searchList.add(searchStr);
-            fileList.clear();
-            getContactSub(fileList, searchStr);
-            Collections.sort(fileList, NameComparator);
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Comparator PosComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            String str1 = (String) obj1;
-            String str2 = (String) obj2;
-            if (Integer.parseInt(str1) < Integer.parseInt(str2))
-                return -1;
-            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
-                return 0;
-            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
-                return 1;
-            return 0;
-        }
-    };
-
-    Comparator NameComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            FileBean file1 = (FileBean) obj1;
-            FileBean file2 = (FileBean) obj2;
-            if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) < 0)
-                return -1;
-            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) == 0)
-                return 0;
-            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) > 0)
-                return 1;
-            return 0;
-        }
-    };
 }

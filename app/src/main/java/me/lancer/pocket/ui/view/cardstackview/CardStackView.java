@@ -21,33 +21,28 @@ import me.lancer.pocket.R;
 
 public class CardStackView extends ViewGroup implements ScrollDelegate {
 
-    private static final int INVALID_POINTER = -1;
     public static final int INVALID_TYPE = -1;
     public static final int ANIMATION_STATE_START = 0;
     public static final int ANIMATION_STATE_END = 1;
     public static final int ANIMATION_STATE_CANCEL = 2;
-
-    private static final String TAG = "CardStackView";
-
     public static final int ALL_DOWN = 0;
     public static final int UP_DOWN = 1;
     public static final int UP_DOWN_STACK = 2;
-
     static final int DEFAULT_SELECT_POSITION = -1;
-
+    private static final int INVALID_POINTER = -1;
+    private static final String TAG = "CardStackView";
+    private final ViewDataObserver mObserver = new ViewDataObserver();
+    private final int[] mScrollOffset = new int[2];
     private int mTotalLength;
     private int mOverlapGaps;
     private int mOverlapGapsCollapse;
     private int mNumBottomShow;
     private me.lancer.pocket.ui.view.cardstackview.StackAdapter mStackAdapter;
-    private final ViewDataObserver mObserver = new ViewDataObserver();
     private int mSelectPosition = DEFAULT_SELECT_POSITION;
     private int mShowHeight;
     private List<ViewHolder> mViewHolders;
-
     private AnimatorAdapter mAnimatorAdapter;
     private int mDuration;
-
     private OverScroller mScroller;
     private int mLastMotionY;
     private boolean mIsBeingDragged = false;
@@ -56,7 +51,6 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
     private int mMinimumVelocity;
     private int mMaximumVelocity;
     private int mActivePointerId = INVALID_POINTER;
-    private final int[] mScrollOffset = new int[2];
     private int mNestedYOffset;
     private boolean mScrollEnable = true;
 
@@ -80,6 +74,16 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
     public CardStackView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    private static int clamp(int n, int my, int child) {
+        if (my >= child || n < 0) {
+            return 0;
+        }
+        if ((my + n) > child) {
+            return child - my;
+        }
+        return n;
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -601,18 +605,13 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
     }
 
     @Override
-    public void scrollViewTo(int x, int y) {
-        scrollTo(x, y);
-    }
-
-    @Override
-    public void setViewScrollY(int y) {
-        setScrollY(y);
-    }
-
-    @Override
     public void setViewScrollX(int x) {
         setScrollX(x);
+    }
+
+    @Override
+    public void scrollViewTo(int x, int y) {
+        scrollTo(x, y);
     }
 
     @Override
@@ -620,19 +619,14 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
         return getScrollY();
     }
 
+    @Override
+    public void setViewScrollY(int y) {
+        setScrollY(y);
+    }
+
     private void endDrag() {
         mIsBeingDragged = false;
         recycleVelocityTracker();
-    }
-
-    private static int clamp(int n, int my, int child) {
-        if (my >= child || n < 0) {
-            return 0;
-        }
-        if ((my + n) > child) {
-            return child - my;
-        }
-        return n;
     }
 
     @Override
@@ -653,6 +647,76 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
         return p instanceof LayoutParams;
+    }
+
+    public int getSelectPosition() {
+        return mSelectPosition;
+    }
+
+    public void setSelectPosition(int selectPosition) {
+        mSelectPosition = selectPosition;
+        mItemExpendListener.onItemExpend(mSelectPosition != DEFAULT_SELECT_POSITION);
+    }
+
+    public int getOverlapGaps() {
+        return mOverlapGaps;
+    }
+
+    public void setOverlapGaps(int overlapGaps) {
+        mOverlapGaps = overlapGaps;
+    }
+
+    public int getOverlapGapsCollapse() {
+        return mOverlapGapsCollapse;
+    }
+
+    public void setOverlapGapsCollapse(int overlapGapsCollapse) {
+        mOverlapGapsCollapse = overlapGapsCollapse;
+    }
+
+    public void setScrollEnable(boolean scrollEnable) {
+        mScrollEnable = scrollEnable;
+    }
+
+    public int getShowHeight() {
+        return mShowHeight;
+    }
+
+    public int getTotalLength() {
+        return mTotalLength;
+    }
+
+    public int getDuration() {
+        if (mAnimatorAdapter != null) return mDuration;
+        return 0;
+    }
+
+    public void setDuration(int duration) {
+        mDuration = duration;
+    }
+
+    public int getNumBottomShow() {
+        return mNumBottomShow;
+    }
+
+    public void setNumBottomShow(int numBottomShow) {
+        mNumBottomShow = numBottomShow;
+    }
+
+    public ScrollDelegate getScrollDelegate() {
+        return mScrollDelegate;
+    }
+
+    public ItemExpendListener getItemExpendListener() {
+        return mItemExpendListener;
+    }
+
+    public void setItemExpendListener(ItemExpendListener itemExpendListener) {
+        mItemExpendListener = itemExpendListener;
+    }
+
+    public interface ItemExpendListener {
+        void onItemExpend(boolean expend);
     }
 
     public static class LayoutParams extends MarginLayoutParams {
@@ -750,75 +814,5 @@ public class CardStackView extends ViewGroup implements ScrollDelegate {
         public void onChanged() {
             refreshView();
         }
-    }
-
-    public int getSelectPosition() {
-        return mSelectPosition;
-    }
-
-    public void setSelectPosition(int selectPosition) {
-        mSelectPosition = selectPosition;
-        mItemExpendListener.onItemExpend(mSelectPosition != DEFAULT_SELECT_POSITION);
-    }
-
-    public int getOverlapGaps() {
-        return mOverlapGaps;
-    }
-
-    public void setOverlapGaps(int overlapGaps) {
-        mOverlapGaps = overlapGaps;
-    }
-
-    public int getOverlapGapsCollapse() {
-        return mOverlapGapsCollapse;
-    }
-
-    public void setOverlapGapsCollapse(int overlapGapsCollapse) {
-        mOverlapGapsCollapse = overlapGapsCollapse;
-    }
-
-    public void setScrollEnable(boolean scrollEnable) {
-        mScrollEnable = scrollEnable;
-    }
-
-    public int getShowHeight() {
-        return mShowHeight;
-    }
-
-    public int getTotalLength() {
-        return mTotalLength;
-    }
-
-    public void setDuration(int duration) {
-        mDuration = duration;
-    }
-
-    public int getDuration() {
-        if (mAnimatorAdapter != null) return mDuration;
-        return 0;
-    }
-
-    public void setNumBottomShow(int numBottomShow) {
-        mNumBottomShow = numBottomShow;
-    }
-
-    public int getNumBottomShow() {
-        return mNumBottomShow;
-    }
-
-    public ScrollDelegate getScrollDelegate() {
-        return mScrollDelegate;
-    }
-
-    public ItemExpendListener getItemExpendListener() {
-        return mItemExpendListener;
-    }
-
-    public void setItemExpendListener(ItemExpendListener itemExpendListener) {
-        mItemExpendListener = itemExpendListener;
-    }
-
-    public interface ItemExpendListener {
-        void onItemExpend(boolean expend);
     }
 }

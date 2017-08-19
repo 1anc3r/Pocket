@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.calculator.model.Calculator;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 /**
  * Created by HuangFangzhi on 2017/6/15.
@@ -24,11 +24,11 @@ public class CalculatorActivity extends BaseActivity {
 
     String expression = "";
     String result = "0";
-    private TextView expView;
-    private TextView resView;
     String l = "";
     int flag = 0;
     float d;
+    private TextView expView;
+    private TextView resView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

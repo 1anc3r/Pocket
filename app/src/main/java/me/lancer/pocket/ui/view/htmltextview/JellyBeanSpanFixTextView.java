@@ -46,28 +46,6 @@ import java.util.List;
  */
 public class JellyBeanSpanFixTextView extends android.support.v7.widget.AppCompatTextView {
 
-    private static class FixingResult {
-        public final boolean fixed;
-        public final List<Object> spansWithSpacesBefore;
-        public final List<Object> spansWithSpacesAfter;
-
-        public static FixingResult fixed(List<Object> spansWithSpacesBefore,
-                                         List<Object> spansWithSpacesAfter) {
-            return new FixingResult(true, spansWithSpacesBefore, spansWithSpacesAfter);
-        }
-
-        public static FixingResult notFixed() {
-            return new FixingResult(false, null, null);
-        }
-
-        private FixingResult(boolean fixed, List<Object> spansWithSpacesBefore,
-                             List<Object> spansWithSpacesAfter) {
-            this.fixed = fixed;
-            this.spansWithSpacesBefore = spansWithSpacesBefore;
-            this.spansWithSpacesAfter = spansWithSpacesAfter;
-        }
-    }
-
     public JellyBeanSpanFixTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
@@ -209,6 +187,28 @@ public class JellyBeanSpanFixTextView extends android.support.v7.widget.AppCompa
         }
         String fallbackText = getText().toString();
         setTextAndMeasure(fallbackText, widthMeasureSpec, heightMeasureSpec);
+    }
+
+    private static class FixingResult {
+        public final boolean fixed;
+        public final List<Object> spansWithSpacesBefore;
+        public final List<Object> spansWithSpacesAfter;
+
+        private FixingResult(boolean fixed, List<Object> spansWithSpacesBefore,
+                             List<Object> spansWithSpacesAfter) {
+            this.fixed = fixed;
+            this.spansWithSpacesBefore = spansWithSpacesBefore;
+            this.spansWithSpacesAfter = spansWithSpacesAfter;
+        }
+
+        public static FixingResult fixed(List<Object> spansWithSpacesBefore,
+                                         List<Object> spansWithSpacesAfter) {
+            return new FixingResult(true, spansWithSpacesBefore, spansWithSpacesAfter);
+        }
+
+        public static FixingResult notFixed() {
+            return new FixingResult(false, null, null);
+        }
     }
 
 }

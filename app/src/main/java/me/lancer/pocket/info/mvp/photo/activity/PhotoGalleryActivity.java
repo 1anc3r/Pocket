@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.page.fragment.PagerFragment;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class PhotoGalleryActivity extends BaseActivity {
 

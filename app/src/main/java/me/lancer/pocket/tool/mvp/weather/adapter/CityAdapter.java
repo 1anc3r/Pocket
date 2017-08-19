@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.weather.FutureBean;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
@@ -51,6 +50,14 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
         this.mItemLongClickListener = listener;
     }
 
+    public interface MyItemClickListener {
+        public void onItemClick(View view, int postion);
+    }
+
+    public interface MyItemLongClickListener {
+        public void onItemLongClick(View view, int postion);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public TextView tvStr;
@@ -80,13 +87,5 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
             }
             return true;
         }
-    }
-
-    public interface MyItemClickListener {
-        public void onItemClick(View view, int postion);
-    }
-
-    public interface MyItemLongClickListener {
-        public void onItemLongClick(View view, int postion);
     }
 }

@@ -49,10 +49,10 @@ public class NovelTxtAdapter extends RecyclerView.Adapter<NovelTxtAdapter.ViewHo
             NovelBean bean = list.get(position);
             if (getItemViewType(position) == TYPE_CONTENT) {
                 viewHolder.tvTitle.setText(bean.getTitle());
-                if (list.get(position).getCover()!=null) {
+                if (list.get(position).getCover() != null) {
                     ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
                     Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivImg);
-                }else{
+                } else {
                     viewHolder.ivImg.setVisibility(View.GONE);
                     viewHolder.tvTitle.setGravity(Gravity.CENTER);
                 }
@@ -66,9 +66,9 @@ public class NovelTxtAdapter extends RecyclerView.Adapter<NovelTxtAdapter.ViewHo
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(bean.getTitle());
-                if (bean.getTitle().equals("男生")){
+                if (bean.getTitle().equals("男生")) {
                     viewHolder.ivImg.setImageResource(R.mipmap.ic_male);
-                } else if (bean.getTitle().equals("女生")){
+                } else if (bean.getTitle().equals("女生")) {
                     viewHolder.ivImg.setImageResource(R.mipmap.ic_female);
                 }
             }

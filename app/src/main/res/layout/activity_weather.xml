@@ -129,8 +129,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="16dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -171,8 +171,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -208,8 +208,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -245,8 +245,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -282,8 +282,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -319,8 +319,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="16dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 

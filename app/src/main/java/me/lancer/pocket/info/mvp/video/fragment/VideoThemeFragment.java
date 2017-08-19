@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.video.IVideoView;
 import me.lancer.pocket.info.mvp.video.VideoBean;
 import me.lancer.pocket.info.mvp.video.VideoPresenter;
 import me.lancer.pocket.info.mvp.video.adapter.VideoAdapter;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.

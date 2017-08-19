@@ -30,12 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.news.INewsView;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.NewsPresenter;
 import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
@@ -54,13 +54,33 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     private NewsAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
     private List<NewsBean> list = new ArrayList<>();
-    
+
     private int id;
     private String title, img, link;
 
     private List<CollectBean> temps = new ArrayList<>();
     private CollectBean temp = new CollectBean();
-
+    View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == fabCollect) {
+                if (temps.size() == 1) {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
+                    CollectUtil.delete(temps.get(0));
+                    temps = CollectUtil.query(title, link);
+                } else {
+                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
+                    temp.setType(0);
+                    temp.setCate(1);
+                    temp.setCover(img);
+                    temp.setTitle(title);
+                    temp.setLink(link);
+                    CollectUtil.add(temp);
+                    temps = CollectUtil.query(title, link);
+                }
+            }
+        }
+    };
     private Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -97,14 +117,12 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
             }
         }
     };
-
     private Runnable loadDetail = new Runnable() {
         @Override
         public void run() {
             presenter.loadDetail(link);
         }
     };
-
     private Runnable loadItem = new Runnable() {
         @Override
         public void run() {
@@ -112,27 +130,17 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         }
     };
 
-    View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (view == fabCollect) {
-                if(temps.size() == 1) {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
-                    CollectUtil.delete(temps.get(0));
-                    temps = CollectUtil.query(title, link);
-                } else {
-                    fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
-                    temp.setType(0);
-                    temp.setCate(1);
-                    temp.setCover(img);
-                    temp.setTitle(title);
-                    temp.setLink(link);
-                    CollectUtil.add(temp);
-                    temps = CollectUtil.query(title, link);
-                }
-            }
-        }
-    };
+    public static void startActivity(Activity activity, int id, String title, String img, String link, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, NewsDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("title", title);
+        intent.putExtra("img", img);
+        intent.putExtra("link", link);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +172,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         fabCollect = (FloatingActionButton) findViewById(R.id.fab_collect);
         fabCollect.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, link);
-        if(temps.size() == 1) {
+        if (temps.size() == 1) {
             fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
             fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
@@ -212,18 +220,6 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
             fabCollect.setVisibility(View.GONE);
             new Thread(loadItem).start();
         }
-    }
-
-    public static void startActivity(Activity activity, int id, String title, String img, String link, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, NewsDetailActivity.class);
-        intent.putExtra("id", id);
-        intent.putExtra("title", title);
-        intent.putExtra("img", img);
-        intent.putExtra("link", link);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

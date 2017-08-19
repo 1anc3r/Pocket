@@ -2,14 +2,9 @@ package me.lancer.pocket.tool.mvp.image.bean;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 public class ImageViewBean extends android.support.v7.widget.AppCompatImageView {
     private OnMeasureListener onMeasureListener;
-
-    public void setOnMeasureListener(OnMeasureListener onMeasureListener) {
-        this.onMeasureListener = onMeasureListener;
-    }
 
     public ImageViewBean(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -17,6 +12,10 @@ public class ImageViewBean extends android.support.v7.widget.AppCompatImageView 
 
     public ImageViewBean(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public void setOnMeasureListener(OnMeasureListener onMeasureListener) {
+        this.onMeasureListener = onMeasureListener;
     }
 
     @Override

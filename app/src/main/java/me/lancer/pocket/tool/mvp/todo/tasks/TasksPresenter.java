@@ -19,14 +19,14 @@ package me.lancer.pocket.tool.mvp.todo.tasks;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.lancer.pocket.tool.mvp.todo.addedittask.AddEditTaskActivity;
 import me.lancer.pocket.tool.mvp.todo.data.Task;
 import me.lancer.pocket.tool.mvp.todo.data.source.TasksDataSource;
 import me.lancer.pocket.tool.mvp.todo.data.source.TasksRepository;
 import me.lancer.pocket.tool.mvp.todo.util.EspressoIdlingResource;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.bumptech.glide.util.Preconditions.checkNotNull;
 
@@ -216,6 +216,11 @@ public class TasksPresenter implements TasksContract.Presenter {
         loadTasks(false, false);
     }
 
+    @Override
+    public TasksFilterType getFiltering() {
+        return mCurrentFiltering;
+    }
+
     /**
      * Sets the current task filtering type.
      *
@@ -226,11 +231,6 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void setFiltering(TasksFilterType requestType) {
         mCurrentFiltering = requestType;
-    }
-
-    @Override
-    public TasksFilterType getFiltering() {
-        return mCurrentFiltering;
     }
 
 }

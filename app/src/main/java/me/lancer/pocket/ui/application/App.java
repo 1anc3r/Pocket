@@ -25,9 +25,8 @@ import me.lancer.pocket.R;
 
 public class App extends LitePalApplication {
 
-    private RequestQueue mRequestQueue;
-
     public static Typeface TypeFace;
+    private RequestQueue mRequestQueue;
     private boolean isPicture, isFirst, isNight, isColorful;
 
     @Override

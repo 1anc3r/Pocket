@@ -26,20 +26,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import me.lancer.pocket.tool.mvp.image.adapter.ImageAdapter;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
-import me.lancer.pocket.tool.mvp.image.bean.ImageBean;
 import me.lancer.pocket.R;
+import me.lancer.pocket.tool.mvp.image.adapter.ImageAdapter;
+import me.lancer.pocket.tool.mvp.image.bean.ImageBean;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class ImageActivity extends BaseActivity implements View.OnClickListener {
 
+    private final static int SCAN_OK = 1;
     private ImageView ivBack;
     private TextView tvShow;
     private GridView mGroupGridView;
     private ProgressDialog mProgressDialog;
-
-    private final static int SCAN_OK = 1;
-
     private ImageAdapter adapter;
     private HashMap<String, List<String>> mGruopMap = new HashMap<>();
     private List<ImageBean> mImageList = new ArrayList<>();

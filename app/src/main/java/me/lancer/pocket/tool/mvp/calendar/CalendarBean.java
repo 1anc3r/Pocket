@@ -16,7 +16,7 @@ public class CalendarBean implements Serializable {
     private String name;
     private String location;
 
-    public CalendarBean(){
+    public CalendarBean() {
 
     }
 

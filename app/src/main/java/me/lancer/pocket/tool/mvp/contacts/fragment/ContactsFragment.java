@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.tool.mvp.contacts.activity.ContactSearchActivity;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 
 /**
  * Created by HuangFangzhi on 2017/6/14.
@@ -106,6 +106,34 @@ public class ContactsFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
+    private void initView() {
+    }
+
+    private void initData() {
+
+    }
+
+    private void initSearchView() {
+        final SearchView searchView = (SearchView) toolbar.getMenu()
+                .findItem(R.id.menu_search).getActionView();
+        searchView.setQueryHint("搜索...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -133,33 +161,5 @@ public class ContactsFragment extends BaseFragment {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-    }
-
-    private void initView() {
-    }
-
-    private void initData() {
-
-    }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
-
-    private void initSearchView() {
-        final SearchView searchView = (SearchView) toolbar.getMenu()
-                .findItem(R.id.menu_search).getActionView();
-        searchView.setQueryHint("搜索...");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
     }
 }

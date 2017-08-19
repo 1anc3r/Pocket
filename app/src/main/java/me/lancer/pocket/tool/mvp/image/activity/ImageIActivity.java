@@ -17,28 +17,35 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.image.adapter.ImageIAdapter;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.ui.application.App;
-import me.lancer.pocket.R;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class ImageIActivity extends BaseActivity implements View.OnClickListener {
 
     App app;
+    Comparator mComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            String str1 = (String) obj1;
+            String str2 = (String) obj2;
+            if (Integer.parseInt(str1) < Integer.parseInt(str2))
+                return -1;
+            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
+                return 0;
+            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
+                return 1;
+            return 0;
+        }
+    };
     private ImageView ivBack;
     private TextView tvShow;
     private GridView mGridView;
     private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnAll;
     private TextView tvDelete, tvCopy, tvMove, tvAll;
-
     private ImageIAdapter adapter;
     private List<String> posList = new ArrayList<>();
-    private List<String> picList = new ArrayList<>();
-    private Boolean isAll = false;
-
-    private SharedPreferences pref;
-
     public Handler iHandler = new Handler() {
 
         @Override
@@ -57,6 +64,50 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
             }
         }
     };
+    private List<String> picList = new ArrayList<>();
+    Runnable deleteFile = new Runnable() {
+
+        @Override
+        public void run() {
+            int count = 0;
+            Collections.sort(posList, mComparator);
+            while (!posList.isEmpty()) {
+                String deletePath = picList.get(Integer.parseInt(posList.get(0)) - count);
+                File deleteFile = new File(deletePath);
+                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
+                    deleteFile.delete();
+                    picList.remove(deletePath);
+                    posList.remove(posList.get(0));
+                    showSnackbar(mGridView, "删除成功!");
+                } else {
+                    showSnackbar(mGridView, "删除失败!");
+                }
+                count++;
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
+    private Boolean isAll = false;
+    Runnable selectAllFile = new Runnable() {
+
+        @Override
+        public void run() {
+            if (!isAll) {
+                posList.clear();
+                for (int i = 0; i < picList.size(); i++) {
+                    posList.add("" + i);
+                }
+                isAll = true;
+                llBottom.setVisibility(View.VISIBLE);
+            } else {
+                posList.clear();
+                isAll = false;
+                llBottom.setVisibility(View.GONE);
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,61 +184,4 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
             startActivity(intent);
         }
     }
-
-    Runnable deleteFile = new Runnable() {
-
-        @Override
-        public void run() {
-            int count = 0;
-            Collections.sort(posList, mComparator);
-            while (!posList.isEmpty()) {
-                String deletePath = picList.get(Integer.parseInt(posList.get(0)) - count);
-                File deleteFile = new File(deletePath);
-                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
-                    deleteFile.delete();
-                    picList.remove(deletePath);
-                    posList.remove(posList.get(0));
-                    showSnackbar(mGridView, "删除成功!");
-                } else {
-                    showSnackbar(mGridView, "删除失败!");
-                }
-                count++;
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable selectAllFile = new Runnable() {
-
-        @Override
-        public void run() {
-            if (!isAll) {
-                posList.clear();
-                for (int i = 0; i < picList.size(); i++) {
-                    posList.add("" + i);
-                }
-                isAll = true;
-                llBottom.setVisibility(View.VISIBLE);
-            } else {
-                posList.clear();
-                isAll = false;
-                llBottom.setVisibility(View.GONE);
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Comparator mComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            String str1 = (String) obj1;
-            String str2 = (String) obj2;
-            if (Integer.parseInt(str1) < Integer.parseInt(str2))
-                return -1;
-            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
-                return 0;
-            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
-                return 1;
-            return 0;
-        }
-    };
 }

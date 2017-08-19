@@ -22,19 +22,18 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import java.io.File;
 import java.util.List;
 
+import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.image.bean.ImageViewBean;
 import me.lancer.pocket.util.NativeImageLoader;
-import me.lancer.pocket.R;
 
 public class ImageIAdapter extends BaseAdapter {
 
+    protected LayoutInflater mInflater;
     private Context context;
     private List<String> picList;
     private List<String> posList;
     private GridView mGridView;
     private Handler mHandler;
-    protected LayoutInflater mInflater;
-
     private Point mPoint = new Point(0, 0);//用来封装ImageView的宽和高的对象
 
     public ImageIAdapter(Context context, List<String> picList, List<String> posList, GridView mGridView, Handler mHandler) {

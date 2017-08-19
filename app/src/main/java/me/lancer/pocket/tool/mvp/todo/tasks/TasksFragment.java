@@ -39,13 +39,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.todo.addedittask.AddEditTaskActivity;
 import me.lancer.pocket.tool.mvp.todo.data.Task;
 import me.lancer.pocket.tool.mvp.todo.taskdetail.TaskDetailActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.bumptech.glide.util.Preconditions.checkNotNull;
 
@@ -55,19 +55,31 @@ import static com.bumptech.glide.util.Preconditions.checkNotNull;
 public class TasksFragment extends Fragment implements TasksContract.View {
 
     private TasksContract.Presenter mPresenter;
+    /**
+     * Listener for clicks on tasks in the ListView.
+     */
+    TaskItelistener mItelistener = new TaskItelistener() {
+        @Override
+        public void onTaskClick(Task clickedTask) {
+            mPresenter.openTaskDetails(clickedTask);
+        }
 
+        @Override
+        public void onCompleteTaskClick(Task completedTask) {
+            mPresenter.completeTask(completedTask);
+        }
+
+        @Override
+        public void onActivateTaskClick(Task activatedTask) {
+            mPresenter.activateTask(activatedTask);
+        }
+    };
     private TasksAdapter listAdapter;
-
     private View mNoTasksView;
-
     private ImageView mNoTaskIcon;
-
     private TextView mNoTaskMainView;
-
     private TextView mNoTaskAddView;
-
     private LinearLayout mTasksView;
-
     private TextView mFilteringLabelView;
 
     public TasksFragment() {
@@ -206,26 +218,6 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         popup.show();
     }
 
-    /**
-     * Listener for clicks on tasks in the ListView.
-     */
-    TaskItelistener mItelistener = new TaskItelistener() {
-        @Override
-        public void onTaskClick(Task clickedTask) {
-            mPresenter.openTaskDetails(clickedTask);
-        }
-
-        @Override
-        public void onCompleteTaskClick(Task completedTask) {
-            mPresenter.completeTask(completedTask);
-        }
-
-        @Override
-        public void onActivateTaskClick(Task activatedTask) {
-            mPresenter.activateTask(activatedTask);
-        }
-    };
-
     @Override
     public void setLoadingIndicator(final boolean active) {
 
@@ -352,6 +344,15 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         return isAdded();
     }
 
+    public interface TaskItelistener {
+
+        void onTaskClick(Task clickedTask);
+
+        void onCompleteTaskClick(Task completedTask);
+
+        void onActivateTaskClick(Task activatedTask);
+    }
+
     private static class TasksAdapter extends BaseAdapter {
 
         private List<Task> mTasks;
@@ -431,15 +432,6 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
             return rowView;
         }
-    }
-
-    public interface TaskItelistener {
-
-        void onTaskClick(Task clickedTask);
-
-        void onCompleteTaskClick(Task completedTask);
-
-        void onActivateTaskClick(Task activatedTask);
     }
 
 }

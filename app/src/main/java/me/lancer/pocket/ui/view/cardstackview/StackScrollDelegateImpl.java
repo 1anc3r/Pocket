@@ -12,6 +12,16 @@ public class StackScrollDelegateImpl implements me.lancer.pocket.ui.view.cardsta
         mCardStackView = cardStackView;
     }
 
+    private static int clamp(int n, int my, int child) {
+        if (my >= child || n < 0) {
+            return 0;
+        }
+        if ((my + n) > child) {
+            return child - my;
+        }
+        return n;
+    }
+
     private void updateChildPos() {
         for (int i = 0; i < mCardStackView.getChildCount(); i++) {
             View view = mCardStackView.getChildAt(i);
@@ -34,14 +44,9 @@ public class StackScrollDelegateImpl implements me.lancer.pocket.ui.view.cardsta
         updateChildPos();
     }
 
-    private static int clamp(int n, int my, int child) {
-        if (my >= child || n < 0) {
-            return 0;
-        }
-        if ((my + n) > child) {
-            return child - my;
-        }
-        return n;
+    @Override
+    public int getViewScrollY() {
+        return mScrollY;
     }
 
     @Override
@@ -50,17 +55,12 @@ public class StackScrollDelegateImpl implements me.lancer.pocket.ui.view.cardsta
     }
 
     @Override
-    public void setViewScrollX(int x) {
-        scrollViewTo(x, mScrollY);
-    }
-
-    @Override
-    public int getViewScrollY() {
-        return mScrollY;
-    }
-
-    @Override
     public int getViewScrollX() {
         return mScrollX;
+    }
+
+    @Override
+    public void setViewScrollX(int x) {
+        scrollViewTo(x, mScrollY);
     }
 }

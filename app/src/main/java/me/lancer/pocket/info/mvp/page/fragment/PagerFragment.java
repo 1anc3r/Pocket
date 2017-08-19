@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -20,11 +19,11 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.PhotoPresenter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 
@@ -55,45 +54,11 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
             presenter.download(link, (new Date().toString()));
         }
     };
-
-    public static PagerFragment newInstance(String link) {
-        Bundle args = new Bundle();
-        args.putString("link", link);
-        PagerFragment fragment = new PagerFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        link = getArguments().getString("link");
-        return inflater.inflate(R.layout.fragment_page, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        imageView = (ImageView) view.findViewById(R.id.imageView);
-        btnFavorite = (Button) view.findViewById(R.id.btn_favorite);
-        temps = CollectUtil.query(link, link);
-        if(temps.size() == 1) {
-            btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
-        } else {
-            btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_border_white_24dp);
-        }
-        btnShare = (Button) view.findViewById(R.id.btn_share);
-        btnDownload = (Button) view.findViewById(R.id.btn_download);
-        btnFavorite.setOnClickListener(vOnClickListener);
-        btnShare.setOnClickListener(vOnClickListener);
-        btnDownload.setOnClickListener(vOnClickListener);
-    }
-
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (view == btnFavorite) {
-                if(temps.size() == 1) {
+                if (temps.size() == 1) {
                     btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(link, link);
@@ -118,6 +83,39 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
             }
         }
     };
+
+    public static PagerFragment newInstance(String link) {
+        Bundle args = new Bundle();
+        args.putString("link", link);
+        PagerFragment fragment = new PagerFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        link = getArguments().getString("link");
+        return inflater.inflate(R.layout.fragment_page, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        imageView = (ImageView) view.findViewById(R.id.imageView);
+        btnFavorite = (Button) view.findViewById(R.id.btn_favorite);
+        temps = CollectUtil.query(link, link);
+        if (temps.size() == 1) {
+            btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
+        } else {
+            btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_border_white_24dp);
+        }
+        btnShare = (Button) view.findViewById(R.id.btn_share);
+        btnDownload = (Button) view.findViewById(R.id.btn_download);
+        btnFavorite.setOnClickListener(vOnClickListener);
+        btnShare.setOnClickListener(vOnClickListener);
+        btnDownload.setOnClickListener(vOnClickListener);
+    }
 
     @Override
     public void onResume() {

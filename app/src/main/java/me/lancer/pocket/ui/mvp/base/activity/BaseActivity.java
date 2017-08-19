@@ -26,8 +26,8 @@ import me.lancer.pocket.R;
 
 public class BaseActivity extends CActivity {
 
-    private Tencent mTencent;
     public Activity mActivity;
+    private Tencent mTencent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,11 @@ public class BaseActivity extends CActivity {
         mTencent.shareToQQ(BaseActivity.this, params, new BaseActivity.BaseUiListener());
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mTencent.onActivityResult(requestCode, resultCode, data);
+    }
+
     private class BaseUiListener implements IUiListener {
 
         @Override
@@ -102,10 +107,5 @@ public class BaseActivity extends CActivity {
         public void onCancel() {
 
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mTencent.onActivityResult(requestCode, resultCode, data);
     }
 }

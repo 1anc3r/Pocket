@@ -1,13 +1,9 @@
 package me.lancer.pocket.ui.mvp.collect;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,6 +109,14 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
         return list == null ? 0 : list.size();
     }
 
+    public interface MyItemClickListener {
+        public void onItemClick(View view, int position);
+    }
+
+    public interface MyItemLongClickListener {
+        public void onItemLongClick(View view, int position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public CardView cardView;
@@ -150,13 +154,5 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             }
             return true;
         }
-    }
-
-    public interface MyItemClickListener {
-        public void onItemClick(View view, int position);
-    }
-
-    public interface MyItemLongClickListener {
-        public void onItemLongClick(View view, int position);
     }
 }

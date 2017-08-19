@@ -51,7 +51,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         @Override
         public void onClick(View view) {
             if (view == fabCollect) {
-                if(temps.size() == 1) {
+                if (temps.size() == 1) {
                     fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(title, link);
@@ -99,6 +99,18 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         }
     };
 
+    public static void startActivity(Activity activity, String link, String cover, String title, String category, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, ChapterActivity.class);
+        intent.putExtra("link", link);
+        intent.putExtra("title", title);
+        intent.putExtra("cover", cover);
+        intent.putExtra("category", category);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, "transitionPic");
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +133,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         fabCollect = (FloatingActionButton) findViewById(R.id.fab_collect);
         fabCollect.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, link);
-        if(temps.size() == 1) {
+        if (temps.size() == 1) {
             fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
             fabCollect.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
@@ -144,18 +156,6 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         adapter = new ChapterAdapter(this, list);
         rvList.setAdapter(adapter);
         new Thread(loadTop).start();
-    }
-
-    public static void startActivity(Activity activity, String link, String cover, String title, String category, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, ChapterActivity.class);
-        intent.putExtra("link", link);
-        intent.putExtra("title", title);
-        intent.putExtra("cover", cover);
-        intent.putExtra("category", category);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, "transitionPic");
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

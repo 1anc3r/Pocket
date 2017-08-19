@@ -25,15 +25,26 @@ import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 public class AppSearchActivity extends PresenterActivity<AppPresenter> implements IAppView {
 
     Toolbar toolbar;
+    Comparator AppComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            AppBean app1 = (AppBean) obj1;
+            AppBean app2 = (AppBean) obj2;
+            if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) < 0)
+                return -1;
+            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) == 0)
+                return 0;
+            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) > 0)
+                return 1;
+            return 0;
+        }
+    };
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
     private AppGridAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
     private List<AppBean> list = new ArrayList<>();
-
     private int pager = 1, last = 0, load = 0;
     private String query;
-
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -77,7 +88,6 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
             }
         }
     };
-
     private Runnable loadSearch = new Runnable() {
         @Override
         public void run() {
@@ -152,20 +162,6 @@ public class AppSearchActivity extends PresenterActivity<AppPresenter> implement
         }
         return max;
     }
-
-    Comparator AppComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            AppBean app1 = (AppBean) obj1;
-            AppBean app2 = (AppBean) obj2;
-            if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) < 0)
-                return -1;
-            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) == 0)
-                return 0;
-            else if (app1.getApkName().compareToIgnoreCase(app2.getApkName()) > 0)
-                return 1;
-            return 0;
-        }
-    };
 
     @Override
     protected void onDestroy() {

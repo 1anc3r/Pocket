@@ -18,11 +18,11 @@ package me.lancer.pocket.tool.mvp.todo.tasks;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import me.lancer.pocket.tool.mvp.todo.BasePresenter;
 import me.lancer.pocket.tool.mvp.todo.BaseView;
 import me.lancer.pocket.tool.mvp.todo.data.Task;
-
-import java.util.List;
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -82,8 +82,8 @@ public interface TasksContract {
 
         void clearCompletedTasks();
 
-        void setFiltering(TasksFilterType requestType);
-
         TasksFilterType getFiltering();
+
+        void setFiltering(TasksFilterType requestType);
     }
 }

@@ -18,12 +18,12 @@ package me.lancer.pocket.tool.mvp.todo.statistics;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import me.lancer.pocket.tool.mvp.todo.data.Task;
 import me.lancer.pocket.tool.mvp.todo.data.source.TasksDataSource;
 import me.lancer.pocket.tool.mvp.todo.data.source.TasksRepository;
 import me.lancer.pocket.tool.mvp.todo.util.EspressoIdlingResource;
-
-import java.util.List;
 
 import static com.bumptech.glide.util.Preconditions.checkNotNull;
 

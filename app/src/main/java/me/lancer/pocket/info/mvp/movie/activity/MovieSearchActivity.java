@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.movie.IMovieView;
 import me.lancer.pocket.info.mvp.movie.MovieBean;
 import me.lancer.pocket.info.mvp.movie.MoviePresenter;
 import me.lancer.pocket.info.mvp.movie.adapter.MovieAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class MovieSearchActivity extends PresenterActivity<MoviePresenter> implements IMovieView {
 
@@ -146,13 +146,13 @@ public class MovieSearchActivity extends PresenterActivity<MoviePresenter> imple
         builder.setTitle("电影");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 影评 : 豆瓣电影的最受欢迎影评\n" +
-                "\t\t\t\t * 影榜 : 爬取呈现豆瓣电影TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
-                "\t\t\t\t *        搜索你想了解的电影信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣电影\n" +
-                "\t\t\t\t * （movie.douban.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 影评 : 豆瓣电影的最受欢迎影评\n" +
+                        "\t\t\t\t * 影榜 : 爬取呈现豆瓣电影TOP250\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                        "\t\t\t\t *        搜索你想了解的电影信息\n" +
+                        "\t\t\t\t * ——数据来源 : 豆瓣电影\n" +
+                        "\t\t\t\t * （movie.douban.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
 

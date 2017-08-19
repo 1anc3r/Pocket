@@ -17,10 +17,10 @@
 
         <CheckBox
             android:id="@+id/cb_group"
-            android:buttonTint="?attr/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:buttonTint="?attr/colorPrimaryDark"
             android:visibility="gone" />
     </FrameLayout>
 

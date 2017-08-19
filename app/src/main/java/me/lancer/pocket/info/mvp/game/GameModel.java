@@ -1,7 +1,6 @@
 package me.lancer.pocket.info.mvp.game;
 
 import android.os.Environment;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;

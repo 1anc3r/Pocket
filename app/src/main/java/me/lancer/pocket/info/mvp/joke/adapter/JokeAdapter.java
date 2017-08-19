@@ -60,7 +60,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
                     public void onClick(View view) {
 //                        PhotoDetailNoBarActivity.startActivity((Activity) context, list.get(position).getImg(), list.get(position).getText(), viewHolder.ivImg);
                         ArrayList<String> gallery = new ArrayList<String>();
-                        for (JokeBean bean : list){
+                        for (JokeBean bean : list) {
                             gallery.add(bean.getImg());
                         }
                         Intent intent = new Intent();

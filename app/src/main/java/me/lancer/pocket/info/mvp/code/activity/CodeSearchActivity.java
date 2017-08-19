@@ -146,14 +146,14 @@ public class CodeSearchActivity extends PresenterActivity<CodePresenter> impleme
         builder.setTitle("编程");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 个人 : GitHub上Star最多的个人\n" +
-                "\t\t\t\t * 组织 : GitHub上Star最多的组织\n" +
-                "\t\t\t\t * 项目 : GitHub上Star最多的项目\n" +
-                "\t\t\t\t * 趋势 : GitHub上今日最热的项目\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
-                "\t\t\t\t *        搜索你想浏览的项目\n" +
-                "\t\t\t\t * ——数据来源 : GithubRanking\n\t\t\t\t（github-ranking.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 个人 : GitHub上Star最多的个人\n" +
+                        "\t\t\t\t * 组织 : GitHub上Star最多的组织\n" +
+                        "\t\t\t\t * 项目 : GitHub上Star最多的项目\n" +
+                        "\t\t\t\t * 趋势 : GitHub上今日最热的项目\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                        "\t\t\t\t *        搜索你想浏览的项目\n" +
+                        "\t\t\t\t * ——数据来源 : GithubRanking\n\t\t\t\t（github-ranking.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
 

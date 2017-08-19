@@ -3,10 +3,8 @@ package me.lancer.pocket.ui.mvp.collect;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -73,7 +71,7 @@ public class CollectModel {
                 bean.setTitle(cursor.getString(3));
                 bean.setCover(cursor.getString(4));
                 bean.setLink(cursor.getString(5));
-                if(bean.getTitle().equals(title)) {
+                if (bean.getTitle().equals(title)) {
                     list.add(bean);
                     break;
                 }

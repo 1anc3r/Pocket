@@ -18,8 +18,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_filter"
-        android:title="@string/menu_filter"
         android:icon="@drawable/ic_filter_list"
+        android:title="@string/menu_filter"
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_clear"

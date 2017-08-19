@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import org.polaric.colorful.CActivity;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.tool.mvp.weather.activity.WeatherActivity;
 
 public class AboutActivity extends CActivity {
 

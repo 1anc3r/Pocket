@@ -9,6 +9,7 @@ import java.util.List;
 
 public class NovelBean implements Serializable {
 
+    public List<Chapters> chapters;
     private String id;
     private String author;
     private String title;
@@ -21,37 +22,6 @@ public class NovelBean implements Serializable {
     private String cover;
     private String link;
     private int type;
-
-    public List<Chapters> chapters;
-
-    public static class Chapters implements Serializable {
-        public String title;
-        public String link;
-
-        public Chapters() {
-        }
-
-        public Chapters(String title, String link) {
-            this.title = title;
-            this.link = link;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public void setLink(String link) {
-            this.link = link;
-        }
-    }
 
     public NovelBean() {
 
@@ -156,5 +126,34 @@ public class NovelBean implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public static class Chapters implements Serializable {
+        public String title;
+        public String link;
+
+        public Chapters() {
+        }
+
+        public Chapters(String title, String link) {
+            this.title = title;
+            this.link = link;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public void setLink(String link) {
+            this.link = link;
+        }
     }
 }

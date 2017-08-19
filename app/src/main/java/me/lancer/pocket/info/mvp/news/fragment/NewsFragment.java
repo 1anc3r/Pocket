@@ -99,35 +99,6 @@ public class NewsFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -155,19 +126,15 @@ public class NewsFragment extends BaseFragment {
         builder.setTitle("趣闻");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 每日 : 知乎日报的每日信息\n" +
-                "\t\t\t\t * 热门 : 知乎日报的热门信息\n" +
-                "\t\t\t\t * 分类 : 包括动漫、游戏、财经、" +
-                "\t\t\t\t *        电影、音乐、互联网安全等日报\n" +
-                "\t\t\t\t * ——数据来源 : 知乎日报\n" +
-                "\t\t\t\t * （news-at.zhihu.com/api）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 每日 : 知乎日报的每日信息\n" +
+                        "\t\t\t\t * 热门 : 知乎日报的热门信息\n" +
+                        "\t\t\t\t * 分类 : 包括动漫、游戏、财经、" +
+                        "\t\t\t\t *        电影、音乐、互联网安全等日报\n" +
+                        "\t\t\t\t * ——数据来源 : 知乎日报\n" +
+                        "\t\t\t\t * （news-at.zhihu.com/api）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -184,5 +151,38 @@ public class NewsFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

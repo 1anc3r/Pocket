@@ -106,35 +106,6 @@ public class GameFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -162,17 +133,13 @@ public class GameFragment extends BaseFragment {
         builder.setTitle("游戏");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 精选 : 精选各大平台热门游戏\n" +
-                "\t\t\t\t * 优惠、热销、新品、即将推出\n" +
-                "\t\t\t\t * ——数据来源 : Steam\n" +
-                "\t\t\t\t * （store.steampowered.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 精选 : 精选各大平台热门游戏\n" +
+                        "\t\t\t\t * 优惠、热销、新品、即将推出\n" +
+                        "\t\t\t\t * ——数据来源 : Steam\n" +
+                        "\t\t\t\t * （store.steampowered.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -189,5 +156,38 @@ public class GameFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
 import me.lancer.pocket.info.mvp.novel.adapter.NovelImgAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
@@ -86,6 +86,17 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
             presenter.loadSearch(value1);
         }
     };
+
+    public static void startActivity(Activity activity, int type, String value1, String value2, int value3, int value4) {
+        Intent intent = new Intent();
+        intent.setClass(activity, NovelListActivity.class);
+        intent.putExtra("type", type);
+        intent.putExtra("value1", value1);
+        intent.putExtra("value2", value2);
+        intent.putExtra("value3", value3);
+        intent.putExtra("value4", value4);
+        ActivityCompat.startActivity(activity, intent, new Bundle());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,12 +199,12 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
         builder.setTitle("小说");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 排行 : 小说排行榜\n" +
-                "\t\t\t\t * 分类 : 小说各分区\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
-                "\t\t\t\t * ——数据来源 : 追书神器\n" +
-                "\t\t\t\t * （www.zhuishushenqi.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 排行 : 小说排行榜\n" +
+                        "\t\t\t\t * 分类 : 小说各分区\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
+                        "\t\t\t\t * ——数据来源 : 追书神器\n" +
+                        "\t\t\t\t * （www.zhuishushenqi.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
 
@@ -209,17 +220,6 @@ public class NovelListActivity extends PresenterActivity<NovelPresenter> impleme
                 new Thread(loadSearch).start();
                 break;
         }
-    }
-
-    public static void startActivity(Activity activity, int type, String value1, String value2, int value3, int value4) {
-        Intent intent = new Intent();
-        intent.setClass(activity, NovelListActivity.class);
-        intent.putExtra("type", type);
-        intent.putExtra("value1", value1);
-        intent.putExtra("value2", value2);
-        intent.putExtra("value3", value3);
-        intent.putExtra("value4", value4);
-        ActivityCompat.startActivity(activity, intent, new Bundle());
     }
 
     @Override

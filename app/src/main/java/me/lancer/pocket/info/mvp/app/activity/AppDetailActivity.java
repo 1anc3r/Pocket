@@ -96,6 +96,17 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
         }
     };
 
+    public static void startActivity(Activity activity, String id, String title, String img, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, AppDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("title", title);
+        intent.putExtra("img", img);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,17 +158,6 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
             }
         });
         new Thread(loadDetail).start();
-    }
-
-    public static void startActivity(Activity activity, String id, String title, String img, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, AppDetailActivity.class);
-        intent.putExtra("id", id);
-        intent.putExtra("title", title);
-        intent.putExtra("img", img);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     private File downFile(String httpUrl) {

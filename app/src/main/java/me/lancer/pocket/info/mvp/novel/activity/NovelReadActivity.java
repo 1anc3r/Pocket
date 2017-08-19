@@ -32,12 +32,12 @@ import org.polaric.colorful.Colorful;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
 import me.lancer.pocket.ui.application.App;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.
@@ -45,9 +45,8 @@ import me.lancer.pocket.ui.application.Params;
 
 public class NovelReadActivity extends PresenterActivity<NovelPresenter> implements INovelView {
 
-    private App app;
     Toolbar toolbar;
-
+    private App app;
     private LoadToast loadToast;
     private TextView tvContent, tvPrev, tvNext;
 
@@ -84,6 +83,30 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
             presenter.loadContent(value2);
         }
     };
+    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent();
+            if (view == tvPrev) {
+                setResult(position - 1, intent);
+            } else if (view == tvNext) {
+                setResult(position + 1, intent);
+            }
+            intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
+            finish();
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
+    };
+
+    public static void startActivity(Activity activity, int position, String value1, String value2) {
+        Intent intent = new Intent();
+        intent.setClass(activity, NovelReadActivity.class);
+        intent.putExtra("position", position);
+        intent.putExtra("value1", value1);
+        intent.putExtra("value2", value2);
+        activity.startActivityForResult(intent, position, new Bundle());
+        activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,21 +146,6 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         value1 = getIntent().getStringExtra("value1");
         value2 = getIntent().getStringExtra("value2");
     }
-
-    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent();
-            if (view == tvPrev) {
-                setResult(position - 1, intent);
-            } else if (view == tvNext) {
-                setResult(position + 1, intent);
-            }
-            intent.setClass(NovelReadActivity.this, NovelDetailActivity.class);
-            finish();
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -187,12 +195,12 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         builder.setTitle("小说");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 排行 : 小说排行榜\n" +
-                "\t\t\t\t * 分类 : 小说各分区\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
-                "\t\t\t\t * ——数据来源 : 追书神器\n" +
-                "\t\t\t\t * （www.zhuishushenqi.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 排行 : 小说排行榜\n" +
+                        "\t\t\t\t * 分类 : 小说各分区\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的小说\n" +
+                        "\t\t\t\t * ——数据来源 : 追书神器\n" +
+                        "\t\t\t\t * （www.zhuishushenqi.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
 
@@ -293,16 +301,6 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         });
         dialog.show();
         dialog.getWindow().setContentView(layout);
-    }
-
-    public static void startActivity(Activity activity, int position, String value1, String value2) {
-        Intent intent = new Intent();
-        intent.setClass(activity, NovelReadActivity.class);
-        intent.putExtra("position", position);
-        intent.putExtra("value1", value1);
-        intent.putExtra("value2", value2);
-        activity.startActivityForResult(intent, position, new Bundle());
-        activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     private void setScreenMode(int value) {

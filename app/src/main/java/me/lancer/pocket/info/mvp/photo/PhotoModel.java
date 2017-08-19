@@ -1,7 +1,6 @@
 package me.lancer.pocket.info.mvp.photo;
 
 import android.os.Environment;
-import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;

@@ -23,9 +23,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.ui.fragment.CollectFragment;
 import me.lancer.pocket.ui.fragment.MainFragment;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -83,42 +83,6 @@ public class MainActivity extends BaseActivity {
         View view = navigationView.inflateHeaderView(R.layout.drawer_header);
 //        LinearLayout llDrawer = (LinearLayout) view.findViewById(R.id.ll_drawer);
         navigationView.setNavigationItemSelectedListener(new NavigationItemSelected());
-    }
-
-    class NavigationItemSelected implements NavigationView.OnNavigationItemSelectedListener {
-        @Override
-        public boolean onNavigationItemSelected(MenuItem menuItem) {
-            Bundle bundle = new Bundle();
-            drawerLayout.closeDrawers();
-            switch (menuItem.getItemId()) {
-                case R.id.navigation_item_1:
-                    currentIndex = 0;
-                    menuItem.setChecked(true);
-                    currentFragment = new MainFragment();
-                    bundle.putInt(getString(R.string.index), currentIndex);
-                    currentFragment.setArguments(bundle);
-                    switchContent(currentFragment);
-                    return true;
-                case R.id.navigation_item_2:
-                    currentIndex = 0;
-                    menuItem.setChecked(true);
-                    currentFragment = new CollectFragment();
-                    bundle.putInt(getString(R.string.index), currentIndex);
-                    currentFragment.setArguments(bundle);
-                    switchContent(currentFragment);
-                    return true;
-                case R.id.navigation_setting:
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(new Intent().setClass(MainActivity.this, SettingActivity.class));
-                        }
-                    }, 180);
-                    return true;
-                default:
-                    return true;
-            }
-        }
     }
 
     public void switchContent(Fragment fragment) {
@@ -181,6 +145,42 @@ public class MainActivity extends BaseActivity {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    class NavigationItemSelected implements NavigationView.OnNavigationItemSelectedListener {
+        @Override
+        public boolean onNavigationItemSelected(MenuItem menuItem) {
+            Bundle bundle = new Bundle();
+            drawerLayout.closeDrawers();
+            switch (menuItem.getItemId()) {
+                case R.id.navigation_item_1:
+                    currentIndex = 0;
+                    menuItem.setChecked(true);
+                    currentFragment = new MainFragment();
+                    bundle.putInt(getString(R.string.index), currentIndex);
+                    currentFragment.setArguments(bundle);
+                    switchContent(currentFragment);
+                    return true;
+                case R.id.navigation_item_2:
+                    currentIndex = 0;
+                    menuItem.setChecked(true);
+                    currentFragment = new CollectFragment();
+                    bundle.putInt(getString(R.string.index), currentIndex);
+                    currentFragment.setArguments(bundle);
+                    switchContent(currentFragment);
+                    return true;
+                case R.id.navigation_setting:
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent().setClass(MainActivity.this, SettingActivity.class));
+                        }
+                    }, 180);
+                    return true;
+                default:
+                    return true;
             }
         }
     }

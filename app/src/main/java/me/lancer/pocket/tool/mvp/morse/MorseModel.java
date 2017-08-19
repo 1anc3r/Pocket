@@ -29,7 +29,7 @@ public class MorseModel {
         }
     }
 
-    private Map<String,String> getMorseFromContent(String content) {
+    private Map<String, String> getMorseFromContent(String content) {
         try {
             Map<String, String> map = new HashMap<>();
             JSONArray morseArr = new JSONArray(content);

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.book.activity.BookSearchActivity;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 
 public class BookFragment extends BaseFragment {
 
@@ -87,35 +87,6 @@ public class BookFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -157,19 +128,15 @@ public class BookFragment extends BaseFragment {
         builder.setTitle("图书");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 书评 : 豆瓣读书的最受欢迎书评\n" +
-                "\t\t\t\t * 书榜 : 爬取呈现豆瓣图书TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
-                "\t\t\t\t *        搜索你想了解的图书信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣读书\n" +
-                "\t\t\t\t * （book.douban.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 书评 : 豆瓣读书的最受欢迎书评\n" +
+                        "\t\t\t\t * 书榜 : 爬取呈现豆瓣图书TOP250\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                        "\t\t\t\t *        搜索你想了解的图书信息\n" +
+                        "\t\t\t\t * ——数据来源 : 豆瓣读书\n" +
+                        "\t\t\t\t * （book.douban.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -190,5 +157,38 @@ public class BookFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

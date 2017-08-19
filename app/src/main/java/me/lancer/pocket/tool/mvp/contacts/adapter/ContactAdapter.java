@@ -1,7 +1,5 @@
 package me.lancer.pocket.tool.mvp.contacts.adapter;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
 
 import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.contacts.activity.ContactActivity;
@@ -26,16 +26,14 @@ import me.lancer.pocket.ui.view.CircleImageView;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
+    private static final int TYPE_CONTENtoolbar = -1;
+    private static final int TYPE_CONTENT_SMALL = 0;
+    private static final int TYPE_TITLE = 1;
     private int[] colors = {R.color.red, R.color.pink, R.color.purple
             , R.color.deeppurple, R.color.indigo, R.color.blue
             , R.color.lightblue, R.color.cyan, R.color.teal
             , R.color.green, R.color.lightgreen, R.color.lime
             , R.color.yellow, R.color.amber, R.color.orange, R.color.deeporange};
-
-    private static final int TYPE_CONTENtoolbar = -1;
-    private static final int TYPE_CONTENT_SMALL = 0;
-    private static final int TYPE_TITLE = 1;
-
     private List<ContactBean> list;
     private Context context;
     private int type;

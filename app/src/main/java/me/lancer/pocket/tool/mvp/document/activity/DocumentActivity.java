@@ -36,38 +36,134 @@ import java.util.Date;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.document.adapter.DocumentAdapter;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.file.bean.FileBean;
 import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.util.FileTypeRefereeUtil;
 
 public class DocumentActivity extends BaseActivity implements View.OnClickListener {
 
+    private final static int SCAN_OK = 1;
     App app;
-
+    Comparator PosComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            String str1 = (String) obj1;
+            String str2 = (String) obj2;
+            if (Integer.parseInt(str1) < Integer.parseInt(str2))
+                return -1;
+            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
+                return 0;
+            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
+                return 1;
+            return 0;
+        }
+    };
+    Comparator NameComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            FileBean file1 = (FileBean) obj1;
+            FileBean file2 = (FileBean) obj2;
+            if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) < 0)
+                return -1;
+            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) == 0)
+                return 0;
+            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) > 0)
+                return 1;
+            return 0;
+        }
+    };
     private TextView tvShow;
     private ListView lvDoc;
     private EditText etSearch;
     private ImageView ivBack, ivSearch;
     private LinearLayout llProgress, llBottom, btnDelete, btnCopy, btnMove, btnAll;
     private TextView tvDelete, tvCopy, tvMove, tvAll;
-
-    private final static int SCAN_OK = 1;
-
     private DocumentAdapter adapter;
     private List<FileBean> docList = new ArrayList<>();
     private List<FileBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
+    Runnable deleteFile = new Runnable() {
+
+        @Override
+        public void run() {
+            Collections.sort(posList, PosComparator);
+            for (int i = 0; i < posList.size(); i++) {
+                String deletePath = docList.get(Integer.parseInt(posList.get(i))).getPath();
+                File deleteFile = new File(deletePath);
+                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
+                    deleteFile.delete();
+                    showSnackbar(lvDoc, getString(R.string.delete_success));
+                } else {
+                    showSnackbar(lvDoc, getString(R.string.delete_fail));
+                }
+            }
+            int count = 0;
+            for (int i = 0; i < posList.size(); i++) {
+                docList.remove(docList.get(Integer.parseInt(posList.get(i)) - count));
+                count++;
+            }
+            posList.clear();
+            lvDoc.requestLayout();
+            adapter.notifyDataSetChanged();
+        }
+    };
     private List<String> searchList = new ArrayList<>();
     private String searchStr = new String();
+    Runnable changed = new Runnable() {
+
+        @Override
+        public void run() {
+            searchStr = etSearch.getText().toString();
+            searchList.clear();
+            searchList.add(searchStr);
+            docList.clear();
+            getContactSub(docList, searchStr);
+            Collections.sort(docList, NameComparator);
+            adapter.notifyDataSetChanged();
+        }
+    };
     private Handler handler = new Handler();
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Boolean isAll = false;
+    Runnable selectAllFile = new Runnable() {
 
+        @Override
+        public void run() {
+            if (isAll == false) {
+                posList.clear();
+                for (int i = 0; i < docList.size(); i++) {
+                    posList.add("" + i);
+                }
+                isAll = true;
+                llBottom.setVisibility(View.VISIBLE);
+            } else {
+                posList.clear();
+                isAll = false;
+                llBottom.setVisibility(View.GONE);
+            }
+            lvDoc.requestLayout();
+            adapter.notifyDataSetChanged();
+        }
+    };
     private SharedPreferences pref;
+    private Handler mHandler = new Handler() {
 
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (posList.contains(msg.obj)) {
+                posList.remove(msg.obj);
+            } else {
+                posList.add((String) msg.obj);
+                Collections.sort(posList, PosComparator);
+            }
+            if (posList.isEmpty()) {
+                llBottom.setVisibility(View.GONE);
+            } else {
+                llBottom.setVisibility(View.VISIBLE);
+            }
+        }
+    };
     private Handler lHandler = new Handler() {
 
         @Override
@@ -85,24 +181,6 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
             }
         }
 
-    };
-
-    private Handler mHandler = new Handler() {
-
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (posList.contains(msg.obj)) {
-                posList.remove(msg.obj);
-            } else {
-                posList.add((String) msg.obj);
-                Collections.sort(posList, PosComparator);
-            }
-            if (posList.isEmpty()) {
-                llBottom.setVisibility(View.GONE);
-            } else {
-                llBottom.setVisibility(View.VISIBLE);
-            }
-        }
     };
 
     @Override
@@ -315,93 +393,4 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
             }
         }
     }
-
-    Runnable changed = new Runnable() {
-
-        @Override
-        public void run() {
-            searchStr = etSearch.getText().toString();
-            searchList.clear();
-            searchList.add(searchStr);
-            docList.clear();
-            getContactSub(docList, searchStr);
-            Collections.sort(docList, NameComparator);
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable deleteFile = new Runnable() {
-
-        @Override
-        public void run() {
-            Collections.sort(posList, PosComparator);
-            for (int i = 0; i < posList.size(); i++) {
-                String deletePath = docList.get(Integer.parseInt(posList.get(i))).getPath();
-                File deleteFile = new File(deletePath);
-                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
-                    deleteFile.delete();
-                    showSnackbar(lvDoc, getString(R.string.delete_success));
-                } else {
-                    showSnackbar(lvDoc, getString(R.string.delete_fail));
-                }
-            }
-            int count = 0;
-            for (int i = 0; i < posList.size(); i++) {
-                docList.remove(docList.get(Integer.parseInt(posList.get(i)) - count));
-                count++;
-            }
-            posList.clear();
-            lvDoc.requestLayout();
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable selectAllFile = new Runnable() {
-
-        @Override
-        public void run() {
-            if (isAll == false) {
-                posList.clear();
-                for (int i = 0; i < docList.size(); i++) {
-                    posList.add("" + i);
-                }
-                isAll = true;
-                llBottom.setVisibility(View.VISIBLE);
-            } else {
-                posList.clear();
-                isAll = false;
-                llBottom.setVisibility(View.GONE);
-            }
-            lvDoc.requestLayout();
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Comparator PosComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            String str1 = (String) obj1;
-            String str2 = (String) obj2;
-            if (Integer.parseInt(str1) < Integer.parseInt(str2))
-                return -1;
-            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
-                return 0;
-            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
-                return 1;
-            return 0;
-        }
-    };
-
-    Comparator NameComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            FileBean file1 = (FileBean) obj1;
-            FileBean file2 = (FileBean) obj2;
-            if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) < 0)
-                return -1;
-            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) == 0)
-                return 0;
-            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) > 0)
-                return 1;
-            return 0;
-        }
-    };
 }

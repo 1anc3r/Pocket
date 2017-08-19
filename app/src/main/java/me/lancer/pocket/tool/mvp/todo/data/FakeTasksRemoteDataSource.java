@@ -20,23 +20,23 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.core.deps.guava.collect.Lists;
 
-import me.lancer.pocket.tool.mvp.todo.data.source.TasksDataSource;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import me.lancer.pocket.tool.mvp.todo.data.source.TasksDataSource;
 
 /**
  * Implementation of a remote data source with static access to the data for easy testing.
  */
 public class FakeTasksRemoteDataSource implements TasksDataSource {
 
+    private static final Map<String, Task> TASKS_SERVICE_DATA = new LinkedHashMap<>();
     private static FakeTasksRemoteDataSource INSTANCE;
 
-    private static final Map<String, Task> TASKS_SERVICE_DATA = new LinkedHashMap<>();
-
     // Prevent direct instantiation.
-    private FakeTasksRemoteDataSource() {}
+    private FakeTasksRemoteDataSource() {
+    }
 
     public static FakeTasksRemoteDataSource getInstance() {
         if (INSTANCE == null) {

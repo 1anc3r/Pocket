@@ -27,7 +27,9 @@ import java.util.List;
 import me.lancer.pocket.tool.mvp.calendar.CalendarBean;
 import me.lancer.pocket.util.DensityUtil;
 
-import static me.lancer.pocket.R.*;
+import static me.lancer.pocket.R.drawable;
+import static me.lancer.pocket.R.style;
+import static me.lancer.pocket.R.styleable;
 
 /**
  * Created by HuangFangzhi on 2016/12/16.
@@ -35,17 +37,14 @@ import static me.lancer.pocket.R.*;
 
 public class CalendarView extends RelativeLayout {
 
-    private FrameLayout flCalendarContent;
-    private List<View> arrCacheView = new ArrayList<>();
-    private TextView tvMonthNum, tvMonthStr;
-
     private static final int[] Schedule_BG = {drawable.calendar_content_teal, drawable.calendar_content_blue,
             drawable.calendar_content_red, drawable.calendar_content_pink, drawable.calendar_content_yellow,
             drawable.calendar_content_green, drawable.calendar_content_orage};
-
     private static final int TV_MONTH_ID = 11;
     private static final int TV_WEEK_ID = 26;
-
+    private FrameLayout flCalendarContent;
+    private List<View> arrCacheView = new ArrayList<>();
+    private TextView tvMonthNum, tvMonthStr;
     private List<? extends CalendarBean> arrCalendar;
     private String[] CN_DAYS = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
 
@@ -57,6 +56,8 @@ public class CalendarView extends RelativeLayout {
     private int totalTime = 12;
     private int totalDay = 7;
     private String preMonth;
+    private OnCalendarItemClickListener onCalendarItemClickListener;
+    private LinearLayout llMonth;
 
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -76,14 +77,8 @@ public class CalendarView extends RelativeLayout {
         this(context, null);
     }
 
-    private OnCalendarItemClickListener onCalendarItemClickListener;
-
     public void setOnCalendarItemClickListener(OnCalendarItemClickListener onCalendarItemClickListener) {
         this.onCalendarItemClickListener = onCalendarItemClickListener;
-    }
-
-    public interface OnCalendarItemClickListener {
-        void onCalendarItemClick(TextView tv, int time, int day, CalendarBean bean);
     }
 
     private void initSize() {
@@ -191,8 +186,6 @@ public class CalendarView extends RelativeLayout {
         drawMonthView();
         drawWeekView();
     }
-
-    private LinearLayout llMonth;
 
     @SuppressWarnings("ResourceType")
     private void drawMonthView() {
@@ -339,10 +332,10 @@ public class CalendarView extends RelativeLayout {
             } else {
                 if (iTime == 11) {
                     sTime = iTime + ":00";
-                }else if (iTime == 12){
-                    sTime = "下午\n" + (iTime+2) + ":00";
-                }else{
-                    sTime = (iTime+2) + ":00";
+                } else if (iTime == 12) {
+                    sTime = "下午\n" + (iTime + 2) + ":00";
+                } else {
+                    sTime = (iTime + 2) + ":00";
                 }
             }
             tvDate.setText(sTime);
@@ -445,5 +438,9 @@ public class CalendarView extends RelativeLayout {
         init(getContext(), date);
         draw();
         updateCalendar();
+    }
+
+    public interface OnCalendarItemClickListener {
+        void onCalendarItemClick(TextView tv, int time, int day, CalendarBean bean);
     }
 }

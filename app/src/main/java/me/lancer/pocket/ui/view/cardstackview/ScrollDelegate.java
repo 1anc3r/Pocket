@@ -4,12 +4,12 @@ public interface ScrollDelegate {
 
     void scrollViewTo(int x, int y);
 
-    void setViewScrollY(int y);
-
-    void setViewScrollX(int x);
-
     int getViewScrollY();
 
+    void setViewScrollY(int y);
+
     int getViewScrollX();
+
+    void setViewScrollX(int x);
 
 }

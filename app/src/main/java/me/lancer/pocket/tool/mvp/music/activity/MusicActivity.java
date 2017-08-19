@@ -37,15 +37,42 @@ import java.util.Comparator;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.tool.mvp.file.activity.FileActivity;
 import me.lancer.pocket.tool.mvp.music.adapter.MusicAdapter;
 import me.lancer.pocket.tool.mvp.music.bean.MusicBean;
 import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
 
+    private final static int SCAN_OK = 1;
     App app;
+    Comparator mComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            String str1 = (String) obj1;
+            String str2 = (String) obj2;
+            if (Integer.parseInt(str1) < Integer.parseInt(str2))
+                return -1;
+            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
+                return 0;
+            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
+                return 1;
+            return 0;
+        }
+    };
+    Comparator TitleComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            String str1 = ((MusicBean) obj1).getTitle();
+            String str2 = ((MusicBean) obj2).getTitle();
+            if (str1.compareTo(str2) < 0)
+                return -1;
+            else if (str1.compareTo(str2) == 0)
+                return 0;
+            else if (str1.compareTo(str2) > 0)
+                return 1;
+            return 0;
+        }
+    };
     private TextView tvShow;
     private ListView lvMusic;
     private EditText etSearch;
@@ -53,20 +80,72 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     private ImageView ivBack, ivSearch;
     private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
     private TextView tvDelete, tvCopy, tvMove, tvShare, tvAll;
-
-    private final static int SCAN_OK = 1;
-
     private MusicAdapter adapter;
     private List<MusicBean> musicList = new ArrayList<>();
     private List<MusicBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
+    Runnable deleteFile = new Runnable() {
+
+        @Override
+        public void run() {
+            Collections.sort(posList, mComparator);
+            for (int i = 0; i < posList.size(); i++) {
+                String deletePath = musicList.get(Integer.parseInt(posList.get(i))).getPath();
+                File deleteFile = new File(deletePath);
+                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
+                    deleteFile.delete();
+                    showSnackbar(lvMusic, "删除成功!");
+                } else {
+                    showSnackbar(lvMusic, "删除失败!");
+                }
+            }
+            int count = 0;
+            for (int i = 0; i < posList.size(); i++) {
+                musicList.remove(musicList.get(Integer.parseInt(posList.get(i)) - count));
+                count++;
+            }
+            posList.clear();
+            lvMusic.requestLayout();
+            adapter.notifyDataSetChanged();
+        }
+    };
     private List<String> searchList = new ArrayList<>();
     private String searchStr = new String();
+    Runnable changed = new Runnable() {
+
+        @Override
+        public void run() {
+            searchStr = etSearch.getText().toString();
+            searchList.clear();
+            searchList.add(searchStr);
+            musicList.clear();
+            getContactSub(musicList, searchStr);
+            Collections.sort(musicList, TitleComparator);
+            adapter.notifyDataSetChanged();
+        }
+    };
     private Handler handler = new Handler();
     private Boolean isAll = false;
+    Runnable selectAllFile = new Runnable() {
 
+        @Override
+        public void run() {
+            if (isAll == false) {
+                posList.clear();
+                for (int i = 0; i < musicList.size(); i++) {
+                    posList.add("" + i);
+                }
+                isAll = true;
+                llBottom.setVisibility(View.VISIBLE);
+            } else {
+                posList.clear();
+                isAll = false;
+                llBottom.setVisibility(View.GONE);
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
     private SharedPreferences pref;
-
     private Handler mHandler = new Handler() {
 
         @Override
@@ -81,7 +160,6 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     };
-
     private Handler posHandler = new Handler() {
 
         public void handleMessage(Message msg) {
@@ -280,92 +358,4 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     }
-
-    Runnable deleteFile = new Runnable() {
-
-        @Override
-        public void run() {
-            Collections.sort(posList, mComparator);
-            for (int i = 0; i < posList.size(); i++) {
-                String deletePath = musicList.get(Integer.parseInt(posList.get(i))).getPath();
-                File deleteFile = new File(deletePath);
-                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
-                    deleteFile.delete();
-                    showSnackbar(lvMusic, "删除成功!");
-                } else {
-                    showSnackbar(lvMusic, "删除失败!");
-                }
-            }
-            int count = 0;
-            for (int i = 0; i < posList.size(); i++) {
-                musicList.remove(musicList.get(Integer.parseInt(posList.get(i)) - count));
-                count++;
-            }
-            posList.clear();
-            lvMusic.requestLayout();
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable selectAllFile = new Runnable() {
-
-        @Override
-        public void run() {
-            if (isAll == false) {
-                posList.clear();
-                for (int i = 0; i < musicList.size(); i++) {
-                    posList.add("" + i);
-                }
-                isAll = true;
-                llBottom.setVisibility(View.VISIBLE);
-            } else {
-                posList.clear();
-                isAll = false;
-                llBottom.setVisibility(View.GONE);
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable changed = new Runnable() {
-
-        @Override
-        public void run() {
-            searchStr = etSearch.getText().toString();
-            searchList.clear();
-            searchList.add(searchStr);
-            musicList.clear();
-            getContactSub(musicList, searchStr);
-            Collections.sort(musicList, TitleComparator);
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Comparator mComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            String str1 = (String) obj1;
-            String str2 = (String) obj2;
-            if (Integer.parseInt(str1) < Integer.parseInt(str2))
-                return -1;
-            else if (Integer.parseInt(str1) == Integer.parseInt(str2))
-                return 0;
-            else if (Integer.parseInt(str1) > Integer.parseInt(str2))
-                return 1;
-            return 0;
-        }
-    };
-
-    Comparator TitleComparator = new Comparator() {
-        public int compare(Object obj1, Object obj2) {
-            String str1 = ((MusicBean) obj1).getTitle();
-            String str2 = ((MusicBean) obj2).getTitle();
-            if (str1.compareTo(str2) < 0)
-                return -1;
-            else if (str1.compareTo(str2) == 0)
-                return 0;
-            else if (str1.compareTo(str2) > 0)
-                return 1;
-            return 0;
-        }
-    };
 }

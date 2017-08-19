@@ -133,7 +133,7 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
         fabFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(temps.size() == 1) {
+                if (temps.size() == 1) {
                     fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(title, author);
@@ -150,7 +150,7 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
             }
         });
         temps = CollectUtil.query(title, author);
-        if(temps.size() == 1) {
+        if (temps.size() == 1) {
             fabFavorite.setImageResource(R.mipmap.ic_favorite_white_24dp);
         } else {
             fabFavorite.setImageResource(R.mipmap.ic_favorite_border_white_24dp);

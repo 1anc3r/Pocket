@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,20 +6,20 @@
         android:id="@+id/ll_titile"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical"
         android:background="?attr/colorPrimary"
         android:clipToPadding="true"
         android:elevation="3dp"
         android:fitsSystemWindows="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:gravity="center_vertical|left"
             android:padding="12dp"
-            android:src="@mipmap/ic_arrow_back_white_24dp"
-            android:gravity="center_vertical|left" />
+            android:src="@mipmap/ic_arrow_back_white_24dp" />
 
         <TextView
             android:id="@+id/tv_show"
@@ -39,12 +38,12 @@
 
         <ImageView
             android:id="@+id/iv_search"
-            android:visibility="invisible"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:gravity="center_vertical|left"
             android:padding="12dp"
             android:src="@mipmap/ic_search_white_24dp"
-            android:gravity="center_vertical|left" />
+            android:visibility="invisible" />
 
     </LinearLayout>
 

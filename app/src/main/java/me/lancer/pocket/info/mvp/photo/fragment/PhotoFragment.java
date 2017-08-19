@@ -92,35 +92,6 @@ public class PhotoFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -148,18 +119,14 @@ public class PhotoFragment extends BaseFragment {
         builder.setTitle("图片");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 妹子 : 好看的妹子图\n" +
-                "\t\t\t\t * 美景 : 好看的风景照\n" +
-                "\t\t\t\t * ——数据来源 : " +
-                "\n\t\t\t\t *  佳人 : Gank.io（gank.io）" +
-                "\n\t\t\t\t *  美图 : Pexels（www.pexels.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 妹子 : 好看的妹子图\n" +
+                        "\t\t\t\t * 美景 : 好看的风景照\n" +
+                        "\t\t\t\t * ——数据来源 : " +
+                        "\n\t\t\t\t *  佳人 : Gank.io（gank.io）" +
+                        "\n\t\t\t\t *  美图 : Pexels（www.pexels.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -176,5 +143,38 @@ public class PhotoFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

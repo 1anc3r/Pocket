@@ -7,8 +7,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.lancer.pocket.util.ContentGetterSetter;
 import me.lancer.pocket.url.NOVEL_URL;
+import me.lancer.pocket.util.ContentGetterSetter;
 
 /**
  * Created by HuangFangzhi on 2017/5/25.

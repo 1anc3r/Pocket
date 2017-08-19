@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.comic.activity.ComicSearchActivity;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 
 public class ComicFragment extends BaseFragment {
 
@@ -94,35 +94,6 @@ public class ComicFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -150,18 +121,14 @@ public class ComicFragment extends BaseFragment {
         builder.setTitle("漫画");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 推荐 : 推荐好看的漫画\n" +
-                "\t\t\t\t * 排行 : 漫画排行榜\n" +
-                "\t\t\t\t * 分类 : 来自有妖气各分区排行榜\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的漫画\n" +
-                "\t\t\t\t * ——数据来源 : 有妖气（www.u17.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 推荐 : 推荐好看的漫画\n" +
+                        "\t\t\t\t * 排行 : 漫画排行榜\n" +
+                        "\t\t\t\t * 分类 : 来自有妖气各分区排行榜\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮搜索你想看的漫画\n" +
+                        "\t\t\t\t * ——数据来源 : 有妖气（www.u17.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -182,5 +149,38 @@ public class ComicFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

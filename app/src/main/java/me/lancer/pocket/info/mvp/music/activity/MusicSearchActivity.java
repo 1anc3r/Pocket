@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.music.IMusicView;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.MusicPresenter;
 import me.lancer.pocket.info.mvp.music.adapter.MusicAdapter;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 
 public class MusicSearchActivity extends PresenterActivity<MusicPresenter> implements IMusicView {
 
@@ -146,13 +146,13 @@ public class MusicSearchActivity extends PresenterActivity<MusicPresenter> imple
         builder.setTitle("音乐");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 乐评 : 豆瓣音乐的最受欢迎乐评\n" +
-                "\t\t\t\t * 乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
-                "\t\t\t\t *        搜索你想了解的音乐信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣音乐\n" +
-                "\t\t\t\t * （music.douban.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 乐评 : 豆瓣音乐的最受欢迎乐评\n" +
+                        "\t\t\t\t * 乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                        "\t\t\t\t *        搜索你想了解的音乐信息\n" +
+                        "\t\t\t\t * ——数据来源 : 豆瓣音乐\n" +
+                        "\t\t\t\t * （music.douban.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
 

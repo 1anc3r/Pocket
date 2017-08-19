@@ -38,7 +38,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
             viewHolder.tvTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    NovelReadActivity.startActivity((Activity)context, position, bean.getTitle(), bean.getLink());
+                    NovelReadActivity.startActivity((Activity) context, position, bean.getTitle(), bean.getLink());
                 }
             });
         }

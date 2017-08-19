@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.PhotoPresenter;
 import me.lancer.pocket.info.mvp.photo.adapter.PhotoAdapter;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
@@ -27,13 +27,6 @@ import me.lancer.pocket.info.mvp.photo.adapter.PhotoAdapter;
 
 public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
 
-    private SwipeRefreshLayout swipeRefresh;
-    private RecyclerView rvList;
-    private PhotoAdapter adapter;
-    private StaggeredGridLayoutManager layoutManager;
-    private List<PhotoBean> list = new ArrayList<>();
-
-    private int last = 0, flag = 0, load = 0;
     private final String[] typeen = {"art", "beach", "car", "ocean", "sunset", "business", "flowers",
             "music", "sport", "technology", "animal", "black-and-white", "mountains", "road", "universe",
             "abstract", "fashion", "landscape", "night", "people", "coffee", "photography", "sky",
@@ -42,7 +35,12 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
             "— 音乐 —", "— 运动 —", "— 科技 —", "— 动物 —", "— 黑白 —", "— 山脉 —", "— 道路 —", "— 宇宙 —",
             "— 抽象 —", "— 时尚 —", "— 景观 —", "— 夜景 —", "— 人像 —", "— 咖啡 —", "— 摄影 —", "— 天空 —",
             "— 复古 —", "— 瀑布 —", "— 城市 —", "— 美食 —", "— 爱情 —", "— 盛夏 —", "— 旅途 —", "— 沙漠 —"};
-
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
+    private PhotoAdapter adapter;
+    private StaggeredGridLayoutManager layoutManager;
+    private List<PhotoBean> list = new ArrayList<>();
+    private int last = 0, flag = 0, load = 0;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

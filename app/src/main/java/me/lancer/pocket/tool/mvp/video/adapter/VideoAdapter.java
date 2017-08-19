@@ -23,20 +23,29 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import java.io.File;
 import java.util.List;
 
+import me.lancer.pocket.R;
 import me.lancer.pocket.tool.mvp.image.bean.ImageViewBean;
 import me.lancer.pocket.tool.mvp.video.bean.VideoBean;
 import me.lancer.pocket.util.NativeImageLoader;
-import me.lancer.pocket.R;
 
 public class VideoAdapter extends BaseAdapter {
 
+    protected LayoutInflater mInflater;
     private Context context;
     private List<VideoBean> list;
     private List<String> posList;
     private Point mPoint = new Point(0, 0);//用来封装ImageView的宽和高的对象
     private GridView mGridView;
     private Handler mHandler;
-    protected LayoutInflater mInflater;
+
+    public VideoAdapter(Context context, List<VideoBean> list, List<String> posList, GridView mGridView, Handler mHandler) {
+        this.context = context;
+        this.list = list;
+        this.posList = posList;
+        this.mGridView = mGridView;
+        this.mHandler = mHandler;
+        mInflater = LayoutInflater.from(context);
+    }
 
     @Override
     public int getCount() {
@@ -48,21 +57,10 @@ public class VideoAdapter extends BaseAdapter {
         return list.get(position);
     }
 
-
     @Override
     public long getItemId(int position) {
         return position;
     }
-
-    public VideoAdapter(Context context, List<VideoBean> list, List<String> posList, GridView mGridView, Handler mHandler) {
-        this.context = context;
-        this.list = list;
-        this.posList = posList;
-        this.mGridView = mGridView;
-        this.mHandler = mHandler;
-        mInflater = LayoutInflater.from(context);
-    }
-
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

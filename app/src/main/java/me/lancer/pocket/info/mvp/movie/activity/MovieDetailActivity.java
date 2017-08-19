@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.info.mvp.movie.IMovieView;
 import me.lancer.pocket.info.mvp.movie.MovieBean;
 import me.lancer.pocket.info.mvp.movie.MoviePresenter;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
@@ -86,6 +86,18 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
         }
     };
 
+    public static void startActivity(Activity activity, int type, String title, String img, String link, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, MovieDetailActivity.class);
+        intent.putExtra("type", type);
+        intent.putExtra("title", title);
+        intent.putExtra("img", img);
+        intent.putExtra("link", link);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +144,7 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
         inflater.inflate(R.menu.menu_collect_item, menu);
         MenuItem item = menu.findItem(R.id.menu_favorite);
         temps = CollectUtil.query(title, link);
-        if(temps.size() == 1) {
+        if (temps.size() == 1) {
             item.setIcon(R.mipmap.ic_favorite_white_24dp);
         } else {
             item.setIcon(R.mipmap.ic_favorite_border_white_24dp);
@@ -145,7 +157,7 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
         switch (item.getItemId()) {
             case R.id.menu_favorite:
                 item.setIcon(R.mipmap.ic_favorite_white_24dp);
-                if(temps.size() == 1) {
+                if (temps.size() == 1) {
                     item.setIcon(R.mipmap.ic_favorite_border_white_24dp);
                     CollectUtil.delete(temps.get(0));
                     temps = CollectUtil.query(title, link);
@@ -162,18 +174,6 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
                 break;
         }
         return true;
-    }
-
-    public static void startActivity(Activity activity, int type, String title, String img, String link, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, MovieDetailActivity.class);
-        intent.putExtra("type", type);
-        intent.putExtra("title", title);
-        intent.putExtra("img", img);
-        intent.putExtra("link", link);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

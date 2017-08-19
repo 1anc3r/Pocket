@@ -1,7 +1,5 @@
 package me.lancer.pocket.info.mvp.news;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +27,16 @@ public class NewsModel {
     String publicUrl = "http://v.juhe.cn/weixin/query?key=26ce25ffcfc907a26263e2b0e3e23676&pno=%d&ps=21";
     String itemUrl = "http://news-at.zhihu.com/api/4/theme/";
     String listUrl = "http://news-at.zhihu.com/api/4/themes";
+    Comparator<NewsBean> comparator = new Comparator<NewsBean>() {
+        @Override
+        public int compare(NewsBean nb1, NewsBean nb2) {
+            if (nb1.getId() > nb2.getId()) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    };
 
     public NewsModel(INewsPresenter presenter) {
         this.presenter = presenter;
@@ -166,7 +174,7 @@ public class NewsModel {
             JSONObject all = new JSONObject(content);
             int errorCode = all.getInt("error_code");
             String reason = all.getString("reason");
-            if(errorCode == 0 && reason.equals("请求成功")){
+            if (errorCode == 0 && reason.equals("请求成功")) {
                 JSONObject result = all.getJSONObject("result");
                 JSONArray jist = result.getJSONArray("list");
                 for (int i = 0; i < jist.length(); i++) {
@@ -257,15 +265,4 @@ public class NewsModel {
             return null;
         }
     }
-
-    Comparator<NewsBean> comparator = new Comparator<NewsBean>() {
-        @Override
-        public int compare(NewsBean nb1, NewsBean nb2) {
-            if (nb1.getId() > nb2.getId()) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
-    };
 }

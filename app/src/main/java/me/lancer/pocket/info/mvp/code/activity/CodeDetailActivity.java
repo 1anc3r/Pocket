@@ -63,6 +63,30 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
         }
     };
 
+    public static void startActivity(Activity activity, String title, String star, String rank, String img, String link, ImageView ImageView) {
+        Intent intent = new Intent();
+        intent.setClass(activity, CodeDetailActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("star", star);
+        intent.putExtra("rank", rank);
+        intent.putExtra("img", img);
+        intent.putExtra("link", link);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
+    public static void startActivity(Activity activity, String title, String star, String link) {
+        Intent intent = new Intent();
+        intent.setClass(activity, CodeDetailActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("star", star);
+        intent.putExtra("link", link);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, null, Params.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,30 +124,6 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
         loadToast.setText("玩命加载中...");
         loadToast.show();
         new Thread(loadDetail).start();
-    }
-
-    public static void startActivity(Activity activity, String title, String star, String rank, String img, String link, ImageView ImageView) {
-        Intent intent = new Intent();
-        intent.setClass(activity, CodeDetailActivity.class);
-        intent.putExtra("title", title);
-        intent.putExtra("star", star);
-        intent.putExtra("rank", rank);
-        intent.putExtra("img", img);
-        intent.putExtra("link", link);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, ImageView, Params.TRANSITION_PIC);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
-    }
-
-    public static void startActivity(Activity activity, String title, String star, String link) {
-        Intent intent = new Intent();
-        intent.setClass(activity, CodeDetailActivity.class);
-        intent.putExtra("title", title);
-        intent.putExtra("star", star);
-        intent.putExtra("link", link);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(activity, null, Params.TRANSITION_PIC);
-        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     @Override

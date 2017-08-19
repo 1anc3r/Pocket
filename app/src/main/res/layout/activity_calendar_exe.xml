@@ -22,15 +22,14 @@
             android:layout_marginBottom="12dp"
             android:layout_marginTop="8dp"
             android:background="@null"
-            android:inputType="text"
             android:drawableLeft="@mipmap/ic_local_offer_black_24dp"
             android:drawablePadding="12dp"
             android:drawableTint="?attr/colorPrimary"
-            android:hint="输入标题" />
+            android:hint="输入标题"
+            android:inputType="text" />
 
         <me.lancer.pocket.ui.view.ClearEditText
             android:id="@+id/et_location"
-            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -39,7 +38,8 @@
             android:drawableLeft="@mipmap/ic_place_black_24dp"
             android:drawablePadding="12dp"
             android:drawableTint="?attr/colorPrimary"
-            android:hint="添加地点" />
+            android:hint="添加地点"
+            android:inputType="text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,29 +62,29 @@
 
                 <Spinner
                     android:id="@+id/s_week"
-                    android:focusable="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:entries="@array/week" />
+                    android:entries="@array/week"
+                    android:focusable="true" />
 
                 <Spinner
                     android:id="@+id/s_start"
-                    android:focusable="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:layout_marginTop="12dp"
-                    android:entries="@array/start_time" />
+                    android:entries="@array/start_time"
+                    android:focusable="true" />
 
                 <Spinner
                     android:id="@+id/s_end"
-                    android:focusable="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:layout_marginTop="12dp"
-                    android:entries="@array/end_time" />
+                    android:entries="@array/end_time"
+                    android:focusable="true" />
 
             </LinearLayout>
 

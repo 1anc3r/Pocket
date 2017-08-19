@@ -25,7 +25,8 @@ public final class TasksPersistenceContract {
 
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
-    private TasksPersistenceContract() {}
+    private TasksPersistenceContract() {
+    }
 
     /* Inner class that defines the table contents */
     public static abstract class TaskEntry implements BaseColumns {

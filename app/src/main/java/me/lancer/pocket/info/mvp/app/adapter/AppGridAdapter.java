@@ -54,7 +54,7 @@ public class AppGridAdapter extends RecyclerView.Adapter<AppGridAdapter.ViewHold
                         Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(list.get(position).getPkgName());
                         context.startActivity(LaunchIntent);
                     } else if (list.get(position).getLogo() != null) {
-                        AppDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getApkName(),list.get(position).getLogo(),viewHolder.ivIcon);
+                        AppDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getApkName(), list.get(position).getLogo(), viewHolder.ivIcon);
                     }
                 }
             });

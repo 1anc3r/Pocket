@@ -38,36 +38,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.info.mvp.repository.RepositoryBean;
 import me.lancer.pocket.info.mvp.repository.adapter.RepositoryAdapter;
 import me.lancer.pocket.ui.adapter.QAAdapter;
 import me.lancer.pocket.ui.adapter.SettingAdapter;
 import me.lancer.pocket.ui.application.App;
 import me.lancer.pocket.ui.application.Params;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.util.ContentGetterSetter;
 
 public class SettingActivity extends BaseActivity {
 
+    private final String root = Environment.getExternalStorageDirectory() + "/";
+    ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     private App app;
-
     private Toolbar toolbar;
     private LinearLayout llNight, llBright, llTheme, llCard, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
     private SwitchCompat scNight, scCard;
     private BottomSheetDialog listDialog;
     private AlertDialog aboutDialog;
     private ProgressDialog progressDialog;
-
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private int screenMode;
     private int screenBrightness;
-
     private List<String> funcList = new ArrayList<>(), problelist = new ArrayList<>(), logList = new ArrayList<>();
     private List<RepositoryBean> reList = new ArrayList<>();
-    ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
-    private final String root = Environment.getExternalStorageDirectory() + "/";
-
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    if (msg.obj != null) {
+                        reList = (List<RepositoryBean>) msg.obj;
+                        showRepositoryDialog(reList);
+                        progressDialog.dismiss();
+                    }
+                    break;
+                case 1:
+                    if (msg.obj != null) {
+                        logList = (List<String>) msg.obj;
+                        showUpdateDialog(logList);
+                        progressDialog.dismiss();
+                    }
+                    break;
+            }
+        }
+    };
     private Runnable repository = new Runnable() {
         @Override
         public void run() {
@@ -97,7 +114,6 @@ public class SettingActivity extends BaseActivity {
             }
         }
     };
-
     private Runnable update = new Runnable() {
         @Override
         public void run() {
@@ -124,25 +140,30 @@ public class SettingActivity extends BaseActivity {
             }
         }
     };
-
-    private Handler handler = new Handler() {
+    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
         @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    if (msg.obj != null) {
-                        reList = (List<RepositoryBean>) msg.obj;
-                        showRepositoryDialog(reList);
-                        progressDialog.dismiss();
-                    }
-                    break;
-                case 1:
-                    if (msg.obj != null) {
-                        logList = (List<String>) msg.obj;
-                        showUpdateDialog(logList);
-                        progressDialog.dismiss();
-                    }
-                    break;
+        public void onClick(View v) {
+            if (v == llNight) {
+                switchLight();
+            } else if (v == llTheme) {
+                showColorPickDialog();
+            } else if (v == llCard) {
+                switchColorful();
+            } else if (v == llBright) {
+                showBrightSeekDialog();
+            } else if (v == llFunc) {
+                showListDialog(1, funcList);
+            } else if (v == llProblem) {
+                showListDialog(2, problelist);
+            } else if (v == llUpdate) {
+                new Thread(update).start();
+            } else if (v == llFeedback) {
+                Instabug.invoke(InstabugInvocationMode.NEW_CHAT);
+            } else if (v == llDownload) {
+                new Thread(repository).start();
+                progressDialog.show();
+            } else if (v == llAboutUs) {
+                aboutDialog.show();
             }
         }
     };
@@ -361,34 +382,6 @@ public class SettingActivity extends BaseActivity {
         problelist.add("Q : 1anc3r, 1anc3r, 你的程序又崩溃了!");
         problelist.add("A : 方法一, 通过 \"意见反馈\" 撩一撩1anc3r; 方法二, 发送邮件至huangfangzhi0@foxmail.com");
     }
-
-    private View.OnClickListener vOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v == llNight) {
-                switchLight();
-            } else if (v == llTheme) {
-                showColorPickDialog();
-            } else if (v == llCard) {
-                switchColorful();
-            } else if (v == llBright) {
-                showBrightSeekDialog();
-            } else if (v == llFunc) {
-                showListDialog(1, funcList);
-            } else if (v == llProblem) {
-                showListDialog(2, problelist);
-            } else if (v == llUpdate) {
-                new Thread(update).start();
-            } else if (v == llFeedback) {
-                Instabug.invoke(InstabugInvocationMode.NEW_CHAT);
-            } else if (v == llDownload) {
-                new Thread(repository).start();
-                progressDialog.show();
-            } else if (v == llAboutUs) {
-                aboutDialog.show();
-            }
-        }
-    };
 
     private void switchLight() {
         if (!app.isNight()) {

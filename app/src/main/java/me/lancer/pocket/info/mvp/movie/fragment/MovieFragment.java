@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 import me.lancer.pocket.info.mvp.movie.activity.MovieSearchActivity;
+import me.lancer.pocket.ui.mvp.base.fragment.BaseFragment;
 
 public class MovieFragment extends BaseFragment {
 
@@ -87,35 +87,6 @@ public class MovieFragment extends BaseFragment {
         viewPager.setCurrentItem(index, true);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
     private void initView() {
     }
 
@@ -143,19 +114,15 @@ public class MovieFragment extends BaseFragment {
         builder.setTitle("电影");
         builder.setMessage(
                 "\t\t\t\t/*\n" +
-                "\t\t\t\t * 影评 : 豆瓣电影的最受欢迎影评\n" +
-                "\t\t\t\t * 影榜 : 爬取呈现豆瓣电影TOP250\n" +
-                "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
-                "\t\t\t\t *        搜索你想了解的电影信息\n" +
-                "\t\t\t\t * ——数据来源 : 豆瓣电影\n" +
-                "\t\t\t\t * （movie.douban.com）\n" +
-                "\t\t\t\t */");
+                        "\t\t\t\t * 影评 : 豆瓣电影的最受欢迎影评\n" +
+                        "\t\t\t\t * 影榜 : 爬取呈现豆瓣电影TOP250\n" +
+                        "\t\t\t\t * 搜索 : 点击右上角的搜索按钮\n" +
+                        "\t\t\t\t *        搜索你想了解的电影信息\n" +
+                        "\t\t\t\t * ——数据来源 : 豆瓣电影\n" +
+                        "\t\t\t\t * （movie.douban.com）\n" +
+                        "\t\t\t\t */");
         builder.show();
     }
-
-//    private void inflateMenu() {
-//        toolbar.inflateMenu(R.menu.menu_search);
-//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
@@ -177,5 +144,38 @@ public class MovieFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

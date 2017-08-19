@@ -4,39 +4,6 @@ import java.io.File;
 
 public class FileTypeRefereeUtil {
 
-    File file;
-
-    public FileTypeRefereeUtil() {
-
-    }
-
-    public FileTypeRefereeUtil(File file) {
-        this.file = file;
-    }
-
-    public String getFileType(File file) {
-
-        String type = "*/*";
-        String name = file.getName();
-
-        int dot = name.lastIndexOf(".");
-        if (dot < 0) {
-            return type;
-        }
-
-        String suffix = name.substring(dot, name.length()).toLowerCase();
-        if (suffix == "") {
-            return type;
-        }
-
-        for (int i = 0; i < FILE_TYPE_TABLE.length; i++) {
-            if (suffix.equals(FILE_TYPE_TABLE[i][0])) {
-                type = FILE_TYPE_TABLE[i][1];
-            }
-        }
-        return type;
-    }
-
     public static final String[][] FILE_TYPE_TABLE = {
             {".3gp", "video/3gpp"},
             {".apk", "application/vnd.android.package-archive"},
@@ -102,4 +69,36 @@ public class FileTypeRefereeUtil {
             {".zip", "application/zip"},
             {"", "*/*"}
     };
+    File file;
+
+    public FileTypeRefereeUtil() {
+
+    }
+
+    public FileTypeRefereeUtil(File file) {
+        this.file = file;
+    }
+
+    public String getFileType(File file) {
+
+        String type = "*/*";
+        String name = file.getName();
+
+        int dot = name.lastIndexOf(".");
+        if (dot < 0) {
+            return type;
+        }
+
+        String suffix = name.substring(dot, name.length()).toLowerCase();
+        if (suffix == "") {
+            return type;
+        }
+
+        for (int i = 0; i < FILE_TYPE_TABLE.length; i++) {
+            if (suffix.equals(FILE_TYPE_TABLE[i][0])) {
+                type = FILE_TYPE_TABLE[i][1];
+            }
+        }
+        return type;
+    }
 }

@@ -15,8 +15,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.lancer.pocket.R;
-import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 
 /**
  * Created by HuangFangzhi on 2017/6/13.
@@ -47,6 +47,12 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         this.context = context;
         this.list = list;
         this.card = card;
+    }
+
+    public static Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
+        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTintList(wrappedDrawable, colors);
+        return wrappedDrawable;
     }
 
     @Override
@@ -85,11 +91,11 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
             viewHolder.cardView.setCardBackgroundColor(context.getResources().getColor(color));
         }
 //        if(position % 2 == 0) {
-            viewHolder.tvTagLeft.setText(list.get(position).getName());
+        viewHolder.tvTagLeft.setText(list.get(position).getName());
 //            viewHolder.tvTagRight.setText("");
 //        } else {
 //            viewHolder.tvTagLeft.setText("");
-            viewHolder.tvTagRight.setText(list.get(position).getName());
+        viewHolder.tvTagRight.setText(list.get(position).getName());
 //        }
         viewHolder.tvTagLeft.setTextColor(context.getResources().getColorStateList(color));
         viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
@@ -109,10 +115,12 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         return list == null ? 0 : list.size();
     }
 
-    public static Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
-        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
-        DrawableCompat.setTintList(wrappedDrawable, colors);
-        return wrappedDrawable;
+    public interface MyItemClickListener {
+        public void onItemClick(View view, int postion);
+    }
+
+    public interface MyItemLongClickListener {
+        public void onItemLongClick(View view, int postion);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -155,13 +163,5 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
             }
             return true;
         }
-    }
-
-    public interface MyItemClickListener {
-        public void onItemClick(View view, int postion);
-    }
-
-    public interface MyItemLongClickListener {
-        public void onItemLongClick(View view, int postion);
     }
 }

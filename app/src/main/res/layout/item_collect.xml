@@ -63,13 +63,13 @@
 
                 <TextView
                     android:id="@+id/textView_"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
 
