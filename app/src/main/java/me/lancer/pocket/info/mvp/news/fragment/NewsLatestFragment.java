@@ -30,10 +30,8 @@ import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 public class NewsLatestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private RecyclerView rvList;
     private NewsAdapter mAdapter;
-
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<NewsBean> mDayList = new ArrayList<>();
 
@@ -96,13 +94,6 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
         }
     };
 
-    private Runnable loadHotest = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadHotest();
-        }
-    };
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -128,22 +119,17 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Message msg = new Message();
-//                msg.what = 0;
-//                handler.sendMessageDelayed(msg, 800);
                 flag = 0;
                 new Thread(loadLatest).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new NewsAdapter(getActivity(), mDayList);
-//        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvList.setAdapter(mAdapter);
+        rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

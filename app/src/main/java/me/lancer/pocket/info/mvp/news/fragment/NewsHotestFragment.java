@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -28,15 +27,10 @@ import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 public class NewsHotestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private RecyclerView rvList;
     private NewsAdapter mAdapter;
-
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<NewsBean> mList = new ArrayList<>();
-
-    private int last = 0, flag = 0, load = 0;
-    private String date;
 
     private Handler handler = new Handler() {
         @Override
@@ -54,8 +48,6 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
                     if (msg.obj != null) {
                         mList.clear();
                         mList.addAll((List<NewsBean>) msg.obj);
-//                        mAdapter = new NewsAdapter(getActivity(), mList);
-//                        mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -96,21 +88,14 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Message msg = new Message();
-//                msg.what = 0;
-//                handler.sendMessageDelayed(msg, 800);
-                flag = 0;
                 new Thread(loadHotest).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mStaggeredGridLayoutManager);
         mAdapter = new NewsAdapter(getActivity(), mList);
-//        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override

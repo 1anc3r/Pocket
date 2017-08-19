@@ -40,7 +40,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
     private List<ComicBean> mData = new ArrayList<ComicBean>();
     private ComicAdapter mAdapter;
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FloatingActionButton fab;
 
@@ -60,7 +60,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                     if (msg.obj != null) {
                         mData = (List<ComicBean>) msg.obj;
                         mAdapter = new ComicAdapter(SortActivity.this, mData);
-                        mRecyclerView.setAdapter(mAdapter);
+                        rvList.setAdapter(mAdapter);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
@@ -108,13 +108,13 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
                 handler.sendMessageDelayed(msg, 800);
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        rvList = (RecyclerView) findViewById(R.id.recyclerView);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new ComicAdapter(this, mData);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
         new Thread(loadTop).start();
     }
 

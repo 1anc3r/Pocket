@@ -28,7 +28,7 @@ import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
 public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private NewsAdapter mAdapter;
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<NewsBean> mList = new ArrayList<>();
@@ -49,8 +49,6 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
                     if (msg.obj != null) {
                         mList.clear();
                         mList.addAll((List<NewsBean>) msg.obj);
-//                        mAdapter = new NewsAdapter(getActivity(), mList);
-//                        mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -91,20 +89,15 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Message msg = new Message();
-//                msg.what = 0;
-//                handler.sendMessageDelayed(msg, 800);
                 new Thread(loadList).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new NewsAdapter(getActivity(), mList);
-//        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override

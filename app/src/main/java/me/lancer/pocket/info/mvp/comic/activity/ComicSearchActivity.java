@@ -28,13 +28,10 @@ import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
 
 public class ComicSearchActivity extends PresenterActivity<ComicPresenter> implements IComicView {
 
-    Toolbar toolbar;
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private Toolbar toolbar;
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rvList;
     private ComicAdapter mAdapter;
-
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<ComicBean> mList = new ArrayList<>();
 
@@ -45,10 +42,10 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
                 case 1:
-                    mSwipeRefreshLayout.setRefreshing(true);
+                    swipeRefresh.setRefreshing(true);
                     break;
                 case 2:
                     break;
@@ -56,9 +53,9 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
                     if (msg.obj != null) {
                         mList = (List<ComicBean>) msg.obj;
                         mAdapter = new ComicAdapter(ComicSearchActivity.this, mList);
-                        mRecyclerView.setAdapter(mAdapter);
+                        rvList.setAdapter(mAdapter);
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    swipeRefresh.setRefreshing(false);
                     break;
             }
         }
@@ -87,21 +84,21 @@ public class ComicSearchActivity extends PresenterActivity<ComicPresenter> imple
             actionBar.setTitle("搜索结果");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_result);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.srl_result);
+        swipeRefresh.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Thread(loadQuery).start();
             }
         });
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_result);
+        rvList = (RecyclerView) findViewById(R.id.rv_result);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         mAdapter = new ComicAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     private void initData() {

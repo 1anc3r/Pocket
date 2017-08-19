@@ -13,7 +13,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,17 +41,9 @@ import me.lancer.pocket.ui.application.Params;
 
 public class NovelDetailActivity extends PresenterActivity<NovelPresenter> implements INovelView {
 
-    private int[] colors = {R.color.red, R.color.pink, R.color.purple
-            , R.color.deeppurple, R.color.indigo, R.color.blue
-            , R.color.lightblue, R.color.cyan, R.color.teal
-            , R.color.green, R.color.lightgreen, R.color.lime
-            , R.color.yellow, R.color.amber, R.color.orange, R.color.deeporange};
-
-    Toolbar toolbar;
-
+    private Toolbar toolbar;
     private ImageView ivImg;
     private TextView tvTitle, tvAuthor, tvIntro, tvWordCount, tvFollowCount, tvRetentRatio;
-    private LinearLayout llTags;
     private LoadToast loadToast;
     private RecyclerView mRecyclerView;
     private ChapterAdapter mAdapter;
@@ -85,15 +76,6 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
                         tvWordCount.setText((nb.getCount() / 10000) + "万字");
                         tvFollowCount.setText(value3 + "人");
                         tvRetentRatio.setText(value4 + "%");
-//                        String[] tags = nb.getCategory().split(";");
-//                        for (String tag : tags) {
-//                            TextView tvTag = new TextView(NovelDetailActivity.this);
-//                            tvTag.setText(tag);
-//                            tvTag.setTextSize(16);
-//                            tvTag.setTextColor(getResources().getColor(R.color.white));
-//                            tvTag.setBackgroundColor(getResources().getColor(colors[(int) (Math.random() * 16)]));
-//                            llTags.addView(tvTag);
-//                        }
                     }
                     break;
                 case 4:
@@ -140,7 +122,6 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         tvWordCount = (TextView) findViewById(R.id.tv_word_count);
         tvFollowCount = (TextView) findViewById(R.id.tv_follow_count);
         tvRetentRatio = (TextView) findViewById(R.id.tv_retent_ratio);
-        llTags = (LinearLayout) findViewById(R.id.ll_tags);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_chapter);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
@@ -212,11 +193,10 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
         if (resultCode != -1) {
             int position = resultCode;
             if (position == mList.size()) {
-//                showSnackbar(mRecyclerView, "这是最后一章.");
+                showSnackbar(mRecyclerView, "这是终章.");
             } else if (position == -1) {
-//                showSnackbar(mRecyclerView, "这是第一章.");
+                showSnackbar(mRecyclerView, "这是首章.");
             } else {
-                Log.e("onActivityResult: ", position + "");
                 NovelReadActivity.startActivity(this, position, mList.get(position).getTitle(), mList.get(position).getLink());
             }
         }

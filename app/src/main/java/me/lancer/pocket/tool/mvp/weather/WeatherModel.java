@@ -1,7 +1,5 @@
 package me.lancer.pocket.tool.mvp.weather;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.util.ContentGetterSetter;
-import me.lancer.pocket.util.JsonReader;
 
 /**
  * Created by HuangFangzhi on 2017/6/16.

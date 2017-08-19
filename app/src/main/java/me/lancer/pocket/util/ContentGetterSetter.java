@@ -1,7 +1,5 @@
 package me.lancer.pocket.util;
 
-import android.util.Log;
-
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;

@@ -42,9 +42,8 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             "电话", "通讯录", "信息",
             "图片", "音乐", "视频",
             "文档", "应用", "存储",
-            "日历", /*"时钟",*/"To-Do",
-            "天气", "翻译", "摩斯电码",
-            "计算器", "二维码", /*"带壳截图"*/};
+            "日历", "To-Do", "天气",
+            "翻译", "摩斯电码", "计算器", "二维码",};
     private String[] strInfos = {
             "文章", "趣闻", "段子",
             "图书", "音乐", "电影",
@@ -54,16 +53,15 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
             R.mipmap.ic_photo_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
             R.mipmap.ic_folder_open_black_48dp, R.mipmap.ic_widgets_black_48dp, R.mipmap.ic_save_black_48dp,
-            R.mipmap.ic_event_black_48dp, /*R.mipmap.ic_watch_later_black_48dp,*/R.mipmap.ic_assignment_turned_in_48pt_3x,
-            R.mipmap.ic_cloud_queue_black_48dp, R.mipmap.ic_translate_black_48dp, R.mipmap.ic_all_inclusive_black_48dp,
-            R.mipmap.ic_calculator_black_48dp, R.mipmap.ic_qrcode_black_48dp};
+            R.mipmap.ic_event_black_48dp, R.mipmap.ic_assignment_turned_in_48pt_3x, R.mipmap.ic_cloud_queue_black_48dp,
+            R.mipmap.ic_translate_black_48dp, R.mipmap.ic_all_inclusive_black_48dp, R.mipmap.ic_calculator_black_48dp, R.mipmap.ic_qrcode_black_48dp};
     private int[] imgInfos = {
             R.mipmap.ic_insert_drive_file_black_48dp, R.mipmap.ic_lightbulb_outline_black_48dp, R.mipmap.ic_golf_course_black_48dp,
             R.mipmap.ic_book_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
             R.mipmap.ic_local_library_black_48dp, R.mipmap.ic_photo_black_48dp, R.mipmap.ic_mood_black_48dp,
             R.mipmap.ic_live_tv_black_48dp, R.mipmap.ic_extension_black_48dp, R.mipmap.ic_code_black_48dp};
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvList;
     private ModelAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private List<ModelBean> mList = new ArrayList<>();
@@ -90,21 +88,21 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                 .getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
         int height = wm.getDefaultDisplay().getHeight();
-        mRecyclerView = (RecyclerView) getView().findViewById(R.id.rv_list);
+        rvList = (RecyclerView) getView().findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mLinearLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
+        rvList.setHasFixedSize(true);
         for (int i = 0; i < names.length; i++) {
             mList.add(new ModelBean(names[i], icons[i]));
         }
         mAdapter = new ModelAdapter(getActivity(), mList, width);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setFocusable(true);
-        mRecyclerView.setFocusableInTouchMode(true);
-        mRecyclerView.setOnKeyListener(OnKeyListener);
+        rvList.setAdapter(mAdapter);
+        rvList.setFocusable(true);
+        rvList.setFocusableInTouchMode(true);
+        rvList.setOnKeyListener(OnKeyListener);
     }
 
     private View.OnKeyListener OnKeyListener = new View.OnKeyListener() {
@@ -202,14 +200,6 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
 
     @Override
     public void onItemLongClick(View view, final int postion) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                CollectBean bean = new CollectBean();
-//                bean.setType(index);
-//                bean.setCate(postion);
-//                bean.setTitle(mList.get(postion).getName());
-//            }
-//        }).start();
+
     }
 }

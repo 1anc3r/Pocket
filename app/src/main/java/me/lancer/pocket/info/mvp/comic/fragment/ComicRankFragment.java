@@ -28,10 +28,8 @@ import me.lancer.pocket.info.mvp.comic.adapter.ComicAdapter;
 public class ComicRankFragment extends PresenterFragment<ComicPresenter> implements IComicView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-
+    private RecyclerView rvList;
     private ComicAdapter mAdapter;
-
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<ComicBean> mList = new ArrayList<>();
 
@@ -51,8 +49,6 @@ public class ComicRankFragment extends PresenterFragment<ComicPresenter> impleme
                     if (msg.obj != null) {
                         mList.clear();
                         mList.addAll((List<ComicBean>) msg.obj);
-//                        mAdapter = new ComicAdapter(getActivity(), mList);
-//                        mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -94,19 +90,14 @@ public class ComicRankFragment extends PresenterFragment<ComicPresenter> impleme
             @Override
             public void onRefresh() {
                 new Thread(loadTop).start();
-//                Message msg = new Message();
-//                msg.what = 0;
-//                handler.sendMessageDelayed(msg, 800);
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        rvList = (RecyclerView) view.findViewById(R.id.recyclerView);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        mRecyclerView.setHasFixedSize(true);
+        rvList.setLayoutManager(mStaggeredGridLayoutManager);
+        rvList.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new ComicAdapter(getActivity(), mList);
-//        mAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mAdapter);
+        rvList.setAdapter(mAdapter);
     }
 
     @Override
