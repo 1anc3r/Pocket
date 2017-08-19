@@ -37,7 +37,7 @@ import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class MovieDetailActivity extends PresenterActivity<MoviePresenter> implements IMovieView {
 
-    private ImageView ivImg;
+    private ImageView ivCover;
     private HtmlTextView htvInfo;
     private HtmlTextView htvContent;
     private LoadToast loadToast;
@@ -122,9 +122,9 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
-        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-        Glide.with(this).load(img).into(ivImg);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
+        Glide.with(this).load(img).into(ivCover);
         htvInfo = (HtmlTextView) findViewById(R.id.htv_info);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
         loadToast = new LoadToast(this);
@@ -178,7 +178,7 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
 
     @Override
     protected void onDestroy() {
-        ivImg.destroyDrawingCache();
+        ivCover.destroyDrawingCache();
         htvInfo.destroyDrawingCache();
         htvContent.destroyDrawingCache();
         super.onDestroy();

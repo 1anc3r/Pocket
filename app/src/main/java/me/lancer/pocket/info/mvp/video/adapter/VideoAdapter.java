@@ -51,11 +51,11 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
                 viewHolder.tvTitle.setTextSize(20);
                 viewHolder.tvTitle.setGravity(Gravity.CENTER);
-                viewHolder.ivImg.setVisibility(View.GONE);
+                viewHolder.ivCover.setVisibility(View.GONE);
             } else if (getItemViewType(position) == TYPE_CONTENT_SMALL) {
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
-                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+                Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
                 viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -69,8 +69,8 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
-                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+                Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
                 viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -104,13 +104,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cvLarge;
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvTitle;
 
         public ViewHolder(View rootView) {
             super(rootView);
             cvLarge = (CardView) rootView.findViewById(R.id.cv_large);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }

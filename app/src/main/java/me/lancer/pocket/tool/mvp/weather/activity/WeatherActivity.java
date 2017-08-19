@@ -39,7 +39,7 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
     SharedPreferences.Editor editor;
     private CollapsingToolbarLayout layout;
     private FloatingActionButton fab;
-    private ImageView ivImg, ivWeather;
+    private ImageView ivCover, ivWeather;
     private TextView tvTemperature, tvAirQuality,
             tvDressingBrief, tvDressingDetail,
             tvUvBrief, tvUvDetail,
@@ -71,9 +71,9 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
                         SimpleDateFormat formatter = new SimpleDateFormat("HH");
                         int date = Integer.parseInt(formatter.format(new Date(System.currentTimeMillis())));
                         if (date > Integer.parseInt(mBean.getSunrise().split(":")[0]) && date < (12 + Integer.parseInt(mBean.getSunrise().split(":")[0]))) {
-                            Glide.with(WeatherActivity.this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_day.png").into(ivImg);
+                            Glide.with(WeatherActivity.this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_day.png").into(ivCover);
                         } else {
-                            Glide.with(WeatherActivity.this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_night.png").into(ivImg);
+                            Glide.with(WeatherActivity.this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/ic_night.png").into(ivCover);
                         }
                         String weather = mBean.getWeather();
                         if (weather.contains("阴") || weather.contains("云")) {
@@ -154,7 +154,7 @@ public class WeatherActivity extends PresenterActivity<WeatherPresenter> impleme
                 finish();
             }
         });
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
         ivWeather = (ImageView) findViewById(R.id.iv_weather);
         tvTemperature = (TextView) findViewById(R.id.tv_temperature);
         tvAirQuality = (TextView) findViewById(R.id.tv_air_quality);

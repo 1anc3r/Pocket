@@ -49,18 +49,18 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
                 viewHolder.tvTitle.setTextSize(20);
                 viewHolder.tvTitle.setGravity(Gravity.CENTER);
-                viewHolder.ivImg.setVisibility(View.GONE);
+                viewHolder.ivCover.setVisibility(View.GONE);
             } else if (getItemViewType(position) == TYPE_CONTENT_NORMAL) {
                 viewHolder.tvTitle.setVisibility(View.GONE);
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHolder.ivImg.getLayoutParams();
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHolder.ivCover.getLayoutParams();
                 params.height = DensityUtil.dip2px(context, 120 + 40 * (list.get(position).getType() - 1));
-                viewHolder.ivImg.setLayoutParams(params);
-                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                Glide.with(context).load(list.get(position).getImgSmall()).into(viewHolder.ivImg);
-                viewHolder.ivImg.setOnClickListener(new View.OnClickListener() {
+                viewHolder.ivCover.setLayoutParams(params);
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+                Glide.with(context).load(list.get(position).getImgSmall()).into(viewHolder.ivCover);
+                viewHolder.ivCover.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), list.get(position).getTitle(), viewHolder.ivImg);
+//                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), list.get(position).getTitle(), viewHolder.ivCover);
                         ArrayList<String> gallery = new ArrayList<String>();
                         for (PhotoBean bean : list) {
                             gallery.add(bean.getImgLarge());
@@ -94,12 +94,12 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public LinearLayout llTop;
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvTitle;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }

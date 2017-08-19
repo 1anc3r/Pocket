@@ -51,16 +51,16 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
                     viewHolder.tvName.setText(bean.getName());
                 }
                 viewHolder.tvStar.setText(bean.getStar());
-                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                Glide.with(context).load(bean.getImg()).into(viewHolder.ivImg);
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+                Glide.with(context).load(bean.getImg()).into(viewHolder.ivCover);
                 viewHolder.cvSmall.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CodeDetailActivity.startActivity((Activity) context, list.get(position).getName(), list.get(position).getStar(), list.get(position).getRank(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivImg);
+                        CodeDetailActivity.startActivity((Activity) context, list.get(position).getName(), list.get(position).getStar(), list.get(position).getRank(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivCover);
                     }
                 });
             } else if (getItemViewType(position) == TYPE_ONE) {
-                viewHolder.ivImg.setVisibility(View.GONE);
+                viewHolder.ivCover.setVisibility(View.GONE);
                 viewHolder.tvName.setText(bean.getName());
                 viewHolder.tvStar.setText(bean.getStar());
                 viewHolder.cvSmall.setOnClickListener(new View.OnClickListener() {
@@ -91,14 +91,14 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cvSmall;
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvRank, tvName, tvStar;
 
         public ViewHolder(View rootView) {
             super(rootView);
             cvSmall = (CardView) rootView.findViewById(R.id.cv_code);
             tvRank = (TextView) rootView.findViewById(R.id.tv_rank);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvName = (TextView) rootView.findViewById(R.id.tv_title);
             tvStar = (TextView) rootView.findViewById(R.id.tv_star);
         }

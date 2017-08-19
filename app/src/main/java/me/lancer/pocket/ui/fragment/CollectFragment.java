@@ -40,19 +40,14 @@ import me.lancer.pocket.ui.mvp.collect.ICollectView;
 public class CollectFragment extends PresenterFragment<CollectPresenter> implements ICollectView, CollectAdapter.MyItemClickListener, CollectAdapter.MyItemLongClickListener {
 
     private Toolbar toolbar;
-    private ImageView ivImg;
+    private ImageView ivCover;
     private RecyclerView rvList;
     private CollectAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
 
     private List<CollectBean> list = new ArrayList<>();
     private CollectBean temp;
-    private Runnable query = new Runnable() {
-        @Override
-        public void run() {
-            presenter.query();
-        }
-    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -77,6 +72,14 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
             }
         }
     };
+
+    private Runnable query = new Runnable() {
+        @Override
+        public void run() {
+            presenter.query();
+        }
+    };
+
     private Runnable add = new Runnable() {
         @Override
         public void run() {
@@ -139,11 +142,11 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle("收藏");
         ((MainActivity) getActivity()).initDrawer(toolbar);
-        ivImg = (ImageView) view.findViewById(R.id.iv_cover);
+        ivCover = (ImageView) view.findViewById(R.id.iv_cover);
         if ((Math.random() * 16) > 8) {
-            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/summer.gif").into(ivImg);
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/summer.gif").into(ivCover);
         } else {
-            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/winter.gif").into(ivImg);
+            Glide.with(this).load("https://raw.githubusercontent.com/1anc3r/Pocket/master/winter.gif").into(ivCover);
         }
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -184,7 +187,6 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
     @Override
     public void onItemClick(View view, int position) {
         Intent intent = new Intent();
-        List<String> list = new ArrayList<>();
         switch (list.get(position).getCate()) {
             case 0:
                 intent.setClass(getActivity(), ArticleActivity.class);
@@ -228,8 +230,9 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                 startActivity(intent);
                 break;
             case 10:
-                list.add(list.get(position).getCover());
-                intent.putStringArrayListExtra("gallery", (ArrayList<String>) list);
+                List<String> gallery = new ArrayList<>();
+                gallery.add(list.get(position).getCover());
+                intent.putStringArrayListExtra("gallery", (ArrayList<String>) gallery);
                 intent.putExtra("position", 0);
                 intent.setClass(getActivity(), PhotoGalleryActivity.class);
                 startActivity(intent);

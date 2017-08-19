@@ -50,10 +50,10 @@ public class NovelTxtAdapter extends RecyclerView.Adapter<NovelTxtAdapter.ViewHo
             if (getItemViewType(position) == TYPE_CONTENT) {
                 viewHolder.tvTitle.setText(bean.getTitle());
                 if (list.get(position).getCover() != null) {
-                    ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                    Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivImg);
+                    ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+                    Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivCover);
                 } else {
-                    viewHolder.ivImg.setVisibility(View.GONE);
+                    viewHolder.ivCover.setVisibility(View.GONE);
                     viewHolder.tvTitle.setGravity(Gravity.CENTER);
                 }
                 viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -67,9 +67,9 @@ public class NovelTxtAdapter extends RecyclerView.Adapter<NovelTxtAdapter.ViewHo
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(bean.getTitle());
                 if (bean.getTitle().equals("男生")) {
-                    viewHolder.ivImg.setImageResource(R.mipmap.ic_male);
+                    viewHolder.ivCover.setImageResource(R.mipmap.ic_male);
                 } else if (bean.getTitle().equals("女生")) {
-                    viewHolder.ivImg.setImageResource(R.mipmap.ic_female);
+                    viewHolder.ivCover.setImageResource(R.mipmap.ic_female);
                 }
             }
         }
@@ -93,13 +93,13 @@ public class NovelTxtAdapter extends RecyclerView.Adapter<NovelTxtAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvTitle;
 
         public ViewHolder(View rootView) {
             super(rootView);
             cardView = (CardView) rootView.findViewById(R.id.cv_novel);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }

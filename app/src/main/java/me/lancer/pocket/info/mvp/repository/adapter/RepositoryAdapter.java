@@ -63,8 +63,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
                 context.startActivity(intent);
             }
         });
-        ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-        Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
+        ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+        Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
     }
 
     @Override
@@ -74,12 +74,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvTitle, tvContent, tvDownload, tvBlog;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
             tvContent = (TextView) rootView.findViewById(R.id.tv_content);
             tvDownload = (TextView) rootView.findViewById(R.id.tv_arg1);

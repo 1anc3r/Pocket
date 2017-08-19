@@ -41,7 +41,7 @@ import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
 public class NovelDetailActivity extends PresenterActivity<NovelPresenter> implements INovelView {
 
     private Toolbar toolbar;
-    private ImageView ivImg;
+    private ImageView ivCover;
     private TextView tvTitle, tvAuthor, tvIntro, tvWordCount, tvFollowCount, tvRetentRatio;
     private LoadToast loadToast;
     private RecyclerView rvList;
@@ -67,8 +67,8 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
                     if (msg.obj != null) {
                         loadToast.success();
                         NovelBean nb = (NovelBean) msg.obj;
-                        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-                        Glide.with(NovelDetailActivity.this).load(nb.getCover()).into(ivImg);
+                        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
+                        Glide.with(NovelDetailActivity.this).load(nb.getCover()).into(ivCover);
                         tvTitle.setText(nb.getTitle());
                         tvAuthor.setText(nb.getAuthor());
                         tvIntro.setText(nb.getIntro());
@@ -124,7 +124,7 @@ public class NovelDetailActivity extends PresenterActivity<NovelPresenter> imple
             actionBar.setTitle(value2);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvAuthor = (TextView) findViewById(R.id.tv_author);
         tvIntro = (TextView) findViewById(R.id.tv_intro);

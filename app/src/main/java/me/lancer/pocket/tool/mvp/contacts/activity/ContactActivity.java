@@ -28,7 +28,7 @@ import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
 public class ContactActivity extends BaseActivity implements View.OnClickListener {
 
     private CollapsingToolbarLayout layout;
-    private ImageView ivImg, ivArg1, ivArg2;
+    private ImageView ivCover, ivArg1, ivArg2;
     private TextView tvPhone, tvCallLog;
     private RecyclerView rvList;
     private ContactAdapter adapter;
@@ -61,7 +61,7 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
         }
         layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_phone);
         layout.setTitle(name);
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
         tvCallLog = (TextView) findViewById(R.id.tv_call_log);
         tvPhone = (TextView) findViewById(R.id.tv_phone);
         tvPhone.setText(number);

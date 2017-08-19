@@ -42,7 +42,7 @@ import me.lancer.pocket.ui.view.htmltextview.HtmlTextView;
 
 public class GameDetailActivity extends PresenterActivity<GamePresenter> implements IGameView {
 
-    private ImageView ivImg;
+    private ImageView ivCover;
     private TextView tvDiscount, tvOriginal, tvFinal, tvDevelopers, tvPublishers;
     private HtmlTextView htvLanguages, htvDescription, htvRequirements;
     private RecyclerView rvList;
@@ -156,9 +156,9 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (ImageView) findViewById(R.id.iv_cover);
-        ViewCompat.setTransitionName(ivImg, Params.TRANSITION_PIC);
-        Glide.with(this).load(img).into(ivImg);
+        ivCover = (ImageView) findViewById(R.id.iv_cover);
+        ViewCompat.setTransitionName(ivCover, Params.TRANSITION_PIC);
+        Glide.with(this).load(img).into(ivCover);
         fab = (FloatingActionButton) findViewById(R.id.fab_collect);
         fab.setOnClickListener(vOnClickListener);
         temps = CollectUtil.query(title, String.valueOf(id));
@@ -192,7 +192,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ivImg.destroyDrawingCache();
+        ivCover.destroyDrawingCache();
         htvDescription.destroyDrawingCache();
         htvRequirements.destroyDrawingCache();
     }

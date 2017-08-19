@@ -56,12 +56,12 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
             if (list.get(position).isLinuxAvailable()) {
                 viewHolder.ivLinux.setVisibility(View.VISIBLE);
             }
-            ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-            Glide.with(context).load(list.get(position).getHeaderImage()).into(viewHolder.ivImg);
+            ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+            Glide.with(context).load(list.get(position).getHeaderImage()).into(viewHolder.ivCover);
             viewHolder.cvGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    GameDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getName(), list.get(position).getHeaderImage(), viewHolder.ivImg);
+                    GameDetailActivity.startActivity((Activity) context, list.get(position).getId(), list.get(position).getName(), list.get(position).getHeaderImage(), viewHolder.ivCover);
                 }
             });
         }
@@ -75,13 +75,13 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cvGame;
-        public ImageView ivImg, ivWindows, ivMac, ivLinux;
+        public ImageView ivCover, ivWindows, ivMac, ivLinux;
         public TextView tvTitle, tvDiscount, tvOriginal, tvFinal;
 
         public ViewHolder(View rootView) {
             super(rootView);
             cvGame = (CardView) rootView.findViewById(R.id.cv_game);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             ivWindows = (ImageView) rootView.findViewById(R.id.iv_windows);
             ivMac = (ImageView) rootView.findViewById(R.id.iv_mac);
             ivLinux = (ImageView) rootView.findViewById(R.id.iv_linux);

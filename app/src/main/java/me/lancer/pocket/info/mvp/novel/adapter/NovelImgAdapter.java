@@ -47,10 +47,10 @@ public class NovelImgAdapter extends RecyclerView.Adapter<NovelImgAdapter.ViewHo
             viewHolder.tvIntro.setText(bean.getIntro());
             viewHolder.tvInfo.setText(bean.getCount() + "人在追 | " + bean.getRatio() + "读者留存");
             if (list.get(position).getCover() != null) {
-                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivImg);
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+                Glide.with(context).load(list.get(position).getCover()).into(viewHolder.ivCover);
             } else {
-                viewHolder.ivImg.setVisibility(View.GONE);
+                viewHolder.ivCover.setVisibility(View.GONE);
                 viewHolder.tvTitle.setGravity(Gravity.CENTER);
             }
             viewHolder.llNovel.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +76,14 @@ public class NovelImgAdapter extends RecyclerView.Adapter<NovelImgAdapter.ViewHo
 
         public CardView cvNovel;
         public LinearLayout llNovel;
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvTitle, tvAuthor, tvIntro, tvInfo;
 
         public ViewHolder(View rootView) {
             super(rootView);
             cvNovel = (CardView) rootView.findViewById(R.id.cv_novel);
             llNovel = (LinearLayout) rootView.findViewById(R.id.ll_novel);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
             tvAuthor = (TextView) rootView.findViewById(R.id.tv_author);
             tvIntro = (TextView) rootView.findViewById(R.id.tv_intro);

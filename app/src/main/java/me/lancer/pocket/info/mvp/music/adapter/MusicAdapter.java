@@ -55,8 +55,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                 star = Float.parseFloat(list.get(position).getStar()) / 2;
             }
             viewHolder.rbRating.setRating(star);
-            ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-            Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
+            ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+            Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
             viewHolder.cvMedimu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -68,7 +68,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                         intent.putExtra("img", list.get(position).getImg());
                         intent.setClass(context, MusicDetailActivity.class);
                         context.startActivity(intent);
-//                        MusicDetailActivity.startActivity((Activity) context, 0, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getMainLink(), viewHolder.ivImg);
+//                        MusicDetailActivity.startActivity((Activity) context, 0, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getMainLink(), viewHolder.ivCover);
                     } else {
                         Intent intent = new Intent();
                         intent.putExtra("title", list.get(position).getMainTitle());
@@ -77,7 +77,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                         intent.putExtra("img", list.get(position).getImg());
                         intent.setClass(context, MusicDetailActivity.class);
                         context.startActivity(intent);
-//                        MusicDetailActivity.startActivity((Activity) context, 1, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getSubLink(), viewHolder.ivImg);
+//                        MusicDetailActivity.startActivity((Activity) context, 1, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getSubLink(), viewHolder.ivCover);
                     }
                 }
             });
@@ -92,14 +92,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cvMedimu;
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvTitle, tvContent;
         public RatingBar rbRating;
 
         public ViewHolder(View rootView) {
             super(rootView);
             cvMedimu = (CardView) rootView.findViewById(R.id.cv_medimu);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
             tvContent = (TextView) rootView.findViewById(R.id.htv_content);
             rbRating = (RatingBar) rootView.findViewById(R.id.rb_medimu);

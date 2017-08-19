@@ -46,19 +46,19 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
         if (list.get(position) != null) {
             if (getItemViewType(position) == TYPE_TEXT) {
                 viewHolder.tvText.setText(list.get(position).getText());
-                viewHolder.ivImg.setVisibility(View.GONE);
+                viewHolder.ivCover.setVisibility(View.GONE);
             } else if (getItemViewType(position) == TYPE_IMAGE) {
                 if (list.get(position).getText() == null || list.get(position).getText().equals("")) {
                     viewHolder.tvText.setVisibility(View.GONE);
                 } else {
                     viewHolder.tvText.setText(list.get(position).getText());
                 }
-                ViewCompat.setTransitionName(viewHolder.ivImg, Params.TRANSITION_PIC);
-                Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivImg);
-                viewHolder.ivImg.setOnClickListener(new View.OnClickListener() {
+                ViewCompat.setTransitionName(viewHolder.ivCover, Params.TRANSITION_PIC);
+                Glide.with(context).load(list.get(position).getImg()).into(viewHolder.ivCover);
+                viewHolder.ivCover.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        PhotoDetailNoBarActivity.startActivity((Activity) context, list.get(position).getImg(), list.get(position).getText(), viewHolder.ivImg);
+//                        PhotoDetailNoBarActivity.startActivity((Activity) context, list.get(position).getImg(), list.get(position).getText(), viewHolder.ivCover);
                         ArrayList<String> gallery = new ArrayList<String>();
                         for (JokeBean bean : list) {
                             gallery.add(bean.getImg());
@@ -97,13 +97,13 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cvJoke;
-        public ImageView ivImg;
+        public ImageView ivCover;
         public TextView tvText;
 
         public ViewHolder(View rootView) {
             super(rootView);
             cvJoke = (CardView) rootView.findViewById(R.id.cv_great);
-            ivImg = (ImageView) rootView.findViewById(R.id.iv_cover);
+            ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvText = (TextView) rootView.findViewById(R.id.tv_title);
         }
     }
