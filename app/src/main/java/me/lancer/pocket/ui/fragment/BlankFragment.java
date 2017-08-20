@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
 
     private RecyclerView rvList;
     private ModelAdapter adapter;
-    private LinearLayoutManager layoutManager;
+    private StaggeredGridLayoutManager layoutManager;
     private List<ModelBean> list = new ArrayList<>();
     private View.OnKeyListener OnKeyListener = new View.OnKeyListener() {
         @Override
@@ -95,12 +96,12 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
 
     private void initView(String[] names, int[] icons) {
         rvList = (RecyclerView) getView().findViewById(R.id.rv_list);
-        layoutManager = new LinearLayoutManager(getContext());
+        layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
         for (int i = 0; i < names.length; i++) {
-            list.add(new ModelBean(names[i], icons[i]));
+            list.add(new ModelBean(i, names[i], icons[i]));
         }
         adapter = new ModelAdapter(getActivity(), list);
         adapter.setOnItemClickListener(this);

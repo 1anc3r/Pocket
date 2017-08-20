@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         initNavigationViewHeader();
         initFragment(savedInstanceState);
-//        setNeedsMenuKey();
+        setNeedsMenuKey();
     }
 
     private void initFragment(Bundle savedInstanceState) {
