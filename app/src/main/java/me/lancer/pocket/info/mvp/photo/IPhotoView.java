@@ -10,9 +10,9 @@ import me.lancer.pocket.ui.mvp.base.IBaseView;
 
 public interface IPhotoView extends IBaseView {
 
-    void showLatest(List<PhotoBean> list);
+    void showPexels(List<PhotoBean> list);
 
-    void showTheme(List<PhotoBean> list);
+    void showGank(List<PhotoBean> list);
 
-    void showWelfare(List<PhotoBean> list);
+    void showHuaban(List<PhotoBean> list);
 }

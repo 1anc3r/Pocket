@@ -12,15 +12,15 @@ public interface IPhotoPresenter {
 
     void downloadFailure(String log);
 
-    void loadLatestSuccess(List<PhotoBean> list);
+    void loadPexelsSuccess(List<PhotoBean> list);
 
-    void loadLatestFailure(String log);
+    void loadPexelsFailure(String log);
 
-    void loadThemeSuccess(List<PhotoBean> list);
+    void loadGankSuccess(List<PhotoBean> list);
 
-    void loadThemeFailure(String log);
+    void loadGankFailure(String log);
 
-    void loadWelfareSuccess(List<PhotoBean> list);
+    void loadHuabanSuccess(List<PhotoBean> list);
 
-    void loadWelfareFailure(String log);
+    void loadHuabanFailure(String log);
 }

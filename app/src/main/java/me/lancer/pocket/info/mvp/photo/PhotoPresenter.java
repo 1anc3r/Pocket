@@ -51,69 +51,69 @@ public class PhotoPresenter implements IBasePresenter<IPhotoView>, IPhotoPresent
         }
     }
 
-    public void loadLatest(int pager) {
+    public void loadPexels(int pager) {
         if (view != null) {
             view.showLoad();
-            model.loadLatest(pager);
+            model.loadPexels(pager);
         }
     }
 
     @Override
-    public void loadLatestSuccess(List<PhotoBean> list) {
+    public void loadPexelsSuccess(List<PhotoBean> list) {
         if (view != null) {
-            view.showLatest(list);
+            view.showPexels(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadLatestFailure(String log) {
+    public void loadPexelsFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();
         }
     }
 
-    public void loadTheme(String type) {
+    public void loadGank(int pager) {
         if (view != null) {
             view.showLoad();
-            model.loadTheme(type);
+            model.loadGank(pager);
         }
     }
 
     @Override
-    public void loadThemeSuccess(List<PhotoBean> list) {
+    public void loadGankSuccess(List<PhotoBean> list) {
         if (view != null) {
-            view.showTheme(list);
+            view.showGank(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadThemeFailure(String log) {
+    public void loadGankFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();
         }
     }
 
-    public void loadWelfare(int pager) {
+    public void loadHuaban(int type, String max) {
         if (view != null) {
             view.showLoad();
-            model.loadWelfare(pager);
+            model.loadHuaban(type, max);
         }
     }
 
     @Override
-    public void loadWelfareSuccess(List<PhotoBean> list) {
+    public void loadHuabanSuccess(List<PhotoBean> list) {
         if (view != null) {
-            view.showWelfare(list);
+            view.showHuaban(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadWelfareFailure(String log) {
+    public void loadHuabanFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();

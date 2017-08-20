@@ -25,7 +25,7 @@ import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
+public class PhotoGankFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -35,10 +35,10 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
 
     private int pager = 1, last = 0;
 
-    private Runnable loadWelfare = new Runnable() {
+    private Runnable loadGank = new Runnable() {
         @Override
         public void run() {
-            presenter.loadWelfare(pager);
+            presenter.loadGank(pager);
         }
     };
 
@@ -88,7 +88,7 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
     }
 
     private void initData() {
-        new Thread(loadWelfare).start();
+        new Thread(loadGank).start();
     }
 
     private void initView(View view) {
@@ -99,7 +99,7 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
             @Override
             public void onRefresh() {
                 pager = 1;
-                new Thread(loadWelfare).start();
+                new Thread(loadGank).start();
             }
         });
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
@@ -117,7 +117,7 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && last + 1 == adapter.getItemCount()) {
                     pager += 1;
-                    new Thread(loadWelfare).start();
+                    new Thread(loadGank).start();
                 }
             }
 
@@ -144,21 +144,21 @@ public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> impl
     }
 
     @Override
-    public void showLatest(List<PhotoBean> list) {
+    public void showPexels(List<PhotoBean> list) {
 
     }
 
     @Override
-    public void showTheme(List<PhotoBean> list) {
-
-    }
-
-    @Override
-    public void showWelfare(List<PhotoBean> list) {
+    public void showGank(List<PhotoBean> list) {
         Message msg = new Message();
         msg.what = 3;
         msg.obj = list;
         handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showHuaban(List<PhotoBean> list) {
+
     }
 
     @Override

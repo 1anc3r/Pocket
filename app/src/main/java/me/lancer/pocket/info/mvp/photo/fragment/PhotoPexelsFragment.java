@@ -25,7 +25,7 @@ import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
+public class PhotoPexelsFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -38,7 +38,7 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
     private Runnable loadLatest = new Runnable() {
         @Override
         public void run() {
-            presenter.loadLatest(pager);
+            presenter.loadPexels(pager);
         }
     };
 
@@ -143,7 +143,7 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
     }
 
     @Override
-    public void showLatest(List<PhotoBean> list) {
+    public void showPexels(List<PhotoBean> list) {
         Message msg = new Message();
         msg.what = 3;
         msg.obj = list;
@@ -151,12 +151,12 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
     }
 
     @Override
-    public void showTheme(List<PhotoBean> list) {
+    public void showGank(List<PhotoBean> list) {
 
     }
 
     @Override
-    public void showWelfare(List<PhotoBean> list) {
+    public void showHuaban(List<PhotoBean> list) {
 
     }
 

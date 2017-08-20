@@ -1,6 +1,7 @@
 package me.lancer.pocket.info.mvp.photo;
 
 import android.os.Environment;
+import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -34,10 +35,24 @@ public class PhotoModel {
     IPhotoPresenter presenter;
 
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
-    String imgListUrl = "https://www.pexels.com/?page=";
-    String imgThemeUrl = "https://www.pexels.com/search/";
-    String imgWelfareUrl = "http://gank.io/api/data/福利/10/";
-    String imgDetailUrl = "?w=940&h=650&auto=compress&cs=tinysrgb";
+    String imgPexelsUrl = "https://www.pexels.com/?page=";
+    String imgGankUrl = "http://gank.io/api/data/福利/10/";
+    String imgDetailUrlPexels = "?w=940&h=650&auto=compress&cs=tinysrgb";
+    String imgDetailUrlHuaban = "http://img.hb.aicdn.com/";
+    String[] imgHuanBanUrls = {
+            "http://api.huaban.com/favorite/anime?limit=42&max=",//动漫
+            "http://api.huaban.com/favorite/games?limit=42&max=",//游戏
+            "http://api.huaban.com/favorite/film_music_books?limit=42&max=",//电影/音乐/图书
+            "http://api.huaban.com/favorite/quotes?limit=42&max=",//唯美
+            "http://api.huaban.com/favorite/photography?limit=42&max=",//摄影
+            "http://api.huaban.com/favorite/travel_places?limit=42&max=",//旅行
+            "http://api.huaban.com/favorite/pets?limit=42&max=",//宠物
+            "http://api.huaban.com/favorite/kids?limit=42&max=",//小孩
+            "http://api.huaban.com/favorite/beauty?limit=42&max=",//美女
+            "http://api.huaban.com/favorite/apparel?limit=42&max=",//女装/搭配
+            "http://api.huaban.com/favorite/men?limit=42&max=",//男士/风尚
+            "http://api.huaban.com/favorite/modeling_hair?limit=42&max=",//造型/美妆
+    };
 
     public PhotoModel(IPhotoPresenter presenter) {
         this.presenter = presenter;
@@ -74,40 +89,40 @@ public class PhotoModel {
         }
     }
 
-    public void loadLatest(int pager) {
-        String content = contentGetterSetter.getContentFromHtml("Photo.loadLatest", imgListUrl + pager);
+    public void loadPexels(int pager) {
+        String content = contentGetterSetter.getContentFromHtml("Photo.loadLatest", imgPexelsUrl + pager);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
-            list = getPhotosFromHtmlContent(content);
-            presenter.loadLatestSuccess(list);
+            list = getPexelsFromHtmlContent(content);
+            presenter.loadPexelsSuccess(list);
         } else {
-            presenter.loadLatestFailure(content);
+            presenter.loadPexelsFailure(content);
         }
     }
 
-    public void loadTheme(String type) {
-        String content = contentGetterSetter.getContentFromHtml("Photo.loadTheme", imgThemeUrl + type);
+    public void loadGank(int pager) {
+        String content = contentGetterSetter.getContentFromHtml("Photo.loadGank", imgGankUrl + pager);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
-            list = getPhotosFromHtmlContent(content);
-            presenter.loadThemeSuccess(list);
+            list = getGankFromJsonContent(content);
+            presenter.loadGankSuccess(list);
         } else {
-            presenter.loadThemeFailure(content);
+            presenter.loadGankFailure(content);
         }
     }
 
-    public void loadWelfare(int pager) {
-        String content = contentGetterSetter.getContentFromHtml("Photo.loadWelfare", imgWelfareUrl + pager);
+    public void loadHuaban(int type, String max) {
+        String content = contentGetterSetter.getContentFromHtml("Photo.loadHuaban", imgHuanBanUrls[type] + max);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
-            list = getPhotosFromJsonContent(content);
-            presenter.loadWelfareSuccess(list);
+            list = getHuabanFromJsonContent(content);
+            presenter.loadHuabanSuccess(list);
         } else {
-            presenter.loadWelfareFailure(content);
+            presenter.loadHuabanFailure(content);
         }
     }
 
-    public List<PhotoBean> getPhotosFromHtmlContent(String content) {
+    public List<PhotoBean> getPexelsFromHtmlContent(String content) {
         List<PhotoBean> list = new ArrayList<>();
         Document document = Jsoup.parse(content);
         Elements elements = document.getElementsByTag("img");
@@ -118,14 +133,15 @@ public class PhotoModel {
                 bean.setType(new Random().nextInt(3) % (3 - 1 + 1) + 1);
                 bean.setTitle(imgSmall.substring(0, imgSmall.indexOf('?')).replace("https://images.pexels.com/photos/", "").substring(0, imgSmall.indexOf('/')).replace("/", ""));
                 bean.setImgSmall(imgSmall);
-                bean.setImgLarge(imgSmall.substring(0, imgSmall.indexOf('?')) + imgDetailUrl);
+                bean.setImgLarge(imgSmall);
+//                bean.setImgLarge(imgSmall.substring(0, imgSmall.indexOf('?')) + imgDetailUrlPexels);
                 list.add(bean);
             }
         }
         return list;
     }
 
-    public List<PhotoBean> getPhotosFromJsonContent(String content) {
+    public List<PhotoBean> getGankFromJsonContent(String content) {
         try {
             List<PhotoBean> list = new ArrayList<>();
             JSONObject jbPhoto = new JSONObject(content);
@@ -143,6 +159,30 @@ public class PhotoModel {
                 return list;
             }
             return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<PhotoBean> getHuabanFromJsonContent(String content) {
+        try {
+            List<PhotoBean> list = new ArrayList<>();
+            JSONObject all = new JSONObject(content);
+            JSONArray pins = all.getJSONArray("pins");
+            for (int i = 0; i < pins.length(); i++) {
+                JSONObject jbItem = (JSONObject) pins.get(i);
+                if (jbItem.has("pin_id") && jbItem.has("file")) {
+                    PhotoBean bean = new PhotoBean();
+                    bean.setType(new Random().nextInt(3) % (3 - 1 + 1) + 1);
+                    bean.setTitle(String.valueOf(jbItem.getInt("pin_id")));
+                    JSONObject file = jbItem.getJSONObject("file");
+                    bean.setImgLarge(imgDetailUrlHuaban + file.getString("key"));
+                    bean.setImgSmall(imgDetailUrlHuaban + file.getString("key"));
+                    list.add(bean);
+                }
+            }
+            return list;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

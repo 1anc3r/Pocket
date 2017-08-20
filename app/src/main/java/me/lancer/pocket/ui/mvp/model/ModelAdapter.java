@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.polaric.colorful.Colorful;
+
 import java.util.List;
 
 import me.lancer.pocket.R;
@@ -48,20 +50,20 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ModelAdapter.ViewHolder viewHolder, int position) {
         int color;
-        if (((App) (((BaseActivity) context).getApplication())).isColorful()) {
-            color = colors[(int) (Math.random() * 16)];
-        } else {
-            color = colors[position % 16];
-        }
         if (((App) (((BaseActivity) context).getApplication())).isNight()) {
             viewHolder.cv.setCardBackgroundColor(context.getResources().getColor(colors[16]));
         } else {
+            if (((App) (((BaseActivity) context).getApplication())).isColorful()) {
+                color = colors[(int) (Math.random() * 16)];
+            } else {
+                color = Colorful.getThemeDelegate().getPrimaryColor().getColorRes();
+            }
             viewHolder.cv.setCardBackgroundColor(context.getResources().getColor(color));
+            viewHolder.tvTagLeft.setTextColor(context.getResources().getColorStateList(color));
+            viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
         }
         viewHolder.tvTagLeft.setText(list.get(position).getName());
         viewHolder.tvTagRight.setText(list.get(position).getName());
-        viewHolder.tvTagLeft.setTextColor(context.getResources().getColorStateList(color));
-        viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
         viewHolder.imageView.setImageResource(list.get(position).getImage());
     }
 

@@ -65,7 +65,6 @@ public class CollectFragment extends PresenterFragment<CollectPresenter> impleme
                     if (msg.obj != null) {
                         list.clear();
                         list.addAll((List<CollectBean>) msg.obj);
-                        Log.e("Collect: ", "" + list.size());
                         adapter.notifyDataSetChanged();
                     }
                     break;

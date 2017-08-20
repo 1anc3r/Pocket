@@ -154,17 +154,17 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
     }
 
     @Override
-    public void showLatest(List<PhotoBean> list) {
+    public void showPexels(List<PhotoBean> list) {
 
     }
 
     @Override
-    public void showTheme(List<PhotoBean> list) {
+    public void showGank(List<PhotoBean> list) {
 
     }
 
     @Override
-    public void showWelfare(List<PhotoBean> list) {
+    public void showHuaban(List<PhotoBean> list) {
 
     }
 }

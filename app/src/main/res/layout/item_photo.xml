@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:minHeight="120dp"
+                android:src="@mipmap/ic_pictures_no"
                 android:scaleType="centerCrop" />
 
             <TextView

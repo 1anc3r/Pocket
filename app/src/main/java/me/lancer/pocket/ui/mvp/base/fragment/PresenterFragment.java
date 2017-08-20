@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import me.lancer.pocket.ui.fragment.LazyLoadFragment;
 import me.lancer.pocket.ui.mvp.base.IBasePresenter;
 
 /**
