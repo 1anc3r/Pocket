@@ -86,9 +86,9 @@ public class NewsFragment extends BaseFragment {
         newfragment = new NewsPublicFragment();
         data = new Bundle();
         data.putInt("id", 0);
-        data.putString("title", "公众号");
+        data.putString("title", "聚合");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "公众号");
+        adapter.addFrag(newfragment, "聚合");
 
         viewPager.setAdapter(adapter);
         if (getArguments() != null) {
