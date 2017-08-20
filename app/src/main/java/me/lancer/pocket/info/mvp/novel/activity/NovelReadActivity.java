@@ -275,7 +275,7 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
 
     private void showBrightDialog() {
         LayoutInflater inflater = LayoutInflater.from(NovelReadActivity.this);
-        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar_view, null);
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar, null);
         final Dialog dialog = new AlertDialog.Builder(NovelReadActivity.this).create();
         try {
             screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);

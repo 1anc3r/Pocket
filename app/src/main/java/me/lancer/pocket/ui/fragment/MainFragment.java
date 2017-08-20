@@ -112,8 +112,8 @@ public class MainFragment extends PresenterFragment<WeatherPresenter> implements
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.getTabAt(0).setCustomView(setTabTextIcon("工具", R.mipmap.ic_tool));
-        tabLayout.getTabAt(1).setCustomView(setTabTextIcon("资讯", R.mipmap.ic_info));
+        tabLayout.getTabAt(0).setCustomView(setTabTextIcon("资讯", R.mipmap.ic_info));
+        tabLayout.getTabAt(1).setCustomView(setTabTextIcon("工具", R.mipmap.ic_tool));
     }
 
     private View setTabTextIcon(String text, int icon) {

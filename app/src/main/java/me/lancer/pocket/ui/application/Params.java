@@ -8,6 +8,7 @@ public class Params {
 
     public static final String ISNIGHT = "isNight";
     public static final String ISCOLORFUL = "isColorful";
+    public static final String COLNUMBER = "colNumber";
     public static final String CURRENT_INDEX = "currentIndex";
     public static final String TRANSITION_PIC = "transitionPic";
     public static final String TRANSITION_SEARCHVIEW = "transitionSearchView";

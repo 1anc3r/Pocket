@@ -32,12 +32,10 @@
 
             <ImageView
                 android:id="@+id/iv_cover"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginTop="-12dp"
-                android:layout_marginBottom="-12dp"
                 android:tint="@android:color/white" />
 
             <TextView

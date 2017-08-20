@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.annotation.IntDef;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,11 +18,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -53,7 +56,7 @@ public class SettingActivity extends BaseActivity {
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     private App app;
     private Toolbar toolbar;
-    private LinearLayout llNight, llBright, llTheme, llCard, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
+    private LinearLayout llNight, llBright, llTheme, llCard, llCol, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
     private SwitchCompat scNight, scCard;
     private BottomSheetDialog listDialog;
     private AlertDialog aboutDialog;
@@ -150,6 +153,8 @@ public class SettingActivity extends BaseActivity {
                 showColorPickDialog();
             } else if (v == llCard) {
                 switchColorful();
+            } else if (v == llCol) {
+                showNumberPickerDialog();
             } else if (v == llBright) {
                 showBrightSeekDialog();
             } else if (v == llFunc) {
@@ -186,6 +191,8 @@ public class SettingActivity extends BaseActivity {
         llTheme.setOnClickListener(vOnClickListener);
         llCard = (LinearLayout) findViewById(R.id.ll_card);
         llCard.setOnClickListener(vOnClickListener);
+        llCol = (LinearLayout) findViewById(R.id.ll_col);
+        llCol.setOnClickListener(vOnClickListener);
         llBright = (LinearLayout) findViewById(R.id.ll_bright);
         llBright.setOnClickListener(vOnClickListener);
         llFunc = (LinearLayout) findViewById(R.id.ll_func);
@@ -441,9 +448,29 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
+    private void showNumberPickerDialog() {
+        LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_number, null);
+        final Dialog dialog = new AlertDialog.Builder(SettingActivity.this).create();
+        NumberPicker npColNumber = (NumberPicker) layout.findViewById(R.id.np_col_number);
+        npColNumber.setMinValue(1);
+        npColNumber.setMaxValue(3);
+        npColNumber.setValue(app.getColNumber());
+        npColNumber.setOnScrollListener(new NumberPicker.OnScrollListener() {
+            @Override
+            public void onScrollStateChange(NumberPicker numberPicker, int i) {
+                app.setColNumber(numberPicker.getValue());
+                editor.putInt(Params.COLNUMBER, numberPicker.getValue());
+                editor.apply();
+            }
+        });
+        dialog.show();
+        dialog.getWindow().setContentView(layout);
+    }
+
     private void showBrightSeekDialog() {
         LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
-        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar_view, null);
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_seekbar, null);
         final Dialog dialog = new AlertDialog.Builder(SettingActivity.this).create();
         try {
             screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);

@@ -1,19 +1,16 @@
 package me.lancer.pocket.ui.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +30,8 @@ import me.lancer.pocket.tool.mvp.translation.activity.TranslationActivity;
 import me.lancer.pocket.tool.mvp.video.activity.VideoActivity;
 import me.lancer.pocket.tool.mvp.weather.activity.WeatherActivity;
 import me.lancer.pocket.ui.activity.BlankActivity;
+import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.mvp.collect.CollectUtil;
 import me.lancer.pocket.ui.mvp.model.ModelAdapter;
 import me.lancer.pocket.ui.mvp.model.ModelBean;
 
@@ -87,21 +86,22 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         index = this.getArguments().getInt(getString(R.string.index));
-        if (index == 0) {
+        if (index == 1) {
             initView(strTools, imgTools);
-        } else if (index == 1) {
+        } else if (index == 0) {
             initView(strInfos, imgInfos);
         }
     }
 
     private void initView(String[] names, int[] icons) {
         rvList = (RecyclerView) getView().findViewById(R.id.rv_list);
-        layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager = new StaggeredGridLayoutManager(((App) getActivity().getApplication()).getColNumber(), StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
         for (int i = 0; i < names.length; i++) {
-            list.add(new ModelBean(i, names[i], icons[i]));
+            ModelBean bean = new ModelBean(i, names[i], icons[i]);
+            list.add(bean);
         }
         adapter = new ModelAdapter(getActivity(), list);
         adapter.setOnItemClickListener(this);
@@ -113,10 +113,18 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        layoutManager = new StaggeredGridLayoutManager(((App) getActivity().getApplication()).getColNumber(), StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onItemClick(View view, int postion) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        if (index == 0) {
+        if (index == 1) {
             switch (postion) {
                 case 0:
                 case 1:
@@ -182,7 +190,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
                     startActivity(intent);
                     break;
             }
-        } else if (index == 1) {
+        } else if (index == 0) {
             if (postion == 0) {
                 intent.setClass(getActivity(), ArticleActivity.class);
                 startActivity(intent);

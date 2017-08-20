@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.polaric.colorful.Colorful;
@@ -47,6 +48,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         return new ModelAdapter.ViewHolder(v, mItemClickListener, mItemLongClickListener);
     }
 
+    @SuppressWarnings("ResourceType")
     @Override
     public void onBindViewHolder(ModelAdapter.ViewHolder viewHolder, int position) {
         int color;
@@ -63,7 +65,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
             viewHolder.tvTagRight.setTextColor(context.getResources().getColorStateList(color));
         }
         viewHolder.tvTagLeft.setText(list.get(position).getName());
-        viewHolder.tvTagRight.setText(list.get(position).getName());
+        viewHolder.tvTagRight.setText("");
         viewHolder.imageView.setImageResource(list.get(position).getImage());
     }
 
