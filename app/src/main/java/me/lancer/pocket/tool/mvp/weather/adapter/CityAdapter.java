@@ -51,11 +51,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     }
 
     public interface MyItemClickListener {
-        public void onItemClick(View view, int postion);
+        void onItemClick(View view, int postion);
     }
 
     public interface MyItemLongClickListener {
-        public void onItemLongClick(View view, int postion);
+        void onItemLongClick(View view, int postion);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {

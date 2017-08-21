@@ -93,7 +93,7 @@ public class VideoAdapter extends BaseAdapter {
                     addAnimation(viewHolder.mCheckBox);
                 }
             });
-            viewHolder.mCheckBox.setChecked(posList.contains("" + position) ? true : false);
+            viewHolder.mCheckBox.setChecked(posList.contains("" + position));
             viewHolder.mCheckBox.bringToFront();
 
             //用来监听ImageView的宽和高

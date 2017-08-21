@@ -29,7 +29,7 @@ public class ImageViewBean extends android.support.v7.widget.AppCompatImageView 
     }
 
     public interface OnMeasureListener {
-        public void onMeasureSize(int width, int height);
+        void onMeasureSize(int width, int height);
     }
 
 }

@@ -143,7 +143,6 @@ public class QRCodeResultActivity extends BaseActivity {
                 break;
             case 3:
                 Uri uri = Uri.parse(qrText);
-                ;
                 String url = qrText.toLowerCase();
                 if (url.contains("http://") || url.contains("https://")) {
                     Matcher m = Patterns.WEB_URL.matcher(url);

@@ -130,7 +130,7 @@ public class FileAdapter extends BaseAdapter {
                 addAnimation(viewHolder.mCheckBox);
             }
         });
-        viewHolder.mCheckBox.setChecked(posList.contains("" + position) ? true : false);
+        viewHolder.mCheckBox.setChecked(posList.contains("" + position));
         viewHolder.mCheckBox.bringToFront();
 
         String fileName = fileList.get(position).getFileName();

@@ -81,7 +81,7 @@ public class AppActivity extends CActivity implements AndroidApplicationBase {
         if (this.getVersion() < 8) {
             throw new GdxRuntimeException("LibGDX requires Android API Level 8 or later.");
         } else {
-            this.graphics = new AndroidGraphics(this, config, (ResolutionStrategy) (config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy));
+            this.graphics = new AndroidGraphics(this, config, config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
             this.input = AndroidInputFactory.newAndroidInput(this, this, this.graphics.view, config);
             this.audio = new AndroidAudio(this, config);
             this.getFilesDir();
@@ -127,8 +127,8 @@ public class AppActivity extends CActivity implements AndroidApplicationBase {
                 try {
                     Class e = Class.forName("com.badlogic.gdx.backends.android.AndroidVisibilityListener");
                     Object o = e.newInstance();
-                    Method method = e.getDeclaredMethod("createListener", new Class[]{AndroidApplicationBase.class});
-                    method.invoke(o, new Object[]{this});
+                    Method method = e.getDeclaredMethod("createListener", AndroidApplicationBase.class);
+                    method.invoke(o, this);
                 } catch (Exception var7) {
                     this.log("AndroidApplication", "Failed to create AndroidVisibilityListener", var7);
                 }
@@ -152,11 +152,11 @@ public class AppActivity extends CActivity implements AndroidApplicationBase {
         if (hide && this.getVersion() >= 11) {
             View rootView = this.getWindow().getDecorView();
             try {
-                Method e = View.class.getMethod("setSystemUiVisibility", new Class[]{Integer.TYPE});
+                Method e = View.class.getMethod("setSystemUiVisibility", Integer.TYPE);
                 if (this.getVersion() <= 13) {
-                    e.invoke(rootView, new Object[]{Integer.valueOf(0)});
+                    e.invoke(rootView, Integer.valueOf(0));
                 }
-                e.invoke(rootView, new Object[]{Integer.valueOf(1)});
+                e.invoke(rootView, Integer.valueOf(1));
             } catch (Exception var4) {
                 this.log("AndroidApplication", "Can\'t hide status bar", var4);
             }
@@ -184,9 +184,9 @@ public class AppActivity extends CActivity implements AndroidApplicationBase {
         if (use && this.getVersion() >= 19) {
             View view = this.getWindow().getDecorView();
             try {
-                Method e = View.class.getMethod("setSystemUiVisibility", new Class[]{Integer.TYPE});
+                Method e = View.class.getMethod("setSystemUiVisibility", Integer.TYPE);
                 short code = 5894;
-                e.invoke(view, new Object[]{Integer.valueOf(code)});
+                e.invoke(view, Integer.valueOf(code));
             } catch (Exception var5) {
                 this.log("AndroidApplication", "Can\'t set immersive mode", var5);
             }
@@ -377,7 +377,7 @@ public class AppActivity extends CActivity implements AndroidApplicationBase {
         Array var4 = this.androidEventListeners;
         synchronized (this.androidEventListeners) {
             for (int i = 0; i < this.androidEventListeners.size; ++i) {
-                ((AndroidEventListener) this.androidEventListeners.get(i)).onActivityResult(requestCode, resultCode, data);
+                this.androidEventListeners.get(i).onActivityResult(requestCode, resultCode, data);
             }
         }
     }

@@ -83,11 +83,11 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
     }
 
     public interface MyItemClickListener {
-        public void onItemClick(View view, int postion);
+        void onItemClick(View view, int postion);
     }
 
     public interface MyItemLongClickListener {
-        public void onItemLongClick(View view, int postion);
+        void onItemLongClick(View view, int postion);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {

@@ -256,11 +256,7 @@ public class NovelReadActivity extends PresenterActivity<NovelPresenter> impleme
         dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
             @Override
             public void onColorSelected(Colorful.ThemeColor themeColor) {
-                if (themeColor.getColorRes() == R.color.md_deep_orange_500) {
-                    night = true;
-                } else {
-                    night = false;
-                }
+                night = themeColor.getColorRes() == R.color.md_deep_orange_500;
                 Colorful.config(NovelReadActivity.this)
                         .primaryColor(themeColor)
                         .accentColor(themeColor)

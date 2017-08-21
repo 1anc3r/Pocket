@@ -175,6 +175,6 @@ public class NativeImageLoader {
          * @param bitmap
          * @param path
          */
-        public void onImageLoader(Bitmap bitmap, String path);
+        void onImageLoader(Bitmap bitmap, String path);
     }
 }

@@ -110,11 +110,11 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
     }
 
     public interface MyItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 
     public interface MyItemLongClickListener {
-        public void onItemLongClick(View view, int position);
+        void onItemLongClick(View view, int position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {

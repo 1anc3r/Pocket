@@ -142,7 +142,7 @@ public class CalendarActivity extends PresenterActivity<CalendarPresenter> imple
                 temp = bean;
                 Intent intent = new Intent();
                 intent.putExtra("type", 1);
-                intent.putExtra("item", (Serializable) temp);
+                intent.putExtra("item", temp);
                 intent.setClass(CalendarActivity.this, CalendarExeActivity.class);
                 startActivityForResult(intent, 0);
             }

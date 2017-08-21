@@ -129,11 +129,7 @@ public class FileUtil {
             }
             br.close();
 
-            if (!mPathOPF.contains("/")) {
-                status = true;
-            } else {
-                status = false;
-            }
+            status = !mPathOPF.contains("/");
         } catch (NullPointerException | IOException e) {
             e.printStackTrace();
         }
