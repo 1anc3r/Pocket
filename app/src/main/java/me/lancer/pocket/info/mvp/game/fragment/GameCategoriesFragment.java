@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.game.GameBean;
 import me.lancer.pocket.info.mvp.game.GamePresenter;
 import me.lancer.pocket.info.mvp.game.IGameView;
 import me.lancer.pocket.info.mvp.game.adapter.GameAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class GameCategoriesFragment extends PresenterFragment<GamePresenter> implements IGameView {
+public class GameCategoriesFragment extends PresenterLazyLoadFragment<GamePresenter> implements IGameView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -87,6 +87,10 @@ public class GameCategoriesFragment extends PresenterFragment<GamePresenter> imp
         Bundle data = this.getArguments();
         type = data.getInt("id") - 1;
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

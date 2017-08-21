@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.novel.INovelView;
 import me.lancer.pocket.info.mvp.novel.NovelBean;
 import me.lancer.pocket.info.mvp.novel.NovelPresenter;
 import me.lancer.pocket.info.mvp.novel.adapter.NovelTxtAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class NovelCateFragment extends PresenterFragment<NovelPresenter> implements INovelView {
+public class NovelCateFragment extends PresenterLazyLoadFragment<NovelPresenter> implements INovelView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -75,6 +75,10 @@ public class NovelCateFragment extends PresenterFragment<NovelPresenter> impleme
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.book.BookBean;
 import me.lancer.pocket.info.mvp.book.BookPresenter;
 import me.lancer.pocket.info.mvp.book.IBookView;
 import me.lancer.pocket.info.mvp.book.adapter.BookAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class BookReviewerFragment extends PresenterFragment<BookPresenter> implements IBookView {
+public class BookReviewerFragment extends PresenterLazyLoadFragment<BookPresenter> implements IBookView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -84,6 +84,10 @@ public class BookReviewerFragment extends PresenterFragment<BookPresenter> imple
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

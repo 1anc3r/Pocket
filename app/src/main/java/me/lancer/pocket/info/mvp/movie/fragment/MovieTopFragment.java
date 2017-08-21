@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.movie.IMovieView;
 import me.lancer.pocket.info.mvp.movie.MovieBean;
 import me.lancer.pocket.info.mvp.movie.MoviePresenter;
 import me.lancer.pocket.info.mvp.movie.adapter.MovieAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class MovieTopFragment extends PresenterFragment<MoviePresenter> implements IMovieView {
+public class MovieTopFragment extends PresenterLazyLoadFragment<MoviePresenter> implements IMovieView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -84,6 +84,10 @@ public class MovieTopFragment extends PresenterFragment<MoviePresenter> implemen
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

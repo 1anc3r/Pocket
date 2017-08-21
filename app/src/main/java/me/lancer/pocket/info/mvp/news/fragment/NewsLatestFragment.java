@@ -21,13 +21,13 @@ import me.lancer.pocket.info.mvp.news.INewsView;
 import me.lancer.pocket.info.mvp.news.NewsBean;
 import me.lancer.pocket.info.mvp.news.NewsPresenter;
 import me.lancer.pocket.info.mvp.news.adapter.NewsAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class NewsLatestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
+public class NewsLatestFragment extends PresenterLazyLoadFragment<NewsPresenter> implements INewsView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -105,6 +105,10 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

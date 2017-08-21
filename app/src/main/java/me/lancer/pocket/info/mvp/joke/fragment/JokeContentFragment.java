@@ -20,13 +20,13 @@ import me.lancer.pocket.info.mvp.joke.IJokeView;
 import me.lancer.pocket.info.mvp.joke.JokeBean;
 import me.lancer.pocket.info.mvp.joke.JokePresenter;
 import me.lancer.pocket.info.mvp.joke.adapter.JokeAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class JokeContentFragment extends PresenterFragment<JokePresenter> implements IJokeView {
+public class JokeContentFragment extends PresenterLazyLoadFragment<JokePresenter> implements IJokeView {
 
     private FloatingActionButton fabRefresh;
     private SwipeRefreshLayout swipeRefresh;
@@ -94,6 +94,10 @@ public class JokeContentFragment extends PresenterFragment<JokePresenter> implem
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

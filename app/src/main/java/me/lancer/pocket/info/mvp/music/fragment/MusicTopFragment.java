@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.music.IMusicView;
 import me.lancer.pocket.info.mvp.music.MusicBean;
 import me.lancer.pocket.info.mvp.music.MusicPresenter;
 import me.lancer.pocket.info.mvp.music.adapter.MusicAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class MusicTopFragment extends PresenterFragment<MusicPresenter> implements IMusicView {
+public class MusicTopFragment extends PresenterLazyLoadFragment<MusicPresenter> implements IMusicView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -84,6 +84,10 @@ public class MusicTopFragment extends PresenterFragment<MusicPresenter> implemen
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

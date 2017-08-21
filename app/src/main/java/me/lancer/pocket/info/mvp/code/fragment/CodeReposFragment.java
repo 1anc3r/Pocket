@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.code.CodeBean;
 import me.lancer.pocket.info.mvp.code.CodePresenter;
 import me.lancer.pocket.info.mvp.code.ICodeView;
 import me.lancer.pocket.info.mvp.code.adapter.CodeAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class CodeReposFragment extends PresenterFragment<CodePresenter> implements ICodeView {
+public class CodeReposFragment extends PresenterLazyLoadFragment<CodePresenter> implements ICodeView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -84,6 +84,10 @@ public class CodeReposFragment extends PresenterFragment<CodePresenter> implemen
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

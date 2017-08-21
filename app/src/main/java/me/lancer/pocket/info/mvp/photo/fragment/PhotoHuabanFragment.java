@@ -20,13 +20,13 @@ import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.PhotoPresenter;
 import me.lancer.pocket.info.mvp.photo.adapter.PhotoAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class PhotoHuabanFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
+public class PhotoHuabanFragment extends PresenterLazyLoadFragment<PhotoPresenter> implements IPhotoView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -63,11 +63,10 @@ public class PhotoHuabanFragment extends PresenterFragment<PhotoPresenter> imple
                             list.addAll((List<PhotoBean>) msg.obj);
                             adapter.notifyDataSetChanged();
                         } else {
-                            int sizeOld = list.size();
-//                            int sizeNew = ((List<PhotoBean>) msg.obj).size();
+                            int size = list.size();
                             list.addAll((List<PhotoBean>) msg.obj);
                             for (int i = 0; i < 70; i++) {
-                                adapter.notifyItemInserted(sizeOld + i);
+                                adapter.notifyItemInserted(size + i);
                             }
                         }
                     }
@@ -86,13 +85,18 @@ public class PhotoHuabanFragment extends PresenterFragment<PhotoPresenter> imple
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Bundle data = this.getArguments();
+        type = data.getInt("id");
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 
     private void initData() {
-        Bundle data = this.getArguments();
-        type = data.getInt("id");
         new Thread(loadHuaban).start();
     }
 

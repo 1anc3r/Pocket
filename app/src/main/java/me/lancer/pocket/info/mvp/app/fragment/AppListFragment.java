@@ -24,13 +24,13 @@ import me.lancer.pocket.info.mvp.app.AppBean;
 import me.lancer.pocket.info.mvp.app.AppPresenter;
 import me.lancer.pocket.info.mvp.app.IAppView;
 import me.lancer.pocket.info.mvp.app.adapter.AppGridAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class AppListFragment extends PresenterFragment<AppPresenter> implements IAppView {
+public class AppListFragment extends PresenterLazyLoadFragment<AppPresenter> implements IAppView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -150,6 +150,10 @@ public class AppListFragment extends PresenterFragment<AppPresenter> implements 
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

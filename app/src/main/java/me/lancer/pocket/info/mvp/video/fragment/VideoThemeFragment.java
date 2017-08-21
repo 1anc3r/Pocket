@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.video.IVideoView;
 import me.lancer.pocket.info.mvp.video.VideoBean;
 import me.lancer.pocket.info.mvp.video.VideoPresenter;
 import me.lancer.pocket.info.mvp.video.adapter.VideoAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implements IVideoView {
+public class VideoThemeFragment extends PresenterLazyLoadFragment<VideoPresenter> implements IVideoView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -78,6 +78,10 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
         Bundle data = this.getArguments();
         pager = data.getInt("id");
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

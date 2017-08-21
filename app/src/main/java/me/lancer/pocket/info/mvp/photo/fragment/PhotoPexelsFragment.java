@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.photo.IPhotoView;
 import me.lancer.pocket.info.mvp.photo.PhotoBean;
 import me.lancer.pocket.info.mvp.photo.PhotoPresenter;
 import me.lancer.pocket.info.mvp.photo.adapter.PhotoAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class PhotoPexelsFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
+public class PhotoPexelsFragment extends PresenterLazyLoadFragment<PhotoPresenter> implements IPhotoView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -84,6 +84,10 @@ public class PhotoPexelsFragment extends PresenterFragment<PhotoPresenter> imple
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

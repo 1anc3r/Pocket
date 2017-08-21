@@ -19,13 +19,13 @@ import me.lancer.pocket.info.mvp.comic.ComicBean;
 import me.lancer.pocket.info.mvp.comic.ComicPresenter;
 import me.lancer.pocket.info.mvp.comic.IComicView;
 import me.lancer.pocket.info.mvp.comic.adapter.SortAdapter;
-import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterLazyLoadFragment;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class ComicSortFragment extends PresenterFragment<ComicPresenter> implements IComicView {
+public class ComicSortFragment extends PresenterLazyLoadFragment<ComicPresenter> implements IComicView {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rvList;
@@ -75,6 +75,10 @@ public class ComicSortFragment extends PresenterFragment<ComicPresenter> impleme
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
+    }
+
+    @Override
+    public void fetchData() {
         initData();
     }
 

@@ -12,7 +12,7 @@ import me.lancer.pocket.ui.mvp.base.IBasePresenter;
  * Created by HuangFangzhi on 2016/12/15.
  */
 
-public abstract class PresenterFragment<P extends IBasePresenter> extends BaseFragment {
+public abstract class PresenterLazyLoadFragment<P extends IBasePresenter> extends LazyLoadFragment {
 
     protected P presenter;
 
