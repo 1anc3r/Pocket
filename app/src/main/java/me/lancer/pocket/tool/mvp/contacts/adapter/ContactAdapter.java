@@ -176,7 +176,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvContact = (CardView) rootView.findViewById(R.id.cv_contact);
+            cvContact = (CardView) rootView.findViewById(R.id.cv);
             civHead = (CircleImageView) rootView.findViewById(R.id.civ_head);
             tvArg0 = (TextView) rootView.findViewById(R.id.tv_arg0);
             tvArg1 = (TextView) rootView.findViewById(R.id.tv_arg1);

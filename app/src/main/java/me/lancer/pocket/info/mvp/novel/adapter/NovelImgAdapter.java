@@ -81,7 +81,7 @@ public class NovelImgAdapter extends RecyclerView.Adapter<NovelImgAdapter.ViewHo
 
         public ViewHolder(View rootView) {
             super(rootView);
-            cvNovel = (CardView) rootView.findViewById(R.id.cv_novel);
+            cvNovel = (CardView) rootView.findViewById(R.id.cv);
             llNovel = (LinearLayout) rootView.findViewById(R.id.ll_novel);
             ivCover = (ImageView) rootView.findViewById(R.id.iv_cover);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);

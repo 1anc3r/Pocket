@@ -90,7 +90,6 @@ public class PhotoModel {
     }
 
     public void loadPexels(int pager) {
-        Log.e("photo: ", imgPexelsUrl + pager);
         String content = contentGetterSetter.getContentFromHtml("Photo.loadLatest", imgPexelsUrl + pager);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
@@ -102,7 +101,6 @@ public class PhotoModel {
     }
 
     public void loadGank(int pager) {
-        Log.e("photo: ", imgGankUrl + pager);
         String content = contentGetterSetter.getContentFromHtml("Photo.loadGank", imgGankUrl + pager);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
@@ -114,7 +112,6 @@ public class PhotoModel {
     }
 
     public void loadHuaban(int type, String max) {
-        Log.e("photo: ", imgHuanBanUrls[type] + max);
         String content = contentGetterSetter.getContentFromHtml("Photo.loadHuaban", imgHuanBanUrls[type] + max);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
