@@ -4,10 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ClearCacheRequest;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.Volley;
 import com.instabug.library.Instabug;
 import com.instabug.library.invocation.InstabugInvocationEvent;
 
@@ -26,7 +22,6 @@ import me.lancer.pocket.R;
 public class App extends LitePalApplication {
 
     public static Typeface TypeFace;
-    private RequestQueue mRequestQueue;
     private boolean isPicture, isFirst, isNight, isColorful;
     private int colNumber;
 
@@ -65,17 +60,6 @@ public class App extends LitePalApplication {
                 .setInvocationEvent(InstabugInvocationEvent.NONE)
                 .setEmailFieldVisibility(false)
                 .build();
-    }
-
-    public RequestQueue getRequestQueue() {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-        File cacheDir = new File(this.getCacheDir(), "volley");
-        DiskBasedCache cache = new DiskBasedCache(cacheDir);
-        mRequestQueue.start();
-        mRequestQueue.add(new ClearCacheRequest(cache, null));
-        return mRequestQueue;
     }
 
     public boolean isPicture() {
