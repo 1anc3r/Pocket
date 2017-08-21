@@ -51,7 +51,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             "视频", "游戏", "编程",};
     private int[] imgTools = {
             R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
-            R.mipmap.ic_photo_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
+            R.mipmap.ic_photo_black_48dp, R.drawable.ic_audiotrack_black_24dp, R.mipmap.ic_movie_creation_black_48dp,
             R.mipmap.ic_folder_open_black_48dp, R.mipmap.ic_widgets_black_48dp, R.mipmap.ic_save_black_48dp,
             R.mipmap.ic_event_black_48dp, R.mipmap.ic_assignment_turned_in_48pt_3x, R.mipmap.ic_cloud_queue_black_48dp,
             R.mipmap.ic_translate_black_48dp, R.mipmap.ic_all_inclusive_black_48dp, R.mipmap.ic_calculator_black_48dp, R.mipmap.ic_qrcode_black_48dp};
