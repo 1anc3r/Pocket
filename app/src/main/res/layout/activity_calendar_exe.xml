@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
-                android:src="@mipmap/ic_query_builder_black_24dp"
+                android:src="@drawable/ic_query_builder_black_24dp"
                 android:tint="?attr/colorPrimary" />
 
             <LinearLayout
