@@ -181,19 +181,26 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
             rvList.setVisibility(View.GONE);
             new Thread(loadDetail).start();
         } else if (link != null && !link.equals("") && id == -1) {
-            wvContent.setVisibility(View.VISIBLE);
-            htvContent.setVisibility(View.GONE);
-            rvList.setVisibility(View.GONE);
-            wvContent.getSettings().setJavaScriptEnabled(true);
-            wvContent.requestFocus();
-            wvContent.setWebViewClient(new WebViewClient() {
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    view.loadUrl(url);
-                    loadToast.success();
-                    return true;
-                }
-            });
-            wvContent.loadUrl(link);
+            if(link.contains("zhihu")) {
+                htvContent.setVisibility(View.VISIBLE);
+                wvContent.setVisibility(View.GONE);
+                rvList.setVisibility(View.GONE);
+                new Thread(loadDetail).start();
+            } else {
+                wvContent.setVisibility(View.VISIBLE);
+                htvContent.setVisibility(View.GONE);
+                rvList.setVisibility(View.GONE);
+                wvContent.getSettings().setJavaScriptEnabled(true);
+                wvContent.requestFocus();
+                wvContent.setWebViewClient(new WebViewClient() {
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        view.loadUrl(url);
+                        loadToast.success();
+                        return true;
+                    }
+                });
+                wvContent.loadUrl(link);
+            }
         } else {
             rvList.setVisibility(View.VISIBLE);
             htvContent.setVisibility(View.GONE);
