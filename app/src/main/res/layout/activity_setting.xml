@@ -145,7 +145,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:text="卡片随机"
+                            android:text="彩色卡片"
                             android:textSize="16sp" />
 
                         <View
@@ -155,6 +155,43 @@
 
                         <android.support.v7.widget.SwitchCompat
                             android:id="@+id/sc_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_scroll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_scroll"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="16dp"
+                            android:src="@drawable/ic_clear_all_black_24dp"
+                            android:tint="#FF999999" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:text="卡片轮播"
+                            android:textSize="16sp" />
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="8dp"
+                            android:layout_weight="1" />
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:id="@+id/sc_scroll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp" />
@@ -182,7 +219,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:text="卡片列数"
+                            android:text="卡片布局"
                             android:textSize="16sp" />
 
                     </LinearLayout>

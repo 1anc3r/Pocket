@@ -26,6 +26,7 @@ public class CollectModel {
         ContentValues contentValues = new ContentValues();
         contentValues.put("type", bean.getType());
         contentValues.put("cate", bean.getCate());
+        contentValues.put("model", bean.getModel());
         contentValues.put("title", bean.getTitle());
         contentValues.put("cover", bean.getCover());
         contentValues.put("link", bean.getLink());
@@ -40,16 +41,17 @@ public class CollectModel {
     public void query() {
         init();
         List<CollectBean> list = new ArrayList<>();
-        Cursor cursor = db.query("Collect", null, null, null, null, null, null);
+        Cursor cursor = db.query("Collect", null, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 CollectBean bean = new CollectBean();
                 bean.setId(cursor.getInt(0));
                 bean.setType(cursor.getInt(1));
                 bean.setCate(cursor.getInt(2));
-                bean.setTitle(cursor.getString(3));
-                bean.setCover(cursor.getString(4));
-                bean.setLink(cursor.getString(5));
+                bean.setModel(cursor.getInt(3));
+                bean.setTitle(cursor.getString(4));
+                bean.setCover(cursor.getString(5));
+                bean.setLink(cursor.getString(6));
                 list.add(bean);
                 cursor.moveToNext();
             }
@@ -61,16 +63,17 @@ public class CollectModel {
     public void query(String title) {
         init();
         List<CollectBean> list = new ArrayList<>();
-        Cursor cursor = db.query("Collect", null, null, null, null, null, null);
+        Cursor cursor = db.query("Collect", null, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 CollectBean bean = new CollectBean();
                 bean.setId(cursor.getInt(0));
                 bean.setType(cursor.getInt(1));
                 bean.setCate(cursor.getInt(2));
-                bean.setTitle(cursor.getString(3));
-                bean.setCover(cursor.getString(4));
-                bean.setLink(cursor.getString(5));
+                bean.setModel(cursor.getInt(3));
+                bean.setTitle(cursor.getString(4));
+                bean.setCover(cursor.getString(5));
+                bean.setLink(cursor.getString(6));
                 if (bean.getTitle().equals(title)) {
                     list.add(bean);
                     break;
@@ -87,6 +90,7 @@ public class CollectModel {
         ContentValues contentValues = new ContentValues();
         contentValues.put("type", bean.getType());
         contentValues.put("cate", bean.getCate());
+        contentValues.put("model", bean.getModel());
         contentValues.put("title", bean.getTitle());
         contentValues.put("cover", bean.getCover());
         contentValues.put("link", bean.getLink());
@@ -124,7 +128,7 @@ public class CollectModel {
 
     private void init() {
         db = SQLiteDatabase.openOrCreateDatabase("/data/data/me.lancer.pocket/databases/collect.db", null);
-        String createTable = "CREATE TABLE IF NOT EXISTS Collect(_id INTEGER PRIMARY KEY AUTOINCREMENT, type INTEGER, cate INTEGER, title VARCHAR, cover VARCHAR, link VARCHAR)";
+        String createTable = "CREATE TABLE IF NOT EXISTS Collect(_id INTEGER PRIMARY KEY AUTOINCREMENT, type INTEGER, cate INTEGER, model INTEGER, title VARCHAR, cover VARCHAR, link VARCHAR)";
         db.execSQL(createTable);
     }
 }

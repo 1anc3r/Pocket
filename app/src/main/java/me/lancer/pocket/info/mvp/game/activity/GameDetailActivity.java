@@ -110,6 +110,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
                     fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(2);
                     temp.setCate(13);
+                    temp.setModel(10);
                     temp.setCover(img);
                     temp.setTitle(title);
                     temp.setLink(String.valueOf(id));

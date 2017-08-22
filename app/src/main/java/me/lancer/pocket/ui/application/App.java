@@ -22,7 +22,7 @@ import me.lancer.pocket.R;
 public class App extends LitePalApplication {
 
     public static Typeface TypeFace;
-    private boolean isPicture, isFirst, isNight, isColorful;
+    private boolean isNight, isScroll, isColorful;
     private int colNumber;
 
     @Override
@@ -30,6 +30,7 @@ public class App extends LitePalApplication {
         super.onCreate();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         isNight = sharedPreferences.getBoolean(Params.ISNIGHT, false);
+        isScroll = sharedPreferences.getBoolean(Params.ISSCROLL, false);
         colNumber = sharedPreferences.getInt(Params.COLNUMBER, 3);
         isColorful = sharedPreferences.getBoolean(Params.ISCOLORFUL, false);
         if (isNight) {
@@ -62,22 +63,6 @@ public class App extends LitePalApplication {
                 .build();
     }
 
-    public boolean isPicture() {
-        return isPicture;
-    }
-
-    public void setPicture(boolean picture) {
-        isPicture = picture;
-    }
-
-    public boolean isFirst() {
-        return isFirst;
-    }
-
-    public void setFirst(boolean first) {
-        isFirst = first;
-    }
-
     public boolean isNight() {
         return isNight;
     }
@@ -86,19 +71,27 @@ public class App extends LitePalApplication {
         isNight = night;
     }
 
-    public boolean isColorful() {
-        return isColorful;
-    }
-
-    public void setColorful(boolean colorful) {
-        isColorful = colorful;
-    }
-
     public int getColNumber() {
         return colNumber;
     }
 
     public void setColNumber(int colNumber) {
         this.colNumber = colNumber;
+    }
+
+    public boolean isScroll() {
+        return isScroll;
+    }
+
+    public void setScroll(boolean scorll) {
+        isScroll = scorll;
+    }
+
+    public boolean isColorful() {
+        return isColorful;
+    }
+
+    public void setColorful(boolean colorful) {
+        isColorful = colorful;
     }
 }

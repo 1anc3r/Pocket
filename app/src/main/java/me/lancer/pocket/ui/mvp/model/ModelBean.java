@@ -1,5 +1,6 @@
 package me.lancer.pocket.ui.mvp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.pocket.ui.mvp.collect.CollectBean;
@@ -18,10 +19,16 @@ public class ModelBean {
     public ModelBean() {
     }
 
+    public ModelBean(String name, int image) {
+        this.name = name;
+        this.image = image;
+    }
+
     public ModelBean(int id, String name, int image) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.list = new ArrayList<>();
     }
 
     public int getId() {
@@ -54,5 +61,9 @@ public class ModelBean {
 
     public void setList(List<CollectBean> list) {
         this.list = list;
+    }
+
+    public void addItem(CollectBean item) {
+        this.list.add(item);
     }
 }

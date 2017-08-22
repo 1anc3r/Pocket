@@ -76,15 +76,13 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             viewHolder.textView.setVisibility(View.VISIBLE);
             viewHolder.textView_.setVisibility(View.GONE);
             viewHolder.textView.setText(list.get(position).getTitle());
-        }
-        if (list.get(position).getType() == 1) {
+        } else if (list.get(position).getType() == 1) {
             viewHolder.imageView.setVisibility(View.VISIBLE);
             viewHolder.textView.setVisibility(View.GONE);
             viewHolder.textView_.setVisibility(View.GONE);
             ViewCompat.setTransitionName(viewHolder.imageView, Params.TRANSITION_PIC);
             Glide.with(context).load(list.get(position).getCover()).into(viewHolder.imageView);
-        }
-        if (list.get(position).getType() == 2) {
+        } else if (list.get(position).getType() == 2) {
             viewHolder.imageView.setVisibility(View.VISIBLE);
             viewHolder.textView.setVisibility(View.GONE);
             viewHolder.textView_.setVisibility(View.VISIBLE);

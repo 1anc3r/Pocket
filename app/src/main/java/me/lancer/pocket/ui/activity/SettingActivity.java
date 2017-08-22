@@ -56,8 +56,8 @@ public class SettingActivity extends BaseActivity {
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     private App app;
     private Toolbar toolbar;
-    private LinearLayout llNight, llBright, llTheme, llCard, llCol, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
-    private SwitchCompat scNight, scCard;
+    private LinearLayout llNight, llBright, llTheme, llCard, llScroll, llCol, llFunc, llProblem, llUpdate, llFeedback, llDownload, llAboutUs;
+    private SwitchCompat scNight, scCard, scScroll;
     private BottomSheetDialog listDialog;
     private AlertDialog aboutDialog;
     private ProgressDialog progressDialog;
@@ -153,6 +153,8 @@ public class SettingActivity extends BaseActivity {
                 showColorPickDialog();
             } else if (v == llCard) {
                 switchColorful();
+            } else if (v == llScroll) {
+                switchScroll();
             } else if (v == llCol) {
                 showNumberPickerDialog();
             } else if (v == llBright) {
@@ -191,6 +193,8 @@ public class SettingActivity extends BaseActivity {
         llTheme.setOnClickListener(vOnClickListener);
         llCard = (LinearLayout) findViewById(R.id.ll_card);
         llCard.setOnClickListener(vOnClickListener);
+        llScroll = (LinearLayout) findViewById(R.id.ll_scroll);
+        llScroll.setOnClickListener(vOnClickListener);
         llCol = (LinearLayout) findViewById(R.id.ll_col);
         llCol.setOnClickListener(vOnClickListener);
         llBright = (LinearLayout) findViewById(R.id.ll_bright);
@@ -209,6 +213,7 @@ public class SettingActivity extends BaseActivity {
         llAboutUs.setOnClickListener(vOnClickListener);
         scNight = (SwitchCompat) findViewById(R.id.sc_night);
         scCard = (SwitchCompat) findViewById(R.id.sc_card);
+        scScroll = (SwitchCompat) findViewById(R.id.sc_scroll);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("正在加载,请稍后...");
         progressDialog.setCancelable(true);
@@ -223,6 +228,8 @@ public class SettingActivity extends BaseActivity {
         scNight.setClickable(false);
         scCard.setChecked(app.isColorful());
         scCard.setClickable(false);
+        scScroll.setChecked(app.isScroll());
+        scScroll.setClickable(false);
         funcList.add("— 工具 —");
         funcList.add("电话、通讯录、信息 : \n" +
                 "\t\t\t\t/*\n" +
@@ -448,12 +455,26 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
+    private void switchScroll() {
+        if (!app.isScroll()) {
+            scScroll.setChecked(true);
+            app.setScroll(true);
+            editor.putBoolean(Params.ISSCROLL, true);
+            editor.apply();
+        } else {
+            scScroll.setChecked(false);
+            app.setScroll(false);
+            editor.putBoolean(Params.ISSCROLL, false);
+            editor.apply();
+        }
+    }
+
     private void showNumberPickerDialog() {
         LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_number, null);
         final Dialog dialog = new AlertDialog.Builder(SettingActivity.this).create();
         NumberPicker npColNumber = (NumberPicker) layout.findViewById(R.id.np_col_number);
-        npColNumber.setMinValue(1);
+        npColNumber.setMinValue(2);
         npColNumber.setMaxValue(3);
         npColNumber.setValue(app.getColNumber());
         npColNumber.setOnScrollListener(new NumberPicker.OnScrollListener() {

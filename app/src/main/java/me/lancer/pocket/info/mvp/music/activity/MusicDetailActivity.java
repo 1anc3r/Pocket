@@ -165,6 +165,7 @@ public class MusicDetailActivity extends PresenterActivity<MusicPresenter> imple
                     item.setIcon(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(type + 5);
+                    temp.setModel(4);
                     temp.setCover(img);
                     temp.setTitle(title);
                     temp.setLink(link);

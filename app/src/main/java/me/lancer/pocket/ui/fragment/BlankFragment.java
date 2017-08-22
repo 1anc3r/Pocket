@@ -2,6 +2,8 @@ package me.lancer.pocket.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -31,11 +33,15 @@ import me.lancer.pocket.tool.mvp.video.activity.VideoActivity;
 import me.lancer.pocket.tool.mvp.weather.activity.WeatherActivity;
 import me.lancer.pocket.ui.activity.BlankActivity;
 import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.mvp.base.fragment.PresenterFragment;
+import me.lancer.pocket.ui.mvp.collect.CollectBean;
+import me.lancer.pocket.ui.mvp.collect.CollectPresenter;
 import me.lancer.pocket.ui.mvp.collect.CollectUtil;
+import me.lancer.pocket.ui.mvp.collect.ICollectView;
 import me.lancer.pocket.ui.mvp.model.ModelAdapter;
 import me.lancer.pocket.ui.mvp.model.ModelBean;
 
-public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickListener, ModelAdapter.MyItemLongClickListener {
+public class BlankFragment extends PresenterFragment<CollectPresenter> implements ICollectView, ModelAdapter.MyItemClickListener, ModelAdapter.MyItemLongClickListener {
 
     private int index = 0;
     private String[] strTools = {
@@ -65,6 +71,49 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     private ModelAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
     private List<ModelBean> list = new ArrayList<>();
+    private List<CollectBean> temp = new ArrayList<>();
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    new Thread(query).start();
+                    break;
+                case 4:
+                    if (msg.obj != null) {
+                        temp = (List<CollectBean>) msg.obj;
+                        if(index == 0) {
+                            for (ModelBean mitem : list) {
+                                for (CollectBean citem : temp) {
+                                    if (mitem.getId() == citem.getModel()) {
+                                        mitem.addItem(citem);
+                                    }
+                                }
+                            }
+                        }
+                        layoutManager = new StaggeredGridLayoutManager(((App) getActivity().getApplication()).getColNumber(), StaggeredGridLayoutManager.VERTICAL);
+                        rvList.setLayoutManager(layoutManager);
+                        adapter.notifyDataSetChanged();
+                    }
+                    break;
+            }
+        }
+    };
+
+    private Runnable query = new Runnable() {
+        @Override
+        public void run() {
+            presenter.query();
+        }
+    };
+
     private View.OnKeyListener OnKeyListener = new View.OnKeyListener() {
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -100,10 +149,15 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setHasFixedSize(true);
         for (int i = 0; i < names.length; i++) {
-            ModelBean bean = new ModelBean(i, names[i], icons[i]);
+            ModelBean bean = null;
+            if (index == 0) {
+                bean = new ModelBean(i, names[i], icons[i]);
+            } else if (index == 1) {
+                bean = new ModelBean(names[i], icons[i]);
+            }
             list.add(bean);
         }
-        adapter = new ModelAdapter(getActivity(), list);
+        adapter = new ModelAdapter(getActivity(), index,  list);
         adapter.setOnItemClickListener(this);
         adapter.setOnItemLongClickListener(this);
         rvList.setAdapter(adapter);
@@ -115,9 +169,7 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     @Override
     public void onResume() {
         super.onResume();
-        layoutManager = new StaggeredGridLayoutManager(((App) getActivity().getApplication()).getColNumber(), StaggeredGridLayoutManager.VERTICAL);
-        rvList.setLayoutManager(layoutManager);
-        adapter.notifyDataSetChanged();
+        new Thread(query).start();
     }
 
     @Override
@@ -205,5 +257,56 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
     @Override
     public void onItemLongClick(View view, final int postion) {
 
+    }
+
+    @Override
+    protected CollectPresenter onCreatePresenter() {
+        return new CollectPresenter(this);
+    }
+
+    @Override
+    public void showMsg(String log) {
+        Message msg = new Message();
+        msg.what = 2;
+        msg.obj = log;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showLoad() {
+        Message msg = new Message();
+        msg.what = 1;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void hideLoad() {
+        Message msg = new Message();
+        msg.what = 0;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showResult(int result) {
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = result;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showResult(long result) {
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = result;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showList(List<CollectBean> list) {
+        Message msg = new Message();
+        msg.what = 4;
+        msg.obj = list;
+        handler.sendMessage(msg);
     }
 }

@@ -33,7 +33,7 @@ public class NewsLatestFragment extends PresenterLazyLoadFragment<NewsPresenter>
     private RecyclerView rvList;
     private NewsAdapter adapter;
     private StaggeredGridLayoutManager layoutManager;
-    private List<NewsBean> mDayList = new ArrayList<>();
+    private List<NewsBean> list = new ArrayList<>();
 
     private int last = 0, flag = 0, load = 0;
     private String date;
@@ -66,21 +66,21 @@ public class NewsLatestFragment extends PresenterLazyLoadFragment<NewsPresenter>
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mDayList.clear();
-                        mDayList.add(new NewsBean(1, "— 今日 —"));
-                        mDayList.addAll((List<NewsBean>) msg.obj);
+                        list.clear();
+                        list.add(new NewsBean(1, "— 今日 —"));
+                        list.addAll((List<NewsBean>) msg.obj);
                         adapter.notifyDataSetChanged();
                     }
                     swipeRefresh.setRefreshing(false);
                     break;
                 case 4:
                     if (msg.obj != null && load == 1) {
-                        int size = mDayList.size();
+                        int size = list.size();
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
                         date = formatter.format(new Date(System.currentTimeMillis() - 24 * 3600 * 1000 * (flag)));
                         date = date.substring(0, 4) + "年" + date.substring(4, 6) + "月" + date.substring(6, 8) + "日";
-                        mDayList.add(new NewsBean(1, "— " + date + " —"));
-                        mDayList.addAll((List<NewsBean>) msg.obj);
+                        list.add(new NewsBean(1, "— " + date + " —"));
+                        list.addAll((List<NewsBean>) msg.obj);
                         for (int i = 0; i < ((List<NewsBean>) msg.obj).size() + 1; i++) {
                             adapter.notifyItemInserted(size + 1 + i);
                         }
@@ -131,7 +131,7 @@ public class NewsLatestFragment extends PresenterLazyLoadFragment<NewsPresenter>
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvList.setLayoutManager(layoutManager);
         rvList.setItemAnimator(new DefaultItemAnimator());
-        adapter = new NewsAdapter(getActivity(), mDayList);
+        adapter = new NewsAdapter(getActivity(), list);
         rvList.setAdapter(adapter);
         rvList.setOnScrollListener(new RecyclerView.OnScrollListener() {
 

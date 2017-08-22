@@ -67,6 +67,7 @@ public class PagerFragment extends PresenterFragment<PhotoPresenter> implements 
                     btnFavorite.setBackgroundResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(1);
                     temp.setCate(10);
+                    temp.setModel(7);
                     temp.setCover(link);
                     temp.setTitle(link);
                     temp.setLink(link);

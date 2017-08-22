@@ -165,6 +165,7 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
                     item.setIcon(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(type + 7);
+                    temp.setModel(5);
                     temp.setCover(img);
                     temp.setTitle(title);
                     temp.setLink(link);

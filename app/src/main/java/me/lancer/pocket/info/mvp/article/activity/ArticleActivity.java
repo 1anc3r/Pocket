@@ -141,6 +141,7 @@ public class ArticleActivity extends PresenterActivity<ArticlePresenter> impleme
                     fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(0);
+                    temp.setModel(0);
                     temp.setCover(content);
                     temp.setTitle(title);
                     temp.setLink(author);

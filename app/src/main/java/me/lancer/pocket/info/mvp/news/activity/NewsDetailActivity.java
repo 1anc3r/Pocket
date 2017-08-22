@@ -215,6 +215,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                     fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(1);
+                    temp.setModel(1);
                     temp.setCover(img);
                     temp.setTitle(title);
                     temp.setLink(link);

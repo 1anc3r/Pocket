@@ -9,6 +9,7 @@ public class CollectBean {
     private int id;
     private int type;
     private int cate;
+    private int model;
     private String link;
     private String title;
     private String cover;
@@ -25,6 +26,14 @@ public class CollectBean {
         this.id = id;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public int getCate() {
         return cate;
     }
@@ -33,12 +42,12 @@ public class CollectBean {
         this.cate = cate;
     }
 
-    public int getType() {
-        return type;
+    public int getModel() {
+        return model;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setModel(int model) {
+        this.model = model;
     }
 
     public String getLink() {

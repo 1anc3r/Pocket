@@ -165,6 +165,7 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
                     item.setIcon(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(0);
                     temp.setCate(type + 3);
+                    temp.setModel(3);
                     temp.setCover(img);
                     temp.setTitle(title);
                     temp.setLink(link);

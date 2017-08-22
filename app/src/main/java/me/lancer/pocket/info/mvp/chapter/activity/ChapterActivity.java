@@ -92,6 +92,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
                     fabCollect.setImageResource(R.mipmap.ic_favorite_white_24dp);
                     temp.setType(2);
                     temp.setCate(11);
+                    temp.setModel(8);
                     temp.setCover(cover);
                     temp.setTitle(title);
                     temp.setLink(link);
