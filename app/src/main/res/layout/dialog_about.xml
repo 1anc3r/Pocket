@@ -78,7 +78,7 @@
             android:layout_marginRight="2.5dp"
             android:gravity="center"
             android:scaleType="centerInside"
-            android:src="@mipmap/ic_web_link"
+            android:src="@drawable/ic_link_black_24dp"
             android:tint="@color/blue" />
 
         <TextView
@@ -109,7 +109,7 @@
             android:layout_marginRight="2.5dp"
             android:gravity="center"
             android:scaleType="centerInside"
-            android:src="@mipmap/ic_web_link"
+            android:src="@drawable/ic_link_black_24dp"
             android:tint="@color/blue" />
 
         <TextView

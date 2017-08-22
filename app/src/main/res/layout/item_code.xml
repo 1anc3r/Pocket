@@ -78,7 +78,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="4dp"
-                android:background="@mipmap/ic_star_black_24dp"
+                android:background="@drawable/ic_star_black_24dp"
                 android:backgroundTint="?attr/colorPrimary"
                 android:scaleType="centerCrop" />
 

@@ -180,7 +180,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_margin="16dp"
-                            android:src="@mipmap/ic_beach_access_black_48dp" />
+                            android:src="@drawable/ic_beach_access_black_24dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -217,7 +217,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_margin="16dp"
-                            android:src="@mipmap/ic_directions_car_black_48dp" />
+                            android:src="@drawable/ic_directions_car_black_24dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

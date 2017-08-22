@@ -36,7 +36,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="8dp"
-                    android:background="@mipmap/ic_settings_black_24dp"
+                    android:background="@drawable/ic_settings_black_24dp"
                     android:backgroundTint="@color/white"
                     android:visibility="gone" />
 
@@ -52,7 +52,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="8dp"
-                    android:background="@mipmap/ic_share_black_24dp"
+                    android:background="@drawable/ic_share_black_24dp"
                     android:backgroundTint="@color/white" />
 
                 <Button

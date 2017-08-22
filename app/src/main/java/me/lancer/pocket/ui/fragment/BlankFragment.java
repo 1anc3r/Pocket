@@ -50,16 +50,16 @@ public class BlankFragment extends Fragment implements ModelAdapter.MyItemClickL
             "小说", "图片", "漫画",
             "视频", "游戏", "编程",};
     private int[] imgTools = {
-            R.mipmap.ic_phone_black_48dp, R.mipmap.ic_people_black_48dp, R.mipmap.ic_message_black_48dp,
-            R.mipmap.ic_photo_black_48dp, R.drawable.ic_audiotrack_black_24dp, R.mipmap.ic_movie_creation_black_48dp,
-            R.mipmap.ic_folder_open_black_48dp, R.mipmap.ic_widgets_black_48dp, R.mipmap.ic_save_black_48dp,
-            R.mipmap.ic_event_black_48dp, R.mipmap.ic_assignment_turned_in_48pt_3x, R.mipmap.ic_cloud_queue_black_48dp,
-            R.mipmap.ic_translate_black_48dp, R.mipmap.ic_all_inclusive_black_48dp, R.mipmap.ic_calculator_black_48dp, R.mipmap.ic_qrcode_black_48dp};
+            R.drawable.ic_phone_black_24dp, R.drawable.ic_people_black_24dp, R.drawable.ic_message_black_24dp,
+            R.drawable.ic_photo_black_24dp, R.drawable.ic_audiotrack_black_24dp, R.drawable.ic_movie_black_24dp,
+            R.drawable.ic_folder_open_black_24dp, R.drawable.ic_widgets_black_24dp, R.drawable.ic_save_black_24dp,
+            R.drawable.ic_event_black_24dp, R.drawable.ic_assignment_turned_in_black_24dp, R.drawable.ic_cloud_queue_black_24dp,
+            R.drawable.ic_translate_black_24dp, R.drawable.ic_all_inclusive_black_24dp, R.mipmap.ic_calculator_black_48dp, R.mipmap.ic_qrcode_black_48dp};
     private int[] imgInfos = {
-            R.mipmap.ic_insert_drive_file_black_48dp, R.mipmap.ic_lightbulb_outline_black_48dp, R.mipmap.ic_golf_course_black_48dp,
-            R.mipmap.ic_book_black_48dp, R.mipmap.ic_music_note_black_48dp, R.mipmap.ic_movie_creation_black_48dp,
-            R.mipmap.ic_local_library_black_48dp, R.mipmap.ic_photo_black_48dp, R.mipmap.ic_mood_black_48dp,
-            R.mipmap.ic_live_tv_black_48dp, R.mipmap.ic_extension_black_48dp, R.mipmap.ic_code_black_48dp};
+            R.drawable.ic_insert_drive_file_black_24dp, R.drawable.ic_lightbulb_outline_black_24dp, R.drawable.ic_golf_course_black_24dp,
+            R.drawable.ic_book_black_24dp, R.drawable.ic_audiotrack_black_24dp, R.drawable.ic_movie_black_24dp,
+            R.drawable.ic_local_library_black_24dp, R.drawable.ic_photo_black_24dp, R.drawable.ic_mood_black_24dp,
+            R.drawable.ic_live_tv_black_24dp, R.drawable.ic_extension_black_24dp, R.drawable.ic_code_black_24dp};
 
     private RecyclerView rvList;
     private ModelAdapter adapter;

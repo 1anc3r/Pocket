@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_tool"
-        android:icon="@mipmap/ic_build_black_24dp"
+        android:icon="@drawable/ic_build_black_24dp"
         android:title="工具" />
 
     <item
         android:id="@+id/navigation_info"
-        android:icon="@mipmap/ic_lightbulb_outline_black_24dp"
+        android:icon="@drawable/ic_lightbulb_outline_black_24dp"
         android:title="资讯" />
 
 </menu>

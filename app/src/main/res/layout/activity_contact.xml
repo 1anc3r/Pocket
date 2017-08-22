@@ -80,7 +80,7 @@
                         android:layout_height="24dp"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
-                        android:src="@mipmap/ic_phone_black_24dp"
+                        android:src="@drawable/ic_phone_black_24dp"
                         android:tint="?attr/colorPrimary" />
 
                     <TextView
