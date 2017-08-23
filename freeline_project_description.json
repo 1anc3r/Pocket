@@ -1,0 +1,160 @@
+{
+    "android_gradle_plugin_version": "2.3.3",
+    "apk_path": "F:\\Program\\Pocket\\app\\build\\outputs\\apk\\app-debug.apk",
+    "apt": {
+        "app": {
+            "aptArgs": [
+                
+            ],
+            "aptOutput": "F:\\Program\\Pocket\\app\\build\\generated\\source\\apt\\debug",
+            "disableDiscovery": false,
+            "enabled": true,
+            "processor": null,
+            "processorPath": "F:\\Program\\Pocket\\cropper\\build\\intermediates\\bundles\\default\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\f38cce98384161eb8a5a3b39686a7e39c4053fc9\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.squareup\\javawriter\\2.1.1\\67ff45d9ae02e583d0f9b3432a5ebbe05c30c966\\javawriter-2.1.1.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\a786785bb3057acc8176f1cfdddd7d09a83211e0\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\277b7cfadded3a9e345db99da2367a65d0f7aac8\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\junit\\junit\\4.12\\2973d150c0dc1fefe998f834810d68f278ea58ec\\junit-4.12.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\a1c669911f001d0b10f85f7c13e7150c19067b12\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\javax.inject\\javax.inject\\1\\6975da39a7040257bd51d21a231b76c915872d38\\javax.inject-1.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\org.hamcrest\\hamcrest-integration\\1.3\\5de0c73fef18917cd85d0ab70bb23818685e4dfd\\hamcrest-integration-1.3.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\org.hamcrest\\hamcrest-library\\1.3\\4785a3c21320980282f9f33d0d1264a69040538f\\hamcrest-library-1.3.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\org.hamcrest\\hamcrest-core\\1.3\\42a25dc3219429f0e5d060061f71acb49bf010a0\\hamcrest-core-1.3.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.google.code.findbugs\\jsr305\\2.0.1\\516c03b21d50a644d538de0f0369c620989cd8f0\\jsr305-2.0.1.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\javax.annotation\\javax.annotation-api\\1.2\\479c1e06db31c432330183f5cae684163f186146\\javax.annotation-api-1.2.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\a0abbb5e0dab8b7b4552908ff0889be1b28d3d70\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\c5dba55a0fb35eaafd6e445e3c5116303b8c3d17\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\ad2f627a50558f3ccf96e136312520d32272286b\\output\\jars\\classes.jar;D:\\Android\\sdk\\extras\\m2repository\\com\\android\\support\\constraint\\constraint-layout-solver\\1.0.2\\constraint-layout-solver-1.0.2.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\e30fff96ebbade6e2cbe8d0fb0e4b5d0b666bdf7\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\cb2df65ef5e8bbedb2f4b58462e7c67ccbf8f096\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\416975d902838cc2d86f65f6dbcb1054b58b29e3\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\7892dc7783e678a29b3db1d0b68f54eaf5098b3f\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\33dd89460a31ad65a62f475404059c427be30aa7\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.bumptech.glide\\glide\\4.0.0-RC0\\eb86cd1d96acc30dcebf338abaf2c62ca28bf355\\glide-4.0.0-RC0.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.bumptech.glide\\gifdecoder\\4.0.0-RC0\\c64f5d4805b528de434a5a8bb9a8091b6f9cd1a7\\gifdecoder-4.0.0-RC0.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.bumptech.glide\\disklrucache\\4.0.0-RC0\\46d23cdc19155c5f0d47ece99ca1c421346c1509\\disklrucache-4.0.0-RC0.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.bumptech.glide\\annotations\\4.0.0-RC0\\d5dd0afc50069b7fa0fc12ac85f91efa8df4db67\\annotations-4.0.0-RC0.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\e985c46ba92866285e2a35dab3323a903717e77b\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\5edf36afa0b0414b69d01a1eaa19c7aac98ec49b\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\3bd322880868f78dad638805b50944f7f3a848ce\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\2c7db47306e2e92f62af9ac39f8512c9c3b46932\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\97ddf1ff33c71bb2d32285fb3165c5d521b160a3\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\5d1911d012b057751e6d6bcfa5e1ff3fa9e8e553\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\39302af1ed58993f98b9d605ba3d4942eddeae42\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\7a19db23e8df19f3ab7dcd44be5aafd7f345a604\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\6a0c610074b847ba18e89e348ecc4e78796302ae\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\7fedd8d14c7afab3a077d04cc8d67d8bed98f679\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\b57ac0cc332ae198b0b559906c42f1c42b7706c9\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\334b3e82b84d3ad0b469359b4a829e5ff96aaa58\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\io.reactivex\\rxjava\\1.1.9\\e4362e62f1ba92e360b197d6d7ffae67e5ecae9a\\rxjava-1.1.9.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.squareup.mimecraft\\mimecraft\\1.1.1\\66f73c3e42fa4658ef1cbae8b1ebefdaa856a23c\\mimecraft-1.1.1.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\org.jcodec\\jcodec-android\\0.1.9\\390f4672af45d022b05015e21388e6836178f0bb\\jcodec-android-0.1.9.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\org.jcodec\\jcodec\\0.1.9\\d874724f18c8ebc54931d1ab9b4603b7c6a7cf93\\jcodec-0.1.9.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\org.jsoup\\jsoup\\1.10.1\\645f1ad2f6f4cbad1cde4c483eae71e4051be6ef\\jsoup-1.10.1.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\80d2775b740585a991a50b3d1e51d333970409fa\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.google.zxing\\core\\3.2.1\\2287494d4f5f9f3a9a2bb6980e3f32053721b315\\core-3.2.1.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\255bcad23dc3ea7d5fe47835bcf346de73fea9f4\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\d2cba9b8586f11f231ef3de3a9a10a8a87b473a7\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\40d4811d1bbb50584fde244c553967a6449386cd\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\ccd76cdb98dd3dd2d58ce68a06aa7a913310788f\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\6536d92ee84994d3a78816ff5b238037741086c5\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\c26fc220aec71eb704780cdc528715beefe190bb\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\f0353c3e94991e96715657205bfe87000ea21582\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\c35edd61e45630d698fa6767a8c3b9ab28a6875e\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\2c7ab9b749000a135a8fa775e93f3c2828dd708d\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\29ac7eccf322a033634439c2d04875b2d7c8b64f\\output\\jars\\classes.jar;D:\\Android\\sdk\\extras\\android\\m2repository\\com\\android\\support\\support-annotations\\25.3.1\\support-annotations-25.3.1.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.squareup.okhttp\\okhttp\\2.4.0\\40340c0748190fe897baf7bffbc1b282734294e5\\okhttp-2.4.0.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.squareup.okio\\okio\\1.4.0\\5b72bf48563ea8410e650de14aa33ff69a3e8c35\\okio-1.4.0.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\979bcfff411d1d4b47400c74bc9ca204a88a91d5\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.nineoldandroids\\library\\2.4.0\\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\\library-2.4.0.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\896ee12459e6c6d030fbd3d240732f469998ae4c\\output\\jars\\classes.jar;C:\\Users\\HuangFangzhi\\.android\\build-cache\\d8311fe0e11951b2c92de3dbd5dcb2bc957d6489\\output\\jars\\classes.jar;F:\\Program\\Pocket\\app\\libs\\gdx-backend-android.jar;F:\\Program\\Pocket\\app\\libs\\gdx.jar;F:\\Program\\Pocket\\app\\libs\\spine-libgdx.jar;F:\\Program\\Pocket\\app\\libs\\httpclient-4.2.5.jar;F:\\Program\\Pocket\\app\\libs\\httpcore-4.2.4.jar;F:\\Program\\Pocket\\app\\libs\\litepal-1.3.0-src.jar;F:\\Program\\Pocket\\app\\libs\\open_sdk_r5793_lite.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.bumptech.glide\\compiler\\4.0.0-RC0\\a787851933d12dd29d5a2f43ce02e2144bdeca79\\compiler-4.0.0-RC0.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.squareup\\javapoet\\1.8.0\\e858dc62ef484048540d27d36f3ec2177a3fa9b1\\javapoet-1.8.0.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.google.auto.service\\auto-service\\1.0-rc3\\35c5d43b0332b8f94d473f9fee5fb1d74b5e0056\\auto-service-1.0-rc3.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.google.code.findbugs\\jsr305\\3.0.1\\f7be08ec23c21485b9b5a1cf1654c2ec8c58168d\\jsr305-3.0.1.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.google.auto\\auto-common\\0.3\\4073ab16ab4aceb9a217273da6442166bf51ae16\\auto-common-0.3.jar;C:\\Users\\HuangFangzhi\\.gradle\\caches\\modules-2\\files-2.1\\com.google.guava\\guava\\19.0\\6ce200f6b23222af3d8abb6b6459e6c44f4bb0e9\\guava-19.0.jar"
+        }
+    },
+    "apt_libraries": {
+        "dagger": false,
+        "butterknife": false
+    },
+    "auto_dependency": true,
+    "build_cache_dir": "F:\\Program\\Pocket\\app\\build\\freeline",
+    "build_directory": "F:\\Program\\Pocket\\app\\build",
+    "build_script": "gradlew.bat :app:assembleDebug",
+    "build_script_work_directory": "",
+    "build_tools_directory": "D:\\Android\\sdk\\build-tools\\25.0.3",
+    "build_tools_version": "25.0.3",
+    "check_sources_md5": [
+        
+    ],
+    "compile_sdk_directory": "D:\\Android\\sdk\\platforms\\android-25",
+    "compile_sdk_version": "android-25",
+    "databinding": [
+        
+    ],
+    "databinding_compiler_jar": "",
+    "databinding_modules": [
+        
+    ],
+    "debug_package": "me.lancer.pocket",
+    "exclude_dep_res_paths": [
+        
+    ],
+    "extra_dep_res_paths": [
+        
+    ],
+    "freeline_cache_dir": "F:\\Program\\Pocket",
+    "freeline_gradle_plugin_version": "0.8.7",
+    "ignore_resource_ids": [
+        "avd_hide_password_1",
+        "avd_hide_password_2",
+        "avd_hide_password_3",
+        "avd_show_password_1",
+        "avd_show_password_2",
+        "avd_show_password_3"
+    ],
+    "java_home": "D:\\Java\\jdk1.8.0_45",
+    "launcher": "me.lancer.pocket.ui.activity.MainActivity",
+    "main_assets_directory": [
+        "F:\\Program\\Pocket\\app\\src\\debug\\assets",
+        "F:\\Program\\Pocket\\app\\src\\main\\assets",
+        "F:\\Program\\Pocket\\app\\assets"
+    ],
+    "main_jniLibs_directory": [
+        "F:\\Program\\Pocket\\app\\src\\debug\\jniLibs",
+        "F:\\Program\\Pocket\\app\\libs"
+    ],
+    "main_jni_directory": [
+        "F:\\Program\\Pocket\\app\\src\\debug\\jni",
+        "F:\\Program\\Pocket\\app\\src\\main\\jni"
+    ],
+    "main_manifest_path": "F:\\Program\\Pocket\\app\\src\\main\\AndroidManifest.xml",
+    "main_project_dir": "app",
+    "main_project_name": "app",
+    "main_r_path": "F:\\Program\\Pocket\\app\\build\\generated\\source\\r\\debug\\R.java",
+    "main_res_directory": [
+        "F:\\Program\\Pocket\\app\\src\\debug\\res",
+        "F:\\Program\\Pocket\\app\\src\\main\\res"
+    ],
+    "main_src_directory": [
+        "F:\\Program\\Pocket\\app\\src\\debug\\java",
+        "F:\\Program\\Pocket\\app\\src\\main\\java"
+    ],
+    "module_dependencies": {
+        "app": [
+            "cropper"
+        ],
+        "cropper": [
+            
+        ]
+    },
+    "modules": [
+        {
+            "name": "app",
+            "path": "F:\\Program\\Pocket\\app"
+        },
+        {
+            "name": "cropper",
+            "path": "F:\\Program\\Pocket\\cropper"
+        }
+    ],
+    "package": "me.lancer.pocket",
+    "product_flavor": "",
+    "project_source_sets": {
+        "app": {
+            "main_assets_directory": [
+                "F:\\Program\\Pocket\\app\\src\\debug\\assets",
+                "F:\\Program\\Pocket\\app\\src\\main\\assets",
+                "F:\\Program\\Pocket\\app\\assets"
+            ],
+            "main_jniLibs_directory": [
+                "F:\\Program\\Pocket\\app\\src\\debug\\jniLibs",
+                "F:\\Program\\Pocket\\app\\libs"
+            ],
+            "main_jni_directory": [
+                "F:\\Program\\Pocket\\app\\src\\debug\\jni",
+                "F:\\Program\\Pocket\\app\\src\\main\\jni"
+            ],
+            "main_manifest_path": "F:\\Program\\Pocket\\app\\src\\main\\AndroidManifest.xml",
+            "main_res_directory": [
+                "F:\\Program\\Pocket\\app\\src\\debug\\res",
+                "F:\\Program\\Pocket\\app\\src\\main\\res"
+            ],
+            "main_src_directory": [
+                "F:\\Program\\Pocket\\app\\src\\debug\\java",
+                "F:\\Program\\Pocket\\app\\src\\main\\java"
+            ]
+        },
+        "cropper": {
+            "main_assets_directory": [
+                "F:\\Program\\Pocket\\cropper\\src\\release\\assets",
+                "F:\\Program\\Pocket\\cropper\\src\\main\\assets"
+            ],
+            "main_jniLibs_directory": [
+                "F:\\Program\\Pocket\\cropper\\src\\release\\jniLibs",
+                "F:\\Program\\Pocket\\cropper\\src\\main\\jniLibs"
+            ],
+            "main_jni_directory": [
+                "F:\\Program\\Pocket\\cropper\\src\\release\\jni",
+                "F:\\Program\\Pocket\\cropper\\src\\main\\jni"
+            ],
+            "main_manifest_path": "F:\\Program\\Pocket\\cropper\\AndroidManifest.xml",
+            "main_res_directory": [
+                "F:\\Program\\Pocket\\cropper\\src\\release\\res",
+                "F:\\Program\\Pocket\\cropper\\res"
+            ],
+            "main_src_directory": [
+                "F:\\Program\\Pocket\\cropper\\src\\release\\java",
+                "F:\\Program\\Pocket\\cropper\\src"
+            ]
+        }
+    },
+    "project_type": "gradle",
+    "retrolambda": {
+        
+    },
+    "root_dir": "F:\\Program\\Pocket",
+    "sdk_directory": "D:\\Android\\sdk",
+    "use_jdk8": true,
+    "use_system_gradle": false
+}
