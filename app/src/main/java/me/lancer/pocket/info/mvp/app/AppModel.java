@@ -80,7 +80,6 @@ public class AppModel {
     }
 
     public void loadDetail(String id) {
-        Log.e("loadDetail: ", id);
         StringBuilder content = new StringBuilder();
         OkHttpClient client = new OkHttpClient();
         client.setFollowRedirects(false);
@@ -143,7 +142,6 @@ public class AppModel {
             } else {
                 bean.setDownLink(APP_URL.DOWN_URL + apkfile);
             }
-            Log.e("onClick: ", bean.getDownLink());
             JSONObject meta = jsonObject.getJSONObject("meta");
             bean.setApkName(meta.getString("title"));
             bean.setLogo(meta.getString("logo"));

@@ -133,8 +133,8 @@ public class PhotoModel {
                 bean.setType(new Random().nextInt(3) % (3 - 1 + 1) + 1);
                 bean.setTitle(imgSmall.substring(0, imgSmall.indexOf('?')).replace("https://images.pexels.com/photos/", "").substring(0, imgSmall.indexOf('/')).replace("/", ""));
                 bean.setImgSmall(imgSmall);
-                bean.setImgLarge(imgSmall);
-//                bean.setImgLarge(imgSmall.substring(0, imgSmall.indexOf('?')) + imgDetailUrlPexels);
+//                bean.setImgLarge(imgSmall);
+                bean.setImgLarge(imgSmall.substring(0, imgSmall.indexOf('?')) + imgDetailUrlPexels);
                 list.add(bean);
             }
         }

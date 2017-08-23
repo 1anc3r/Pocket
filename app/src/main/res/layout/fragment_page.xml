@@ -32,15 +32,6 @@
                 android:paddingRight="8dp">
 
                 <Button
-                    android:id="@+id/btn_setting"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/ic_settings_black_24dp"
-                    android:backgroundTint="@color/white"
-                    android:visibility="gone" />
-
-                <Button
                     android:id="@+id/btn_favorite"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -53,6 +44,14 @@
                     android:layout_height="24dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/ic_share_black_24dp"
+                    android:backgroundTint="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_wallpager"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/ic_wallpaper_black_24dp"
                     android:backgroundTint="@color/white" />
 
                 <Button
