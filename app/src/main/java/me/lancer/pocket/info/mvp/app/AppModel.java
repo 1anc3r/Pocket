@@ -80,6 +80,7 @@ public class AppModel {
     }
 
     public void loadDetail(String id) {
+        Log.e("loadDetail: ", id);
         StringBuilder content = new StringBuilder();
         OkHttpClient client = new OkHttpClient();
         client.setFollowRedirects(false);

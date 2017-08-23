@@ -22,7 +22,7 @@ import me.lancer.pocket.R;
 public class App extends LitePalApplication {
 
     public static Typeface TypeFace;
-    private boolean isNight, isScroll, isColorful;
+    private boolean isFirst, isNight, isScroll, isColorful;
     private int colNumber;
 
     @Override
@@ -30,6 +30,7 @@ public class App extends LitePalApplication {
         super.onCreate();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         isNight = sharedPreferences.getBoolean(Params.ISNIGHT, false);
+        isFirst = sharedPreferences.getBoolean(Params.ISFIRST, true);
         isScroll = sharedPreferences.getBoolean(Params.ISSCROLL, false);
         colNumber = sharedPreferences.getInt(Params.COLNUMBER, 3);
         isColorful = sharedPreferences.getBoolean(Params.ISCOLORFUL, false);
@@ -61,6 +62,14 @@ public class App extends LitePalApplication {
                 .setInvocationEvent(InstabugInvocationEvent.NONE)
                 .setEmailFieldVisibility(false)
                 .build();
+    }
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+
+    public void setFirst(boolean first) {
+        isFirst = first;
     }
 
     public boolean isNight() {

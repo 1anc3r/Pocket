@@ -7,6 +7,7 @@ package me.lancer.pocket.ui.application;
 public class Params {
 
     public static final String ISNIGHT = "isNight";
+    public static final String ISFIRST = "isFirst";
     public static final String ISSCROLL = "isScroll";
     public static final String COLNUMBER = "colNumber";
     public static final String ISCOLORFUL = "isColorful";

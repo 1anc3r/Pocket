@@ -1,9 +1,16 @@
 package me.lancer.pocket.ui.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
@@ -11,7 +18,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,13 +30,21 @@ import android.widget.LinearLayout;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import me.lancer.pocket.R;
+import me.lancer.pocket.info.mvp.app.AppBean;
+import me.lancer.pocket.info.mvp.app.AppPresenter;
+import me.lancer.pocket.info.mvp.app.IAppView;
+import me.lancer.pocket.ui.application.App;
+import me.lancer.pocket.ui.application.Params;
 import me.lancer.pocket.ui.fragment.CollectFragment;
 import me.lancer.pocket.ui.fragment.MainFragment;
 import me.lancer.pocket.ui.mvp.base.activity.BaseActivity;
+import me.lancer.pocket.ui.mvp.base.activity.PresenterActivity;
+import me.lancer.pocket.ui.view.htmltextview.HtmlHttpImageGetter;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends PresenterActivity<AppPresenter> implements IAppView {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -35,10 +52,63 @@ public class MainActivity extends BaseActivity {
     private LinearLayout container;
     private Fragment currentFragment;
 
+    private App app;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     private int currentIndex;
     private long exitTime;
 
-    private Handler handler = new Handler();
+    private String id = "145716";
+    private AppBean bean;
+
+    private Runnable loadDetail = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadDetail(id);
+        }
+    };
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    if (msg.obj != null) {
+                        bean = (AppBean) msg.obj;
+                        if(getVersion() != null && !getVersion().equals(bean.getVersNum())) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("发现新版本, 需要更新吗 ? (ง •̀_•́)ง\n"+getVersion()+" > "+bean.getVersNum()+"\n"+bean.getVersLog())
+                                    .setPositiveButton("    好哒 ヽ( ^∀^)ﾉ", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent intent = new Intent();
+                                            intent.setAction("android.intent.action.VIEW");
+                                            Uri content_url = Uri.parse("https://www.coolapk.com/apk/" + bean.getPkgName());
+                                            intent.setData(content_url);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .setNegativeButton("别来烦我 (｡•ˇ‸ˇ•｡)    ", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            app.setFirst(true);
+                                            editor.putBoolean(Params.ISFIRST, false);
+                                            editor.apply();
+                                        }
+                                    });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +119,10 @@ public class MainActivity extends BaseActivity {
         initNavigationViewHeader();
         initFragment(savedInstanceState);
         setNeedsMenuKey();
+        app = (App) this.getApplication();
+        sharedPreferences = this.getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        new Thread(loadDetail).start();
     }
 
     private void initFragment(Bundle savedInstanceState) {
@@ -182,5 +256,71 @@ public class MainActivity extends BaseActivity {
                     return true;
             }
         }
+    }
+
+    public String getVersion() {
+        try {
+            PackageManager manager = this.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
+            return info.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    protected AppPresenter onCreatePresenter() {
+        return new AppPresenter(this);
+    }
+
+    @Override
+    public void showMsg(String log) {
+        Message msg = new Message();
+        msg.what = 2;
+        msg.obj = log;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showLoad() {
+        Message msg = new Message();
+        msg.what = 1;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void hideLoad() {
+        Message msg = new Message();
+        msg.what = 0;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showHomepage(List<AppBean> list) {
+
+    }
+
+    @Override
+    public void showSearch(List<AppBean> list) {
+
+    }
+
+    @Override
+    public void showDetail(AppBean bean) {
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = bean;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showDownload(String log) {
+
+    }
+
+    @Override
+    public void showUpgrade(List<AppBean> list) {
+
     }
 }
