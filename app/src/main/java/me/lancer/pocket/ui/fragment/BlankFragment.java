@@ -98,8 +98,6 @@ public class BlankFragment extends PresenterFragment<CollectPresenter> implement
                                 }
                             }
                         }
-                        layoutManager = new StaggeredGridLayoutManager(((App) getActivity().getApplication()).getColNumber(), StaggeredGridLayoutManager.VERTICAL);
-                        rvList.setLayoutManager(layoutManager);
                         adapter.notifyDataSetChanged();
                     }
                     break;
@@ -169,6 +167,8 @@ public class BlankFragment extends PresenterFragment<CollectPresenter> implement
     @Override
     public void onResume() {
         super.onResume();
+        layoutManager = new StaggeredGridLayoutManager(((App) getActivity().getApplication()).getColNumber(), StaggeredGridLayoutManager.VERTICAL);
+        rvList.setLayoutManager(layoutManager);
         new Thread(query).start();
     }
 
