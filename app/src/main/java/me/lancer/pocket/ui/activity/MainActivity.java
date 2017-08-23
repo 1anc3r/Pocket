@@ -82,7 +82,7 @@ public class MainActivity extends PresenterActivity<AppPresenter> implements IAp
                 case 3:
                     if (msg.obj != null) {
                         bean = (AppBean) msg.obj;
-                        if(getVersion() != null && !getVersion().equals(bean.getVersNum()) &&
+                        if(((App)getApplication()).isFirst() && getVersion() != null && !getVersion().equals(bean.getVersNum()) &&
                                 Integer.parseInt(getVersion().replace(".","")) < Integer.parseInt(bean.getVersNum().replace(".",""))) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage("发现新版本, 需要更新吗 ? (ง •̀_•́)ง\n"+getVersion()+" > "+bean.getVersNum()+"\n"+bean.getVersLog())
