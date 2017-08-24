@@ -237,6 +237,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     protected void onDestroy() {
         ivCover.destroyDrawingCache();
         htvContent.destroyDrawingCache();
+        wvContent.destroy();
         super.onDestroy();
     }
 

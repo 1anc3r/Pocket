@@ -75,14 +75,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                     }
                 });
                 if (list.get(position).getType() == 1) {//呼入
-                    viewHolder.ivArg0.setImageResource(R.mipmap.ic_call_received_black_24dp);
+                    viewHolder.ivArg0.setImageResource(R.drawable.ic_call_received_black_24dp);
                 } else if (list.get(position).getType() == 2) {//呼出
-                    viewHolder.ivArg0.setImageResource(R.mipmap.ic_call_made_black_24dp);
+                    viewHolder.ivArg0.setImageResource(R.drawable.ic_call_made_black_24dp);
                 } else if (list.get(position).getType() == 3) {//未接
-                    viewHolder.ivArg0.setImageResource(R.mipmap.ic_call_missed_black_24dp);
+                    viewHolder.ivArg0.setImageResource(R.drawable.ic_call_missed_black_24dp);
                     viewHolder.tvArg2.setText("未接");
                 } else if (list.get(position).getType() == 5) {//拒接
-                    viewHolder.ivArg0.setImageResource(R.mipmap.ic_clear_black_24dp);
+                    viewHolder.ivArg0.setImageResource(R.drawable.ic_clear_black_24dp);
                     viewHolder.tvArg2.setText("拒接");
                 }
                 viewHolder.cvContact.setOnClickListener(new View.OnClickListener() {

@@ -10,7 +10,6 @@ import com.instabug.library.invocation.InstabugInvocationEvent;
 import org.litepal.LitePalApplication;
 import org.polaric.colorful.Colorful;
 
-import java.io.File;
 import java.lang.reflect.Field;
 
 import me.lancer.pocket.R;

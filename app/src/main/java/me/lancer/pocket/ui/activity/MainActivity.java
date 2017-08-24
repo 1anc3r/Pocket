@@ -26,6 +26,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import java.lang.reflect.InvocationTargetException;
@@ -155,6 +157,16 @@ public class MainActivity extends PresenterActivity<AppPresenter> implements IAp
     private void initNavigationViewHeader() {
         navigationView = (NavigationView) findViewById(R.id.nv_main);
         View view = navigationView.inflateHeaderView(R.layout.drawer_header);
+//        WebView wvContent = (WebView) view.findViewById(R.id.wv_content);
+//        wvContent.getSettings().setJavaScriptEnabled(true);
+//        wvContent.requestFocus();
+//        wvContent.setWebViewClient(new WebViewClient() {
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
+//        wvContent.loadUrl("http://snow.akqa.com");
         disableNavigationViewScrollbars(navigationView);
         navigationView.setNavigationItemSelectedListener(new NavigationItemSelected());
     }

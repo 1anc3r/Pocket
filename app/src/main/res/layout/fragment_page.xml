@@ -59,7 +59,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="8dp"
-                    android:background="@mipmap/ic_get_app_black_24dp"
+                    android:background="@drawable/ic_get_app_black_24dp"
                     android:backgroundTint="@color/white" />
 
             </LinearLayout>
