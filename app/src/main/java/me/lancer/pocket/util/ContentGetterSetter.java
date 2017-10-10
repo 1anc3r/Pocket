@@ -44,7 +44,7 @@ public class ContentGetterSetter {
 
     public String getContentFromFile(String path, String arg1) {
         try {
-            File dir = new File(path + "/me.lancer.pocket.info");
+            File dir = new File(path + "/me.lancer.pocket");
             if (!dir.exists()) {
                 dir.mkdirs();
             }
@@ -67,7 +67,7 @@ public class ContentGetterSetter {
 
     public void setContentToFile(String path, String arg1, String arg2, String content) {
         try {
-            File dir = new File(path + "/me.lancer.pocket.info");
+            File dir = new File(path + "/me.lancer.pocket");
             if (!dir.exists()) {
                 dir.mkdirs();
             }

@@ -66,7 +66,7 @@ public class PhotoModel {
         try {
             Response response = client.newCall(request).execute();
             if (response.code() == 200) {
-                File dir = new File(path + "/me.lancer.pocket.info");
+                File dir = new File(path + "/me.lancer.pocket");
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }

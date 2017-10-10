@@ -163,7 +163,7 @@ public class AppDetailActivity extends PresenterActivity<AppPresenter> implement
     private File downFile(String httpUrl) {
         if (bean != null) {
             final String fileName = bean.getApkName() + ".apk";
-            final String filePath = Environment.getExternalStorageDirectory().toString() + "/me.lancer.pocket.info";
+            final String filePath = Environment.getExternalStorageDirectory().toString() + "/me.lancer.pocket";
             File tmpFile = new File(filePath);
             if (!tmpFile.exists()) {
                 tmpFile.mkdir();
